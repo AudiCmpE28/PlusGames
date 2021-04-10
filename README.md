@@ -16,8 +16,11 @@ Year: 2021
  
  ----------------------------------------------------------------------------------------------------------------------------
  Running the Page: (as of 04_09_21)*
- Download flask: pip install Flask
+ Download flask:
+  NOTE: https://flask.palletsprojects.com/en/1.1.x/installation/
+  (1) Terminal: pip install Flask
  Run the init.py file : 
+  NOTE: https://flask.palletsprojects.com/en/1.1.x/quickstart/
   (1) flask run
   (2) python -m flask run
   ----> What you should see in the terminal:  "* Running on http://127.0.0.1:5000/"
