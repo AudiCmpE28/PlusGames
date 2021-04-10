@@ -13,3 +13,13 @@ Year: 2021
   
  Description:
  +Games is a web application that displays the game's summary, information, and ratings for viewers to browse through. 
+ 
+ ----------------------------------------------------------------------------------------------------------------------------
+ Running the Page: (as of 04_09_21)*
+ Download flask: pip install Flask
+ Run the init.py file : 
+  (1) flask run
+  (2) python -m flask run
+  ----> What you should see in the terminal:  "* Running on http://127.0.0.1:5000/"
+  
+  NOTE: At the moment, when you click on the URL, the page should say "Website content goes here."
