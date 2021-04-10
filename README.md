@@ -22,8 +22,9 @@ Year: 2021
   (1) Terminal: pip install Flask
   
 **Run the init.py file :** https://flask.palletsprojects.com/en/1.1.x/quickstart/
+**ON WINDOWS:**
   
-  (1) flask run
+  (1) $env:FLASK_APP = "init.py"
   
   (2) python -m flask run
   
