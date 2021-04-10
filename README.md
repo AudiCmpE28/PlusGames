@@ -17,13 +17,11 @@ Year: 2021
  ----------------------------------------------------------------------------------------------------------------------------
  **Running the Page: (as of 04_09_21)***
  
- **Download flask:**
-  **NOTE**: https://flask.palletsprojects.com/en/1.1.x/installation/
+ **Download flask:** https://flask.palletsprojects.com/en/1.1.x/installation/
   
   (1) Terminal: pip install Flask
   
-**Run the init.py file :** 
- **NOTE**: https://flask.palletsprojects.com/en/1.1.x/quickstart/
+**Run the init.py file :** https://flask.palletsprojects.com/en/1.1.x/quickstart/
   
   (1) flask run
   
