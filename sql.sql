@@ -115,8 +115,29 @@ primary key (unique_id, admin_username)
 -- on update cascade
 );
 
-CREATE TABLE Profile(
+--  new (Pls check to see if its correct)
+CREATE TABLE Profile (
+user_id integer(16) not null,
+name varchar(16),
+primary key (user_id)
+); 
 
+--  new (Pls check to see if its correct)
+CREATE TABLE interact_with (
+mem_username	varchar(16),
+user_id       varchar(16) not null,
+primary key (mem_username, user_id),
+foreign key (mem_username) references Members(mem_username) ON DELETE CASCADE,
+foreign key (user_id) references Profile(user_id) ON DELETE CASCADE
+);
+
+--  new (Pls check to see if its correct)
+CREATE TABLE manage (
+admin_username	varchar(16),
+user_id       varchar(16) not null,
+primary key (admin_username, user_id),
+foreign key (admin_username) references Administrator(admin_username) ON DELETE CASCADE,
+foreign key (user_id) references Profile(user_id) ON DELETE CASCADE
 );
 
 insert into `Users` (`unique_id`) values (0); -- leave value at 0 for autoincrement to take effect, or insert custom user id --though the autoincrement continues from greatest previous value
