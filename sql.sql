@@ -1,5 +1,5 @@
 -- sql tables 
---
+--New testing comment
 drop database if exists `+games`;
 create database `+games`;
 use `+games`;
