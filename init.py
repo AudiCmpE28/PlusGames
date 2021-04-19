@@ -1,16 +1,18 @@
 from flask import Flask, render_template
 import os
 
-app = Flask(__name__)
+LOGO_PICTURE = os.path.join('static', 'images')
 
-picFolder = os.path.join('static', 'images')
-app.config['UPLOAD_FOLDER'] = picFolder
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = LOGO_PICTURE
 
 @app.route('/')
+@app.route('/home')
 def home():
-   pic1 = os.path.join(app.config['UPLOAD_FOLDER'], 'gamesLOGO.png')
-   return render_template('home.html', user_image = pic1)
+   logo_image = os.path.join(app.config['UPLOAD_FOLDER'], 'gamesLOGO.jpg')
+   return render_template('home.html', user_image = logo_image)
 
-if __name__ == '__main__':
-   app.run()
+# if __name__ == '__main__':
+#    app.run()
 
