@@ -31,4 +31,10 @@ Year: 2021
   
   ----> What you should see in the terminal:  "* Running on http://127.0.0.1:5000/"
   
+  **Images Flask**
+  
+  (1) pip install Flask-Images
+  
+   In case encounter problems regarding images, follow: https://mikeboers.github.io/Flask-Images/
+  
   **NOTE:** At the moment, when you click on the URL, the page should say "Website content goes here."
