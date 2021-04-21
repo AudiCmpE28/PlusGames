@@ -1,9 +1,12 @@
 /* CSS */
+
+/*~~HomePage~~*/
 .images{
     position: absolute;
     right: 150px;
 }
 
+/*~~Sidebar~~*/
 .sidebar {
     height: 100%;
     width: 200px;
@@ -14,10 +17,19 @@
     background-color:#8c8c8c;
 }
     
-.sidebar div {   
-    padding: 15px;
-    font-size: 24px;
-    text-align: center;
-    display: block;
+.text {   
+    color: #FFFFFF;
+    background-color: #35839b;
+    position: static;
+    transition: 0.3s;
+    padding: 10px 20px;
+    font-size: 21px;
+    display: inline-block;
+    cursor: pointer;
+    font-family: Comic Sans MS;
 }
-    
+   
+
+.text:hover{
+    background: tomato;
+}
