@@ -21,7 +21,6 @@
 .v107_3 {
   width: 680px;
   height: 42px;
-  background: url("../images/v107_3.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -64,8 +63,13 @@
   overflow: hidden;
 }
 .v104_28 {
+<<<<<<< HEAD
   width: 120px;
   height: 34px;
+=======
+  width: 129px;
+  height: 40px;
+>>>>>>> 4ef5a441f1f7aa35bdc3db628c50389aafe2259b
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -84,7 +88,7 @@
   top: 0px;
   left: 0px;
   border: 3px solid rgba(140,255,138,1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   overflow: hidden;
 }
 .v101_20 {
@@ -102,7 +106,6 @@
 .v104_25 {
   width: 355px;
   height: 34px;
-  background: url("../images/v104_25.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -139,7 +142,6 @@
 .v104_26 {
   width: 355px;
   height: 34px;
-  background: url("../images/v104_26.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -176,7 +178,6 @@
 .v104_27 {
   width: 355px;
   height: 34px;
-  background: url("../images/v104_27.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
