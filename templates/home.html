@@ -1,54 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>+Games</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 
-<!-- Fonts/Formats -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Body of Homepage -->
+<body style="background-color: #222222">
 
-\static\images
-
-<!-- Sidebar Font CLass -->
-  <body class="w3-content" style="max-width:1400px; background-color: #222222">
-  
-  <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-bar-block w3-collapse w3-top" style="z-index:3; width:250px; background-color: #8c8c8c" id="mySidebar">
-    <div class="w3-container w3-display-container w3-padding-16">
-      <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-      <!-- <h3 class="w3-wide" style="color: #14E6FF; text-align:center; font-family:Comic Sans MS; font-size:300%;background-color: #222222"><b>+Games</b></h3> -->
-      <img src="{{ user_gif }}" alt="" style="vertical-align:middle;margin:0px 250px">
-    </div>
-    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold; background-color: #8c8c8c">
-      <a href="#" class="w3-bar-item w3-button" style="color: #FFFFFF">Recent Games</a>
-      <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn" style="color: #FFFFFF">
-        Alphabetical Order <i class="fa fa-caret-down"></i>
-      </a>
-      <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
-        <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>A -> Z</a>
-        <a href="#" class="w3-bar-item w3-button">Z -> A</a>
-      </div>
-      <a href="#" class="w3-bar-item w3-button" style="color: #FFFFFF">Release Date</a>
-      <a href="#" class="w3-bar-item w3-button" style="color: #FFFFFF">ID</a>
-      <a href="#" class="w3-bar-item w3-button" style="color: #FFFFFF">Genre</a>
-      <a href="#" class="w3-bar-item w3-button" style="color: #FFFFFF">Popular</a>
-    </div>
-    <a href="#footer" class="w3-bar-item w3-button w3-padding" style="color: #FFFFFF">Sign In</a> 
-    <a href="#footer"  class="w3-bar-item w3-button w3-padding" style="color: #FFFFFF">Sign Up</a>
-  </nav>
+<div class="images">
+  <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo"></div>
+</div>  
   
 
-  <!-- Image header -->
-  <div class="w3-display-container w3-container">
-    <img src="{{ user_image }}" alt="" style="vertical-align:middle;margin:0px 250px">
-    <div class="w3-display-topleft w3-text-white" style="padding:0px 280px" >
-      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">Browse Now</a></p>
-    </div>
+<!-- The sidebar -->
+<div class="sidebar">
+  <img src="/static/images/logoCool.gif" style="padding-bottom: 55px;"/>
+  <div>Popular</div>
+  <div>Categories</div>
+  <div>Alphabetical</div>
   </div>
+  
+
 
 
 
