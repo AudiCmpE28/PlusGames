@@ -1,13 +1,7 @@
-* {
-  box-sizing: border-box;
-}
-body {
-  font-size: 14px;
-}
+
 .v108_2 {
   width: 680px;
   height: 863px;
-  background: rgba(255,255,255,1);
   opacity: 1;
   position: relative;
   top: 0px;
@@ -17,7 +11,7 @@ body {
 .v101_3 {
   width: 680px;
   height: 842px;
-  background: rgba(34,33,33,1);
+  background: #333;
   opacity: 1;
   position: relative;
   top: 0px;
@@ -233,7 +227,7 @@ body {
   color: rgba(255,255,255,1);
   position: absolute;
   top: 237px;
-  left: 82px;
+  left: 120px;
   font-family: Roboto;
   font-weight: Regular;
   font-size: 18px;
@@ -252,9 +246,12 @@ body {
   opacity: 1;
   text-align: left;
 }
+
+/*~~ already a member ~~*/
 .v119_3 {
   width: 203px;
-  color: url("../images/v119_3.png");
+  background-color: transparent;
+  border: none;
   position: absolute;
   top: 511px;
   left: 116px;
@@ -263,4 +260,9 @@ body {
   font-size: 18px;
   opacity: 1;
   text-align: left;
+  color: blue;
+}
+
+.v119_3:hover{
+  color: black;
 }

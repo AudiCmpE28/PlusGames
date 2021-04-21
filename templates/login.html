@@ -4,29 +4,45 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
     <link href="/static/css/login.css" rel="stylesheet" />
+    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
     <title>Document</title>
 </head>
 
-<body>
+<!-- Body of Page -->
+<body style="background-color: #222222">
+
+<!-- Login Box -->
+<center>
     <div class="v108_3">
         <div class="v101_24"></div>
-        <div class="v106_0">
-            <div class="v101_26"></div>
-            <div class="v101_25"></div>
-        </div>
-        <div class="v107_4">
-            <div class="v104_31">
-                <div class="v101_30"></div><span class="v101_36">login</span>
+            <div class="v106_0">
+                <div class="v101_26"></div>
+                <div class="v101_25"></div>
             </div>
-            <div class="v104_30">
-                <div class="v101_32"></div><span class="v101_35">password</span>
+            
+            <div class="v107_4"> 
+                <div class="v104_31">
+                    <div class="v101_30"></div>
+                    <span class="v101_36">login</span>
+                </div>
+                <div class="v104_30">
+                <div class="v101_32"></div>
+                <span class="v101_35">password</span>
             </div>
             <div class="v104_29">
-                <div class="v101_33"></div><span class="v101_34">email</span>
+                <div class="v101_33"></div>
+                <span class="v101_34">email</span>
             </div>
-            <div class="v101_38"></div><span class="v119_4">Not a member? Sign Up</span>
-        </div><span class="v101_28">Already a member? Login today!</span><span class="v101_27">Login</span>
+            <div class="v101_38"></div>
+            <a href="{{ url_for('signup') }}">
+                <button class="v119_4" type="button" onclick="">Not a member? Sign Up</button>
+            </a>
+       </div>
+
+       <span class="v101_28">Already a member? Login today!</span>
+       <span class="v101_27">Login</span>
     </div>
-</body>
+</center>
+
 
 </html>
