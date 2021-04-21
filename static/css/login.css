@@ -95,7 +95,7 @@
   font-weight: Regular;
   font-size: 18px;
   opacity: 1;
-  text-align: left;
+  text-align: center; /*left*/
 }
 .v104_30 {
   width: 350px;
@@ -217,11 +217,12 @@
   width: 240px;
   color: rgba(255,255,255,1);
   position: absolute;
+  position: center;
   top: 7px;
-  left: 63px;
+  left: -63px; /*63*/
   font-family: Roboto;
   font-weight: Regular;
   font-size: 96px;
   opacity: 1;
-  text-align: left;
+  text-align: center; /*left*/
 }
