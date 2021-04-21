@@ -68,11 +68,21 @@ mariopart8
     <button class="text" >Alphabetical</button>
     <button class="text" >Free iPhone</button>
     
-
-    <button class="users" style="margin-top: 120%;">SIGN IN</button>
-    <a href=“/static/images/signup_login.html”>
-      <button class="users">SIGN UP</button>
+    <a href="{{ url_for('login') }}">
+      <button class="users" style="margin-top: 120%;" type="button" onclick="">SIGN IN</button>
     </a>
+
+    <a href="{{ url_for('signup') }}">
+      <button class="users" type="button" onclick="">SIGN UP</button>
+    </a>
+    <!--
+    <button class="users" style="margin-top: 120%;">SIGN IN
+        <a href="{{ url_for('login') }}"></a>
+      </button>
+  
+    
+      <li><a href="{{ url_for('login') }}">Login</a></li>  -->
+      
   
 </nav>
   
