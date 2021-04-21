@@ -8,7 +8,8 @@ use `+games`;
 CREATE TABLE Company (
     CompanyName VARCHAR(25),
     
-    PRIMARY KEY (CompanyName)
+    PRIMARY KEY (CompanyName),
+    unique (CompanyName)
 );
 CREATE TABLE Platform (
 platform_name varchar(25),
