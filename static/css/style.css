@@ -6,6 +6,38 @@
     right: 150px;
 }
 
+/*~~Video Games Grid~~*/
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1.5rem;
+    justify-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* The Picture Frame */
+  .gallery-frame {
+    padding: .5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    background-color: #333;
+    color: #d9d9d9;
+  }
+  
+  /* The Images */
+  .gallery-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: opacity 0.25s ease-in-out;
+  }
+  
+  .gallery-img:hover {
+    opacity: .7;
+  }
+
+
 /*~~Sidebar~~*/
 .sidebar {
     height: 100%;
@@ -30,7 +62,24 @@
     font-family: Comic Sans MS;
 }
    
-
 .text:hover{
     background: tomato;
 }
+
+/*~~Log in/ sign up~~*/
+.users{
+    color: whitesmoke;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-family: 'Franklin Gothic Medium';
+    position: static;
+    padding: 10px 20px;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.users:hover {
+    color: turquoise;
+}
+
