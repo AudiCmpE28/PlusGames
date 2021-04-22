@@ -17,5 +17,4 @@ select game_id, game_n, g_company from game where genre = 'Action';
 
 SELECT game_n FROM game WHERE g_company = 'Microsoft';
 
--- Israel Test 
-SELECT DISTINCT g_company FROM game
+
