@@ -1,6 +1,6 @@
 -- Write more insert , delete queries which would be useful. 
 -- test and report any errors in a comment
-
+--testing
 insert into `Users` (`unique_id`) values (0);
 
 -- the line below gives an error 
