@@ -1,27 +1,19 @@
-* {
-  box-sizing: border-box;
-}
-body {
-  font-size: 14px;
-}
+/*~~login~~*/
+
+
 .v108_3 {
   width: 694px;
   height: 781px;
-  background: rgba(255,255,255,1);
   opacity: 1;
   position: relative;
-  top: 0px;
-  left: 0px;
   overflow: hidden;
 }
 .v101_24 {
   width: 680px;
   height: 921px;
-  background: rgba(51,51,51,1);
+  background: #333;
   opacity: 1;
   position: relative;
-  top: 0px;
-  left: 0px;
   overflow: hidden;
 }
 .v106_0 {
@@ -43,7 +35,7 @@ body {
   opacity: 1;
   position: absolute;
   top: 26px;
-  left: 0px;
+  left: 10px;
   overflow: hidden;
 }
 .v101_25 {
@@ -53,7 +45,7 @@ body {
   opacity: 1;
   position: relative;
   top: 0px;
-  left: 0px;
+  left: 10px;
   overflow: hidden;
 }
 .v107_4 {
@@ -98,11 +90,12 @@ body {
   position: absolute;
   top: 6px;
   left: 40px;
+  text-align: center;
   font-family: Roboto;
   font-weight: Regular;
   font-size: 18px;
   opacity: 1;
-  text-align: left;
+  text-align: center; /*left*/
 }
 .v104_30 {
   width: 350px;
@@ -113,7 +106,7 @@ body {
   opacity: 1;
   position: absolute;
   top: 183px;
-  left: 3px;
+  left: 10px;
   overflow: hidden;
 }
 .v101_32 {
@@ -149,7 +142,7 @@ body {
   opacity: 1;
   position: absolute;
   top: 120px;
-  left: 3px;
+  left: 10px;
   overflow: hidden;
 }
 .v101_33 {
@@ -186,8 +179,12 @@ body {
   left: 0px;
   overflow: hidden;
 }
+
+/*~~not member~~*/
 .v119_4 {
   width: 189px;
+  background-color: transparent;
+  border: none;
   position: absolute;
   top: 241px;
   left: 3px;
@@ -196,13 +193,20 @@ body {
   font-size: 18px;
   opacity: 1;
   text-align: left;
+  color: blue;
 }
+
+.v119_4:hover{
+  color: black;
+}
+
+/*~~ already a member~~*/
 .v101_28 {
   width: 257px;
   color: rgba(255,255,255,1);
   position: absolute;
   top: 253px;
-  left: 67px;
+  left: 130px;
   font-family: Roboto;
   font-weight: Regular;
   font-size: 18px;
@@ -213,11 +217,12 @@ body {
   width: 240px;
   color: rgba(255,255,255,1);
   position: absolute;
+  position: center;
   top: 7px;
-  left: 63px;
+  left: -63px; /*63*/
   font-family: Roboto;
   font-weight: Regular;
   font-size: 96px;
   opacity: 1;
-  text-align: left;
+  text-align: center; /*left*/
 }

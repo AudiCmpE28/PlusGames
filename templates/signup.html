@@ -4,11 +4,17 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
     <link href="/static/css/signup.css" rel="stylesheet" />
-    <title>Document</title>
+    <title>+Games Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
+    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
 </head>
 
-<body>
+<!-- Body of Page -->
+<body style="background-color: #222222">
+
+
+<!-- Login Box -->
+<center>
     <div class="v108_2">
         <div class="v101_3"></div>
         <div class="v107_3">
@@ -29,9 +35,14 @@
                 <div class="v101_13"></div><span class="v101_16">password</span>
             </div>
             <div class="v101_39"></div>
-        </div><span class="v101_10">Become a +Games member today!</span><span class="v101_9">Sign Up</span><span
-            class="v119_3">Already a member? Login </span>
+        </div><span class="v101_10">Become a +Games member today!</span>
+        <span class="v101_9">Sign Up</span>
+        <a href="{{ url_for('login') }}">
+           <button class="v119_3" type="button" onclick="">Already a member? Login</button>
+        </a>
+
     </div>
-</body>
+</center>
+
 
 </html>

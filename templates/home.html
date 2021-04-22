@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>+Games</title>
+    <title>+Games Home Page</title>
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
@@ -37,7 +37,7 @@
       
       <figure class="gallery-frame">
         <img class="gallery-img" src="/static/images/BlackDessert.jpg" alt="symbol image" title="symbol image">
-        <figcaption>Black Dessert Online</figcaption>
+        <figcaption>Black Desert Online</figcaption>
       </figure>
   
       <figure class="gallery-frame">
@@ -47,7 +47,7 @@
 
       <figure class="gallery-frame">
         <img class="gallery-img" src="/static/images/amogus.jpg" alt="symbol image" title="symbol image">
-        <figcaption>Among Us</figcaption>
+        <figcaption>AmongUs</figcaption>
       </figure> 
       
       <figure class="gallery-frame">
@@ -57,8 +57,6 @@
   </div><!-- end:gallery-grid -->
 </div>  
   
-mariopart8
-
 
 <!-- The sidebar -->
 <nav class="sidebar" id="sidebar">
@@ -66,15 +64,23 @@ mariopart8
     <button class="text">Popular</button>
     <button class="text">Genre</button>
     <button class="text" >Alphabetical</button>
-    <button class="text" >Free iPhone</button>
     
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+      <button class="text" type="button" onclick="">Free iPhone</button>
+    </a>
+    
+  <!-- login/sign up -->
     <a href="{{ url_for('login') }}">
       <button class="users" style="margin-top: 120%;" type="button" onclick="">SIGN IN</button>
     </a>
-
     <a href="{{ url_for('signup') }}">
       <button class="users" type="button" onclick="">SIGN UP</button>
     </a>
+
+    <a href="{{ url_for('example') }}">
+      <button class="users"  type="button" onclick="">EXAMPLE</button>
+    </a>
+
 </nav>
   
 
