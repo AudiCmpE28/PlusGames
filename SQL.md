@@ -4,10 +4,12 @@ pip install mysql-connector-python
 
 pip install pandas
 
+pip install IPython
+
+
 ## Create the database in sql.sql
 
-
-## Python-sql connector in pyconnector.py
-you can import it using:
+## You can import my Python-sql connector library in pyconnector.py
 
 from pysqltest import *
+

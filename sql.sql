@@ -31,7 +31,7 @@ CREATE TABLE Game(
 
 
 CREATE TABLE Released_on (
-game_id VARCHAR(25) not null,
+game_id 	  VARCHAR(25) not null,
 platform_name VARCHAR(25) not null,
 primary key (game_id,platform_name),
 foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -39,9 +39,8 @@ foreign key (platform_name) references Platform(platform_name) ON UPDATE CASCADE
 );
 
 
--- need to decide if we keep Users table and link Guests/Members/Admins via Foreign Keys or doaway with inheritance
 CREATE TABLE Users (
-unique_id integer not null AUTO_INCREMENT primary key,
+unique_id integer not null primary key,
 unique (unique_id)
 );
 
@@ -53,6 +52,7 @@ foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade
 );
 
+
 CREATE TABLE Members (
 unique_id	integer(16)not null,
 mem_username	varchar(16)not null,
@@ -63,18 +63,17 @@ on update cascade on delete cascade,
 unique (mem_username)
 );
 
-
 CREATE TABLE request_game (
-mem_username	varchar(16)not null,
-game_id       varchar(25),
-req_text	varchar(50),
+mem_username	varchar(16) not null,
+game_id       	varchar(25),
+req_text		varchar(50),
 foreign key (mem_username) references Members(mem_username) ON UPDATE CASCADE ON DELETE CASCADE,
 foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE comment_on (
 mem_username	varchar(16)not null,
-game_id		varchar(25)not null,
+game_id			varchar(25)not null,
 c_date	date,
 c_time 	timestamp,
 comment_text varchar(250),
@@ -86,7 +85,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 CREATE TABLE review_on (
 mem_username	varchar(16)not null,
 game_id		varchar(10)not null,
-rv_date	date,
+rv_date		date,
 rv_time 	timestamp,
 review_text varchar(250),
 primary key (mem_username, game_id), 
@@ -96,7 +95,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 
 CREATE TABLE report_on (
 mem_username	varchar(16)not null,
-game_id		varchar(10)not null,
+game_id			varchar(10)not null,
 rp_date	date,
 rp_time 	timestamp,
 report_text varchar(250),
@@ -107,7 +106,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 
 CREATE TABLE bookmarked (
 mem_username	varchar(16) not null,
-game_id		varchar(10) not null,
+game_id			varchar(10) not null,
 primary key (mem_username, game_id), 
 foreign key (mem_username) references Members(mem_username) on delete CASCADE,
 foreign key (game_id) references Game(game_id) on delete CASCADE
@@ -119,30 +118,27 @@ admin_username	varchar(16) not null,
 admin_password	varchar(255) default null,
 primary key (unique_id, admin_username),
 foreign key (unique_id) references Users(unique_id)
-on update cascade on delete cascade
+on update cascade on delete cascade,
+unique (admin_username)
 );
 -- Create test cases to verify insertion/deletion works as expected
---  new (Pls check to see if its correct)
 CREATE TABLE Profile (
 user_id integer(16) not null,
-name varchar(16),
+name 	varchar(16),
 primary key (user_id)
-
 ); 
 
---  new (Pls check to see if its correct)
 CREATE TABLE interact_with (
 mem_username	varchar(16),
-user_id       integer(16),
+user_id       	integer(16),
 primary key (mem_username, user_id),
 foreign key (mem_username) references Members(mem_username) ON DELETE CASCADE,
 foreign key (user_id) references Profile(user_id) ON DELETE CASCADE
 );
 
---  new (Pls check to see if its correct)
 CREATE TABLE manage (
-admin_username	varchar(16)  not null,
-user_id       integer(16) not null,
+admin_username	varchar(16) not null,
+user_id       	integer(16) not null,
 primary key (admin_username, user_id),
 foreign key (admin_username) references Administrator(admin_username) ON DELETE CASCADE,
 foreign key (user_id) references Profile(user_id) ON DELETE CASCADE
