@@ -20,6 +20,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
     return connection
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
+#Pass in connection and string query, commits or rollbacks changes depending on errors
 def execute_query(connection, query):
     cursor = connection.cursor()
     try:
@@ -30,3 +31,19 @@ def execute_query(connection, query):
         print(f"Error: '{err}'")
         #Rollback changes due to errors
         connection.rollback()
+
+
+#Pass in a connection and a string query, returns result
+def read_query(connection, query):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Error as err:
+        print(f"Error: '{err}'")
+
+#Table specific connectors-queries
+def addmembers(memid, memname, password):
+    execute_query(connection,"insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (%(memid)d, %(memname)s, sha1(%(password)s));",{'memid':memid, 'memname':memname, 'password':password})
