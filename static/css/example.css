@@ -7,7 +7,6 @@ body {
 .v108_2 {
   width: 680px;
   height: 863px;
-  background: rgba(255,255,255,1);
   opacity: 1;
   position: relative;
   top: 0px;
@@ -27,7 +26,7 @@ body {
 .v125_11 {
   width: 680px;
   height: 42px;
-  background: rgba(255,255,255,1);
+  background:  rgba(34,33,33,1);
   opacity: 1;
   position: absolute;
   top: 122px;
@@ -54,10 +53,12 @@ body {
   left: 0px;
   overflow: hidden;
 }
+
+/*~~mini box~~*/
 .v125_9 {
   width: 457px;
   height: 404px;
-  background: rgba(255,255,255,1);
+  background: #333;
   opacity: 1;
   position: absolute;
   top: 216px;
