@@ -1,6 +1,6 @@
 -- Write more insert , delete queries which would be useful. 
 -- test and report any errors in a comment
---testing
+
 insert into `Users` (`unique_id`) values (0);
 
 -- the line below gives an error 
@@ -16,3 +16,6 @@ INSERT INTO Game (g_company, game_id, game_n, genre) VALUES ('Microsoft', 23904,
 select game_id, game_n, g_company from game where genre = 'Action';
 
 SELECT game_n FROM game WHERE g_company = 'Microsoft';
+
+-- Israel Test 
+SELECT DISTINCT g_company FROM game
