@@ -1,0 +1,22 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#03b6b3",
+        "activityBar.activeBorder": "#fee0fe",
+        "activityBar.background": "#03b6b3",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#fee0fe",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#028482",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#03b6b3",
+        "titleBar.activeBackground": "#028482",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#02848299",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#028482",
+    "git.ignoredRepositories": [
+        ".vscode"
+    ]
+}
