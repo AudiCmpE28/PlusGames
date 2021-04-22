@@ -132,8 +132,8 @@ primary key (user_id)
 
 --  new (Pls check to see if its correct)
 CREATE TABLE interact_with (
-mem_username	varchar(16)not null,
-user_id       integer(16) not null,
+mem_username	varchar(16),
+user_id       integer(16),
 primary key (mem_username, user_id),
 foreign key (mem_username) references Members(mem_username) ON DELETE CASCADE,
 foreign key (user_id) references Profile(user_id) ON DELETE CASCADE

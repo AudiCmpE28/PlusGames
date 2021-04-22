@@ -1,9 +1,14 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+import random
+import string
 from pyconnector import *
 
 
+
+
+#put in the actual database credentials you have on your end. 
 connection = create_db_connection("localhost","root","1234","+games")
 
 samplequery="""
@@ -21,3 +26,40 @@ INSERT Company VALUES
 """
 
 execute_query(connection, companyinsert)
+#-----------------------------------------------------
+#Retrieving data and tabulating it in python
+#-----------------------------------------------------
+
+selectquery = """
+select * from company;
+"""
+qresult = read_query(connection, selectquery)
+for result in qresult:
+    print(result)
+
+print('\nLets put all that data into a row(array) instead')
+
+resultlist1 = []
+for result in qresult:
+    result=result
+    resultlist1.append(result)
+    print(result)
+
+print('\nLets put all that data into a column(2Darray) instead')
+
+resultlist2 = []
+for result in qresult:
+    result=list(result)
+    resultlist2.append(result)
+    print(result)
+
+#now we can use those columns and display a table in python
+#lets populate the tables first
+# Safe Parameterized SQLquery method 
+#("""SELECT count(*) FROM %(table_name)s """, {'table_name': table_name,})
+#https://realpython.com/prevent-python-sql-injection/
+
+userquery = """insert into `Users` (`unique_id`) values (0);"""
+for x in range(0, 10):
+    execute_query(connection,userquery)
+
