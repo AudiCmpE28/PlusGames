@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+import random, string
 
 def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
@@ -23,14 +24,18 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 #Pass in connection and string query, commits or rollbacks changes depending on errors
 def execute_query(connection, query):
     cursor = connection.cursor()
+    
     try:
         cursor.execute(query)
         print("Query successful")
         connection.commit()
+        cursor.close()
     except Error as err:
         print(f"Error: '{err}'")
         #Rollback changes due to errors
         connection.rollback()
+        cursor.close()
+        raise err
 
 
 #Pass in a connection and a string query, returns result
@@ -40,10 +45,28 @@ def read_query(connection, query):
     try:
         cursor.execute(query)
         result = cursor.fetchall()
+        cursor.close()
         return result
     except Error as err:
         print(f"Error: '{err}'")
+        cursor.close()
 
+def randomstring(length):
+    l = string.ascii_lowercase
+    return ''.join(random.choice(l)for i in range(length))
+
+
+#---------------------------------
 #Table specific connectors-queries
-def addmembers(memid, memname, password):
-    execute_query(connection,"insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (%(memid)d, %(memname)s, sha1(%(password)s));",{'memid':memid, 'memname':memname, 'password':password})
+#---------------------------------
+
+
+# use {} for any parameter, then at the end of the string use .format(parameter, ...)
+def addmembers(connection, memid, memname, password):
+    user_query ="insert into `Users` (`unique_id`) values ({});".format(memid)
+    member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values ({},'{}', sha1('{}'));".format(memid,memname,password)
+    try:
+        execute_query(connection,user_query)
+        execute_query(connection,member_query)
+    except:
+        exit

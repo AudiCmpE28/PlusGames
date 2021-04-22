@@ -39,9 +39,8 @@ foreign key (platform_name) references Platform(platform_name) ON UPDATE CASCADE
 );
 
 
--- need to decide if we keep Users table and link Guests/Members/Admins via Foreign Keys or doaway with inheritance
 CREATE TABLE Users (
-unique_id integer not null AUTO_INCREMENT primary key,
+unique_id integer not null primary key,
 unique (unique_id)
 );
 
