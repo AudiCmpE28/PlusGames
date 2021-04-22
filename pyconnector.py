@@ -50,7 +50,8 @@ def read_query(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
         cursor.close()
-
+#for testing purposes, returns a string of size length
+#use 
 def randomstring(length):
     l = string.ascii_lowercase
     return ''.join(random.choice(l)for i in range(length))
@@ -61,7 +62,8 @@ def randomstring(length):
 #---------------------------------
 
 
-# use {} for any parameter, then at the end of the string use .format(parameter, ...)
+# use {}, '{}' for any raw parameters and string parameters,respectively.
+# then at the end of the string use .format(parameter, ...)
 def addmembers(connection, memid, memname, password):
     user_query ="insert into `Users` (`unique_id`) values ({});".format(memid)
     member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values ({},'{}', sha1('{}'));".format(memid,memname,password)
