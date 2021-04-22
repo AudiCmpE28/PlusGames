@@ -3,8 +3,16 @@
 
 insert into `Users` (`unique_id`) values (0);
 
-insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (1, 'Anon', sha1('password123'));
+-- the line below gives an error 
+-- insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (1, 'Anon', sha1('password123'));
+-- Cannot add or update a child row: a foreign key constraint fails (`+games`.`members`, CONSTRAINT `members_ibfk_1` FOREIGN KEY (`unique_id`) REFERENCES `users` (`unique_id`) ON DELETE CASCADE ON UPDATE CASCADE)
 
 INSERT Company VALUES ('Microsoft'),('Bethesda'),('Arkane'),('Epic'),('Steam'),('Frontier'),('Ubisoft'),('Mojang');
 
-select game_id, game_name, release_date from games where genre = 'Action'
+INSERT INTO Game (g_company, game_id, game_n, genre) VALUES ('Microsoft', 21345, 'Minecraft', 'Action');
+INSERT INTO Game (g_company, game_id, game_n, genre) VALUES ('Microsoft', 54398, 'Halo', 'Shooter');
+INSERT INTO Game (g_company, game_id, game_n, genre) VALUES ('Microsoft', 23904, 'Forza Horizon', 'Racing');
+
+select game_id, game_n, g_company from game where genre = 'Action';
+
+SELECT game_n FROM game WHERE g_company = 'Microsoft';
