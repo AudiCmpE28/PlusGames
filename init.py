@@ -19,6 +19,10 @@ def login():
 def signup():
    return render_template('signup.html')
 
+@app.route('/request', methods=['GET', 'POST'])
+def request():
+   return render_template('request.html')
+
 @app.route('/example', methods=['GET', 'POST'])
 def example():
    return render_template('example.html')
