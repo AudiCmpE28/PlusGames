@@ -14,46 +14,33 @@
 
 <!-- Login Box -->
 <center>
-    <div class="v108_3">
-        <div class="boxPlacement">
-            <label for="email">Email:</label>
-            <input type="text" id="email" placeholder="Enter Your Email" name="email">
-        
-
-            <label for="password" style="padding-top: 30px"><b>Password:</b></label>
-            <input type="text" id="password" placeholder="Enter Your Password" name="password"/>    
+    <div class="medium_box">
+        <h1 class="title_login">Login</h1>
+        <div class="Blue_Line">
+        </div>
+        <div class="Green_Line">
         </div>
 
-        <div class="v101_24">   
+
+        <div class="smoll_box">
+            <h2 class="title_sub">Welcome Back Gamers!</h2>
+            <div class="boxPlacement">
+                
+                <label for="email" class="box_titles"><b>Email:</b></label><br>
+                <input type="text" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" /><br>
+
+                <div class="spacing"></div>
+
+                <label for="password" class="box_titles"><b>Password:</b></label><br>
+                <input type="text" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" /><br>
+            </div>
+
+            <a href="{{ url_for('signup') }}">
+                <button class="signup_redirect" type="button" onclick="">Not a member? Sign Up</button>
+            </a>
+
+            <button class="login_button" type="button" onclick="">Login</button>
         </div>
-
-            <div class="v106_0"> 
-                <div class="v101_26">
-                </div> 
-                <div class="v101_25">
-                </div>
-            </div>
-
-
-            <div class="v107_4"> 
-
-             
-            
-                <div class="v101_38">
-                </div>
-
-                <a href="{{ url_for('signup') }}">
-                    <button class="v119_4" type="button" onclick="">Not a member? Sign Up</button>
-                </a>
-
-                <div class="v104_31">
-                    <div class="v101_30">
-                    </div>
-                    <span class="v101_36">login</span>
-                </div>
-            </div>
-       <span class="v101_27">Login</span>
-       <span class="v101_28">Already a member? Login today!</span>
     </div>
 </center>
 

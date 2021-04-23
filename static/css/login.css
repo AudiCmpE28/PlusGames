@@ -1,144 +1,95 @@
-/*~~login~~*/
-
-/*~~Boxes~~*/
-.boxPlacement{
-  position: absolute;
-  left: 10px;
-  top: 50px;
-  text-align: left;
-  padding-top: 20px;
-  border-radius: 5px;
-
-  padding: 20px;
+/*--~~login~~--*/
+.title_login{
+  color:whitesmoke;
+  font-size: 80px;
+  font-family: Roboto;
 }
 
-.resize_box{
-  width: 300px; 
-  height: 25px;
-}
-
-/* input{
-  width: 100%;
-} */
-
-/*~~ Unkwown~~*/
-.v108_3 {
-  width: 694px;
-  height: 781px;
-  opacity: 1;
-  position: relative;
-  overflow: hidden;
-}
-.v101_24 {
-  width: 680px;
-  height: 921px;
-  background: #333;
-  opacity: 1;
-  position: relative;
- 
-}
-.v106_0 {
-  width: 680px;
-  height: 43px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 120px;
-  left: 0px;
-  overflow: hidden;
-}
-.v101_26 {
+.Green_Line {
   width: 680px;
   height: 17px;
   background: rgba(140,255,138,1);
   opacity: 1;
-  position: absolute;
-  top: 26px;
-  left: 10px;
-  overflow: hidden;
+  position: relative;
+  top: -40px;
 }
-.v101_25 {
+
+.Blue_Line {
   width: 680px;
   height: 17px;
   background: rgba(135,255,240,1);
   opacity: 1;
   position: relative;
-  top: 0px;
-  left: 10px;
-  overflow: hidden;
+  top: -50px;
 }
-.v107_4 {
-  width: 450px;
-  height: 377px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 219px;
-  left: 115px;
-  overflow: hidden;
-}
-.v104_31 {
-  width: 119px;
-  height: 32px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 289px;
-  left: 228px;
-  overflow: hidden;
-}
-.v101_30 {
-  width: 119px;
-  height: 32px;
-  background: rgba(255,255,255,1);
+
+.medium_box{
+  top: 5px;
+  width: 680px;
+  height: 721px;
+  background: #333;
   opacity: 1;
   position: relative;
-  top: 0px;
-  left: 0px;
-  border: 3px solid rgba(140,255,138,1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
 }
-.v101_36 {
-  width: 40px;
-  color: rgba(0,0,0,0.5099999904632568);
-  position: absolute;
-  top: 6px;
-  left: 40px;
-  text-align: center;
+
+.smoll_box{
+  top: 35px;
+  width: 410px;
+  height: 430px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: relative;
+}
+
+.title_sub{
+  color:whitesmoke;
+  font-size: 20px;
+  font-family: Roboto;
+  position: relative;
+  top: 25px;
+}
+
+/*~~Text Boxes~~*/
+.boxPlacement{
+  position: relative;
+  left: 10px;
+  top: 50px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.box_decorations{
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+input{
+  width: 280px; 
+  height: 25px;
+}
+
+.spacing{
+  height: 20px;
+}
+
+.box_titles{
   font-family: Roboto;
   font-weight: Regular;
   font-size: 18px;
-  opacity: 1;
-  text-align: center; /*left*/
+  color: #FFCC66;
 }
 
-
-
-.v101_38 {
-  width: 450px;
-  height: 377px;
-  background: rgba(255,255,255,0.47999998927116394);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-
-/*~~not member~~*/
-.v119_4 {
-  width: 189px;
+/*redirect to Sign Up*/
+.signup_redirect{
+  width: 220px;
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 241px;
+  top: 250px;
   left: 3px;
   font-family: Roboto;
   font-weight: Regular;
@@ -148,31 +99,29 @@
   color: blue;
 }
 
-.v119_4:hover{
-  color: black;
+.signup_redirect:hover{
+  color: tomato;
 }
 
-/*~~ already a member~~*/
-.v101_28 {
-  width: 257px;
-  color: rgba(255,255,255,1);
+/*~~Login Button~~*/
+.login_button{
+  color: #23C6C6 ;
+  background-color: white;
   position: absolute;
-  top: 253px;
-  left: 130px;
   font-family: Roboto;
   font-weight: Regular;
-  font-size: 18px;
-  opacity: 1;
-  text-align: left;
+  font-size: 15px;
+  width: 90px;
+  height: 40px;
+  right: 40px;
+  bottom: 40px;
+  border-style: solid;
+  border-width: thick;
+  border:lightcoral;
 }
-.v101_27 {
-  width: 240px;
-  color: rgba(255,255,255,1);
-  position: absolute;
-  top: 7px;
-  left: 63px; /*63*/
-  font-family: Roboto;
-  font-weight: Regular;
-  font-size: 96px;
-  opacity: 1;
+
+.login_button:hover{
+  background-color: tomato;
+  color: #6B6B6B;
+  border: blue;
 }
