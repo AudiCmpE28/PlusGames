@@ -1,13 +1,27 @@
 /*~~login~~*/
-label {
-  display: block;
-  font: 1rem 'Fira Sans', sans-serif;
+
+/*~~Boxes~~*/
+.boxPlacement{
+  position: absolute;
+  left: 10px;
+  top: 50px;
+  text-align: left;
+  padding-top: 20px;
+  border-radius: 5px;
+
+  padding: 20px;
 }
 
-input, label {
-  margin: .4rem 0;
+.resize_box{
+  width: 300px; 
+  height: 25px;
 }
 
+/* input{
+  width: 100%;
+} */
+
+/*~~ Unkwown~~*/
 .v108_3 {
   width: 694px;
   height: 781px;
@@ -21,7 +35,7 @@ input, label {
   background: #333;
   opacity: 1;
   position: relative;
-  overflow: hidden;
+ 
 }
 .v106_0 {
   width: 680px;
@@ -104,84 +118,15 @@ input, label {
   opacity: 1;
   text-align: center; /*left*/
 }
-.v104_30 {
-  width: 350px;
-  height: 32px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 183px;
-  left: 10px;
-  overflow: hidden;
-}
-.v101_32 {
-  width: 350px;
-  height: 32px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  border: 3px solid rgba(135,255,240,1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-.v101_35 {
-  width: 79px;
-  color: rgba(0,0,0,0.5099999904632568);
-  position: absolute;
-  top: 5px;
-  left: 18px;
-  font-family: Roboto;
-  font-weight: Regular;
-  font-size: 18px;
-  opacity: 1;
-  text-align: left;
-}
-.v104_29 {
-  width: 350px;
-  height: 32px;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 120px;
-  left: 10px;
-  overflow: hidden;
-}
-.v101_33 {
-  width: 350px;
-  height: 32px;
-  background: rgba(255,252,252,1);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  border: 3px solid rgba(135,255,240,1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-}
-.v101_34 {
-  width: 44px;
-  color: rgba(0,0,0,0.5099999904632568);
-  position: absolute;
-  top: 6px;
-  left: 18px;
-  font-family: Roboto;
-  font-weight: Regular;
-  font-size: 18px;
-  opacity: 1;
-  text-align: left;
-}
+
+
+
 .v101_38 {
   width: 450px;
   height: 377px;
   background: rgba(255,255,255,0.47999998927116394);
   opacity: 1;
-  position: relative;
+  position: absolute;
   top: 0px;
   left: 0px;
   overflow: hidden;
@@ -224,12 +169,10 @@ input, label {
   width: 240px;
   color: rgba(255,255,255,1);
   position: absolute;
-  position: center;
   top: 7px;
-  left: -63px; /*63*/
+  left: 63px; /*63*/
   font-family: Roboto;
   font-weight: Regular;
   font-size: 96px;
   opacity: 1;
-  text-align: center; /*left*/
 }
