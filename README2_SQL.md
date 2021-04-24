@@ -13,3 +13,4 @@ pip install IPython
 
 from pysqltest import *
 
+## Write more connecting scripts like in pytesting.py

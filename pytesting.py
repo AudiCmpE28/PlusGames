@@ -46,9 +46,12 @@ for result in qresult:
 #now we can use those columns and display a table in python
 #lets populate the tables first
 
+#-------------------------------------------------------------
 # Safe Parameterized SQLquery method 
-#("SELECT count(*) FROM '{}' ;".format(table_name)
+#aquery = "SELECT count(*) FROM '{}' ;".format(table_name)
+#execute_query(connection, aquery) #etc
 #https://realpython.com/prevent-python-sql-injection/
+#-------------------------------------------------------------
 
 userquery = """insert into `Users` (`unique_id`) values (0);"""
 for x in range(0, 10):
@@ -58,7 +61,7 @@ for x in range(0, 10):
 for i in range(0,5):
     username= randomstring(16)
     password= randomstring(25)
-    uniqueid= random.randint(1,10)
+    uniqueid= random.randint(1,100000)
     print('\nUnique_id:'+str(uniqueid),'\nUsername:'+username,'\nPassword:'+password)    
     addmembers(connection, uniqueid,username,password)
 

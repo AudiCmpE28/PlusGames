@@ -62,12 +62,12 @@ def randomstring(length):
 #---------------------------------
 
 
-# use {}, '{}' for any raw parameters and string parameters,respectively.
+# use {}, '{}' for any raw arguments and string arguments,respectively.
 # then at the end of the string use .format(parameter, ...)
 def addmembers(connection, memid, memname, password):
     user_query ="insert into `Users` (`unique_id`) values ({});".format(memid)
     member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values ({},'{}', sha1('{}'));".format(memid,memname,password)
-    try:
+    try: #This will fail the whole query and prevent a member being added to an already existing unique_id
         execute_query(connection,user_query)
         execute_query(connection,member_query)
     except:
