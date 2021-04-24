@@ -4,9 +4,9 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
     <link href="/static/css/signup.css" rel="stylesheet" />
-    <title>+Games Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
+    <title>+Games Sign Up</title>
+    
 </head>
 
 <!-- Body of Page -->
@@ -16,41 +16,41 @@
 <!-- Login Box -->
 <center>
 <!-- Body of Page -->
-    <h1 class="title">Sign Up</h1>
-    <div class="container-center-horizontal">
-        <div class="signup screen">
-            <div class="overlap-group">
-                <div class="outline">
-                    <div class="blue-bar"></div>
-                    <div class="green-bar"></div>
-                </div>
-                <div class="inputs">
-                    <div class="subtitle">Become a +Games member today!</div>
-                    <div class="username">
-                        <div class="overlap-group2">
-                            <div class="username-1">username</div>
-                        </div>
-                    </div>
-                    <div class="email-1">
-                        <div class="overlap-group3">
-                            <div class="email">email</div>
-                        </div>
-                    </div>
-                    <input class="password" name="12510" placeholder="password" type="password" required />
-                    <div class="sub-title">
-                        <span class="span">Already a member? </span><span class="span1">Login</span><span
-                            class="span">&nbsp;</span>
-                    </div>
-                    <div class="signupbutton">
-                        <div class="overlap-group1">
-                            <div class="sign-up">sign up</div>
-                        </div>
-                    </div>
-                </div>
+    <div class="medium_box"> 
+        <h1 class="title_signup">Sign Up</h1>
+        <div class="Blue_Line"> </div>
+        <div class="Green_Line"> </div>
+
+        <div class= "smoll_box"> 
+            <h2 class="title_sub"> Become a +Games Member today! </h2> 
+            <div class="boxPlacement">
+                <label for="username" class="box_titles"><b>Username:</b></label><br>
+                <input type="text" id="username" class="box_decorations" placeholder="Enter Your Username" name="username" /><br>
+
+                <div class="spacing"></div>
+
+                <label for="email" class="box_titles"><b>Email:</b></label><br>
+                <input type="text" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" /><br>
+
+                <div class="spacing"></div>
+
+                <label for="password" class="box_titles"><b>Password:</b></label><br>
+                <input type="text" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" /><br>
+            
+                <a href="{{ url_for('login') }}">
+                    <button class="login_redirect" type="button" onclick="">Already a member? Login</button>
+                </a>
             </div>
+            
+            
+
+            <button class="signup_button" type="button" onclick="">Sign Up</button>
         </div>
+        <a href="{{ url_for('home') }}">
+            <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+        </a>
     </div>
-      
+
     
 </center>
 

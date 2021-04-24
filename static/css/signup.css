@@ -1,101 +1,149 @@
-.signup {
-  height: 863px;
+/*--~~sign up~~--*/
+.title_signup{
+  color:whitesmoke;
+  font-size: 80px;
+  font-family: Roboto;
+}
+
+.Green_Line {
+  width: 680px;
+  height: 17px;
+  background: rgba(140,255,138,1);
+  opacity: 1;
   position: relative;
-  width: 680px;
+  top: -40px;
 }
-.blue-bar {
-  background-color: rgba(136,255,241,1);
+
+.Blue_Line {
+  width: 680px;
   height: 17px;
+  background: rgba(135,255,240,1);
+  opacity: 1;
+  position: relative;
+  top: -50px;
+}
+
+.medium_box{
+  top: 5px;
   width: 680px;
+  height: 721px;
+  background: #333;
+  opacity: 1;
+  position: relative;
 }
-.email {
-  letter-spacing: 0.00px;
-  min-height: 23px;
-  width: 47px;
+
+.smoll_box{
+  top: 35px;
+  width: 410px;
+  height: 430px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: relative;
 }
-.email-1 {
-  align-items: flex-start;
-  display: flex;
-  height: 34px;
-  justify-content: center;
-  margin-top: 33px;
-  min-width: 355px;
+
+.title_sub{
+  color:whitesmoke;
+  font-size: 20px;
+  font-family: Roboto;
+  position: relative;
+  top: 25px;
 }
-.green-bar {
-  background-color: rgba(140, 255, 138, 1);
-  height: 17px;
-  margin-top: 8px;
-  width: 680px;
+
+/*~~Text Boxes~~*/
+.boxPlacement{
+  position: relative;
+  left: 10px;
+  top: 50px;
+  text-align: left;
+  border-radius: 5px;
 }
-.inputs {
-  align-items: center;
-  background-color: rgba(255,255,255,0.48);
-  display: flex;
-  flex-direction: column;
-  margin-right: 1.0px;
-  margin-top: 52px;
-  min-height: 404px;
-  padding: 21px 50.8px;
-  width: 457px;
+
+.box_decorations{
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
 }
-.outline {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  min-height: 42px;
-  width: 680px;
+
+input{
+  width: 280px; 
+  height: 25px;
 }
-.overlap-group {
-  align-items: center;
-  background-color: rgba(34,33,33,1.0);
-  display: flex;
-  flex-direction: column;
-  left: 0px;
-  min-height: 842px;
-  padding: 122px 0;
+
+.spacing{
+  height: 20px;
+}
+
+.box_titles{
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 18px;
+  color: whitesmoke;
+}
+
+/*redirect to Sign Up*/
+.login_redirect{
+  width: 220px;
+  background-color: transparent;
+  border: none;
   position: absolute;
-  top: 0px;
-  width: 680px;
+  top: 250px;
+  left: 3px;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 18px;
+  opacity: 1;
+  text-align: left;
+  color: #00c3ff;
 }
-.overlap-group1 {
-  align-items: flex-start;
-  background-color: rgba(251,251,251,1.0);
-  border: 3px solid rgba(140, 255, 138, 1);
-  display: flex;
+
+.login_redirect:hover{
+  color: rgb(160, 255, 71);
+}
+
+/*~~Login Button~~*/
+.signup_button{
+  color: #23C6C6 ;
+  background-color: white;
+  position: absolute;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 15px;
+  width: 90px;
   height: 40px;
-  justify-content: flex-end;
-  margin-top: -3px;
-  min-width: 127px;
-  padding: 6.4px 32.4px;
+  right: 40px;
+  bottom: 40px;
+  border-style: solid;
+  border-width: thick;
+  border:rgb(128, 240, 240);
 }
-.overlap-group2 {
-  align-items: flex-start;
-  background-color:rgba(255,255,255,1.0);
-  display: flex;
+
+.signup_button:hover{
+  background-color: rgb(160, 255, 71);
+  color: #6B6B6B;
+  border: #00c3ff;
+}
+
+/*~~Home Button~~*/
+.back_home{
+  position:absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 95px;
   height: 40px;
-  margin-top: -3px;
-  min-width: 361px;
-  padding: 6.4px 18.3px;
+  background-color: transparent;
+  border: none;
 }
-.overlap-group3 {
-  align-items: flex-start;
-  background-color: rgba(255,255,255,1.0);
-  display: flex;
-  height: 40px;
-  margin-top: -3px;
-  min-width: 361px;
-  padding: 8.6px 18.3px;
-}
-.overlap-group4 {
-  align-items: flex-start;
-  background-color: rgba(255,255,255,1.0);
-  display: flex;
-  height: 40px;
-  margin-top: -3px;
-  min-width: 361px;
-  padding: 5.4px 18.3px;
-}
-.password {
-  align-items: flex-start;
-  align-self: flex-end;
-}
+
+
+
+
+
+
+
+
+
+
+
