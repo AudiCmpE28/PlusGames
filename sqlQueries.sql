@@ -24,3 +24,17 @@ INSERT INTO Profile (name, user_id) VALUES ('Devin', '43029');
 SELECT DISTINCT user_id, name
 FROM Profile
 WHERE name LIKE '_a%';
+
+-- new test cases
+SELECT DISTINCT game_id 
+FROM Game
+WHERE game_id = 21345 OR game_id = 23904;
+
+-- test cases for administrator
+INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('12345','izdawiz1','sjsu');
+INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('67896','audiCmpe2','doggo');
+INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('98765','dankman3','yolo');
+INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('23457','vasser4','hello');
+
+SELECT *
+FROM administrator
