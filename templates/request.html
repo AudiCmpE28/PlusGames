@@ -33,14 +33,15 @@
                 </select><br><br>
 
                 <label for="comment" class="boxPlacement_ct"><b>Comment Box:</b></label><br>
-                <!-- <input type="text" id="comment" class="box_decorations_ct" placeholder="Enter your Comment..." name="comment" /> -->
-                <textarea id="comment" class="box_decorations_ct" placeholder="Enter your Comment..." name="comment">
-                </textarea>    
+                <textarea placeholder="Enter your Comment..." class="box_decorations_ct"  name="comment"></textarea>    
             </div>
 
             <button class="submit_button" type="button" onclick="">Submit</button>
+                
         </div>
-
+        <a href="{{ url_for('home') }}">
+            <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+        </a>
 
     </div>
 </center>

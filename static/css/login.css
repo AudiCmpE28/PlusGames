@@ -80,7 +80,7 @@ input{
   font-family: Roboto;
   font-weight: Regular;
   font-size: 18px;
-  color: #FFCC66;
+  color: whitesmoke;
 }
 
 /*redirect to Sign Up*/
@@ -125,3 +125,25 @@ input{
   color: #6B6B6B;
   border: blue;
 }
+
+/*~~Home Button~~*/
+.back_home{
+  position:absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 95px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+

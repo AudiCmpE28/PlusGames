@@ -11,8 +11,11 @@
 <body style="background-color: #222222">
 
 <div class="images">
-  <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" style="border: 6px solid #1e9cb3;"></div>
-  
+  <div class="parent_image">
+  <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" class="image_position1"></div>
+  <div><img src="/static/images/rgb.gif" alt="HomePage Back" class="image_position2"></div>
+</div>
+
   <!-- Video Game Grid -->
   <div class="gallery-grid">
     <figure class="gallery-frame">
@@ -58,27 +61,58 @@
 </div>  
   
 
+
+
 <!-- The sidebar -->
 <nav class="sidebar" id="sidebar">
-  <img src="/static/images/logoCool.gif" style="padding-bottom: 121px;"/>
-    <button class="text">Popular</button>
-    <button class="text">Genre</button>
-    <button class="text">Alphabetical</button>
+  <img src="/static/images/logoCool.gif"/>
+  <div class="Blue_Line"></div>
+  <div class="Green_Line"></div>
+
+  <div style="padding-bottom: 140px;"></div>
+  
+  <!-- Buttons -->
+    <button class="text" >Popular</button>
+
+    <div class="dropdown">
+      <button class="text" disabled>Alphabetical</button>
+      <div class="dropdown_content">
+        <a href="#">A to Z</a>
+       <a href="#">Z to A</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="text" disabled>Genre</button>
+      <div class="dropdown_content">
+        <a href="#">Action games</a>
+        <a href="#">Action-adventure games</a>
+        <a href="#">Adventure games</a>
+        <a href="#">Role-playing games</a>
+        <a href="#">Simulation games</a>
+        <a href="#">Strategy games</a>
+        <a href="#">Sports games</a>
+        <a href="#">Puzzle games</a>
+        <a href="#">Idle games</a>
+        <a href="#">Sandbox/Open world</a>
+      </div>
+    </div>
+
     
-    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-      <button class="text" type="button" onclick="">Free iPhone</button>
-    </a>
-    
+
+
+
+
+
   <!-- login/sign up -->
     <a href="{{ url_for('login') }}">
       <button class="users" style="margin-top: 120%;" type="button" onclick="">SIGN IN</button>
-    </a>
+    </a><br>
     <a href="{{ url_for('signup') }}">
       <button class="users" type="button" onclick="">SIGN UP</button>
-    </a>
-
+    </a><br>
     <a href="{{ url_for('request') }}">
-      <button class="users"  type="button" onclick="">Request Edit</button>
+      <button class="users"  type="button" onclick="">REQUEST</button>
     </a>
 
 </nav>

@@ -93,14 +93,16 @@
     border-bottom-color: rgba(140,255,138,1);
     border-left-color: rgba(135,255,240,1);
     border-right-color: rgba(140,255,138,1);
-  }
-
-  input[type=text] {
+    max-width: 400px; 
+    min-width: 400px;
+    max-height: 260px;
+    min-height: 260px;
     border-style: solid;
     border-width: thick;
-    width: 100px; /*400*/
-    height: 260px;
+    word-wrap: break-word;
   }
+  
+
 
   /*~~Submit button~~*/
 .submit_button{
@@ -126,3 +128,13 @@
     border: blue;
 }
 
+/*~~Home Button~~*/
+.back_home{
+    position:absolute;
+    bottom: 15px;
+    left: 10px;
+    width: 95px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+}

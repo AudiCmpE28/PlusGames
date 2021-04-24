@@ -6,6 +6,36 @@
     left: 220px;
 }
 
+.parent_image{
+  position:relative;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+
+}
+
+.image_position1{
+  width: 1057px;
+  height: 595px;  
+  position:relative;
+  top: 0px;
+  left: 0px;
+  filter: brightness(130%);
+}
+
+.image_position2{
+  width: 1057px;
+  height: 595px;  
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 30%;
+  /* mix-blend-mode: normal; */
+}
+
 /*~~Video Games Grid~~*/
 .gallery-grid {
     display: grid;
@@ -23,6 +53,12 @@
     text-align: center;
     background-color: #333;
     color: #d9d9d9;
+    border-style: solid;
+    border-width: thick;
+    border-top-color: rgba(135,255,240,1);
+    border-bottom-color: rgba(140,255,138,1);
+    border-left-color: rgba(135,255,240,1);
+    border-right-color: rgba(140,255,138,1);
   }
   
   .gallery-frame:hover {
@@ -52,7 +88,13 @@
     
 .text {   
     color: #FFFFFF;
-    background-color: #35839b;
+    background-color: #9b3579;
+    border-style: solid;
+    border-width: thick;
+    border-top-color: rgba(135,255,240,1);
+    border-bottom-color: rgba(140,255,138,1);
+    border-left-color: rgba(135,255,240,1);
+    border-right-color: rgba(140,255,138,1);
     position: static;
     transition: 0.3s;
     padding: 10px 20px;
@@ -66,8 +108,77 @@
 }
    
 .text:hover{
-    background: tomato;
+    background: #35839b;
 }
+
+
+/*Side bar lines*/
+.Green_Line {
+  height: 10px;
+  width: 200px;
+  background: rgba(140,255,138,1);
+  position:fixed;
+  left: 10px;
+  transform: rotate(10deg);
+}
+
+.Blue_Line {
+  height: 10px;
+  width: 200px;
+  background-color: rgba(135,255,240,1);
+  position:relative;
+  left: 0px;
+  transform: rotate(-10deg);
+}
+
+
+
+/* Dropdown Button */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 80px;
+  max-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 52px;
+}
+
+/* Links inside the dropdown */
+.dropdown_content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown_content a:hover {
+  background-color: #ddd;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown_content{
+  display: block;
+  opacity: 5;
+  right: -10px;
+}
+
+
 
 /*~~Log in/ sign up~~*/
 .users{
@@ -85,4 +196,3 @@
 .users:hover {
     color: turquoise;
 }
-
