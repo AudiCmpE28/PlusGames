@@ -20,6 +20,7 @@ SELECT game_n FROM game WHERE g_company = 'Microsoft';
 INSERT INTO Profile (name, user_id) VALUES ('Carter', '82394');
 INSERT INTO Profile (name, user_id) VALUES ('Carp', '34904');
 INSERT INTO Profile (name, user_id) VALUES ('Devin', '43029');
+
 SELECT DISTINCT user_id, name
 FROM Profile
 WHERE name LIKE '_a%';
