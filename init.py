@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 @app.route('/')
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def home():
    return render_template('home.html')
    
@@ -19,6 +19,10 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
    return render_template('signup.html')
+
+@app.route('/request', methods=['GET', 'POST'])
+def request():
+   return render_template('request.html')
 
 @app.route('/example', methods=['GET', 'POST'])
 def example():
