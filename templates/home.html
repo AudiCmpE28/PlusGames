@@ -64,7 +64,7 @@
 
 
 <!-- The sidebar -->
-<nav class="sidebar" id="sidebar">
+<div class="sidebar" id="sidebar">
   <img src="/static/images/logoCool.gif"/>
   <div class="Blue_Line"></div>
   <div class="Green_Line"></div>
@@ -114,17 +114,20 @@
 
 
   <!-- login/sign up -->
+  <div class="text_position">
     <a href="{{ url_for('login') }}">
-      <button class="users" style="margin-top: 90%;" type="button" onclick="">SIGN IN</button>
-    </a><br>
+      <button class="users" style="margin-top: 80%;" type="button" onclick="">SIGN IN</button>
+    </a>
+    <div style="padding-top: 30px;"></div>
     <a href="{{ url_for('signup') }}">
       <button class="users" type="button" onclick="">SIGN UP</button>
-    </a><br>
+    </a>
+    <div style="padding-top: 30px;"></div>
     <a href="{{ url_for('request') }}">
       <button class="users"  type="button" onclick="">REQUEST</button>
     </a>
-
-</nav>
+  </div>
+</div>
   
 
 
