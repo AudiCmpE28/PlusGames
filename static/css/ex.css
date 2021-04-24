@@ -1,0 +1,165 @@
+.s {
+  align-items: center;
+  background-color: rgba(75,75,75,1.0);
+  display: flex;
+  flex-direction: column;
+  height: 842px;
+  padding: 9px 0;
+  width: 680px;
+}
+.s .blue-bar {
+  background-color: rgba(136,255,241,1);
+  height: 17px;
+  width: 680px;
+}
+.s .decoration {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 0px;
+  min-height: 42px;
+  position: absolute;
+  top: 113px;
+  width: 680px;
+}
+.s .email {
+  letter-spacing: 0.00px;
+  min-height: 23px;
+  width: 47px;
+}
+.s .green-bar {
+  background-color: rgba(140, 255, 138, 1);
+  height: 17px;
+  margin-top: 8px;
+  width: 680px;
+}
+.s .overlap-group {
+  height: 155px;
+  position: relative;
+  width: 680px;
+}
+.s .overlap-group1 {
+  align-items: flex-start;
+  background-color: rgba(255,255,255,0.48);
+  display: flex;
+  height: 40px;
+  justify-content: flex-end;
+  margin-left: -3px;
+  margin-top: -3px;
+  min-width: 127px;
+  padding: 6.4px 32.4px;
+}
+.s .overlap-group2 {
+  align-items: flex-start;
+  background-color: rgba(251,251,251,1.0);
+  display: flex;
+  height: 40px;
+  margin-left: -3px;
+  margin-top: -3px;
+  min-width: 361px;
+  padding: 5.4px 18.3px;
+}
+.s .overlap-group3 {
+  align-items: flex-start;
+  background-color: rgba(251,251,251,1.0);
+  display: flex;
+  height: 40px;
+  margin-left: -3px;
+  margin-top: -3px;
+  min-width: 361px;
+  padding: 8.6px 18.3px;
+}
+.s .overlap-group4 {
+  align-items: flex-start;
+  background-color: rgba(251,251,251,1.0);
+  display: flex;
+  height: 40px;
+  margin-left: -3px;
+  margin-top: -3px;
+  min-width: 361px;
+  padding: 6.4px 18.3px;
+}
+.s .password {
+  letter-spacing: 0.00px;
+  min-height: 23px;
+  width: 82px;
+}
+.s .s-item {
+  align-items: flex-start;
+  display: flex;
+  height: 34px;
+  margin-left: 1.44px;
+  margin-top: 33px;
+  min-width: 357px;
+}
+.s .sign-up {
+  letter-spacing: 0.00px;
+  min-height: 23px;
+  width: 62px;
+}
+.s .signup-button {
+  align-items: flex-start;
+  display: flex;
+  height: 34px;
+  margin-left: 234.85px;
+  margin-top: 19px;
+  min-width: 123px;
+}
+.s .span {
+  color: rgba(255,255,255,1.0);
+  font-family: 'Roboto', Helvetica;
+  font-size: 18px;
+}
+.s .span1 {
+  color: rgba(0,207,252,1.0);
+  font-family: 'Roboto', Helvetica;
+  font-size: 18px;
+  text-decoration: underline;
+}
+.s .sub-title {
+  letter-spacing: 0.00px;
+  margin-right: 151.0px;
+  margin-top: 33px;
+  min-height: 21px;
+  min-width: 205px;
+}
+.s .subtitle {
+  letter-spacing: 0.00px;
+  margin-right: 77.0px;
+  margin-top: 73px;
+  min-height: 21px;
+  min-width: 279px;
+}
+.s .title {
+  left: 180px;
+  letter-spacing: 0.00px;
+  position: absolute;
+  top: 0px;
+  width: 330px;
+}
+.s .username {
+  letter-spacing: 0.00px;
+  min-height: 23px;
+  width: 83px;
+}
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:400");
+* {
+  box-sizing: border-box;
+}
+.container-center-horizontal {
+  pointer-events: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+.container-center-horizontal > * {
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+.screen a {
+  text-decoration: none;
+  display: contents;
+}

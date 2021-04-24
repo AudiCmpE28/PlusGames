@@ -221,12 +221,12 @@
   color: rgba(255,255,255,1);
   position: absolute;
   top: 237px;
-  left: 120px;
+  left: 200px; /* left: 120px; */
   font-family: Roboto;
   font-weight: Regular;
   font-size: 18px;
   opacity: 1;
-  text-align: left;
+  text-align: center; /* left */
 }
 .v101_9 {
   width: 328px;

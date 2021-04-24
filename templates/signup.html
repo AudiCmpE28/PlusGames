@@ -15,30 +15,59 @@
 
 <!-- Login Box -->
 <center>
-    <div class="v108_2">
-        <div class="v101_3"></div>
-        <div class="v107_3">
-            <div class="v101_5"></div>
-            <div class="v101_4"></div>
+    <div class="v108_2">  <!--v108_2 = black background-->
+        <div class="v101_3"></div> <!--v101_3 = dark grey background-->
+        <div class="v107_3"> <!--v107_3 = blue & green bar -->
+            <div class="v101_5"></div> <!--v101_5 = green bar-->
+            <div class="v101_4"></div> <!--v101_4 = blue background-->
         </div>
-        <div class="v107_2">
-            <div class="v104_28">
-                <div class="v101_19"></div><span class="v101_20">sign up</span>
+        <div class="v107_2"> <!--v107_2 = light grey background content alignment-->
+            <!-- <div class="v104_28"> <!-v104_28 = green outline / grey box->
+                <div class="v101_19"></div> <!-v101_19 = green outline / grey box->
+                <!- <span class="v101_20">sign up</span> v101_20 = words in box ->
+            </div> -->
+            <!-- <div class="v104_25"> <!-v104_25 = blue box outline->
+                <div class="v101_11"></div> <!-v101_11 = grey box inside->
+                <span class="v101_14">username</span> <!-v101_14 = username->
+                <input type="text" style="color: whitesmoke;" placeholder="Enter Your Username" name="username" required>
             </div>
-            <div class="v104_25">
-                <div class="v101_11"></div><span class="v101_14">username</span>
-            </div>
-            <div class="v104_26">
-                <div class="v101_12"></div><span class="v101_15">email</span>
-            </div>
-            <div class="v104_27">
-                <div class="v101_13"></div><span class="v101_16">password</span>
-            </div>
-            <div class="v101_39"></div>
-        </div><span class="v101_10">Become a +Games member today!</span>
-        <span class="v101_9">Sign Up</span>
+            <div class="v104_26"> <!-v104_26 = blue box outline->
+                <div class="v101_12"></div> <!-v101_12 = grey box inside->
+                <span class="v101_15">email</span>
+                <input type="email" style="color: whitesmoke;" placeholder="Enter your email" name="email" required>
+            </div> -->
+            
+            <!-- <div class="v104_27"> <!-v104_27 = blue box outline--
+                <input type="v101_16" style="color: whitesmoke;" placeholder="Enter your password" required>
+                <!- <div class="v101_13"></div> v101_13 = grey box inside
+                <input type="v101_16" style="color: whitesmoke;" placeholder="Enter your password" required>
+                <input type="password" style="color: whitesmoke;" minlength="16"
+                title="Passwords must be 16 or more characters, contain at least one number[0-9], lowercase letter[a-z], uppercase letter[A-Z], and a special character[@$!%*#?&]."
+                pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{16,}$" placeholder="Enter Password"
+                name="psw" required> --
+            </div> -->
+            <div class="v101_39"> <!-- light grey text box -->
+                
+                <div class="v104_25"> <!--v104_25 = blue box outline-->
+                    <input type="text" placeholder="username" name="username" required>
+                </div>
+                <div class="v104_26"> <!--v104_26 = blue box outline-->
+                    <input type="email" placeholder="email" name="email" required>
+                </div>
+                <div class="v104_27"> <!--v104_27 = blue box outline-->
+                    <input type="v101_16"  placeholder="password" required>
+                </div>
+                <div class="v104_28"> <!--v104_28 = green outline / grey box-->
+                    <button type="submit">signup</button>
+                </div>
+            </div> <!-- light grey text box -->
+           
+            
+        </div>
+        <span class="v101_10">Become a +Games member today!</span> <!-- v101_10 = Subtitle  -->
+        <div class="v101_9">Sign Up</div> <!-- v101_9 = Title  -->
         <a href="{{ url_for('login') }}">
-           <button class="v119_3" type="button" onclick="">Already a member? Login</button>
+           <button class="v119_3" type="button" onclick="">Already a member? Login </button>
         </a>
 
     </div>
