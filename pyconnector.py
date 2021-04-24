@@ -2,7 +2,10 @@ import mysql.connector
 from mysql.connector import Error
 import pandas as pd
 import random, string
-
+#-----------------
+#Building blocks
+#-----------------
+#Connect to the database, necessary object for every query
 def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
     try:
@@ -50,15 +53,16 @@ def read_query(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
         cursor.close()
-#for testing purposes, returns a string of size length
-#use 
+
+
+#for testing purposes, returns a string of size length 
 def randomstring(length):
     l = string.ascii_lowercase
     return ''.join(random.choice(l)for i in range(length))
 
 
 #---------------------------------
-#Table specific connectors-queries
+#connector funcs
 #---------------------------------
 
 
@@ -67,8 +71,33 @@ def randomstring(length):
 def addmembers(connection, memid, memname, password):
     user_query ="insert into `Users` (`unique_id`) values ({});".format(memid)
     member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values ({},'{}', sha1('{}'));".format(memid,memname,password)
-    try: #This will fail the whole query and prevent a member being added to an already existing unique_id
+    try: #This will fail the whole query and prevent a member being added to an already existing unique_id. Even though execute_query has a try/except, we need another try here to make sure we stop if the 1st exec fails
         execute_query(connection,user_query)
         execute_query(connection,member_query)
     except:
         exit
+
+#add add game, comment, add review, company, console etc.
+#LOOK AT THE WEBSITE
+
+def returncolumns(connection,query):#basically read_query but returns a 2darray/column
+    qresult=read_query(connection,query)
+    resultlist1 = []
+    for result in qresult:
+        result = list(result)
+        resultlist1.append(result)
+    return resultlist1
+
+def displaytable(columns,twoDarray): #columns = ["unique_id", "mem_username", "mem_password"]
+    df = pd.DataFrame(twoDarray, columns=columns)
+    display(df)
+
+
+
+def sortbygenre(connection, genre):
+    return
+    
+def sortbypopularity(connection):
+    gamequery="select * from Games order by rating desc;" #uncertain, game not implemented yet so...
+    print(returncolumns(connection,gamequery))
+    return

@@ -56,6 +56,7 @@ on update cascade on delete cascade
 CREATE TABLE Members (
 unique_id	integer(16)not null,
 mem_username	varchar(16)not null,
+-- mem_email VARCHAR(50)NOT NULL,
 mem_password	varchar(255) default null, -- insert hashed passwords by using a select statment and MD5('password')
 primary key		(unique_id, mem_username),  -- temporary, might need to add email column for these tables
 foreign key (unique_id) references Users(unique_id)
