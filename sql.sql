@@ -122,7 +122,7 @@ foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade,
 unique (admin_username)
 );
--- Create test cases to verify insertion/deletion works as expected
+
 CREATE TABLE Profile (
 user_id integer(16) not null,
 name 	varchar(16),
