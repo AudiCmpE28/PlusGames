@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 import os, sys
 
 app = Flask(__name__)
@@ -7,14 +7,11 @@ app = Flask(__name__)
 @app.route('/home', methods=['GET', 'POST'])
 def home():
    return render_template('home.html')
-   
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    
    return render_template('login.html')
-
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -30,6 +27,10 @@ def example():
    cursor = connection.cursor()
    cursor.execute("get database testing result", result)
    return render_template('example.html', result = result)
+
+@app.route('/game_page', methods=['GET', 'POST'])
+def game_page():
+   return render_template('game_page.html')
 
 
 if __name__ == '__main__':
