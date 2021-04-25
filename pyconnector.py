@@ -109,7 +109,9 @@ def displaytable(columns,twoDarray): #columns = ["unique_id", "mem_username", "m
 
 
 
-def sortbygenre(connection, genre):
+def sortbygenre(connection,genre):
+gamegenre = "SELECT * FROM game ORDER BY genre;"
+ print(returncolumns(connection,gamegenre))
     return
     
 def sortbypopularity(connection):
