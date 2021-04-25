@@ -1,0 +1,107 @@
+/*--~~game list~~--*/
+
+.blue_bar {
+  width: 1062px;
+  height: 17px;
+  background: rgba(135,255,240,1);
+  opacity: 1;
+  position: relative;
+  top: -50px;
+}
+
+.bar_name{
+  width: 109px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 2px;
+  left: 37px;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
+/* Game Gallery Title */
+.Game-Gallery-Title{
+  color: #88fff1;
+  font-family: Roboto;
+  font-size: 24px;
+}
+
+/*~~Video Games Grid~~*/
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px); /*minmax(250px, 1fr) for flux*/
+  grid-gap: 0.5rem;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* The Picture Frame */
+.gallery-frame {
+  padding: .3rem;
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: #333;
+  color: #d9d9d9;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.gallery-frame:hover {
+  background-color: #88fff1;
+}
+
+/* The Images */
+.gallery-img {
+  height: 300px;
+  width: 200px;
+  object-fit: cover;
+  transition: opacity 0.25s ease-in-out;
+}
+
+/* Grey Bar Line */
+.hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+/*~~ Sidebar ~~*/
+.l-sidebar{
+  height: 1024px;
+  width: 190px;
+  position: fixed;
+  left: 10px;
+  top: 0;
+  padding-top: 40px;
+  background-color:#8c8c8c;
+}
+
+.r-sidebar{
+  height: 1024px;
+  width: 190px;
+  position: fixed;
+  right: 10px;
+  top: 0;
+  padding-top: 40px;
+  background-color:#8c8c8c;
+}
+
+
+
+
+
+
+
+

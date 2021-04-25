@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import os, sys
 
 app = Flask(__name__)
@@ -32,6 +32,9 @@ def example():
 def game_page():
    return render_template('game_page.html')
 
+@app.route('/game_list', methods=['GET', 'POST'])
+def game_list():
+   return render_template('game_list.html')
 
 if __name__ == '__main__':
    app.run()
