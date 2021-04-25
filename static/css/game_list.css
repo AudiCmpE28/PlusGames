@@ -35,7 +35,7 @@
 /*~~Video Games Grid~~*/
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr); /*minmax(250px, 1fr) for flux*/
+  /* grid-template-columns: repeat(1, 1fr); minmax(250px, 1fr) for flux */
   grid-gap: 0.5rem;
   justify-items: end;
   margin: 0;
@@ -71,7 +71,7 @@
 }
 
 /* Grey Bar Line */
-.hr {
+/* .hr {
   display: block;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -79,7 +79,7 @@
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
-}
+} */
 
 /*~~ Sidebar ~~*/
 .l-sidebar{
