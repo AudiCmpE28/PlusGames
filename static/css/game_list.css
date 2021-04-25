@@ -9,6 +9,13 @@
   top: -50px;
 }
 
+/* Game Gallery Title */
+.Game-Gallery-Title{
+  color: #88fff1;
+  font-family: Roboto;
+  font-size: 24px;
+}
+
 /*~~Video Games Grid~~*/
 .gallery-grid {
   display: grid;
