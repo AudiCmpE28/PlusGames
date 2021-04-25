@@ -22,9 +22,9 @@ CREATE TABLE Game(
   g_company		varchar(25) not null,
   game_n		varchar(25) not null,
   genre			varchar(10),
-  rating 		float(2,2),
+  rating 		float(3,1),
   release_Date	date,
-  price			float(2,2),
+  price			float(4,2),
   primary key (game_id,g_company), -- pull PK of owner entity to weak entity
   foreign key (g_company) references Company(CompanyName)
 );
@@ -122,7 +122,7 @@ foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade,
 unique (admin_username)
 );
--- Create test cases to verify insertion/deletion works as expected
+
 CREATE TABLE Profile (
 user_id integer(16) not null,
 name 	varchar(16),
