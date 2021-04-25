@@ -96,11 +96,11 @@ input{
   font-size: 18px;
   opacity: 1;
   text-align: left;
-  color: #00c3ff;
+  color: #ffffff;
 }
 
 .login_redirect:hover{
-  color: rgb(160, 255, 71);
+  color: #00c3ff;
 }
 
 /*~~Login Button~~*/
