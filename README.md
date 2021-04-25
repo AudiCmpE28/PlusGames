@@ -15,9 +15,9 @@ Year: 2021
  +Games is a web application that displays the game's summary, information, and ratings for viewers to browse through. 
  
  ----------------------------------------------------------------------------------------------------------------------------
- ## **Running the Page: (as of 04_24_21)***
+ ## ** UPDATE: Running the Page as of 04_24_21 ***
  
- **NOTE:** Webpage display may have issues with Google Chrome, so if it's not displaying completely use a different Browser
+ **NOTE:** Webpage display may have issues with Google Chrome, so if that occurs, please use a different browser
  
  ## Download / Installation
  **Download flask:** https://flask.palletsprojects.com/en/1.1.x/installation/
@@ -26,7 +26,7 @@ Year: 2021
   
 **Run the init.py file :** https://flask.palletsprojects.com/en/1.1.x/quickstart/
 
-## ** Running ON WINDOWS:**
+## ** Commands to run on WINDOWS:**
   
   (1) $env:FLASK_APP = "init.py"
   
