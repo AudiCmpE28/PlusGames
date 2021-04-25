@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 import pandas as pd
 import random, string
+from flask import Flask, request,render_template
 #-----------------
 #Building blocks
 #-----------------
@@ -20,7 +21,6 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         print("MySQL Database connection successful")
     except Error as err:
         print(f"Error: '{err}'")
-
     return connection
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
@@ -53,6 +53,7 @@ def read_query(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
         cursor.close()
+        raise err
 
 
 #for testing purposes, returns a string of size length 
@@ -77,9 +78,22 @@ def addmembers(connection, unique_id, mem_username, mem_email,mem_password):
     except:
         exit
 
+def addadmins(connection, unique_id, admin_username, admin_email, admin_password):
+    user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
+    adm_query="INSERT INTO administrator (unique_id, admin_username, admin_email, admin_password) VALUES({},'{}','{}',sha1('{}'));".format(unique_id,admin_username,admin_email,admin_password)
+    try:
+        execute_query(connection,user_query)
+        execute_query(connection,adm_query)
+    except:
+        exit
+
+def addguest(connection,unique_id):
+    user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
+
+
 #add add game, comment, add review, company, console etc.
 #LOOK AT THE WEBSITE
-#Anything that a person clicks on the website, think what should be returned to them. Write functions that the front end can use to format and display it.
+#Anything that a person clicks on the website, think what should be returned to webpage. Write functions that the front end can use to format and display it.
 
 def returncolumns(connection,query):#basically read_query but returns a 2darray/column
     qresult=read_query(connection,query)
@@ -99,6 +113,15 @@ def sortbygenre(connection, genre):
     return
     
 def sortbypopularity(connection):
-    gamequery="select * from Games order by rating desc;" #uncertain, game not implemented yet so...
+    gamequery="select * from Game order by rating desc;" #uncertain, game not implemented yet so...
     print(returncolumns(connection,gamequery))
     return
+
+def addcomment(connection, mem_username,game_id,text):
+    insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
+    execute_query(connection, insertq)
+
+def addreview(connection, mem_username,game_id,text):
+    insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
+    execute_query(connection, insertq)
+
