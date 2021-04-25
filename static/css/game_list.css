@@ -1,4 +1,7 @@
 /*--~~game list~~--*/
+.html{
+  overflow-y: scroll;
+}
 
 .blue_bar {
   width: 1062px;
@@ -19,7 +22,7 @@
   font-weight: Regular;
   font-size: 24px;
   opacity: 1;
-  text-align: left;
+  text-align: center;
 }
 
 /* Game Gallery Title */
@@ -37,6 +40,7 @@
   justify-items: center;
   margin: 0;
   padding: 0;
+  overflow-y: scroll;
 }
 
 /* The Picture Frame */
@@ -60,8 +64,8 @@
 
 /* The Images */
 .gallery-img {
-  height: 300px;
-  width: 200px;
+  height: 150px;
+  width: 100px;
   object-fit: cover;
   transition: opacity 0.25s ease-in-out;
 }
