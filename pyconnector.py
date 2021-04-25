@@ -9,6 +9,7 @@ import random, string
 def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
     try:
+        #connect to the database
         connection = mysql.connector.connect(
             host=host_name, #use double quotes for all fields
             user=user_name,
@@ -26,6 +27,8 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
 #Pass in connection and string query, commits or rollbacks changes depending on errors
 def execute_query(connection, query):
+
+    #instance of connection
     cursor = connection.cursor()
     
     try:
