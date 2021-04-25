@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="/static/css/request.css" type="text/css" rel="stylesheet" />
+    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
+    <title> +Games Request</title>
+</head>
+
+<!-- Body of Page -->
+<body style="background-color: #222222">
+
+
+<!-- Request Box -->
+<center>
+    <div class="medium_box">
+        <h1 class="title_Request">Request Page</h1>
+        <div class="Blue_Line">
+        </div>
+        <div class="Green_Line">
+        </div>
+
+
+        <div class="smoll_box">
+           
+            
+            <div class="boxPlacement">
+                <label for="request_select"><b>Choose type of Request:</b></label><br>
+                <select name="request" id="request_select" class="box_decorations">
+                    <option value="">~~Please choose an option~~</option>
+                    <option value="Game_New">Request Game </option>
+                    <option value="Game_Edit">Request Modification</option>
+                </select><br><br>
+
+                <label for="comment" class="boxPlacement_ct"><b>Comment Box:</b></label><br>
+                <textarea placeholder="Enter your Comment..." class="box_decorations_ct"  name="comment"></textarea>    
+            </div>
+
+            <button class="submit_button" type="button" onclick="">Submit</button>
+                
+        </div>
+        <a href="{{ url_for('home') }}">
+            <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+        </a>
+
+    </div>
+</center>
+
+
+</html>

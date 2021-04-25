@@ -1,0 +1,140 @@
+.title_Request{
+    color:whitesmoke;
+    font-size: 80px;
+    font-family: Roboto;
+  }
+  
+  .Green_Line {
+    width: 680px;
+    height: 17px;
+    background: rgba(140,255,138,1);
+    opacity: 1;
+    position: relative;
+    top: -40px;
+  }
+  
+  .Blue_Line {
+    width: 680px;
+    height: 17px;
+    background: rgba(135,255,240,1);
+    opacity: 1;
+    position: relative;
+    top: -50px;
+  }
+  
+  .medium_box{
+    top: 5px;
+    width: 680px;
+    height: 750px;
+    background: #333;
+    opacity: 1;
+    position: relative;
+  }
+  
+  .smoll_box{
+    top: 15px;
+    width: 510px;
+    height: 490px;
+    background: rgba(255,255,255,0.47999998927116394);
+    opacity: 1;
+    position: relative;
+  }
+  
+  .title_sub{
+    color:whitesmoke;
+    font-size: 20px;
+    font-family: Roboto;
+    position: relative;
+    top: 25px;
+  }
+
+  /*Selection Box*/
+.boxPlacement{
+    position: relative;
+    top: 8px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  .box_decorations{
+    border-style: solid;
+    border-width: thick;
+    border-top-color: rgba(135,255,240,1);
+    border-bottom-color: rgba(140,255,138,1);
+    border-left-color: rgba(135,255,240,1);
+    border-right-color: rgba(140,255,138,1);
+    width: 400px;
+    height: 40px;
+  }
+
+  label {
+    color:whitesmoke;
+    position: relative;
+    font-size: 20px;
+    font-family: Roboto;
+    
+  }
+
+  select{
+      font-size: 12px;
+      position: relative; 
+  }
+
+
+  /*Comment Box*/
+  .boxPlacement_ct{
+    position: relative;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  .box_decorations_ct{
+    border-top-color: rgba(135,255,240,1);
+    border-bottom-color: rgba(140,255,138,1);
+    border-left-color: rgba(135,255,240,1);
+    border-right-color: rgba(140,255,138,1);
+    max-width: 400px; 
+    min-width: 400px;
+    max-height: 260px;
+    min-height: 260px;
+    border-style: solid;
+    border-width: thick;
+    word-wrap: break-word;
+  }
+  
+
+
+  /*~~Submit button~~*/
+.submit_button{
+    position: relative;
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 15px;
+    width: 90px;
+    height: 40px;
+    top: 40px;
+    text-align: center;
+
+    color: #23C6C6 ;
+    background-color: white;
+    border-style: solid;
+    border-width: thick;
+    border:lightcoral;
+}
+
+.submit_button:hover{
+    background-color: tomato;
+    color: #6B6B6B;
+    border: blue;
+}
+
+/*~~Home Button~~*/
+.back_home{
+    position:absolute;
+    bottom: 15px;
+    left: 10px;
+    width: 95px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+}

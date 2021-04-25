@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+    <link href="/static/css/login.css" type="text/css" rel="stylesheet" />
+    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
+    <title> +Games Login</title>
+</head>
+
+<!-- Body of Page -->
+<body style="background-color: #222222">
+
+
+<!-- Login Box -->
+<center>
+    <div class="medium_box">
+        <h1 class="title_login">Login</h1>
+        <div class="Blue_Line">
+        </div>
+        <div class="Green_Line">
+        </div>
+
+
+        <div class="smoll_box">
+            <h2 class="title_sub">Welcome Back Gamers!</h2>
+            <div class="boxPlacement">
+                
+                <label for="email" class="box_titles"><b>Email:</b></label><br>
+                <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
+
+                <div class="spacing"></div>
+
+                <label for="password" class="box_titles"><b>Password:</b></label><br>
+                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
+            </div>
+
+            <a href="{{ url_for('signup') }}">
+                <button class="signup_redirect" type="button" onclick="">Not a member? Sign Up</button>
+            </a>
+
+            <button class="login_button" type="button" onclick="">Login</button>
+        </div>
+        <a href="{{ url_for('home') }}">
+            <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+        </a>
+    </div>
+</center>
+
+
+</html>

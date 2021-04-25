@@ -1,24 +1,136 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>++Games</title>
-  </head>
-  <body>
-    <h1>++Games</h1>
-    <p> Made by Gamers, For the Gamers </p>
-    <p> Christine is the CEO </p>
+<html lang="en">
+<head>
+    <title>+Games Home Page</title>
+    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
 
-    <h2>Headings</h2>
-    <p>Headings define the outline of your site. <br/> There are six levels of
-    headings.</p>
 
-    <h2>Lists</h2>
+<!-- Body of Homepage -->
+<body style="background-color: #222222">
 
-    <p>This is how you make an unordered list:</p>
-    <ul>
-        <li>Add a "ul" element (it stands for unordered list)</li>
-        <li>Add each item in its own "li" element</li>
-        <li>They don't need to be in any particular order</li>
-    </ul>
-  </body>
+<div class="images">
+  <div class="parent_image">
+  <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" class="image_position1"></div>
+  <div><img src="/static/images/rgb.gif" alt="HomePage Back" class="image_position2"></div>
+</div>
+
+  <!-- Video Game Grid -->
+  <div class="gallery-grid">
+    <figure class="gallery-frame">
+      <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
+      <figcaption>Apex Legends</figcaption>
+    </figure>
+
+    <figure class="gallery-frame">
+      <img class="gallery-img" src="/static/images/rocketLeague.jpg" alt="symbol image" title="symbol image">
+      <figcaption>Rocket League</figcaption>
+    </figure>
+
+    <figure class="gallery-frame">
+      <img class="gallery-img" src="/static/images/GenshinImpact.png" alt="symbol image" title="symbol image">
+      <figcaption>Genshin Impact</figcaption>
+    </figure>
+
+    <figure class="gallery-frame">
+      <img class="gallery-img" src="/static/images/mariopart8.png" alt="symbol image" title="symbol image">
+      <figcaption>Mario Party 8</figcaption>
+    </figure>
+      
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/BlackDessert.jpg" alt="symbol image" title="symbol image">
+        <figcaption>Black Desert Online</figcaption>
+      </figure>
+  
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/overwatch.jpg" alt="symbol image" title="symbol image">
+        <figcaption>Overwatch</figcaption>
+      </figure>
+
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/amogus.jpg" alt="symbol image" title="symbol image">
+        <figcaption>AmongUs</figcaption>
+      </figure> 
+      
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/fifa21.jpg" alt="symbol image" title="symbol image">
+        <figcaption>FIFA 21</figcaption>
+      </figure>
+  </div><!-- end:gallery-grid -->
+</div>  
+  
+
+
+
+<!-- The sidebar -->
+<div class="sidebar" id="sidebar">
+  <img src="/static/images/logoCool.gif"/>
+  <div class="Blue_Line"></div>
+  <div class="Green_Line"></div>
+
+  <div style="padding-bottom: 120px;"></div>
+  
+  <!-- Buttons -->
+    <button class="text" >Popular</button>
+
+    <div class="dropdown">
+      <button class="text" disabled>Alphabetical</button>
+      <div class="dropdown_content">
+        <a href="#">A to Z</a>
+       <a href="#">Z to A</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="text" disabled>Genre</button>
+      <div class="dropdown_content">
+        <a href="#">Action games</a>
+        <a href="#">Action-adventure games</a>
+        <a href="#">Adventure games</a>
+        <a href="#">Role-playing games</a>
+        <a href="#">Simulation games</a>
+        <a href="#">Strategy games</a>
+        <a href="#">Sports games</a>
+        <a href="#">Puzzle games</a>
+        <a href="#">Idle games</a>
+        <a href="#">Sandbox/Open world</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="text" disabled>Platform</button>
+      <div class="dropdown_content">
+        <a href="#">Console</a>
+        <a href="#">PC</a>
+        <a href="#">Mobile</a>
+        <a href="#">Handheld</a>
+        <a href="#">Arcade</a>
+      </div>
+    </div>
+
+
+
+
+
+  <!-- login/sign up -->
+  <div class="text_position">
+    <a href="{{ url_for('login') }}">
+      <button class="users" style="margin-top: 80%;" type="button" onclick="">SIGN IN</button>
+    </a>
+    <div style="padding-top: 30px;"></div>
+    <a href="{{ url_for('signup') }}">
+      <button class="users" type="button" onclick="">SIGN UP</button>
+    </a>
+    <div style="padding-top: 30px;"></div>
+    <a href="{{ url_for('request') }}">
+      <button class="users"  type="button" onclick="">REQUEST</button>
+    </a>
+  </div>
+</div>
+  
+
+
+
+
 </html>
