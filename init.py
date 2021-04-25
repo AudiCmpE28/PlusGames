@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import os
+import os, sys, request
 
 app = Flask(__name__)
 
@@ -23,7 +23,10 @@ def request():
 
 @app.route('/example', methods=['GET', 'POST'])
 def example():
-   return render_template('example.html')
+   result = int(request.form['result'])
+   cursor = connection.cursor()
+   cursor.execute("get database testing result", result)
+   return render_template('example.html', result = result)
 
 @app.route('/example', methods=['GET', 'POST'])
 def example():
