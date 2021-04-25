@@ -2,9 +2,9 @@
 <html>
 
 <head>
-    <link href="/static/css/game_page.css" type="text/css" rel="stylesheet" />
+    <title>Game Page</title>
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-    <title>sGame Page</title>
+    <link href="/static/css/game_page.css" type="text/css" rel="stylesheet" />
 </head>
 
 <!-- Body of Page -->
@@ -12,21 +12,25 @@
 
 
 
-<!-- Login Box -->
+<!-- Game Page Box -->
 <center>
     <div class="medium_box">
-        <h1 class="title_login">Login</h1>
+        <h1 class="title_game_page">Game Page</h1>
         <div class="Blue_Line">
         </div>
         <div class="Green_Line">
         </div>
 
+        <div class="images">
+            <div class="parent_image">
+            <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" width="200" height="300" class="image_position1"></div>
+        </div>
 
-        <div class="smoll_box">
-            <h2 class="title_sub">Welcome Back Gamers!</h2>
+        <!-- <div class="smoll_box">
+            <h2 class="title_sub">[Game Title Here]</h2>
             <div class="boxPlacement">
                 
-                <label for="email" class="box_titles"><b>Email:</b></label><br>
+                <label for="email" class="box_titles"><b>Test:</b></label><br>
                 <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
 
                 <div class="spacing"></div>
@@ -40,7 +44,7 @@
             </a>
 
             <button class="login_button" type="button" onclick="">Login</button>
-        </div>
+        </div> -->
         <a href="{{ url_for('home') }}">
             <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
         </a>
