@@ -11,6 +11,7 @@ pip install IPython
 
 ## You can import my Python-sql connector library in pyconnector.py
 
-from pysqltest import *
+from pyconnector import *
 
-## Write more connecting scripts like in pytesting.py
+## Write more connecting scripts like in pyconnector.py
+## Test them out in pytesting.py or your own folder/file
