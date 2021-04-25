@@ -38,4 +38,7 @@ INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('23
 
 SELECT *
 FROM administrator
+<<<<<<< HEAD
 
+=======
+>>>>>>> de9f47a47fc57c3df66feb0866fcc6fc508cbf40

@@ -27,12 +27,12 @@
             <div class="boxPlacement">
                 
                 <label for="email" class="box_titles"><b>Email:</b></label><br>
-                <input type="text" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" /><br>
+                <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
 
                 <div class="spacing"></div>
 
                 <label for="password" class="box_titles"><b>Password:</b></label><br>
-                <input type="text" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" /><br>
+                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
             </div>
 
             <a href="{{ url_for('signup') }}">
