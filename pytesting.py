@@ -90,25 +90,3 @@ print(returncolumns(connection,sel_mem),end='\n')
 for x in returncolumns(connection,sel_mem):
     print(x)
     
-    
-    
-    
-#------------------------------------------------------------
-#experimenting
-# gamesinsert = """
-# INSERT INTO Game(g_company, game_id, game_n, genre) VALUES
-# ('EA', 21345, 'Apex Legends', 'Action');
-# """
-
-# #add values to Games table
-# execute_query(connection, gamesinsert)
-
-# #read all values from DB
-# selectquery = """
-# SELECT * FROM Game;
-# """
-
-# #reads and returns a list of games
-# qresult = read_query(connection, selectquery)
-# for result in qresult:
-#     print(result)
