@@ -37,7 +37,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, 250px); /*minmax(250px, 1fr) for flux*/
   grid-gap: 0.5rem;
-  justify-items: center;
+  justify-items: end;
   margin: 0;
   padding: 0;
   overflow-y: scroll;
@@ -59,7 +59,7 @@
 }
 
 .gallery-frame:hover {
-  background-color: #88fff1;
+  background-color: #8c8c8c;
 }
 
 /* The Images */
