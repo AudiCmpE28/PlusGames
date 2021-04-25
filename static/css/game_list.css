@@ -1,0 +1,149 @@
+/*--~~sign up~~--*/
+.title_signup{
+  color:whitesmoke;
+  font-size: 80px;
+  font-family: Roboto;
+}
+
+.Green_Line {
+  width: 680px;
+  height: 17px;
+  background: rgba(140,255,138,1);
+  opacity: 1;
+  position: relative;
+  top: -40px;
+}
+
+.Blue_Line {
+  width: 680px;
+  height: 17px;
+  background: rgba(135,255,240,1);
+  opacity: 1;
+  position: relative;
+  top: -50px;
+}
+
+.medium_box{
+  top: 5px;
+  width: 680px;
+  height: 721px;
+  background: #333;
+  opacity: 1;
+  position: relative;
+}
+
+.smoll_box{
+  top: 35px;
+  width: 410px;
+  height: 430px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: relative;
+}
+
+.title_sub{
+  color:whitesmoke;
+  font-size: 20px;
+  font-family: Roboto;
+  position: relative;
+  top: 25px;
+}
+
+/*~~Text Boxes~~*/
+.boxPlacement{
+  position: relative;
+  left: 10px;
+  top: 50px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.box_decorations{
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+input{
+  width: 280px; 
+  height: 25px;
+}
+
+.spacing{
+  height: 20px;
+}
+
+.box_titles{
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 18px;
+  color: whitesmoke;
+}
+
+/*redirect to Sign Up*/
+.login_redirect{
+  width: 220px;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 250px;
+  left: 3px;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 18px;
+  opacity: 1;
+  text-align: left;
+  color: #ffffff;
+}
+
+.login_redirect:hover{
+  color: #00c3ff;
+}
+
+/*~~Login Button~~*/
+.signup_button{
+  color: #23C6C6 ;
+  background-color: white;
+  position: absolute;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 15px;
+  width: 90px;
+  height: 40px;
+  right: 40px;
+  bottom: 40px;
+  border-style: solid;
+  border-width: thick;
+  border:rgb(128, 240, 240);
+}
+
+.signup_button:hover{
+  background-color: rgb(160, 255, 71);
+  color: #6B6B6B;
+  border: #00c3ff;
+}
+
+/*~~Home Button~~*/
+.back_home{
+  position:absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 95px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
