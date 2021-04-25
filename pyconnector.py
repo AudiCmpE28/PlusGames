@@ -119,6 +119,18 @@ def sortbypopularity(connection):
     print(returncolumns(connection,gamequery))
     return
 
+def sortbyalphabetical(connection):
+
+	gamealpha = "SELECT game_n FROM game ORDER BY game_n ASC;"
+	print(returncolumns(connection,gamealpha))
+	return
+	
+	
+def sordbyalphabeticaldesc(connection):
+	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
+	print(returncolumns(connection,gamealphadesc))
+	return
+
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
