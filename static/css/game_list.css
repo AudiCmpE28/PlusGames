@@ -64,8 +64,26 @@
   border-width: 1px;
 }
 
+/*~~ Sidebar ~~*/
+.l-sidebar{
+  height: 1024px;
+  width: 190px;
+  position: fixed;
+  left: 10px;
+  top: 0;
+  padding-top: 40px;
+  background-color:#8c8c8c;
+}
 
-
+.r-sidebar{
+  height: 1024px;
+  width: 190px;
+  position: fixed;
+  right: 10px;
+  top: 0;
+  padding-top: 40px;
+  background-color:#8c8c8c;
+}
 
 
 
