@@ -9,6 +9,19 @@
   top: -50px;
 }
 
+.bar_name{
+  width: 109px;
+  color: rgba(255,255,255,1);
+  position: absolute;
+  top: 2px;
+  left: 37px;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 24px;
+  opacity: 1;
+  text-align: left;
+}
+
 /* Game Gallery Title */
 .Game-Gallery-Title{
   color: #88fff1;
