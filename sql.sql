@@ -1,9 +1,8 @@
 -- sql tables 
---New testing comment
 drop database if exists `+games`;
 create database `+games`;
 use `+games`;
-
+-- test
 
 CREATE TABLE Company (
     CompanyName VARCHAR(25),
