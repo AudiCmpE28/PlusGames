@@ -1,5 +1,5 @@
-/*--~~login~~--*/
-.title_login{
+/*Game Page*/
+.title_game_page{
   color:whitesmoke;
   font-size: 80px;
   font-family: Roboto;
@@ -23,19 +23,29 @@
   top: -50px;
 }
 
+/*Image*/
+.image_position1{
+  width: 1057px;
+  height: 595px;  
+  position:relative;
+  top: 0px;
+  left: 0px;
+  filter: brightness(100%);
+}
+
 .medium_box{
   top: 5px;
-  width: 680px;
-  height: 721px;
+  width: 700px;
+  height: 741px;
   background: #333;
   opacity: 1;
   position: relative;
 }
 
 .smoll_box{
-  top: 35px;
+  top: 20px;
   width: 410px;
-  height: 430px;
+  height: 500px;
   background: rgba(255,255,255,0.47999998927116394);
   opacity: 1;
   position: relative;
