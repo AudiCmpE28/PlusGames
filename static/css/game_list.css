@@ -1,5 +1,5 @@
-/*--~~login~~--*/
-.title_login{
+/*--~~sign up~~--*/
+.title_signup{
   color:whitesmoke;
   font-size: 80px;
   font-family: Roboto;
@@ -84,7 +84,7 @@ input{
 }
 
 /*redirect to Sign Up*/
-.signup_redirect{
+.login_redirect{
   width: 220px;
   background-color: transparent;
   border: none;
@@ -96,15 +96,15 @@ input{
   font-size: 18px;
   opacity: 1;
   text-align: left;
-  color: blue;
+  color: #ffffff;
 }
 
-.signup_redirect:hover{
-  color: tomato;
+.login_redirect:hover{
+  color: #00c3ff;
 }
 
 /*~~Login Button~~*/
-.login_button{
+.signup_button{
   color: #23C6C6 ;
   background-color: white;
   position: absolute;
@@ -117,13 +117,13 @@ input{
   bottom: 40px;
   border-style: solid;
   border-width: thick;
-  border:lightcoral;
+  border:rgb(128, 240, 240);
 }
 
-.login_button:hover{
-  background-color: tomato;
+.signup_button:hover{
+  background-color: rgb(160, 255, 71);
   color: #6B6B6B;
-  border: blue;
+  border: #00c3ff;
 }
 
 /*~~Home Button~~*/
@@ -136,6 +136,13 @@ input{
   background-color: transparent;
   border: none;
 }
+
+
+
+
+
+
+
 
 
 

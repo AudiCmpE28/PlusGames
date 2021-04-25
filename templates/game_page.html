@@ -1,68 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <title>+Games</title>
+    <link href="/static/css/game_page.css" type="text/css" rel="stylesheet" />
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/static/css/game_page.css">
+    <title>sGame Page</title>
 </head>
 
-<div class="cotn_principal">
-<div class="cont_centrar">
+<!-- Body of Page -->
+<body style="background-color: #222222">
 
-  <div class="cont_login">
-<div class="cont_info_log_sign_up">
-      <div class="col_md_login">
-<div class="cont_ba_opcitiy">
-        
-        <h2>LOGIN</h2>  
-  <p>Already have an account? Login!</p> 
-  <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
-  </div>
-  </div>
-<div class="col_md_sign_up">
-<div class="cont_ba_opcitiy">
-  <h2>GAME TITLE</h2>
 
-  
-  <p>Become a +Game's member now!</p>
 
-  <button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
-</div>
-  </div>
-       </div>
+<!-- Login Box -->
+<center>
+    <div class="medium_box">
+        <h1 class="title_login">Login</h1>
+        <div class="Blue_Line">
+        </div>
+        <div class="Green_Line">
+        </div>
 
-    
-    <div class="cont_back_info">
-       <div class="cont_img_back_1">
-    
-       </div>
-       
+
+        <div class="smoll_box">
+            <h2 class="title_sub">Welcome Back Gamers!</h2>
+            <div class="boxPlacement">
+                
+                <label for="email" class="box_titles"><b>Email:</b></label><br>
+                <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
+
+                <div class="spacing"></div>
+
+                <label for="password" class="box_titles"><b>Password:</b></label><br>
+                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
+            </div>
+
+            <a href="{{ url_for('signup') }}">
+                <button class="signup_redirect" type="button" onclick="">Not a member? Sign Up</button>
+            </a>
+
+            <button class="login_button" type="button" onclick="">Login</button>
+        </div>
+        <a href="{{ url_for('home') }}">
+            <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+        </a>
     </div>
-<div class="cont_forms" >
-    <div class="cont_img_back_">
+</center>
 
-       </div>
- <div class="cont_form_login">
-<a href="#" onclick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
-   <h2>LOGIN</h2>
- <input type="text" placeholder="Email" />
-<input type="password" placeholder="Password" />
-<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
-  </div>
-  
-   <div class="cont_form_sign_up">
-<a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
-     <h2>SIGN UP</h2>
-<input type="text" placeholder="Email" />
-<input type="text" placeholder="User" />
-<input type="password" placeholder="Password" />
-<input type="password" placeholder="Confirm Password" />
-<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
 
-  </div>
-
-    </div>
-    
-  </div>
- </div>
-</div>
+</html>
