@@ -68,9 +68,9 @@ def randomstring(length):
 
 # use {}, '{}' for any raw arguments and string arguments,respectively.
 # then at the end of the string use .format(parameter, ...)
-def addmembers(connection, memid, memname, password):
-    user_query ="insert into `Users` (`unique_id`) values ({});".format(memid)
-    member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values ({},'{}', sha1('{}'));".format(memid,memname,password)
+def addmembers(connection, unique_id, mem_username, mem_email,mem_password):
+    user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
+    member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
     try: #This will fail the whole query and prevent a member being added to an already existing unique_id. Even though execute_query has a try/except, we need another try here to make sure we stop if the 1st exec fails
         execute_query(connection,user_query)
         execute_query(connection,member_query)
@@ -79,6 +79,7 @@ def addmembers(connection, memid, memname, password):
 
 #add add game, comment, add review, company, console etc.
 #LOOK AT THE WEBSITE
+#Anything that a person clicks on the website, think what should be returned to them. Write functions that the front end can use to format and display it.
 
 def returncolumns(connection,query):#basically read_query but returns a 2darray/column
     qresult=read_query(connection,query)
