@@ -25,9 +25,9 @@ CREATE TABLE Game(
   g_company		varchar(25) not null,
   game_n		varchar(25) not null,
   genre			varchar(10),
-  rating 		float(2,2),
+  rating 		decimal(2,2),
   release_Date	date,
-  price			float(2,2),
+  price			decimal(2,2),
   primary key (game_id,g_company), -- pull PK of owner entity to weak entity
   foreign key (g_company) references Company(CompanyName)
 );
@@ -55,12 +55,11 @@ foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade
 );
 
-
-CREATE TABLE Members (
+create table Members (
 unique_id	integer(16)not null,
 mem_username	varchar(16)not null,
--- mem_email VARCHAR(50)NOT NULL,
-mem_password	varchar(255) default null, -- insert hashed passwords by using a select statment and MD5('password')
+mem_email VARCHAR(50),
+mem_password	varchar(128) default null, -- insert hashed passwords by using a select statment and MD5('password')
 primary key		(unique_id, mem_username),  -- temporary, might need to add email column for these tables
 foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade,
@@ -119,13 +118,14 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 CREATE TABLE Administrator (
 unique_id	integer(16) not null,
 admin_username	varchar(16) not null,
-admin_password	varchar(255) default null,
+admin_email	varchar(50),
+admin_password	varchar(128) default null,
 primary key (unique_id, admin_username),
 foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade,
 unique (admin_username)
 );
--- Create test cases to verify insertion/deletion works as expected
+
 CREATE TABLE Profile (
 user_id integer(16) not null,
 name 	varchar(16),
