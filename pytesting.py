@@ -62,11 +62,7 @@ for result in qresult:
 #     execute_query(connection,userquery)
 
 ## suppose these random strings are user inputs from the website
-<<<<<<< HEAD
-for i in range(0,15):
-=======
 for i in range(0,10):
->>>>>>> 7390830a46fe914ca5c3cad20c5045b9232a4745
     uniqueid= random.randint(1,100000)
     username= randomstring(16)
     email=randomstring(5)+'@'+randomstring(5)+'.com'
