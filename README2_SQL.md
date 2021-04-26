@@ -6,6 +6,7 @@ pip install pandas
 
 pip install IPython
 
+pip install flask-mysql
 
 ## Create the database in sql.sql
 
