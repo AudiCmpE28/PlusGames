@@ -1,4 +1,5 @@
 import mysql.connector
+import os
 from mysql.connector import Error
 import pandas as pd
 import random
@@ -61,7 +62,7 @@ for result in qresult:
 #     execute_query(connection,userquery)
 
 ## suppose these random strings are user inputs from the website
-for i in range(0,0):
+for i in range(0,15):
     uniqueid= random.randint(1,100000)
     username= randomstring(16)
     email=randomstring(5)+'@'+randomstring(5)+'.com'
