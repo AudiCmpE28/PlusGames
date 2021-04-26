@@ -6,7 +6,7 @@ from pyconnector.py
 
 app = Flask(__name__)
 
- mysql = MySQL(app)
+mysql = MySQL(app)
 
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])

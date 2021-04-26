@@ -113,9 +113,9 @@ def displaytable(columns,twoDarray): #columns = ["unique_id", "mem_username", "m
 
 
 def sortbygenre(connection,genre):
-gamegenre = "SELECT * FROM game ORDER BY genre;"
- print(returncolumns(connection,gamegenre))
-    return
+  gamegenre = "SELECT * FROM game ORDER BY genre;"
+  print(returncolumns(connection,gamegenre))
+  return
     
 def sortbypopularity(connection):
     gamequery="select * from Game order by rating desc;" #uncertain, game not implemented yet so...
