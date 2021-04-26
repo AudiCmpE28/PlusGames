@@ -21,26 +21,27 @@
         <div class="Green_Line">
         </div>
 
+        <form action="" method="POST">
+            <div class="smoll_box">
+                <h2 class="title_sub">Welcome Back Gamers!</h2>
+                <div class="boxPlacement">
+                    
+                    <label for="username" class="box_titles"><b>Username:</b></label><br>
+                    <input type="text" id="username" class="box_decorations" placeholder="Enter Your Username" name="username" required/><br>
 
-        <div class="smoll_box">
-            <h2 class="title_sub">Welcome Back Gamers!</h2>
-            <div class="boxPlacement">
-                
-                <label for="email" class="box_titles"><b>Email:</b></label><br>
-                <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
+                    <div class="spacing"></div>
 
-                <div class="spacing"></div>
+                    <label for="password" class="box_titles"><b>Password:</b></label><br>
+                    <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
+                </div>
 
-                <label for="password" class="box_titles"><b>Password:</b></label><br>
-                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
+                <a href="{{ url_for('signup') }}">
+                    <button class="signup_redirect" type="button" onclick="">Not a member? Sign Up</button>
+                </a>
+
+                <button class="login_button" type="submit" onclick="">Login</button>
             </div>
-
-            <a href="{{ url_for('signup') }}">
-                <button class="signup_redirect" type="button" onclick="">Not a member? Sign Up</button>
-            </a>
-
-            <button class="login_button" type="button" onclick="">Login</button>
-        </div>
+        </form>
         <a href="{{ url_for('home') }}">
             <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
         </a>
