@@ -11,7 +11,7 @@ from flask_mysql_connector import MySQL
 app = Flask(__name__)
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PASSWORD'] = '1234'
+app.config['MYSQL_PASSWORD'] = 'peachesxlr8'
 app.config['MYSQL_DATABASE'] = '+games'
 mysql = MySQL(app)
 
@@ -47,10 +47,14 @@ def signup():
       print(mem_password)
       user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
       member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
+
       try:
          cur.execute(user_query)
          cur.execute(member_query)
-         return render_template('signup.html')
+         mysql.connection.commit()
+         cur.close()
+         return 'success'
+         # return render_template('signup.html')
       except:
          return -1
    return render_template('signup.html')

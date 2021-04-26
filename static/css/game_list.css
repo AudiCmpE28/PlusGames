@@ -52,10 +52,10 @@
   color: #d9d9d9;
   border-style: solid;
   border-width: thick;
-  border-top-color: rgba(135,255,240,1);
+  /* border-top-color: rgba(135,255,240,1);
   border-bottom-color: rgba(140,255,138,1);
   border-left-color: rgba(135,255,240,1);
-  border-right-color: rgba(140,255,138,1);
+  border-right-color: rgba(140,255,138,1); */
 } 
 
 /* .gallery-frame:hover {
@@ -71,7 +71,7 @@
 }
 
 /* Grey Bar Line */
-/* .hr {
+.hr {
   display: block;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -79,7 +79,7 @@
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
-} */
+}
 
 /*~~ Sidebar ~~*/
 .l-sidebar{
