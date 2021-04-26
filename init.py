@@ -29,9 +29,8 @@ def login():
       try:
          cur= mysql.connection.cursor()
          cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
-         members= cur.fetchone()
+         members= cur.fetchall()
          cur.close()
-         
       except:
          return -1
    else:
@@ -49,7 +48,6 @@ def signup():
       mem_username=request.form.get('username')
       mem_email= request.form.get('email')
       mem_password= request.form.get('password')
-      # cur= mysql.connection.cursor()
       unique_id=random.randint(1,100000)
       print(mem_username)
       print(mem_email)

@@ -144,8 +144,14 @@ def sordbyalphabeticaldesc(connection):
 	return returncolumns(connection,gamealphadesc)
 
 def platform(connection,released_on):
-        chooseplatform = "SELECT DISTINCT platform_name FROM released_on WHERE platform_name = '{}';".format(platform_name)
-        return returncolumns(connection,chooseplatform)
+    chooseplatform = "SELECT DISTINCT platform_name FROM released_on WHERE platform_name = '{}';".format(platform_name)
+    return returncolumns(connection,chooseplatform)
+
+def sortbyplatform(connection,platform):
+    chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
+    #or this
+    chooseplatform2 ="SELECT g.game_id,g.game_n,g.genre,g.rating,g.release_date,g.price FROM Game as g join Released_on as r WHERE g.game_id = r.game_id and r.platform_name='{}';".format(platform)
+    return returncolumns(connection,chooseplatform)
 
 
 def addcomment(connection, mem_username,game_id,text):
@@ -154,6 +160,11 @@ def addcomment(connection, mem_username,game_id,text):
 
 def addreview(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
+    execute_query(connection, insertq)
+	
+def addgame(connection,game_id,g_company,game_n,genre,rating,price):
+
+    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});" .format(game_id,g_company,game_n,genre,rating,price)
     execute_query(connection, insertq)
 
 def gamecomments(connection, game_id):
