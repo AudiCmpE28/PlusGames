@@ -2,6 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 import pandas as pd
 import random, string
+from IPython.display import display
 
 #-----------------
 #Building blocks

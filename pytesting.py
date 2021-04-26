@@ -9,7 +9,7 @@ from flask import Flask, request,render_template
 
 #put in the actual database credentials you have on your end. 
 #connection = create_db_connection("localhost","root","1234","+games")
-connection = create_db_connection("localhost","root","0924","+games")
+connection = create_db_connection("localhost","root","1234","+games")
 
 companyinsert = """
 INSERT Company VALUES
@@ -61,13 +61,13 @@ for result in qresult:
 #     execute_query(connection,userquery)
 
 ## suppose these random strings are user inputs from the website
-for i in range(0,0):
-    uniqueid= random.randint(1,100000)
-    username= randomstring(16)
-    email=randomstring(5)+'@'+randomstring(5)+'.com'
-    password= randomstring(25)
-    print('\nUnique_id:'+str(uniqueid)+'\nUsername:'+username+'\nEmail:'+email+'\nPassword:'+password)
-    addmembers(connection, uniqueid,username,email,password)
+# for i in range(0,10):
+#     uniqueid= random.randint(1,100000)
+#     username= randomstring(16)
+#     email=randomstring(5)+'@'+randomstring(5)+'.com'
+#     password= randomstring(25)
+#     print('\nUnique_id:'+str(uniqueid)+'\nUsername:'+username+'\nEmail:'+email+'\nPassword:'+password)
+#     addmembers(connection, uniqueid,username,email,password)
 
 
 # Tabulate the query results!
@@ -80,9 +80,9 @@ for result in member_read:
 
 
 columns = ["unique_id", "mem_username", "mem_email","mem_password"]
-df = pd.DataFrame(mem_db, columns=columns)
+#df = pd.DataFrame(mem_db, columns=columns)
 ##Display dataframe/table
-display(df)
+#display(df)
 
 #----------------------------------------#
 #dumps whole 2darray
@@ -91,3 +91,5 @@ display(df)
 #read a row for each column, dataframe is nicer
 #for x in returncolumns(connection,sel_mem):
 #    print(x)
+
+displaytable(columns,returncolumns(connection,sel_mem))
