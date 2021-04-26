@@ -5,7 +5,7 @@ from flaskext.mysql import MySQL
 import random, string
 import os, sys
 from flask_msqldb import MySQL
-from pyconnector.py
+from pyconnector.py import *
 
 
 app = Flask(__name__)
