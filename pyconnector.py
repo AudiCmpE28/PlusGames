@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 import pandas as pd
 import random, string
-from flask import Flask, request,render_template
+
 #-----------------
 #Building blocks
 #-----------------
@@ -70,6 +70,10 @@ def randomstring(length):
 # use {}, '{}' for any raw arguments and string arguments,respectively.
 # then at the end of the string use .format(parameter, ...)
 def addmembers(connection, unique_id, mem_username, mem_email,mem_password):
+    if(unique_id==0):
+        unique_id=random.randint(1,100000)
+    if mem_email == "" and mem_username =="" and mem_password == "":
+        raise 'invalid'
     user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
     member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
     try: #This will fail the whole query and prevent a member being added to an already existing unique_id. Even though execute_query has a try/except, we need another try here to make sure we stop if the 1st exec fails
@@ -89,6 +93,10 @@ def addadmins(connection, unique_id, admin_username, admin_email, admin_password
 
 def addguest(connection,unique_id):
     user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
+    try:
+        execute_query(connection,unique_id)
+    except:
+        exit
 
 
 #add add game, comment, add review, company, console etc.
@@ -110,26 +118,24 @@ def displaytable(columns,twoDarray): #columns = ["unique_id", "mem_username", "m
 
 
 def sortbygenre(connection,genre):
-gamegenre = "SELECT * FROM game ORDER BY genre;"
- print(returncolumns(connection,gamegenre))
-    return
+    gamegenre = "SELECT * FROM Game ORDER BY '{}';".format(genre)
+    return returncolumns(connection,gamegenre)
+
+
     
 def sortbypopularity(connection):
     gamequery="select * from Game order by rating desc;" #uncertain, game not implemented yet so...
-    print(returncolumns(connection,gamequery))
-    return
+    return returncolumns(connection,gamequery)
+    
 
 def sortbyalphabetical(connection):
-
-	gamealpha = "SELECT game_n FROM game ORDER BY game_n ASC;"
-	print(returncolumns(connection,gamealpha))
-	return
+	gamealpha = "SELECT game_n FROM Game ORDER BY game_n ASC;"
+	return returncolumns(connection,gamealpha)
 	
 	
 def sordbyalphabeticaldesc(connection):
 	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
-	print(returncolumns(connection,gamealphadesc))
-	return
+	return returncolumns(connection,gamealphadesc)
 
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
@@ -138,4 +144,8 @@ def addcomment(connection, mem_username,game_id,text):
 def addreview(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
+
+def gamecomments(connection, game_id):
+    game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
+    return returncolumns(connection,game_comments)
 

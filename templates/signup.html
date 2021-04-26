@@ -20,32 +20,32 @@
         <h1 class="title_signup">Sign Up</h1>
         <div class="Blue_Line"> </div>
         <div class="Green_Line"> </div>
+        <!-- Form -->
+        <form method="POST" action="#"> 
+            <div class= "smoll_box">
+                <h2 class="title_sub"> Become a +Games Member today! </h2> 
+                <div class="boxPlacement">
+                    <label for="username" class="box_titles"><b>Username:</b></label><br>
+                    <input type="text" id="username" class="box_decorations" placeholder="Enter Your Username" name="username" required/><br>
 
-        <form>
-        <div class= "smoll_box"> 
-            <h2 class="title_sub"> Become a +Games Member today! </h2> 
-            <div class="boxPlacement">
-                <label for="username" class="box_titles"><b>Username:</b></label><br>
-                <input type="text" id="username" class="box_decorations" placeholder="Enter Your Username" name="username" required/><br>
+                    <div class="spacing"></div>
 
-                <div class="spacing"></div>
+                    <label for="email" class="box_titles"><b>Email:</b></label><br>
+                    <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
 
-                <label for="email" class="box_titles"><b>Email:</b></label><br>
-                <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
+                    <div class="spacing"></div>
 
-                <div class="spacing"></div>
-
-                <label for="password" class="box_titles"><b>Password:</b></label><br>
-                <input type="password" id="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" class="box_decorations" placeholder="Enter Your Password" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" name="password" required/><br>
-            
-                <a href="{{ url_for('login') }}">
-                    <button class="login_redirect" type="button" onclick="">Already a member? Login</button>
-                </a>
+                    <label for="password" class="box_titles"><b>Password:</b></label><br>
+                    <input type="password" id="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" class="box_decorations" placeholder="Enter Your Password" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" name="password" required/><br>
+                
+                    <a href="{{ url_for('login') }}">
+                        <button class="login_redirect" type="button" onclick="">Already a member? Login</button>
+                    </a>
+                </div>
+                <button class="signup_button" type="submit" onclick="">Sign Up</button>
             </div>
-    
-            <button class="signup_button" type="button" onclick="">Sign Up</button>
-        </div>
         </form>
+        <!-- Form end -->
         <a href="{{ url_for('home') }}">
             <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
         </a>

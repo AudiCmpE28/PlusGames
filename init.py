@@ -1,4 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for#, session,logging
+from flaskext.mysql import MySQL
+#from flask_mysqldb import MySQL
+
+import random, string
 import os, sys
 from flask_msqldb import MySQL
 from pyconnector.py
@@ -29,6 +33,20 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+   # if request.method=='POST':
+   #    memdata= request.form
+   #    mem_username=memdata['username']
+   #    mem_email= memdata['email']
+   #    mem_password= memdata['password']
+   #    cur= mysql.connection.cursor()
+   #    unique_id=random.randint(1,100000)
+   #    user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
+   #    member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
+   #    try:
+   #       cur.execute(user_query)
+   #       cur.execute(member_query)
+   #    except:
+   #       exit
    return render_template('signup.html')
 
 @app.route('/request', methods=['GET', 'POST'])
