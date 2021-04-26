@@ -1,14 +1,23 @@
 /*--~~game list~~--*/
-.html{
+/* .html{
   overflow-y: scroll;
+} */
+/*~~Home Button~~*/
+.back_home{
+  position:relative;
+  text-align: center;
+ 
+  background-color: transparent;
+  border: none;
 }
 
 .blue_bar {
-  width: 1062px;
-  height: 42px;
-  background: rgba(135,255,240,1);
+  width: 1000px;
+  height: 48px;
+  /* background: rgba(135,255,240,1); */
+  background: rgb(160, 255, 71);
   opacity: 1;
-  position: relative;
+  position: absolute;
   top: 0px;
 }
 
@@ -17,7 +26,6 @@
   color: rgba(255,255,255,1);
   position: absolute;
   top: 2px;
-  left: -255px;
   font-family: Roboto;
   font-weight: Regular;
   font-size: 24px;
@@ -25,42 +33,57 @@
   text-align: center;
 }
 
+/*Game List Box*/
+.middle_box{
+  background: #222222;
+  height: Auto;
+  width: 1000px;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+
 /* Game Gallery Title */
 .Game-Gallery-Title{
   color: #88fff1;
   font-family: Roboto;
   font-size: 24px;
+  position: relative;
 }
 
 /*~~Video Games Grid~~*/
-/*.gallery-grid {
+.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(1, 1fr); minmax(250px, 1fr) for flux 
+  grid-template-rows: repeat(auto-fit, 250px); /*minmax(250px, 1fr) for flux*/
   grid-gap: 0.5rem;
-  justify-items: end;
+  justify-items: left;
   margin: 0;
   padding: 0;
-  overflow-y: scroll;
-} */
+}
 
 /* The Picture Frame */
-/* .gallery-frame {
-  padding: .3rem;
+.gallery-frame {
+  padding: 0.5rem;
   font-size: 1.2rem;
-  text-align: center;
-  background-color: #333;
+  text-align: left;
+  width: 900px;
+  height: 160px;
   color: #d9d9d9;
-  border-style: solid;
-  border-width: thick; */
-  /* border-top-color: rgba(135,255,240,1);
-  border-bottom-color: rgba(140,255,138,1);
-  border-left-color: rgba(135,255,240,1);
-  border-right-color: rgba(140,255,138,1); 
-} */
 
-/* .gallery-frame:hover {
+}
+
+.gallery-frame:hover {
   background-color: #8c8c8c;
-} */
+}
+
+.grid_name{
+  position: relative;
+  left: 120px;
+  bottom: 120px;
+  font-size: 70px;
+  word-wrap: break-word;
+}
+
 
 /* The Images */
 .gallery-img {
@@ -69,6 +92,8 @@
   object-fit: cover;
   transition: opacity 0.25s ease-in-out;
 }
+
+
 
 /* Grey Bar Line */
 .hr {
@@ -81,28 +106,7 @@
   border-width: 1px;
 }
 
-/*~~ Sidebar ~~*/
-.l-sidebar{
-  height: 1024px;
-  width: 190px;
-  position: fixed;
-  left: 10px;
-  top: 0;
-  padding-top: 40px;
-  background-color:#8c8c8c;
-  overflow-y: scroll;
-}
 
-.r-sidebar{
-  height: 1024px;
-  width: 190px;
-  position: fixed;
-  right: 10px;
-  top: 0;
-  padding-top: 40px;
-  background-color:#8c8c8c;
-  overflow-y: scroll;
-}
 
 
 
