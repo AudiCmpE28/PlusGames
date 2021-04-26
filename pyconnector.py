@@ -30,6 +30,8 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 def execute_query(connection, query):
 
     #instance of connection
+    #cursor is an abstraction meant for
+    #data set traversal.
     cursor = connection.cursor()
     
     try:
