@@ -25,6 +25,8 @@ def login():
    else:
       return render_template('login.html')
 
+
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
    return render_template('signup.html')
@@ -33,12 +35,14 @@ def signup():
 def request():
    return render_template('request.html')
 
+
 @app.route('/example', methods=['GET', 'POST'])
 def example():
    result = (request.form['result'])
    cursor = connection.cursor()
    cursor.execute("get database testing result", result)
    return render_template('example.html', result = result)
+
 
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
@@ -51,6 +55,8 @@ def game_list():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
    return render_template('profile.html')
+
+
 
 if __name__ == '__main__':
    app.run()
