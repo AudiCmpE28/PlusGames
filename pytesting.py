@@ -10,14 +10,14 @@ from flask import Flask, request,render_template
 
 #put in the actual database credentials you have on your end. 
 #connection = create_db_connection("localhost","root","1234","+games")
-connection = create_db_connection("localhost","root","0924","+games")
+connection = create_db_connection("localhost","root","1234","+games")
 
 companyinsert = """
 INSERT Company VALUES
 ('Microsoft'),('Bethesda'),('Arkane'),('Epic'),('Steam'),('Frontier'),('Ubisoft'),('Mojang');
 """
 #Since we can only have unique companies, run only once
-#execute_query(connection, companyinsert)
+execute_query(connection, companyinsert)
 
 #-----------------------------------------------------
 #Retrieving data and tabulating it in python
@@ -62,7 +62,11 @@ for result in qresult:
 #     execute_query(connection,userquery)
 
 ## suppose these random strings are user inputs from the website
+<<<<<<< HEAD
 for i in range(0,15):
+=======
+for i in range(0,10):
+>>>>>>> 7390830a46fe914ca5c3cad20c5045b9232a4745
     uniqueid= random.randint(1,100000)
     username= randomstring(16)
     email=randomstring(5)+'@'+randomstring(5)+'.com'
@@ -81,9 +85,9 @@ for result in member_read:
 
 
 columns = ["unique_id", "mem_username", "mem_email","mem_password"]
-df = pd.DataFrame(mem_db, columns=columns)
+#df = pd.DataFrame(mem_db, columns=columns)
 ##Display dataframe/table
-display(df)
+#display(df)
 
 #----------------------------------------#
 #dumps whole 2darray
@@ -92,3 +96,5 @@ display(df)
 #read a row for each column, dataframe is nicer
 #for x in returncolumns(connection,sel_mem):
 #    print(x)
+
+displaytable(columns,returncolumns(connection,sel_mem))
