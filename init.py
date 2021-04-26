@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session #,
 from pyconnector import *
 from mysql.connector import Error
 import random, string
-import os, sys, bcrypt
+import os, sys
 from flask_mysql_connector import MySQL
 import yaml
 
@@ -34,8 +34,8 @@ def login():
          print(len(members))
          if len(members) > 0:
             if bcrypt.hashpw(mem_password, members["password"].encode('utf-8')) == members["password"].encode('utf-8'):
-                        session['username'] = members['username']
-                        session['email'] = members['email']
+               session['username'] = members['username']
+               session['email'] = members['email']
                return render_template("profile.html")
             else:
                return "Error password and email not match"
@@ -56,7 +56,6 @@ def signup():
       mem_username=request.form.get('username')
       mem_email= request.form.get('email')
       mem_password= request.form.get('password')
-      # cur= mysql.connection.cursor()
       unique_id=random.randint(1,100000)
       print(mem_username)
       print(mem_email)
