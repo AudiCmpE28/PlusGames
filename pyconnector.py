@@ -141,6 +141,12 @@ def sordbyalphabeticaldesc(connection):
 	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
 	return returncolumns(connection,gamealphadesc)
 
+def platform(connection,released_on):
+        chooseplatform = "SELECT DISTINCT platform_name FROM released_on 
+        WHERE platform_name = '{}';".format(platform_name)
+        return returncolumns(connection,chooseplatform)
+
+
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
