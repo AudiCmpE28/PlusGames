@@ -5,14 +5,15 @@ from mysql.connector import Error
 import random, string
 import os, sys, bcrypt
 from flask_mysql_connector import MySQL
+import yaml
 
-
+db=yaml.safe_load(open('db.yaml'))
 
 app = Flask(__name__)
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PASSWORD'] = 'peachesxlr8'
-app.config['MYSQL_DATABASE'] = '+games'
+app.config['MYSQL_USER'] = db['MYSQL_USER']
+app.config['MYSQL_HOST'] = db['MYSQL_HOST']
+app.config['MYSQL_PASSWORD'] = db['MYSQL_PASSWORD']
+app.config['MYSQL_DATABASE'] = db['MYSQL_DATABASE']
 mysql = MySQL(app)
 
 @app.route('/')
@@ -55,21 +56,16 @@ def signup():
       mem_username=request.form.get('username')
       mem_email= request.form.get('email')
       mem_password= request.form.get('password')
-      cur= mysql.connection.cursor()
+      # cur= mysql.connection.cursor()
       unique_id=random.randint(1,100000)
       print(mem_username)
       print(mem_email)
       print(mem_password)
       user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
       member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
-
       try:
-         cur.execute(user_query)
-         cur.execute(member_query)
-         mysql.connection.commit()
-         cur.close()
-         return 'success'
-         # return render_template('signup.html')
+         addmembers(mysql.connection,unique_id,mem_username,mem_email,mem_password)
+         return render_template('signup.html')
       except:
          return -1
    return render_template('signup.html')

@@ -8,7 +8,9 @@ pip install IPython
 
 pip install flask-mysql-connector
 
-pip install flask-mysql
+pip install flask-mysqldb
+
+pip install pyyaml
 
 ## Create the database in sql.sql
 
