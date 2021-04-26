@@ -142,8 +142,7 @@ def sordbyalphabeticaldesc(connection):
 	return returncolumns(connection,gamealphadesc)
 
 def platform(connection,released_on):
-        chooseplatform = "SELECT DISTINCT platform_name FROM released_on 
-        WHERE platform_name = '{}';".format(platform_name)
+        chooseplatform = "SELECT DISTINCT platform_name FROM released_on WHERE platform_name = '{}';".format(platform_name)
         return returncolumns(connection,chooseplatform)
 
 
