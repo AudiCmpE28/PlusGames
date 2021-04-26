@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for#, session,logging
+from flask import Flask, render_template, request, redirect, url_for, session #,logging
 #from flaskext.mysql import MySQL
 from pyconnector import *
 from mysql.connector import Error
 import random, string
-import os, sys
+import os, sys, bcrypt
 from flask_mysql_connector import MySQL
 
 
@@ -22,16 +22,31 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   # if request.method == "POST": ##gets info from form
-   #    userDetails = request.form
-   #    email= userDetails['email']
-   #    password = userDetails['password']
-   #    cur = mysql.connection.cursor() #open cursor
-   #    cursor.execute("Insert INTO users(email, password) VALUES(%s, %s)", (username, email))
-   #    cur.close()
-   # else:
+   if request.method == "POST": ##gets info from form
+      mem_username=request.form.get('username')
+      mem_password= request.form.get('password')
+      try:
+         cur= mysql.connection.cursor()
+         cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
+         members=cur.fetchone()
+         cur.close()
+         print(len(members))
+         if len(members) > 0:
+            if bcrypt.hashpw(mem_password, members["password"].encode('utf-8')) == members["password"].encode('utf-8'):
+                        session['username'] = members['username']
+                        session['email'] = members['email']
+                        return render_template("profile.html")
+            else:
+               return "Error password and email not match"
+      except:
+         return -1
+   else:
       return render_template('login.html')
 
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+   session.clear()
+   return render_template('home.html')
 
 
 @app.route('/signup', methods=['GET','POST'])
