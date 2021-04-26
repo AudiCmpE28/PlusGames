@@ -5,6 +5,7 @@ import random
 import string
 from IPython.display import display
 from pyconnector import *
+from flask import Flask, request,render_template
 
 #put in the actual database credentials you have on your end. 
 connection = create_db_connection("localhost","root","1234","+games")
@@ -60,7 +61,7 @@ for result in qresult:
 #     execute_query(connection,userquery)
 
 ## suppose these random strings are user inputs from the website
-for i in range(0,5):
+for i in range(0,0):
     uniqueid= random.randint(1,100000)
     username= randomstring(16)
     email=randomstring(5)+'@'+randomstring(5)+'.com'

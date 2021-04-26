@@ -1,12 +1,7 @@
--- sql tables 
-<<<<<<< HEAD
-=======
--- New testing comment
->>>>>>> 5926b848af025b00393be021cef05705e3cae4a5
+
 drop database if exists `+games`;
 create database `+games`;
 use `+games`;
--- test
 
 CREATE TABLE Company (
     CompanyName VARCHAR(25),
@@ -25,9 +20,9 @@ CREATE TABLE Game(
   g_company		varchar(25) not null,
   game_n		varchar(25) not null,
   genre			varchar(10),
-  rating 		decimal(2,2),
+  rating 		decimal(3,2),
   release_Date	date,
-  price			decimal(2,2),
+  price			decimal(4,2),
   primary key (game_id,g_company), -- pull PK of owner entity to weak entity
   foreign key (g_company) references Company(CompanyName)
 );
@@ -78,7 +73,7 @@ CREATE TABLE comment_on (
 mem_username	varchar(16)not null,
 game_id			varchar(25)not null,
 c_date	date,
-c_time 	timestamp,
+c_time 	time,
 comment_text varchar(250),
 primary key (mem_username, game_id),
 foreign key (mem_username) references Members(mem_username) on delete CASCADE,

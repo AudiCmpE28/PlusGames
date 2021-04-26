@@ -31,6 +31,7 @@ FROM Game
 WHERE game_id = 21345 OR game_id = 23904;
 
 -- test cases for administrator
+-- you cannot add admins/guests/members without adding a user first. see addmembers connector as example
 INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('12345','izdawiz1','sjsu');
 INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('67896','audiCmpe2','doggo');
 INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('98765','dankman3','yolo');
@@ -39,6 +40,17 @@ INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('23
 SELECT *
 FROM administrator
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> de9f47a47fc57c3df66feb0866fcc6fc508cbf40
+=======
+;
+
+insert into company values('Company1');
+insert into company values('Company2');
+insert into game(g_company, game_id, game_n,rating,release_Date,genre,price) values ('Company1',1,'Game1',4.50,'2020-02-20','Action',59.99);
+insert into game(g_company, game_id, game_n,rating,release_Date,genre,price) values ('Company2',2,'Game2',1.50,'2020-01-10','RPG',19.99);
+insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('hremvgltumluwxwk', 23904,NOW(),NOW(), "COMMENT TEXT");
+select * from Game order by rating desc
+>>>>>>> bb83fd3d9fd82ce8b11ade7a3f288ad9d55c2d65
