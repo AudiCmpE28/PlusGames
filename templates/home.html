@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>+Games Home Page</title>
+    <title>+Games Profile Page</title>
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
@@ -112,11 +112,10 @@
 
 
 
-
   <!-- login/sign up -->
   <div class="text_position">
     <a href="{{ url_for('login') }}">
-      <button class="users" style="margin-top: 80%;" type="button" onclick="">SIGN IN</button>
+      <button class="users" style="margin-top: 30%;" type="button" onclick="">SIGN IN</button>
     </a>
     <div style="padding-top: 30px;"></div>
     <a href="{{ url_for('signup') }}">
@@ -129,14 +128,14 @@
     <a href="{{ url_for('game_list') }}">
       <button class="users"  type="button" onclick="">TEST GAME LIST</button>
     </a>
+    <a href="{{ url_for('profile') }}">
+      <button class="users"  type="button" onclick="">PROFILE</button>
+    </a>
     <div style="padding-top: 30px;"></div>
     <a href="{{ url_for('game_page') }}">
       <button class="users"  type="button" onclick="">TEST GAME PAGE</button>
     </a>
-    <!-- <div style="padding-top: 30px;"></div> -->
-    <!-- <a href="{{ url_for('example') }}">
-      <button class="users"  type="button" onclick="">TEST DB REQUEST</button>
-    </a> -->
+    
   </div>
 </div>
   

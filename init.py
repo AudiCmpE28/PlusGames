@@ -1,15 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for#, session,logging
-from flaskext.mysql import MySQL
-#from flask_mysqldb import MySQL
-
+from flask import Flask, render_template, request, redirect, url_for, session #,logging
+#from flaskext.mysql import MySQL
+from pyconnector import *
+from mysql.connector import Error
 import random, string
-import os, sys
-# from flask_msqldb import MySQL
-# from pyconnector.py import * #pyconnector not a package
+import os, sys, bcrypt
+from flask_mysql_connector import MySQL
+import yaml
 
+db=yaml.safe_load(open('db.yaml'))
 
 app = Flask(__name__)
-
+app.config['MYSQL_USER'] = db['MYSQL_USER']
+app.config['MYSQL_HOST'] = db['MYSQL_HOST']
+app.config['MYSQL_PASSWORD'] = db['MYSQL_PASSWORD']
+app.config['MYSQL_DATABASE'] = db['MYSQL_DATABASE']
 mysql = MySQL(app)
 
 @app.route('/')
@@ -19,48 +23,49 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   # if request.method == "POST": ##gets info from form
-   #    userDetails = request.form
-   #    email= userDetails['email']
-   #    password = userDetails['password']
-   #    cur = mysql.connection.cursor() #open cursor
-   #    cursor.execute("Insert INTO users(email, password) VALUES(%s, %s)", (username, email))
-   #    cur.close()
-   # else:
+   if request.method == "POST": ##gets info from form
+      mem_username=request.form.get('username')
+      mem_password= request.form.get('password')
+      try:
+         cur= mysql.connection.cursor()
+         cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
+         members= cur.fetchone()
+         cur.close()
+         
+      except:
+         return -1
+   else:
       return render_template('login.html')
 
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+   session.clear()
+   return render_template('home.html')
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET','POST'])
 def signup():
-   # if request.method=='POST':
-   #    memdata= request.form
-   #    mem_username=memdata['username']
-   #    mem_email= memdata['email']
-   #    mem_password= memdata['password']
-   #    cur= mysql.connection.cursor()
-   #    unique_id=random.randint(1,100000)
-   #    user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
-   #    member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
-   #    try:
-   #       cur.execute(user_query)
-   #       cur.execute(member_query)
-   #    except:
-   #       exit
+   if request.method=='POST':
+      mem_username=request.form.get('username')
+      mem_email= request.form.get('email')
+      mem_password= request.form.get('password')
+      # cur= mysql.connection.cursor()
+      unique_id=random.randint(1,100000)
+      print(mem_username)
+      print(mem_email)
+      print(mem_password)
+      user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
+      member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
+      try:
+         addmembers(mysql.connection,unique_id,mem_username,mem_email,mem_password)
+         return render_template('signup.html')
+      except:
+         return -1
    return render_template('signup.html')
 
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    return render_template('request_page.html')
-
-
-@app.route('/example', methods=['GET', 'POST'])
-def example():
-   # result = (request.form['result'])
-   # cursor = connection.cursor()
-   # cursor.execute("get database testing result", result)
-   return render_template('example.html')
-
 
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
@@ -77,4 +82,4 @@ def profile():
 
 
 if __name__ == '__main__':
-   app.run()
+   app.run(debug=True)

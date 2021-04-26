@@ -17,7 +17,7 @@ INSERT Company VALUES
 ('Microsoft'),('Bethesda'),('Arkane'),('Epic'),('Steam'),('Frontier'),('Ubisoft'),('Mojang');
 """
 #Since we can only have unique companies, run only once
-execute_query(connection, companyinsert)
+#execute_query(connection, companyinsert)
 
 #-----------------------------------------------------
 #Retrieving data and tabulating it in python
@@ -62,7 +62,7 @@ for result in qresult:
 #     execute_query(connection,userquery)
 
 ## suppose these random strings are user inputs from the website
-for i in range(0,10):
+for i in range(0,1):
     uniqueid= random.randint(1,100000)
     username= randomstring(16)
     email=randomstring(5)+'@'+randomstring(5)+'.com'
