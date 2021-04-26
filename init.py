@@ -110,7 +110,7 @@ def profile():
       print(rating)
       print(release_Date)
       print(price)
-      
+      ##
       try:
          sortbyalphabetical(mysql.connection)
          return render_template('profile.html')
