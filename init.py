@@ -27,7 +27,7 @@ def login():
    #    email= userDetails['email']
    #    password = userDetails['password']
    #    cur = mysql.connection.cursor() #open cursor
-   #    cursor.execute("Insert INTO users(email, password) VALUES(%s, %s)", (username, email)) #YOU HAVE TO SELECT, AND CHECK IF USER EXISTS IN DB
+   #    cursor.execute("Insert INTO users(email, password) VALUES(%s, %s)", (username, email))
    #    cur.close()
    # else:
       return render_template('login.html')
@@ -55,17 +55,17 @@ def signup():
          return -1
    return render_template('signup.html')
 
-@app.route('/requestgame', methods=['GET', 'POST'])
-def requestgame():
-   return render_template('requestgame.html')
+@app.route('/request_page', methods=['GET', 'POST'])
+def request_page():
+   return render_template('request_page.html')
 
 
 @app.route('/example', methods=['GET', 'POST'])
 def example():
-   result = (request.form['result'])
-   cursor = connection.cursor()
-   cursor.execute("get database testing result", result)
-   return render_template('example.html', result = result)
+   # result = (request.form['result'])
+   # cursor = connection.cursor()
+   # cursor.execute("get database testing result", result)
+   return render_template('example.html')
 
 
 @app.route('/game_page', methods=['GET', 'POST'])
