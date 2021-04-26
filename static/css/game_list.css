@@ -5,11 +5,11 @@
 
 .blue_bar {
   width: 1062px;
-  height: 17px;
+  height: 42px;
   background: rgba(135,255,240,1);
   opacity: 1;
   position: relative;
-  top: -50px;
+  top: 0px;
 }
 
 .bar_name{
@@ -17,7 +17,7 @@
   color: rgba(255,255,255,1);
   position: absolute;
   top: 2px;
-  left: 37px;
+  left: -255px;
   font-family: Roboto;
   font-weight: Regular;
   font-size: 24px;
@@ -33,15 +33,15 @@
 }
 
 /*~~Video Games Grid~~*/
-.gallery-grid {
+/*.gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 250px); /*minmax(250px, 1fr) for flux*/
+  grid-template-columns: repeat(1, 1fr); minmax(250px, 1fr) for flux 
   grid-gap: 0.5rem;
   justify-items: end;
   margin: 0;
   padding: 0;
   overflow-y: scroll;
-}
+} */
 
 /* The Picture Frame */
 .gallery-frame {
@@ -56,11 +56,11 @@
   border-bottom-color: rgba(140,255,138,1);
   border-left-color: rgba(135,255,240,1);
   border-right-color: rgba(140,255,138,1);
-}
+} 
 
-.gallery-frame:hover {
+/* .gallery-frame:hover {
   background-color: #8c8c8c;
-}
+} */
 
 /* The Images */
 .gallery-img {
@@ -71,7 +71,7 @@
 }
 
 /* Grey Bar Line */
-.hr {
+/* .hr {
   display: block;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -79,7 +79,7 @@
   margin-right: auto;
   border-style: inset;
   border-width: 1px;
-}
+} */
 
 /*~~ Sidebar ~~*/
 .l-sidebar{

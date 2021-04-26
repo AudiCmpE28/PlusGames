@@ -4,17 +4,13 @@ from flaskext.mysql import MySQL
 
 import random, string
 import os, sys
+from flask_msqldb import MySQL
+from pyconnector.py
+
 
 app = Flask(__name__)
 
-mysql = MySQL()
-#connect=create_db_connection("localhost","root","1234","+games")
-
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = '1234'
-app.config['MYSQL_DATABASE_DB'] = '+games'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
+ mysql = MySQL(app)
 
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
@@ -23,7 +19,17 @@ def home():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   return render_template('login.html')
+   if request.method == "POST": ##gets info from form
+      userDetails = request.form
+      email= userDetails['email']
+      password = userDetails['password']
+      cur = mysql.connection.cursor() #open cursor
+      cursor.execute("Insert INTO users(email, password) VALUES(%s, %s)", (username, email))
+      cur.close()
+   else:
+      return render_template('login.html')
+
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -47,12 +53,14 @@ def signup():
 def request():
    return render_template('request.html')
 
+
 @app.route('/example', methods=['GET', 'POST'])
 def example():
    result = (request.form['result'])
    cursor = connection.cursor()
    cursor.execute("get database testing result", result)
    return render_template('example.html', result = result)
+
 
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
@@ -61,6 +69,12 @@ def game_page():
 @app.route('/game_list', methods=['GET', 'POST'])
 def game_list():
    return render_template('game_list.html')
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+   return render_template('profile.html')
+
+
 
 if __name__ == '__main__':
    app.run()
