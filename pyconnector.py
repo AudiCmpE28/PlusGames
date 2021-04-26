@@ -112,13 +112,27 @@ def displaytable(columns,twoDarray): #columns = ["unique_id", "mem_username", "m
 
 
 
-def sortbygenre(connection, genre):
+def sortbygenre(connection,genre):
+gamegenre = "SELECT * FROM game ORDER BY genre;"
+ print(returncolumns(connection,gamegenre))
     return
     
 def sortbypopularity(connection):
     gamequery="select * from Game order by rating desc;" #uncertain, game not implemented yet so...
     print(returncolumns(connection,gamequery))
     return
+
+def sortbyalphabetical(connection):
+
+	gamealpha = "SELECT game_n FROM game ORDER BY game_n ASC;"
+	print(returncolumns(connection,gamealpha))
+	return
+	
+	
+def sordbyalphabeticaldesc(connection):
+	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
+	print(returncolumns(connection,gamealphadesc))
+	return
 
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
