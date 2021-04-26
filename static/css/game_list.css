@@ -44,19 +44,19 @@
 } */
 
 /* The Picture Frame */
-.gallery-frame {
+/* .gallery-frame {
   padding: .3rem;
   font-size: 1.2rem;
   text-align: center;
   background-color: #333;
   color: #d9d9d9;
   border-style: solid;
-  border-width: thick;
+  border-width: thick; */
   /* border-top-color: rgba(135,255,240,1);
   border-bottom-color: rgba(140,255,138,1);
   border-left-color: rgba(135,255,240,1);
-  border-right-color: rgba(140,255,138,1); */
-} 
+  border-right-color: rgba(140,255,138,1); 
+} */
 
 /* .gallery-frame:hover {
   background-color: #8c8c8c;
@@ -90,6 +90,7 @@
   top: 0;
   padding-top: 40px;
   background-color:#8c8c8c;
+  overflow-y: scroll;
 }
 
 .r-sidebar{
@@ -100,6 +101,7 @@
   top: 0;
   padding-top: 40px;
   background-color:#8c8c8c;
+  overflow-y: scroll;
 }
 
 

@@ -63,15 +63,6 @@ def signup():
 def request_page():
    return render_template('request_page.html')
 
-
-@app.route('/example', methods=['GET', 'POST'])
-def example():
-   # result = (request.form['result'])
-   # cursor = connection.cursor()
-   # cursor.execute("get database testing result", result)
-   return render_template('example.html')
-
-
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
    return render_template('game_page.html')
