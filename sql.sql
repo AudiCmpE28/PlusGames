@@ -8,6 +8,7 @@ CREATE TABLE Company (
     PRIMARY KEY (CompanyName),
     unique (CompanyName)
 );
+
 CREATE TABLE Platform (
 platform_name varchar(25),
 PRIMARY KEY (platform_name)
