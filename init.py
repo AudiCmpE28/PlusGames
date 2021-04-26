@@ -28,14 +28,14 @@ def login():
       try:
          cur= mysql.connection.cursor()
          cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
-         members=cur.fetchone()
+         members= cur.fetchone()
          cur.close()
          print(len(members))
          if len(members) > 0:
             if bcrypt.hashpw(mem_password, members["password"].encode('utf-8')) == members["password"].encode('utf-8'):
                         session['username'] = members['username']
                         session['email'] = members['email']
-                        return render_template("profile.html")
+               return render_template("profile.html")
             else:
                return "Error password and email not match"
       except:
