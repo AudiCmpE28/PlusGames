@@ -32,7 +32,7 @@
                 <div class="spacing"></div>
 
                 <label for="password" class="box_titles"><b>Password:</b></label><br>
-                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
+                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
             </div>
 
             <a href="{{ url_for('signup') }}">
