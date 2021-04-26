@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>+Games Home Page</title>
+    <title>+Games Profile Page</title>
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
@@ -127,6 +127,9 @@
     </a>
     <a href="{{ url_for('game_list') }}">
       <button class="users"  type="button" onclick="">TEST GAME LIST</button>
+    </a>
+    <a href="{{ url_for('profile') }}">
+      <button class="users"  type="button" onclick="">PROFILE</button>
     </a>
     <div style="padding-top: 30px;"></div>
     <a href="{{ url_for('game_page') }}">
