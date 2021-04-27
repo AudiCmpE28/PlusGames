@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for#, session,logging
-from flaskext.mysql import MySQL
+#from flaskext.mysql import MySQL
 #from flask_mysqldb import MySQL
 
 import random, string
 import os, sys
-from flask_msqldb import MySQL
-from pyconnector.py import *
+#from flask_msqldb import MySQL
+from pyconnector import *
 
 
 app = Flask(__name__)
 
-mysql = MySQL(app)
+
+#mysql = MySQL(app)
 
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
