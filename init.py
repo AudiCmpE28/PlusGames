@@ -1,5 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, session, g ,logging
-#from flaskext.mysql import MySQL
+import logging
+logger = logging.getLogger('TxLog')
+logger.setLevel(logging.DEBUG)
+logger.debug('Logger config message')
+fhandler = logging.FileHandler(filename='logfile.log', mode='a')
+fhandler.setLevel(logging.DEBUG)
+hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+fhandler.setFormatter(hformatter)
+logger.addHandler(fhandler)
+#logger.debug('Debugging to file')
+
+from flask import Flask, render_template, request, redirect, url_for, session, g
 from pyconnector import *
 from mysql.connector import Error
 from flask_mysql_connector import MySQL
@@ -11,7 +21,12 @@ import yaml
 
 
 db=yaml.safe_load(open('db.yaml'))
-
+#Create a db.yaml file in the base directory and put the following 4 lines in it. Add it to .gitignore so you keep your own independent config files.
+#MYSQL_USER: 'root'
+#MYSQL_HOST: 'localhost'
+#MYSQL_PASSWORD: 'your_mysql_password'
+#MYSQL_DATABASE: '+games'
+#
 app = Flask(__name__)
 app.config['MYSQL_USER'] = db['MYSQL_USER']
 app.config['MYSQL_HOST'] = db['MYSQL_HOST']
