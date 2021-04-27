@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session #,logging
-#from flaskext.mysql import MySQL
+from flask import Flask, render_template, request, redirect, url_for, session ,logging
 from pyconnector import *
 from mysql.connector import Error
 import random, string
@@ -10,6 +9,7 @@ import yaml
 db=yaml.safe_load(open('db.yaml'))
 
 app = Flask(__name__)
+
 app.config['MYSQL_USER'] = db['MYSQL_USER']
 app.config['MYSQL_HOST'] = db['MYSQL_HOST']
 app.config['MYSQL_PASSWORD'] = db['MYSQL_PASSWORD']
