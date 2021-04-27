@@ -38,15 +38,24 @@ app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
 app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
 
-######################
-dbinit(logger,mysql,0)   # Set to 1 if you want to reset the db
-######################
+###################
+global resetflag  #
+resetflag=0       # Set to 1 if you want to reset the db
+###################
 
 #### Homepage HTML ####
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+   global resetflag
+   ################################
+   dbreinit(logger,mysql,resetflag)   
+   ################################
+
+   resetflag=0
+
    return render_template('home.html')
+   
 
 
 #### Login HTML ####
