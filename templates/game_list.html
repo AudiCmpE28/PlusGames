@@ -34,13 +34,31 @@
         <figure class="gallery-frame">
           <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
           <figcaption class="grid_name">Apex Legends</figcaption>
+          
         </figure>
       </div>
-      <hr>
-  
 
     </div>
   </center>
-  
+  <div>
+
+
+    <thead>
+      <tr>
+        <th>GAMES </th>
+      </tr>
+    </thead>
+
+    {% for item in games_list %}
+    <tr>
+      <td>{{item}}</td>
+    </tr>
+    {% endfor %}
+
+  </div>
+</body>
+
+
+
   
   </html>

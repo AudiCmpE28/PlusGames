@@ -1,0 +1,5 @@
+db.yaml
+/__pycache__
+/.vscode
+/logfile.log
+/logfile2.log
