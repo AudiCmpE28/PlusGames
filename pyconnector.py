@@ -176,7 +176,7 @@ def addreview(connection, mem_username,game_id,text):
 	
 def addgame(connection,game_id,g_company,game_n,genre,rating,price):
 
-    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});" .format(game_id,g_company,game_n,genre,rating,price)
+    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});".format(game_id,g_company,game_n,genre,rating,price)
     execute_query(connection, insertq)
 
 def gamecomments(connection, game_id):
