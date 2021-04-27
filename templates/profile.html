@@ -1,52 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>+Games Home Page</title>
+<html>
+  <head>
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/static/css/profile.css">
-</head>
+  </head>
 
+  <body>
+    <div for="game_n" > </div>
+    name="game_n"
 
-<!-- Body of Homepage -->
-<body style="background-color: #222222">
-
-<div class="images">
-  <div class="parent_image">
-  <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" class="image_position1"></div>
-  <div><img src="/static/images/rgb.gif" alt="HomePage Back" class="image_position2"></div>
-</div>
-
-
-
-  <!-- login/sign up -->
-  <div class="text_position">
-    <a href="{{ url_for('login') }}">
-      <button class="users" style="margin-top: 30%;" type="button" onclick="">SIGN IN</button>
-    </a>
-    <div style="padding-top: 30px;"></div>
-    <a href="{{ url_for('signup') }}">
-      <button class="users" type="button" onclick="">SIGN UP</button>
-    </a>
-    <div style="padding-top: 30px;"></div>
-    <a href="{{ url_for('request_page') }}">
-      <button class="users"  type="button" onclick="">REQUEST</button>
-    </a>
-    <a href="{{ url_for('game_list') }}">
-      <button class="users"  type="button" onclick="">TEST GAME LIST</button>
-    </a>
-    <div style="padding-top: 30px;"></div>
-    <a href="{{ url_for('game_page') }}">
-      <button class="users"  type="button" onclick="">TEST GAME PAGE</button>
-    </a>
-    <!-- <div style="padding-top: 30px;"></div> -->
-    <!-- <a href="{{ url_for('example') }}">
-      <button class="users"  type="button" onclick="">TEST DB REQUEST</button>
-    </a> -->
-  </div>
-</div>
-  
-
-
-
-
+ </body>
 </html>
+
