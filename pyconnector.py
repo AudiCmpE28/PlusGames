@@ -90,8 +90,8 @@ def randomstring(length):
 def addmembers(connection, unique_id, mem_username, mem_email,mem_password):
     if(unique_id==0):
         unique_id=random.randint(1,100000)
-    if mem_email == "" and mem_username =="" and mem_password == "":
-        raise 'invalid'
+    if mem_email == "" or mem_username =="" or mem_password == "":
+        raise err
     user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
     member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
     try: #This will fail the whole query and prevent a member being added to an already existing unique_id. Even though execute_query has a try/except, we need another try here to make sure we stop if the 1st exec fails
@@ -186,3 +186,4 @@ def gamecomments(connection, game_id):
 def addbookmark(connection, mem_username, game_id):
         insertq="insert into bookmarked (mem_username, game_id) values ('{}', '{}');".format(mem_username, game_id)
         execute_query(connection, insertq)
+

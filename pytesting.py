@@ -23,9 +23,7 @@ INSERT Company VALUES
 #Retrieving data and tabulating it in python
 #-----------------------------------------------------
 
-selectquery = """
-select * from company;
-"""
+selectquery = """select * from company;"""
 #reads and returns a list of companies
 qresult = read_query(connection, selectquery)
 for result in qresult:

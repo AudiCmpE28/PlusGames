@@ -1,7 +1,8 @@
 import logging
+
 logger = logging.getLogger('TxLog')
 logger.setLevel(logging.DEBUG)
-logger.debug('Logger config message')
+logger.info('Logger config message')
 fhandler = logging.FileHandler(filename='logfile.log', mode='a')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -9,16 +10,19 @@ fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
 #logger.debug('Debugging to file')
 
-from flask import Flask, render_template, request, redirect, url_for, session, g
-from pyconnector import *
-from mysql.connector import Error
-from flask_mysql_connector import MySQL
+import os
+import random
+import string
+import sys
 
-import random, string
-import os, sys
 import yaml
+from flask import (Flask, g, redirect, render_template, request, session,
+                   url_for)
+from flask_mysql_connector import MySQL
+from mysql.connector import Error
 
-
+from dbinit import *
+from pyconnector import *
 
 db=yaml.safe_load(open('db.yaml'))
 #Create a db.yaml file in the base directory and put the following 4 lines in it. Add it to .gitignore so you keep your own independent config files.
@@ -30,9 +34,13 @@ db=yaml.safe_load(open('db.yaml'))
 app = Flask(__name__)
 app.config['MYSQL_USER'] = db['MYSQL_USER']
 app.config['MYSQL_HOST'] = db['MYSQL_HOST']
-app.config['MYSQL_PASSWORD'] = db['MYSQL_PASSWORD']
-app.config['MYSQL_DATABASE'] = db['MYSQL_DATABASE']
+app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
+app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
+
+######################
+dbinit(logger,mysql,0)   # Set to 1 if you want to reset the db
+######################
 
 #### Homepage HTML ####
 @app.route('/')

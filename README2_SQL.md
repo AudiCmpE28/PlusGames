@@ -8,8 +8,6 @@ pip install IPython
 
 pip install flask-mysql-connector
 
-pip install flask-mysqldb
-
 pip install pyyaml
 
 
