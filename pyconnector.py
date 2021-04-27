@@ -3,7 +3,15 @@ from mysql.connector import Error
 import pandas as pd
 import random, string
 from IPython.display import display
-
+import logging
+logger = logging.getLogger('TLog')
+logger.setLevel(logging.DEBUG)
+logger.debug('Logger config message')
+fhandler = logging.FileHandler(filename='logfile2.log', mode='a')
+fhandler.setLevel(logging.DEBUG)
+hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+fhandler.setFormatter(hformatter)
+logger.addHandler(fhandler)
 #-----------------
 #Building blocks
 #-----------------
@@ -23,6 +31,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         print("MySQL Database connection successful")
     except Error as err:
         print(f"Error: '{err}'")
+        logger.debug('Db connection err')
     return connection
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
@@ -30,7 +39,8 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 def execute_query(connection, query):
 
     #instance of connection
-  
+    #cursor is an abstraction meant for
+    #data set traversal.
     cursor = connection.cursor()
     
     try:
@@ -38,11 +48,14 @@ def execute_query(connection, query):
         print("Query successful")
         connection.commit()
         cursor.close()
+        logger.debug('Commit: '+query)
+
     except Error as err:
         print(f"Error: '{err}'")
         #Rollback changes due to errors
         connection.rollback()
         cursor.close()
+        logger.debug('Rollback: '+query)
         raise err
 
 
@@ -54,12 +67,12 @@ def read_query(connection, query):
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
+        logger.debug('Fetching: '+query)
         return result
     except Error as err:
         print(f"Error: '{err}'")
         cursor.close()
-        raise err
-
+        logger.debug('Badfetch: '+query)
 
 #for testing purposes, returns a string of size length 
 def randomstring(length):
@@ -142,6 +155,17 @@ def sordbyalphabeticaldesc(connection):
 	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
 	return returncolumns(connection,gamealphadesc)
 
+def platform(connection,released_on):
+    chooseplatform = "SELECT DISTINCT platform_name FROM released_on WHERE platform_name = '{}';".format(platform_name)
+    return returncolumns(connection,chooseplatform)
+
+def sortbyplatform(connection,platform):
+    chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
+    #or this
+    chooseplatform2 ="SELECT g.game_id,g.game_n,g.genre,g.rating,g.release_date,g.price FROM Game as g join Released_on as r WHERE g.game_id = r.game_id and r.platform_name='{}';".format(platform)
+    return returncolumns(connection,chooseplatform)
+
+
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
@@ -149,8 +173,16 @@ def addcomment(connection, mem_username,game_id,text):
 def addreview(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
+	
+def addgame(connection,game_id,g_company,game_n,genre,rating,price):
+
+    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});".format(game_id,g_company,game_n,genre,rating,price)
+    execute_query(connection, insertq)
 
 def gamecomments(connection, game_id):
     game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
     return returncolumns(connection,game_comments)
 
+def addbookmark(connection, mem_username, game_id):
+        insertq="insert into bookmarked (mem_username, game_id) values ('{}', '{}');".format(mem_username, game_id)
+        execute_query(connection, insertq)

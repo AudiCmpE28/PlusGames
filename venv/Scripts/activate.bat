@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\SJSU Spring 2021\CMPE 138\138_Project\venv
+set VIRTUAL_ENV=C:\Users\Simon\OneDrive\Desktop\CMPE 138 (Spring 2021)\PlusGames\138_Project\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
