@@ -1,11 +1,9 @@
 -- Write more insert , delete queries which would be useful. 
 -- test and report any errors in a comment
 
-insert into `Users` (`unique_id`) values (0);
+insert into `Users` (`unique_id`) values (1);
 
--- the line below gives an error 
--- insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (1, 'Anon', sha1('password123'));
--- Cannot add or update a child row: a foreign key constraint fails (`+games`.`members`, CONSTRAINT `members_ibfk_1` FOREIGN KEY (`unique_id`) REFERENCES `users` (`unique_id`) ON DELETE CASCADE ON UPDATE CASCADE)
+insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (1, 'Anon', sha1('password123'));
 
 INSERT Company VALUES ('Microsoft'),('Bethesda'),('Arkane'),('Epic'),('Steam'),('Frontier'),('Ubisoft'),('Mojang');
 
@@ -32,6 +30,11 @@ WHERE game_id = 21345 OR game_id = 23904;
 
 -- test cases for administrator
 -- you cannot add admins/guests/members without adding a user first. see addmembers connector as example
+insert into `Users` (`unique_id`) values (12345);
+insert into `Users` (`unique_id`) values (67896);
+insert into `Users` (`unique_id`) values (98765);
+insert into `Users` (`unique_id`) values (23457);
+
 INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('12345','izdawiz1','sjsu');
 INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('67896','audiCmpe2','doggo');
 INSERT INTO administrator (unique_id, admin_username, admin_password) VALUES('98765','dankman3','yolo');
