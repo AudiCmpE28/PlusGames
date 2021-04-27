@@ -14,6 +14,7 @@ from pyconnector import *
 from mysql.connector import Error
 from flask_mysql_connector import MySQL
 
+
 import random, string
 import os, sys
 import yaml
@@ -87,10 +88,6 @@ def signup():
 
 
 
-
-
-
-
 #### request page HTML ####
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
@@ -102,51 +99,27 @@ def game_page():
    return render_template('game_page.html')
 
 #### Game List HTML ####
+# @app.route('/game_list', methods=['GET', 'POST'])
+# def game_list():
+#    return render_template('game_list.html')
 @app.route('/game_list', methods=['GET', 'POST'])
 def game_list():
    return render_template('game_list.html')
+   if request.method=='GET':
+      gamesL=mysql.connection.cursor()
+      gamesL.execute('SELECT game_n FROM Game ORDER BY game_n ASC')
+      data=gamesL.fetchall()
+      gamesL.close()
+      return render_template('game_list.html', games_list = data)
+   else:
+      return render_template('game_list.html')
+
+
 
 #### Profile HTML ####
-# @app.route('/profile', methods=['GET', 'POST'])
-# def profile():
-#    return render_template('profile.html')
-
-
-##############################
-####       Database      ####
-#############################
-@app.route('/profile', methods=['GET','POST'])
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-   if request.method=='POST':
-      print(game_id)
-      print(g_company)
-      print(game_n)
-      print(genre)
-      print(rating)
-      print(release_Date)
-      print(price)
-      
-
-      try:
-         sortbyalphabetical(mysql.connection)
-         return render_template('profile.html')
-      except:
-         return -1
-
    return render_template('profile.html')
-
-
-
-
-# class results(table):
-#   game_id = columns('Game ID')      
-#   g_company = columns('Company')		
-#   game_n = columns('Game Name')		
-#   genre = columns('Genre')			
-#   rating = columns('Rate') 		
-#   release_Date = columns('Release')
-#   price	= columns('Price')
-
 
 
 
