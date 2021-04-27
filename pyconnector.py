@@ -176,10 +176,13 @@ def addreview(connection, mem_username,game_id,text):
 	
 def addgame(connection,game_id,g_company,game_n,genre,rating,price):
 
-    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});" .format(game_id,g_company,game_n,genre,rating,price)
+    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});".format(game_id,g_company,game_n,genre,rating,price)
     execute_query(connection, insertq)
 
 def gamecomments(connection, game_id):
     game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
     return returncolumns(connection,game_comments)
 
+def addbookmark(connection, mem_username, game_id):
+        insertq="insert into bookmarked (mem_username, game_id) values ('{}', '{}');".format(mem_username, game_id)
+        execute_query(connection, insertq)
