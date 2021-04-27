@@ -10,7 +10,7 @@ from flask import Flask, request,render_template
 
 #put in the actual database credentials you have on your end. 
 #connection = create_db_connection("localhost","root","1234","+games")
-connection = create_db_connection("localhost","root","0924","+games")
+connection = create_db_connection("localhost","root","1234","+games")
 
 companyinsert = """
 INSERT Company VALUES

@@ -3,7 +3,15 @@ from mysql.connector import Error
 import pandas as pd
 import random, string
 from IPython.display import display
-
+import logging
+logger = logging.getLogger('TLog')
+logger.setLevel(logging.DEBUG)
+logger.debug('Logger config message')
+fhandler = logging.FileHandler(filename='logfile2.log', mode='a')
+fhandler.setLevel(logging.DEBUG)
+hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+fhandler.setFormatter(hformatter)
+logger.addHandler(fhandler)
 #-----------------
 #Building blocks
 #-----------------
@@ -23,6 +31,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         print("MySQL Database connection successful")
     except Error as err:
         print(f"Error: '{err}'")
+        logger.debug('Db connection err')
     return connection
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
@@ -39,11 +48,14 @@ def execute_query(connection, query):
         print("Query successful")
         connection.commit()
         cursor.close()
+        logger.debug('Commit: '+query)
+
     except Error as err:
         print(f"Error: '{err}'")
         #Rollback changes due to errors
         connection.rollback()
         cursor.close()
+        logger.debug('Rollback: '+query)
         raise err
 
 
@@ -55,12 +67,12 @@ def read_query(connection, query):
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
+        logger.debug('Fetching: '+query)
         return result
     except Error as err:
         print(f"Error: '{err}'")
         cursor.close()
-        raise err
-
+        logger.debug('Badfetch: '+query)
 
 #for testing purposes, returns a string of size length 
 def randomstring(length):
@@ -164,10 +176,13 @@ def addreview(connection, mem_username,game_id,text):
 	
 def addgame(connection,game_id,g_company,game_n,genre,rating,price):
 
-    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});" .format(game_id,g_company,game_n,genre,rating,price)
+    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});".format(game_id,g_company,game_n,genre,rating,price)
     execute_query(connection, insertq)
 
 def gamecomments(connection, game_id):
     game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
     return returncolumns(connection,game_comments)
 
+def addbookmark(connection, mem_username, game_id):
+        insertq="insert into bookmarked (mem_username, game_id) values ('{}', '{}');".format(mem_username, game_id)
+        execute_query(connection, insertq)
