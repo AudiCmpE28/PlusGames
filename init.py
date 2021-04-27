@@ -23,6 +23,7 @@ from mysql.connector import Error
 
 from dbinit import *
 from pyconnector import *
+from cryptography.fernet import Fernet
 
 db=yaml.safe_load(open('db.yaml'))
 #Create a db.yaml file in the base directory and put the following 4 lines in it. Add it to .gitignore so you keep your own independent config files.
@@ -31,6 +32,21 @@ db=yaml.safe_load(open('db.yaml'))
 #MYSQL_PASSWORD: 'your_mysql_password'
 #MYSQL_DATABASE: '+games'
 #
+
+def __encryptpw(password:str):
+   key=Fernet("Secret138KEY")
+   #key=Fernet.generate_key() we can save a key to a file and use that as a key as well
+   password=password.encode("utf-8")
+   encryptedpw= key.encrypt(password)
+   return encryptedpw
+
+def __decryptpw(encrypted_password:str):
+   key=Fernet("Secret138KEY")
+   decrypted= key.decrypt(encrypted_password)
+   password = decrypted.decode("utf-8")
+   return password
+
+
 app = Flask(__name__)
 app.config['MYSQL_USER'] = db['MYSQL_USER']
 app.config['MYSQL_HOST'] = db['MYSQL_HOST']
@@ -67,8 +83,10 @@ def login():
       try:
          cur= mysql.connection.cursor()
          cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
-         members= cur.fetchall()
+         members= cur.fetchone()
          cur.close()
+         #if members[3]==mem_password #compare html hashed password against
+            #
       except:
          return -1
    else:
