@@ -3,10 +3,28 @@
     <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
   </head>
 
-  <body>
-    <div for="game_n" > </div>
-    name="game_n"
 
- </body>
+  <table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in output_data %} <-- Using these '{%' and '%}' we can write our python code -->
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+            </tr>
+        {% endfor %}      
+    </tbody>
+</table>  
+
+
 </html>
 
