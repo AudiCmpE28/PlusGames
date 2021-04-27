@@ -40,4 +40,9 @@ Year: 2021
   
    In case encounter problems regarding images, follow: https://mikeboers.github.io/Flask-Images/
   
+   ** Database Table ** 
+  
+  (1) pip install flask_table
+  
+   In case encounter problems regarding images, follow: https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
  
