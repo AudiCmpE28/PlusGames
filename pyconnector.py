@@ -5,6 +5,8 @@ import random, string
 from IPython.display import display
 import logging
 import csv
+import MySQLdb
+
 logger = logging.getLogger('TLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')

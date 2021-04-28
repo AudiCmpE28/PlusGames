@@ -50,4 +50,5 @@ Year: 2021
   pip install -U flask-paginate
   https://pythonhosted.org/Flask-paginate/
   
- 
+**Git Ignore Issues Command**  
+git rm --cached <filename or source name>
