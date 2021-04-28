@@ -10,6 +10,7 @@ pip install flask-mysql-connector
 
 pip install pyyaml
 
+pip install cryptography
 
 
 ## Create the database in sql.sql
