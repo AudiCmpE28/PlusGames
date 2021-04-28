@@ -26,37 +26,30 @@
       </a>
 
       <h2 class="Game-Gallery-Title"> Game Gallery </h2>
+
       <!-- Video Game Grid -->
-
-      <!-- <div class="gallery-grid"> -->
-
-      <!-- {% for item in games_list %}
+      {% for games in games_list %}
       <div class="gallery-grid">
         <figure class="gallery-frame">
           <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
-          {{ loop.index + pagination.skip }}
-          <figcaption class="grid_name">{{item}}</figcaption>
+          <figcaption class="grid_name">{{games}}</figcaption>
         </figure>
-        {% endfor %}
-
-        {{ pagination.links }}{{ pagination.info }} -->
-
-        {% for item in games_list %}
-        <div class="gallery-grid">
-          <figure class="gallery-frame">
-            <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
-            <figcaption class="grid_name">{{item}}</figcaption>
-          </figure>
-          {% endfor %}
-  
-          {{ pagination.links }} {{ pagination.info }}
-
-
       </div>
-  </center>
-  <div>
+      <div class="game_divider"></div>
+      {% endfor %}
 
-  </div>
+        <div class="bottom_layout">
+          <form method="post">
+            <input type="submit" name="submit_button" value="Back" class="left_button"></input>
+            <input type="submit" name="submit_button" value="Forward" class="right_button"></input>
+          </form>
+
+          {{ pagination.links }} {{ pagination.info }}
+        </div>
+    </div>
+  </center>
+
+  
 </body>
 
 
