@@ -18,6 +18,7 @@ pip install flask_table
 
 pip install Flask-Images
 
+pip install mysqlclient
 
 
 ## Create the database in sql.sql
