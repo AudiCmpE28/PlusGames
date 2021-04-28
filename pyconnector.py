@@ -4,6 +4,7 @@ import pandas as pd
 import random, string
 from IPython.display import display
 import logging
+import csv
 logger = logging.getLogger('TLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
@@ -12,6 +13,25 @@ fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
+from cryptography.fernet import Fernet
+
+def encryptpw(password:str):
+   f = Fernet("yMCknhRM5NJiN5flBsigJEavBdeVXal4UI08P7qfngc=")
+   password=password.encode("utf-8")
+   token = f.encrypt(password)
+   print(token)
+   return token
+
+def decryptpw(encrypted_password):
+   f = Fernet("yMCknhRM5NJiN5flBsigJEavBdeVXal4UI08P7qfngc=")
+   decrypted=f.decrypt(encrypted_password)
+   print(decrypted.decode("utf-8"))
+   return decrypted.decode("utf-8")
+
+kms="kms"
+en=encryptpw(kms)
+decryptpw(en)
+
 #-----------------
 #Building blocks
 #-----------------
@@ -33,6 +53,27 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         print(f"Error: '{err}'")
         logger.debug('Db connection err')
     return connection
+
+	#first open file 'with open', insert csv name in ''
+with open('steam_game.csv')as csv_file_game:
+
+    csvfile = csv.reader(csv_file_game,delimiter =',')
+    #store all the values in dynamic array
+    all_value = []
+
+    #use loop to iterate through csvfile
+    for row in csvfile:
+    	#inserting each row into value
+    	value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
+    	all_value.append(value)
+
+    #query
+    query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price') values (%s,%s,%s,%s,%s,%s,%s,%s)"
+    
+mycursor = connection.cursor()
+mycursor.executemany(query,all_value)
+connection.commit()
+
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
 #Pass in connection and string query, commits or rollbacks changes depending on errors
@@ -186,6 +227,6 @@ def gamecomments(connection, game_id):
     return returncolumns(connection,game_comments)
 
 def addbookmark(connection, mem_username, game_id):
-        insertq="insert into bookmarked (mem_username, game_id) values ('{}', '{}');".format(mem_username, game_id)
+        insertq="insert into bookmarked (mem_username, game_id) values ('{}', {});".format(mem_username, game_id)
         execute_query(connection, insertq)
 
