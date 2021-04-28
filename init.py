@@ -206,9 +206,6 @@ def game_list(page=1):
 #########################
 #### Profile HTML ####
 #########################
-# @app.route('/profile', methods=['GET', 'POST'])
-# def profile():
-#    return render_template('profile.html')
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
    return render_template('profile.html')
