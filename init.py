@@ -76,19 +76,25 @@ def login():
    if request.method == "POST": ##gets info from form
       mem_username=request.form.get('username')
       mem_password= request.form.get('password')
-
+      getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
+    
       try:
-         cur= mysql.connection.cursor()
-         cur.execute("SELECT * FROM members WHERE username=%s AND password=%s", (mem_username, mem_password))
-         members= cur.fetchone()
+         getlogin(mysql.connection, mem_username)
+         if mem_username != getlogin(mysql.connection, mem_username):
+            msg = 'Incorrect username'
+         # cur= mysql.connection.cursor()
+         # cur.execute("SELECT * FROM members WHERE mem_username='{}' AND mem_password='{}'", (mem_username, mem_password))
+         # members= cur.fetchone()
          #if members[3]==mem_password #compare html hashed password against
             #
-         if (mem_password == __decryptpw(password) and mem_username == username) 
-            return render_template('profile.html')
-         else:
-            msg ='Incorrect username or password'
-            return render_template('login.html')
-         cur.close()
+         # getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
+    
+         # if (mem_password == password and mem_username == getlogin(mem_username)):
+         #    return render_template('profile.html')
+         # else:
+         #    msg ='Incorrect username or password'
+         #    return render_template('login.html')
+         # cur.close()
          
       except:
          return -1
