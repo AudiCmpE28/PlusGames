@@ -77,11 +77,12 @@ def login():
       mem_username=request.form.get('username')
       mem_password= request.form.get('password')
       getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
-    
+      cur.execute("SELECT * FROM members WHERE mem_password='{}'", (mem_password))
+         
       try:
          getlogin(mysql.connection, mem_username)
-         if mem_username != getlogin(mysql.connection, mem_username):
-            msg = 'Incorrect username'
+         if mem_username != getlogin(mysql.connection, mem_username) or mem_password != decryptpw(mem_password):
+            msg = 'Incorrect username or password'
          # cur= mysql.connection.cursor()
          # cur.execute("SELECT * FROM members WHERE mem_username='{}' AND mem_password='{}'", (mem_username, mem_password))
          # members= cur.fetchone()
