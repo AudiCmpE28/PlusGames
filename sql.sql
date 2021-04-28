@@ -10,15 +10,16 @@ CREATE TABLE Company (
 
 CREATE TABLE Platform (
 platform_name varchar(25),
-PRIMARY KEY (platform_name)
+PRIMARY KEY (platform_name),
+unique(platform_name)
 );
 
 
 CREATE TABLE Game(
-  game_id       varchar(25) not null,
+  game_id       integer(10) not null,
   g_company		varchar(25) not null,
-  game_n		varchar(25) not null,
-  genre			varchar(10),
+  game_n		varchar(50) not null,
+  genre			varchar(30),
   rating 		decimal(3,2),
   release_Date	date,
   price			decimal(4,2),
@@ -28,7 +29,7 @@ CREATE TABLE Game(
 
 
 CREATE TABLE Released_on (
-game_id 	  VARCHAR(25) not null,
+game_id 	  integer(10) not null,
 platform_name VARCHAR(25) not null,
 primary key (game_id,platform_name),
 foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -62,7 +63,7 @@ unique (mem_username)
 
 CREATE TABLE request_game (
 mem_username	varchar(16) not null,
-game_id       	varchar(25),
+game_id       	integer(10),
 req_text		varchar(50),
 foreign key (mem_username) references Members(mem_username) ON UPDATE CASCADE ON DELETE CASCADE,
 foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCADE
@@ -70,7 +71,7 @@ foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCA
 
 CREATE TABLE comment_on (
 mem_username	varchar(16)not null,
-game_id			varchar(25)not null,
+game_id			integer(10)not null,
 c_date	date,
 c_time 	time,
 comment_text varchar(250),
@@ -81,7 +82,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 
 CREATE TABLE review_on (
 mem_username	varchar(16)not null,
-game_id		varchar(10)not null,
+game_id		integer(10)not null,
 rv_date		date,
 rv_time 	timestamp,
 review_text varchar(250),
@@ -92,7 +93,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 
 CREATE TABLE report_on (
 mem_username	varchar(16)not null,
-game_id			varchar(10)not null,
+game_id			integer(10)not null,
 rp_date	date,
 rp_time 	timestamp,
 report_text varchar(250),
@@ -103,7 +104,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 
 CREATE TABLE bookmarked (
 mem_username	varchar(16) not null,
-game_id			varchar(10) not null,
+game_id			integer(10) not null,
 primary key (mem_username, game_id), 
 foreign key (mem_username) references Members(mem_username) on delete CASCADE,
 foreign key (game_id) references Game(game_id) on delete CASCADE

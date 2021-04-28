@@ -3,7 +3,7 @@
 
 insert into `Users` (`unique_id`) values (1);
 
-insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (1, 'Anon', sha1('password123'));
+insert into `Members` (`unique_id`, `mem_username`, `mem_password`) values (1, 'Anon', 'password123');
 
 INSERT Company VALUES ('Microsoft'),('Bethesda'),('Arkane'),('Epic'),('Steam'),('Frontier'),('Ubisoft'),('Mojang');
 
