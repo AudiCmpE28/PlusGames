@@ -9,13 +9,13 @@ fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
 #logger.debug('Debugging to file')
 
-from flask import Flask, render_template, request, redirect, url_for, session, g
+from flask import Flask, render_template, request, redirect, url_for, session #, g
 from pyconnector import *
 from mysql.connector import Error
 from flask_mysql_connector import MySQL
 
 import random, string
-import os, sys
+import os, sys 
 import yaml
 
 
@@ -44,16 +44,28 @@ def home():
 #### Login HTML ####
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   if request.method == "POST": ##gets info from form
+   if request.method == "POST":
       mem_username=request.form.get('username')
       mem_password= request.form.get('password')
-      try:
-         cur= mysql.connection.cursor()
-         cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
-         members= cur.fetchall()
-         cur.close()
-      except:
-         return -1
+      
+      cur= mysql.connection.cursor()
+      cur.execute("SELECT * FROM members WHERE username=%s AND password=%s")
+      # fetch all results and return
+      members= cur.fetchall()
+      
+      # if len(members) > 0:
+      #    if(bcyrpt.check_haspw(mem_password, members('password').encode('utf-8')) == members('password').encode('utf-8'):
+      #       session('username') = mem_username('username')
+      #       session('password') = user('password')
+      #       msg = 'you logged in'
+      #       return render_template('profile.html')
+      #    else:
+      #       msg = 'Invalid username or password'
+      #       return render_template('login.html')
+         # creating a session to be accessed in other routes
+         # session('username') = members('username')
+      cur.close()
+      return render_template('profile.html')
    else:
       return render_template('login.html')
 
