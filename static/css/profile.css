@@ -47,19 +47,20 @@
    width: 300px;
  }
  
- .logout {
-  width: 220px;
-  background-color: transparent;
-  border: none;
+ .logout_button {
+  color: #23C6C6 ;
+  background-color: white;
   position: absolute;
-  top: 250px;
-  left: 3px;
   font-family: Roboto;
   font-weight: Regular;
-  font-size: 18px;
-  opacity: 1;
-  text-align: left;
-  color: blue;
+  font-size: 15px;
+  width: 90px;
+  height: 40px;
+  right: 40px;
+  bottom: 40px;
+  border-style: solid;
+  border-width: thick;
+  border:lightcoral;
  }
  
  .p {
