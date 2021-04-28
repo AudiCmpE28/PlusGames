@@ -205,6 +205,6 @@ def gamecomments(connection, game_id):
     return returncolumns(connection,game_comments)
 
 def addbookmark(connection, mem_username, game_id):
-        insertq="insert into bookmarked (mem_username, game_id) values ('{}', '{}');".format(mem_username, game_id)
+        insertq="insert into bookmarked (mem_username, game_id) values ('{}', {});".format(mem_username, game_id)
         execute_query(connection, insertq)
 
