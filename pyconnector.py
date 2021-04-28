@@ -56,25 +56,26 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         logger.debug('Db connection err')
     return connection
 
-# 	#first open file 'with open', insert csv name in ''
-# with open('static/csv/steam_game.csv')as csv_file_game:
+#def parse_through_csv(connection,static/csv/steam_game.csv):
 
-#     csvfile = csv.reader(csv_file_game,delimiter =',')
-#     #store all the values in dynamic array
-#     all_value = []
+#with open('static/csv/steam_game.csv')as csv_file_game:
 
-#     #use loop to iterate through csvfile
-#     for row in csvfile:
-#     	#inserting each row into value
-#     	value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
-#     	all_value.append(value)
+#    csvfile = csv.reader(csv_file_game,delimiter =',')
+#    #store all the values in dynamic array
+#    all_value = []
 
-#     #query
-#     query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price') values (%s,%s,%s,%s,%s,%s,%s,%s)"
+#    #use loop to iterate through csvfile
+#    for row in csvfile:
+#    	#inserting each row into value
+#    	value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6])
+#    	all_value.append(value)
+
+#    #query
+#    query = "INSERT INTO 'game'('game_id','g_company','game_n','genre','rating','release_date','price') values (%s,%s,%s,%s,%s,%s,%s)"
     
-# mycursor = connection.cursor()
-# mycursor.executemany(query,all_value)
-# connection.commit()
+#mycursor = connection.cursor()
+#mycursor.executemany(query,all_value)
+#connection.commit()
 
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
