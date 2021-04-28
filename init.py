@@ -163,7 +163,11 @@ def game_list(page=1):
    elif request.method == 'GET':
       offset = 0
       
-   sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
+   sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+   # if request.form['sort'] == 'a_to_z':   
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
+   # elif request.form['sort'] == 'z_to_a':
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
 
    gamesL=mysql.connection.cursor()
    gamesL.execute(sql_query)
@@ -178,8 +182,7 @@ def game_list(page=1):
                            per_page=per_page, 
                            format_number=True, 
                            total=len(VideoGames), 
-                           record_name='Video Games' 
-                           )
+                           record_name='Video Games')
    return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
 
 
