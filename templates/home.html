@@ -74,7 +74,10 @@
     <div style="padding-bottom: 120px;"></div>
 
     <!-- Buttons -->
-    <button class="text">Popular</button>
+    <form method="POST">
+      <input type="submit" name="sort" value="Popular" class="text"></input>
+    </form>
+    <!-- <button class="text">Popular</button> -->
 
     <div class="dropdown">
       <button class="text" disabled>Genre</button>
@@ -99,7 +102,6 @@
         <form method="POST">
           <a><input type="submit" name="sort" value="A to Z" class="redirect_buttons"></input></a>
           <a><input type="submit" name="sort" value="Z to A" class="redirect_buttons"></input></a>
-    
         </form>
       </div>
     </div>

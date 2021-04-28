@@ -181,20 +181,23 @@ def sortbygenre(connection,genre):
     return returncolumns(connection,gamegenre)
 
 
-    
-def sortbypopularity(connection):
-    gamequery="select * from Game order by rating desc;" #uncertain, game not implemented yet so...
-    return returncolumns(connection,gamequery)
+def sortbypopularity2nd(connection, offset, per_page):
+    gamequery="SELECT genre FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
+    return gamequery
+
+def sortbypopularity(connection, offset, per_page):
+    gamequery="SELECT game_n FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
+    return gamequery
     
 
-def sortbyalphabetical(connection):
-	gamealpha = "SELECT game_n FROM Game ORDER BY game_n ASC;"
-	return returncolumns(connection,gamealpha)
+def sortbyalphabetical(connection, offset, per_page):
+	gamealpha = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {};".format((offset*10), per_page) 
+	return gamealpha
 	
 	
-def sordbyalphabeticaldesc(connection):
-	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
-	return returncolumns(connection,gamealphadesc)
+def sordbyalphabeticaldesc(connection, offset, per_page):
+	gamealphadesc = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {};".format((offset*10), per_page)
+	return gamealphadesc
 
 def sortbyplatform(connection,platform):
     chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
