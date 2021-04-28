@@ -14,6 +14,7 @@ import os
 import random
 import string
 import sys
+import math
 
 import yaml
 from flask import (Flask, g, redirect, render_template, request, session,
@@ -23,7 +24,7 @@ from mysql.connector import Error
 
 from dbinit import *
 from pyconnector import *
-from flask_paginate import Pagination, get_page_parameter,get_page_args
+from flask_paginate import Pagination, get_page_parameter, get_page_args
 from cryptography.fernet import Fernet
 
 db=yaml.safe_load(open('db.yaml'))
@@ -60,15 +61,21 @@ global resetflag  #
 resetflag=0       # Set to 1 if you want to reset the db
 ###################
 
+###################
+offset=0       # for pages
+page_track=1
+###################
+
 #### Homepage HTML ####
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
    global resetflag
+   global offset
    ################################
    dbreinit(logger,mysql,resetflag)   
    ################################
-
+   offset = 0
    resetflag=0
 
    return render_template('home.html')
@@ -145,44 +152,42 @@ def game_page():
 #########################
 @app.route('/game_list', methods=['GET', 'POST'])
 def game_list(page=1):
-   per_page = 2
-   offset = 0
+   global offset
+   global page_track
+   per_page = 10
    
-   if per_page:
-      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format(offset, per_page)
-   else:
-      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC"
+   if request.method == 'POST':
+      if request.form['submit_button'] == 'Forward':
+         if(offset < (page_track-1)):
+            offset+=1
+      elif request.form['submit_button'] == 'Back':
+         if(offset > 0):
+            offset-=1
+         else:
+            offset=0   
+      else:
+            pass # unknown
+   elif request.method == 'GET':
+      offset = 0
+      
+   sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
 
    gamesL=mysql.connection.cursor()
    gamesL.execute(sql_query)
-   data=gamesL.fetchall()
-   data=[i[0] for i in data] #removes () and , from each name
+   VideoGames=gamesL.fetchall()
+   VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
    gamesL.close()
    
-
-   pagination = Pagination(page=page, per_page=per_page, record_name='data', format_number=True, total=len(data))
-   return render_template('game_list.html', games_list = data, pagination=pagination)
-   # retrun redirect('game_list.html', games_list = data, pagination=pagination)
-
-
-# @app.route('/game_list', methods=['GET', 'POST'])
-# def game_list():
-#    page = request.args.get(get_page_parameter(), type=int, default=1)
-   # sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}".format(2)
-   # if per_page:
-   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT 2"
-   # else:
-#    gamesL=mysql.connection.cursor()
-#    gamesL.execute('SELECT game_n FROM Game ORDER BY game_n ASC')
-#    data=gamesL.fetchall()
-#    data=[i[0] for i in data] #removes () and , from each name
-#    gamesL.close()
    
-#    pagination = Pagination(page=page, total=len(data), record_name='data', per_page=2, format_number=True)
+   page_track = math.ceil(len(VideoGames)/10) 
 
-
-#    return render_template('game_list.html', games_list = data, pagination=pagination)
-
+   pagination = Pagination(page=page, 
+                           per_page=per_page, 
+                           format_number=True, 
+                           total=len(VideoGames), 
+                           record_name='Video Games' 
+                           )
+   return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
 
 
 #########################

@@ -12,6 +12,13 @@ pip install pyyaml
 
 pip install cryptography
 
+pip install -U flask-paginate
+
+pip install flask_table
+
+pip install Flask-Images
+
+
 
 ## Create the database in sql.sql
 
