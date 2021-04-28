@@ -12,6 +12,25 @@ fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
+from cryptography.fernet import Fernet
+
+def encryptpw(password:str):
+   f = Fernet("yMCknhRM5NJiN5flBsigJEavBdeVXal4UI08P7qfngc=")
+   password=password.encode("utf-8")
+   token = f.encrypt(password)
+   print(token)
+   return token
+
+def decryptpw(encrypted_password):
+   f = Fernet("yMCknhRM5NJiN5flBsigJEavBdeVXal4UI08P7qfngc=")
+   decrypted=f.decrypt(encrypted_password)
+   print(decrypted.decode("utf-8"))
+   return decrypted.decode("utf-8")
+
+kms="kms"
+en=encryptpw(kms)
+decryptpw(en)
+
 #-----------------
 #Building blocks
 #-----------------
