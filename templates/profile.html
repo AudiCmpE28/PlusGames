@@ -9,23 +9,22 @@
 <body style="background-color: #222222">
 
  <center> 
-<div class="content-section">
+
   <h1 class="profile-title"> My Profile </h1>
   <hr>
   <div class="body">
-    <img class="anon-image" src="anon.jpg">
+    <img class="anon" src="/static/images/anon.jpg">
     <div class="blue-bar"></div>
       <a href="{{url_for('logout')}}"> Logout</a>
       <a href="{{url_for('home')}}"> Home</a>
   
       <div class="box">
-        <p class="account-heading">{{current_user.username}}</p>
-        <p class="text-secondary">{{current_user.email}}</p>
+        <p class="account-heading">username: username</p>
+        <p class="text-secondary">email: email@gmail.com</p>
       </div>
     </div>
   </div>
 <!-- FORM HERE -->
-</div>
   </center>
 
 </html>

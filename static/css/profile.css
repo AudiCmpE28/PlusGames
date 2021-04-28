@@ -1,5 +1,5 @@
 .profile-title{
-  color: #ffff;
+  color: rgb(255, 255, 255);
  
 }
 
@@ -11,14 +11,18 @@
 
 
 .account-heading{
- color: #ffff;
- font-size: 20px;
+ color: rgb(255, 255, 255);
+ font-size: 50px;
  
 }
 
 .text-secondary{
- color: #ffff;
- font-size: 20px; 
+ color: rgb(255, 255, 255);
+ font-size: 40px; 
 }
 
 
+.anon{
+  height: 160px;
+  width: 160px;
+}
