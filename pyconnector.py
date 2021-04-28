@@ -4,6 +4,7 @@ import pandas as pd
 import random, string
 from IPython.display import display
 import logging
+import csv
 logger = logging.getLogger('TLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
