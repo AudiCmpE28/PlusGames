@@ -20,6 +20,7 @@ pip install Flask-Images
 
 pip install mysqlclient
 
+pip install flask-login
 
 ## Create the database in sql.sql
 
