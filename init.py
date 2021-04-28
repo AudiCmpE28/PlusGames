@@ -51,6 +51,7 @@ resetflag=0       # Set to 1 if you want to reset the db
 ###################
 offset=0       # for pages
 page_track=1
+type_sort_db=0
 ###################
 
 #### Homepage HTML ####
@@ -59,11 +60,24 @@ page_track=1
 def home():
    global resetflag
    global offset
+   global type_sort_db
+
+   if request.method == 'POST':
+      if request.form['sort'] == 'A to Z':
+         type_sort_db=0
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Z to A':
+         type_sort_db=1
+         return redirect(url_for('game_list'))
+      else:
+         pass
    ################################
    dbreinit(logger,mysql,resetflag)   
    ################################
-   offset = 0
+   offset=0
    resetflag=0
+   page_track=1
+   
 
    return render_template('home.html')
    
@@ -153,6 +167,7 @@ def game_page():
 def game_list(page=1):
    global offset
    global page_track
+   global type_sort_db
    per_page = 10
    
    if request.method == 'POST':
@@ -165,15 +180,16 @@ def game_list(page=1):
          else:
             offset=0   
       else:
-            pass # unknown
+         pass # unknown
    elif request.method == 'GET':
       offset = 0
       
-   sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
-   # if request.form['sort'] == 'a_to_z':   
-   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
-   # elif request.form['sort'] == 'z_to_a':
-   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+   # sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+   if type_sort_db == 0:   
+      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
+   elif type_sort_db == 1:
+      sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+   
 
    gamesL=mysql.connection.cursor()
    gamesL.execute(sql_query)

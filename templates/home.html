@@ -96,11 +96,15 @@
     <div class="dropdown">
       <button class="text" disabled>Alphabetical</button>
       <div class="dropdown_content">
-        <a href="{{ url_for('game_list') }}" name="sort" value="a_to_z">A to Z</a>
-        <a href="{{ url_for('game_list') }}" name="sort" value="z_to_a">Z to A</a>
+        <form method="POST">
+          <a><input type="submit" name="sort" value="A to Z" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Z to A" class="redirect_buttons"></input></a>
+    
+        </form>
       </div>
     </div>
-    
+
+
 
     <div class="dropdown">
       <button class="text" disabled>Platform</button>

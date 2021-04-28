@@ -179,7 +179,12 @@
   opacity: 5;
   right: -10px;
 }
-
+.redirect_buttons{
+  background-color: transparent;
+  border: none;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
 
 
 /*~~Log in/ sign up/ request~~*/
@@ -203,3 +208,5 @@
 .users:hover {
     color: turquoise;
 }
+
+
