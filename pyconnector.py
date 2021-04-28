@@ -65,7 +65,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 #         #use loop to iterate through csvfile
 #         for row in csvfile:
 #             #inserting each row into value
-#             value = (row[0],row[2],row[3],row[4],row[5],row[6],row[7])
+#             value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6])
 #             all_value.append(value)
 #     mycursor = connection.cursor()
 #     mycursor.executemany(query,all_value)
