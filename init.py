@@ -17,12 +17,13 @@ import sys
 
 import yaml
 from flask import (Flask, g, redirect, render_template, request, session,
-                   url_for)
+                   url_for, Blueprint)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
 
 from dbinit import *
 from pyconnector import *
+from flask_paginate import Pagination, get_page_parameter,get_page_args
 
 db=yaml.safe_load(open('db.yaml'))
 #Create a db.yaml file in the base directory and put the following 4 lines in it. Add it to .gitignore so you keep your own independent config files.
@@ -57,8 +58,9 @@ def home():
    return render_template('home.html')
    
 
-
+#########################
 #### Login HTML ####
+#########################
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    if request.method == "POST": ##gets info from form
@@ -81,8 +83,9 @@ def logout():
    return render_template('home.html')
 
 
-
+#########################
 #### sign up HTML ####
+#########################
 @app.route('/signup', methods=['GET','POST'])
 def signup():
    if request.method=='POST':
@@ -103,40 +106,76 @@ def signup():
    return render_template('signup.html')
 
 
-
+###########################
 #### request page HTML ####
+###########################
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    return render_template('request_page.html')
 
+#########################
 #### Game page HTML ####
+#########################
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
    return render_template('game_page.html')
 
+
+
+#########################
 #### Game List HTML ####
+#########################
+@app.route('/game_list', methods=['GET', 'POST'])
+def game_list(page=1):
+   per_page = 2
+   offset = 0
+   
+   if per_page:
+      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format(offset, per_page)
+   else:
+      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC"
+
+   gamesL=mysql.connection.cursor()
+   gamesL.execute(sql_query)
+   data=gamesL.fetchall()
+   data=[i[0] for i in data] #removes () and , from each name
+   gamesL.close()
+   
+
+   pagination = Pagination(page=page, per_page=per_page, record_name='data', format_number=True, total=len(data))
+   return render_template('game_list.html', games_list = data, pagination=pagination)
+   # retrun redirect('game_list.html', games_list = data, pagination=pagination)
+
+
 # @app.route('/game_list', methods=['GET', 'POST'])
 # def game_list():
-#    return render_template('game_list.html')
-@app.route('/game_list', methods=['GET', 'POST'])
-def game_list():
-   return render_template('game_list.html')
-   if request.method=='GET':
-      gamesL=mysql.connection.cursor()
-      gamesL.execute('SELECT game_n FROM Game ORDER BY game_n ASC')
-      data=gamesL.fetchall()
-      gamesL.close()
-      return render_template('game_list.html', games_list = data)
-   else:
-      return render_template('game_list.html')
+#    page = request.args.get(get_page_parameter(), type=int, default=1)
+   # sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}".format(2)
+   # if per_page:
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT 2"
+   # else:
+#    gamesL=mysql.connection.cursor()
+#    gamesL.execute('SELECT game_n FROM Game ORDER BY game_n ASC')
+#    data=gamesL.fetchall()
+#    data=[i[0] for i in data] #removes () and , from each name
+#    gamesL.close()
+   
+#    pagination = Pagination(page=page, total=len(data), record_name='data', per_page=2, format_number=True)
+
+
+#    return render_template('game_list.html', games_list = data, pagination=pagination)
 
 
 
+#########################
 #### Profile HTML ####
+#########################
+# @app.route('/profile', methods=['GET', 'POST'])
+# def profile():
+#    return render_template('profile.html')
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
    return render_template('profile.html')
-
 
 
 ## Nasic Stuff ##
