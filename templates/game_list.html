@@ -28,6 +28,12 @@
       <h2 class="Game-Gallery-Title"> Game Gallery </h2>
 
       <!-- Video Game Grid -->
+      
+      <!-- {% for extras in info %} -->
+      <!-- <p class="extra">{{extras}}</p> -->
+      <!-- {% endfor %} -->
+
+
       {% for games in games_list %}
       <div class="gallery-grid">
         <figure class="gallery-frame">
@@ -38,6 +44,10 @@
       <div class="game_divider"></div>
       {% endfor %}
 
+
+ 
+      
+      
         <div class="bottom_layout">
           <form method="post">
             <input type="submit" name="submit_button" value="Back" class="left_button"></input>
@@ -47,6 +57,7 @@
           {{ pagination.links }} {{ pagination.info }}
         </div>
     </div>
+  
   </center>
 
   

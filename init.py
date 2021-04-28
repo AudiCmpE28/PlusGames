@@ -68,11 +68,14 @@ def home():
    global type_sort_db
 
    if request.method == 'POST':
-      if request.form['sort'] == 'A to Z':
+      if request.form['sort'] == 'Popular':
          type_sort_db=0
          return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'Z to A':
+      elif request.form['sort'] == 'A to Z':
          type_sort_db=1
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Z to A':
+         type_sort_db=2
          return redirect(url_for('game_list'))
       else:
          pass
@@ -83,9 +86,8 @@ def home():
    offset=0
    resetflag=0
    page_track=1
-   
-
    resetflagcsv=0
+
    return render_template('home.html')
    
 
@@ -174,24 +176,22 @@ def game_list(page=1):
             offset-=1
          else:
             offset=0   
-      else:
-         pass # unknown
    elif request.method == 'GET':
       offset = 0
       
-   # sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
-   if type_sort_db == 0:   
-      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
-   elif type_sort_db == 1:
-      sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
-   
-
    gamesL=mysql.connection.cursor()
-   gamesL.execute(sql_query)
+   
+   if type_sort_db == 0: #POPULAR   
+      gamesL.execute(sortbypopularity(mysql.connection, offset, per_page)) #offset*10
+   elif type_sort_db == 1: # A to Z (ASCE)
+      gamesL.execute(sortbyalphabetical(mysql.connection, offset, per_page))
+   elif type_sort_db == 2: # Z to A (DESC)
+      gamesL.execute(sordbyalphabeticaldesc(mysql.connection, offset, per_page))
    VideoGames=gamesL.fetchall()
    VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
    gamesL.close()
    
+
    
    page_track = math.ceil(len(VideoGames)/10) 
 
@@ -203,7 +203,7 @@ def game_list(page=1):
    return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
 
 
-#########################
+#########################games_list = VideoGames, extras= extra_info,
 #### Profile HTML ####
 #########################
 @app.route('/profile', methods=['GET', 'POST'])
