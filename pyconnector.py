@@ -68,12 +68,12 @@ with open('steam_game.csv')as csv_file_game:
     	all_value.append(value)
 
     #query
-query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price')
+    query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price')
 	values (%s,%s,%s,%s,%s,%s,%s,%s)"
-
-mycursur = connection.cursor()
-mycursor.executemany(query,all_value)
-connection.commit()
+    
+    mycursur = connection.cursor()
+    mycursor.executemany(query,all_value)
+    connection.commit()
 
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
