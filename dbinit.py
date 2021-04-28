@@ -46,5 +46,8 @@ def dbreinit(logger,MySql,bool): #pass in mysql = MySQL(app) from init.py
     execute_query(MySql.connection,profiletable)
     execute_query(MySql.connection,interactable)
     execute_query(MySql.connection,managetable)
+
+ 
+
     logger.debug("Database Reinitialized")
     return
