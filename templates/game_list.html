@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-    <link href="/static/css/game_list.css" rel="stylesheet" />
-    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-    <title>+Games List</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link href="/static/css/game_list.css" rel="stylesheet" />
+  <link rel="icon" href="/static/images/NES_icon.png" type="image/x-icon">
+  <title>+Games List</title>
 </head>
 
 
@@ -22,25 +22,37 @@
       <div class="blue_bar"></div>
 
       <a href="{{ url_for('home') }}">
-        <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
-    </a>
-    
+        <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick="" />
+      </a>
+
       <h2 class="Game-Gallery-Title"> Game Gallery </h2>
+
       <!-- Video Game Grid -->
-  
-      <!-- <div class="gallery-grid"> -->
-  
+      {% for games in games_list %}
       <div class="gallery-grid">
         <figure class="gallery-frame">
           <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
-          <figcaption class="grid_name">Apex Legends</figcaption>
+          <figcaption class="grid_name">{{games}}</figcaption>
         </figure>
       </div>
-  
-  
+      <div class="game_divider"></div>
+      {% endfor %}
 
+        <div class="bottom_layout">
+          <form method="post">
+            <input type="submit" name="submit_button" value="Back" class="left_button"></input>
+            <input type="submit" name="submit_button" value="Forward" class="right_button"></input>
+          </form>
+
+          {{ pagination.links }} {{ pagination.info }}
+        </div>
     </div>
   </center>
+
   
-  
-  </html>
+</body>
+
+
+
+
+</html>

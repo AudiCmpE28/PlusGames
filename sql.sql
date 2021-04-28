@@ -4,7 +4,6 @@ use `+games`;
 
 CREATE TABLE Company (
     CompanyName VARCHAR(25),
-    
     PRIMARY KEY (CompanyName),
     unique (CompanyName)
 );

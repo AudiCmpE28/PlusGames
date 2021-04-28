@@ -1,7 +1,5 @@
 /*--~~game list~~--*/
-/* .html{
-  overflow-y: scroll;
-} */
+
 /*~~Home Button~~*/
 .back_home{
   position:relative;
@@ -31,6 +29,14 @@
   font-size: 24px;
   opacity: 1;
   text-align: center;
+}
+
+/*middle line*/
+.game_divider{
+  position: relative;
+  background-color: deepskyblue;
+  width: 740px;
+  height: 2px;
 }
 
 /*Game List Box*/
@@ -80,7 +86,7 @@
   position: relative;
   left: 120px;
   bottom: 120px;
-  font-size: 70px;
+  font-size: 30px;
   word-wrap: break-word;
 }
 
@@ -106,11 +112,57 @@
   border-width: 1px;
 }
 
+/*Placing Bottom UI*/
+.bottom_layout{
+  position: relative;
+  bottom: -10px;
+}
+
+/*Number of Items of List*/
+.pagination-page-info {
+  padding: 1px;
+  width: 40em;
+  margin: 10px;
+  margin-left: 0;
+  font-size: 20px;
+  color:darkgray;
+  
+}
+.pagination-page-info b {
+  color:whitesmoke;
+  background: darkcyan;
+  padding-left: 2px;
+  padding: .1em .25em;
+  font-size: 20px;
+}
 
 
+/*front and back buttons*/
+.left_button{
+  left:30px;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+  color: black;
+  font-size: 25px;
+}
 
-
-
+.right_button{
+  right: 30px;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+  color: black;
+  font-size: 25px;
+}
 
 
 

@@ -40,9 +40,15 @@ Year: 2021
   
    In case encounter problems regarding images, follow: https://mikeboers.github.io/Flask-Images/
   
-   ** Database Table ** 
+ **Databse Table Flask**
   
   (1) pip install flask_table
   
    In case encounter problems regarding images, follow: https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
- 
+   
+**Pages Flask**
+  pip install -U flask-paginate
+  https://pythonhosted.org/Flask-paginate/
+  
+**Git Ignore Issues Command**  
+git rm --cached <filename or source name>

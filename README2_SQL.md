@@ -8,9 +8,15 @@ pip install IPython
 
 pip install flask-mysql-connector
 
-pip install flask-mysqldb
-
 pip install pyyaml
+
+pip install cryptography
+
+pip install -U flask-paginate
+
+pip install flask_table
+
+pip install Flask-Images
 
 
 

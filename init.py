@@ -1,7 +1,8 @@
 import logging
+
 logger = logging.getLogger('TxLog')
 logger.setLevel(logging.DEBUG)
-logger.debug('Logger config message')
+logger.info('Logger config message')
 fhandler = logging.FileHandler(filename='logfile.log', mode='a')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -9,16 +10,22 @@ fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
 #logger.debug('Debugging to file')
 
-from flask import Flask, render_template, request, redirect, url_for, session, g
-from pyconnector import *
-from mysql.connector import Error
-from flask_mysql_connector import MySQL
+import os
+import random
+import string
+import sys
+import math
 
-import random, string
-import os, sys
 import yaml
+from flask import (Flask, g, redirect, render_template, request, session,
+                   url_for, Blueprint)
+from flask_mysql_connector import MySQL
+from mysql.connector import Error
 
-
+from dbinit import *
+from pyconnector import *
+from flask_paginate import Pagination, get_page_parameter, get_page_args
+from cryptography.fernet import Fernet
 
 db=yaml.safe_load(open('db.yaml'))
 #Create a db.yaml file in the base directory and put the following 4 lines in it. Add it to .gitignore so you keep your own independent config files.
@@ -27,31 +34,67 @@ db=yaml.safe_load(open('db.yaml'))
 #MYSQL_PASSWORD: 'your_mysql_password'
 #MYSQL_DATABASE: '+games'
 #
+
+
 app = Flask(__name__)
 app.config['MYSQL_USER'] = db['MYSQL_USER']
 app.config['MYSQL_HOST'] = db['MYSQL_HOST']
-app.config['MYSQL_PASSWORD'] = db['MYSQL_PASSWORD']
-app.config['MYSQL_DATABASE'] = db['MYSQL_DATABASE']
+app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
+app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
+
+###################
+global resetflag  #
+resetflag=0       # Set to 1 if you want to reset the db
+###################
+
+###################
+offset=0       # for pages
+page_track=1
+###################
 
 #### Homepage HTML ####
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+   global resetflag
+   global offset
+   ################################
+   dbreinit(logger,mysql,resetflag)   
+   ################################
+   offset = 0
+   resetflag=0
+
    return render_template('home.html')
+   
 
-
+#########################
 #### Login HTML ####
+#########################
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    if request.method == "POST": ##gets info from form
       mem_username=request.form.get('username')
       mem_password= request.form.get('password')
+      getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
+      cur.execute("SELECT * FROM members WHERE mem_password='{}'", (mem_password))
+         
       try:
-         cur= mysql.connection.cursor()
-         cur.execute("SELECT * FROM members WHERE username=%s", (mem_username))
-         members= cur.fetchall()
-         cur.close()
+         getlogin(mysql.connection, mem_username)
+         if mem_username != getlogin(mysql.connection, mem_username) or mem_password != decryptpw(mem_password):
+            msg = 'Incorrect username or password'
+         # cur= mysql.connection.cursor()
+         # cur.execute("SELECT * FROM members WHERE mem_username='{}' AND mem_password='{}'", (mem_username, mem_password))
+         # members= cur.fetchone()
+         #if members[3]==mem_password #compare html hashed password against
+            #
+         # if (mem_password == __decryptpw(password) and mem_username == username): 
+         #    return render_template('profile.html')
+         # else:
+         #    msg ='Incorrect username or password'
+         #    return render_template('login.html')
+         # cur.close()
+         
       except:
          return -1
    else:
@@ -64,8 +107,9 @@ def logout():
    return render_template('home.html')
 
 
-
+#########################
 #### sign up HTML ####
+#########################
 @app.route('/signup', methods=['GET','POST'])
 def signup():
    if request.method=='POST':
@@ -86,67 +130,77 @@ def signup():
    return render_template('signup.html')
 
 
-
-
-
-
-
+###########################
 #### request page HTML ####
+###########################
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    return render_template('request_page.html')
 
+#########################
 #### Game page HTML ####
+#########################
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
    return render_template('game_page.html')
 
-#### Game List HTML ####
-@app.route('/game_list', methods=['GET', 'POST'])
-def game_list():
-   return render_template('game_list.html')
 
+
+#########################
+#### Game List HTML ####
+#########################
+@app.route('/game_list', methods=['GET', 'POST'])
+def game_list(page=1):
+   global offset
+   global page_track
+   per_page = 10
+   
+   if request.method == 'POST':
+      if request.form['submit_button'] == 'Forward':
+         if(offset < (page_track-1)):
+            offset+=1
+      elif request.form['submit_button'] == 'Back':
+         if(offset > 0):
+            offset-=1
+         else:
+            offset=0   
+      else:
+            pass # unknown
+   elif request.method == 'GET':
+      offset = 0
+      
+   sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+   # if request.form['sort'] == 'a_to_z':   
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
+   # elif request.form['sort'] == 'z_to_a':
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+
+   gamesL=mysql.connection.cursor()
+   gamesL.execute(sql_query)
+   VideoGames=gamesL.fetchall()
+   VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
+   gamesL.close()
+   
+   
+   page_track = math.ceil(len(VideoGames)/10) 
+
+   pagination = Pagination(page=page, 
+                           per_page=per_page, 
+                           format_number=True, 
+                           total=len(VideoGames), 
+                           record_name='Video Games')
+   return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
+
+
+#########################
 #### Profile HTML ####
+#########################
 # @app.route('/profile', methods=['GET', 'POST'])
 # def profile():
 #    return render_template('profile.html')
-
-
-##############################
-####       Database      ####
-#############################
-@app.route('/profile', methods=['GET','POST'])
+@app.route('/profile', methods=['GET', 'POST'])
 def profile():
-   if request.method=='POST':
-      print(game_id)
-      print(g_company)
-      print(game_n)
-      print(genre)
-      print(rating)
-      print(release_Date)
-      print(price)
-      ##
-      try:
-         sortbyalphabetical(mysql.connection)
-         return render_template('profile.html')
-      except:
-         return -1
-
    return render_template('profile.html')
-
-
-
-
-# class results(table):
-#   game_id = columns('Game ID')      
-#   g_company = columns('Company')		
-#   game_n = columns('Game Name')		
-#   genre = columns('Genre')			
-#   rating = columns('Rate') 		
-#   release_Date = columns('Release')
-#   price	= columns('Price')
-
-
 
 
 ## Nasic Stuff ##
