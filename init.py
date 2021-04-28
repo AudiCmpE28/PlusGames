@@ -157,11 +157,12 @@ def game_list(page=1):
             pass # unknown
    elif request.method == 'GET':
       offset = 0
-
-   if request.form['sort'] == 'a_to_z':   
-      sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
-   elif if request.form['sort'] == 'z_to_a':
-      sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+      
+   sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
+   # if request.form['sort'] == 'a_to_z':   
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {}".format((offset*10), per_page) #offset*10
+   # elif request.form['sort'] == 'z_to_a':
+   #    sql_query = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {}".format((offset*10), per_page)
 
    gamesL=mysql.connection.cursor()
    gamesL.execute(sql_query)
