@@ -57,7 +57,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 	#first open file 'with open', insert csv name in ''
 with open('steam_game.csv')as csv_file_game:
 
-    csvfile = csv.reader(csv_file_game,delimeter =',')
+    csvfile = csv.reader(csv_file_game,delimiter =',')
     #store all the values in dynamic array
     all_value = []
 
