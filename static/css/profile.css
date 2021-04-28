@@ -63,11 +63,33 @@
   border:lightcoral;
  }
  
- .p {
-  color:#ffff; 
-  font-size: 25px; 
-  font-family:Roboto;
+ .upload_profile{
+  color: #23C6C6 ;
+  background-color: white;
+  position: absolute;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 15px;
+  width: 90px;
+  height: 40px;
+  right: 40px;
+  bottom: 40px;
+  border-style: solid;
+  border-width: thick;
+  
  }
+
+ .label{
+   color: white;
+   font-family: Roboto;
+ }
+
+ .avatar{
+  color: white;
+  font-family: Roboto;  
+  position: center;
+ }
+
 
  /*~~Home Button~~*/
 .back_home{
