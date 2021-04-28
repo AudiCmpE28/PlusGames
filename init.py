@@ -1,5 +1,7 @@
+# $env:FLASK_APP = "init.py"    
+# $env:FLASK_ENV = "development"
+# python -m flask run    
 import logging
-
 logger = logging.getLogger('TxLog')
 logger.setLevel(logging.DEBUG)
 logger.info('Logger config message')
@@ -43,10 +45,12 @@ app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
 app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
 
-###################
-global resetflag  #
-resetflag=0       # Set to 1 if you want to reset the db
-###################
+######################
+global resetflag     #
+resetflag=0          # Set to 1 if you want to reset the db
+global resetflagcsv  # 
+resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
+######################
 
 ###################
 offset=0       # for pages
@@ -58,13 +62,15 @@ page_track=1
 @app.route('/home', methods=['GET', 'POST'])
 def home():
    global resetflag
+   global resetflagcsv
    global offset
    ################################
-   dbreinit(logger,mysql,resetflag)   
+   dbreinit(logger,mysql.connection,resetflag)
+   parse_steam_game_csv(mysql.connection, resetflagcsv)
    ################################
    offset = 0
    resetflag=0
-
+   resetflagcsv=0
    return render_template('home.html')
    
 
@@ -77,26 +83,14 @@ def login():
       mem_username=request.form.get('username')
       mem_password= request.form.get('password')
       getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
-      cur.execute("SELECT * FROM members WHERE mem_password='{}'", (mem_password))
-         
       try:
-         getlogin(mysql.connection, mem_username)
-         if mem_username != getlogin(mysql.connection, mem_username) or mem_password != decryptpw(mem_password):
+         database_cred=getlogin(mysql.connection, getuser)
+         if mem_username != database_cred[1] or mem_password != decryptpw[3]:
             msg = 'Incorrect username or password'
-         # cur= mysql.connection.cursor()
-         # cur.execute("SELECT * FROM members WHERE mem_username='{}' AND mem_password='{}'", (mem_username, mem_password))
-         # members= cur.fetchone()
-         #if members[3]==mem_password #compare html hashed password against
-            #
-         # if (mem_password == __decryptpw(password) and mem_username == username): 
-         #    return render_template('profile.html')
-         # else:
-         #    msg ='Incorrect username or password'
-         #    return render_template('login.html')
-         # cur.close()
+
          
       except:
-         return -1
+         logger.info("Login failed by %s",mem_username)
    else:
       return render_template('login.html')
 

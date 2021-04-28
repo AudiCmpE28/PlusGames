@@ -56,25 +56,20 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         logger.debug('Db connection err')
     return connection
 
-	#first open file 'with open', insert csv name in ''
-with open('steam_game.csv')as csv_file_game:
-
-    csvfile = csv.reader(csv_file_game,delimiter =',')
-    #store all the values in dynamic array
-    all_value = []
-
-    #use loop to iterate through csvfile
-    for row in csvfile:
-    	#inserting each row into value
-    	value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
-    	all_value.append(value)
-
-    #query
-    query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price') values (%s,%s,%s,%s,%s,%s,%s,%s)"
-    
-mycursor = connection.cursor()
-mycursor.executemany(query,all_value)
-connection.commit()
+# #csv file parser
+# def parse_through_csv(connection):
+#     with open('static/csv/steam_game.csv')as csv_file_game:
+#         csvfile = csv.reader(csv_file_game,delimiter =',')
+#         #store all the values in dynamic array
+#         all_value = []
+#         #use loop to iterate through csvfile
+#         for row in csvfile:
+#             #inserting each row into value
+#             value = (row[0],row[2],row[3],row[4],row[5],row[6],row[7])
+#             all_value.append(value)
+#     mycursor = connection.cursor()
+#     mycursor.executemany(query,all_value)
+#     connection.commit()
 
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
@@ -88,7 +83,7 @@ def execute_query(connection, query):
     
     try:
         cursor.execute(query)
-        print("Query successful")
+        #print("Query successful")
         connection.commit()
         cursor.close()
         logger.debug('Commit: '+query)
@@ -142,7 +137,7 @@ def addmembers(connection, unique_id, mem_username, mem_email,mem_password):
 def getlogin(connection, mem_username):
     getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
     try:
-        read_query(connection,getuser)
+        return read_query(connection,getuser)
     except:
         exit
 
@@ -201,10 +196,6 @@ def sordbyalphabeticaldesc(connection):
 	gamealphadesc = "SELECT game_n FROM game ORDER BY game_n DESC;"
 	return returncolumns(connection,gamealphadesc)
 
-def platform(connection,released_on):
-    chooseplatform = "SELECT DISTINCT platform_name FROM released_on WHERE platform_name = '{}';".format(platform_name)
-    return returncolumns(connection,chooseplatform)
-
 def sortbyplatform(connection,platform):
     chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
     #or this
@@ -219,12 +210,43 @@ def addcomment(connection, mem_username,game_id,text):
 def addreview(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
-	
-def addgame(connection,game_id,g_company,game_n,genre,rating,price):
-    insertq = "INSERT INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},NOW(),{});".format(game_id,g_company,game_n,genre,rating,price)
-    execute_query(connection, insertq)
 
-def gamecomments(connection, game_id):
+######################## Company, Game, Platform, Released on ##########
+
+def addcompany(connection, company):
+    companyq="Insert IGNORE company values ('{}')".format(company)
+    execute_query(connection,companyq)
+
+def addgame(connection,game_id,g_company,game_n,genre,rating,release_Date,price):
+    gameq = "INSERT IGNORE INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},'{}',{});".format(game_id,g_company,game_n,genre,rating,release_Date,price)
+    execute_query(connection, gameq)
+
+def addplatform(connection,platform):
+    gamep= "Insert IGNORE into platform (platform_name) values('{}');".format(platform)
+    execute_query(connection, gamep)
+
+def addreleasedon(connection,game_id,platform):
+    gameidq = "insert IGNORE into released_on (game_id,platform_name) values ('{}','{}');".format(game_id,platform)
+    execute_query(connection,gameidq)
+
+#csv file parser
+def parse_steam_game_csv(connection,reset):
+    if reset==0:
+        logger.info("CSV to db deferred")
+        return 0
+    with open('static/csv/steam_game.csv',encoding="utf8")as csv_file:
+        csvfile = csv.reader(csv_file,delimiter =',')
+        #store all the values in dynamic array
+        #use loop to iterate through csvfile
+        for row in csvfile:
+            #inserting each row into value
+            addcompany(connection,row[2])
+            addplatform(connection,row[1])
+            addgame(connection, row[0],row[2],row[3],row[4], row[5],row[6],row[7])
+            addreleasedon(connection,row[0],row[1])
+########################################################################
+
+def getgamecomments(connection, game_id):
     game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
     return returncolumns(connection,game_comments)
 
