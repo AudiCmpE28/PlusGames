@@ -1,4 +1,4 @@
-.profile-title{
+.h1{
   color: rgb(255, 255, 255);
  
 }
@@ -23,6 +23,44 @@
 
 
 .anon{
+  height: 300px;
+  width: 300px;
+}
+
+.a{
+  color: rgb(0, 225, 255);
+  font-size: 40px;
+}
+
+.box{
+  color: #8c8c8c;
+  width: 170px;
   height: 160px;
-  width: 160px;
+}
+
+.Green_Line {
+  width: 680px;
+  height: 17px;
+  background: rgba(140,255,138,1);
+  opacity: 1;
+  position: relative;
+  top: -40px;
+}
+
+.Blue_Line {
+  width: 680px;
+  height: 17px;
+  background: rgba(135,255,240,1);
+  opacity: 1;
+  position: relative;
+  top: -50px;
+}
+
+.medium_box{
+  top: 5px;
+  width: 680px;
+  height: 721px;
+  background: #333;
+  opacity: 1;
+  position: relative;
 }

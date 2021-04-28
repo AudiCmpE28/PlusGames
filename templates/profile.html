@@ -4,27 +4,30 @@
 <head>
   <link rel="icon" href="/static/images/NES_icon.png" type="image/x-icon">
   <title>+Games Profile </title>
+  <link href="/static/css/profile.css" type="text/css" rel="stylesheet" />
+
 </head>
 
 <body style="background-color: #222222">
 
  <center> 
+    <div class ="medium_box">
+      <h1 style="color: whitesmoke; font-size:70; font-family: roboto"> My Profile </h1>
+      <div class="Blue_Line"> </div>
+      <div class="Green_Line"> </div>
 
-  <h1 class="profile-title"> My Profile </h1>
-  <hr>
-  <div class="body">
-    <img class="anon" src="/static/images/anon.jpg">
-    <div class="blue-bar"></div>
-      <a href="{{url_for('logout')}}"> Logout</a>
-      <a href="{{url_for('home')}}"> Home</a>
-  
-      <div class="box">
-        <p class="account-heading">username: username</p>
-        <p class="text-secondary">email: email@gmail.com</p>
+      <div class="body">
+        <img class="anon" src="/static/images/anon.jpg">
+        <div class="blue-bar"></div>
+          <a href="{{url_for('logout')}}"> Logout</a>
+          <a href="{{url_for('home')}}"> Home</a>
+        </div>
+        <div class="box">
+          <p style="color:whitesmoke; font-size: 30px; font-family:Roboto">username: username</p>
+          <p style="color:whitesmoke; font-size: 30px; font-family:Roboto">email: email@gmail.com</p>
+        </div>
       </div>
-    </div>
-  </div>
-<!-- FORM HERE -->
-  </center>
+    </div>  
+  </center> 
 
 </html>
