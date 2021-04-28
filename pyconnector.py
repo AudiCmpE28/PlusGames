@@ -69,7 +69,7 @@ with open('steam_game.csv')as csv_file_game:
 
     #query
     query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price')
-    values (%s,%s,%s,%s,%s,%s,%s,%s)"
+	values (%s,%s,%s,%s,%s,%s,%s,%s)"
 
    mycursur = connection.cursor()
    mycursor.executemany(query,all_value)
