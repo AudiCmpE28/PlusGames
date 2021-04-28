@@ -23,6 +23,8 @@ from flask import (Flask, g, redirect, render_template, request, session,
                    url_for, Blueprint)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
+# from flask_login import (LoginManager, logout_user, logout_user, 
+#                          login_required, current_user)
 
 from dbinit import *
 from pyconnector import *
@@ -45,6 +47,11 @@ app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
 app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
 
+
+# login_manager =LoginManager()
+# login_manager.login_view = 'auth.login'
+# login_manager.init_app(app)
+
 ######################
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
@@ -57,6 +64,7 @@ offset=0       # for pages
 page_track=1
 type_sort_db=0
 ###################
+
 
 #### Homepage HTML ####
 @app.route('/')
@@ -113,8 +121,10 @@ def login():
 
 #### Logout ####
 @app.route('/logout', methods=['GET', 'POST'])
+# @login_required
 def logout():
    session.clear()
+   #logout_user()
    return render_template('home.html')
 
 
@@ -207,6 +217,7 @@ def game_list(page=1):
 #### Profile HTML ####
 #########################
 @app.route('/profile', methods=['GET', 'POST'])
+# @login_required
 def profile():
    return render_template('profile.html')
 

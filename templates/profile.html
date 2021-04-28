@@ -12,22 +12,23 @@
 
  <center> 
     <div class ="medium_box">
-      <h1 style="color: whitesmoke; font-size:70; font-family: roboto"> My Profile </h1>
-      <div class="Blue_Line"> </div>
-      <div class="Green_Line"> </div>
-
-      <div class="body">
-        <img class="anon" src="/static/images/anon.jpg">
-        <div class="blue-bar"> </div>
-        <a href="{{url_for('logout')}}"> Logout</a>
-        <a href="{{url_for('home')}}"> Home</a>
-        
-        <div class="box">
-          <p style="color:whitesmoke; font-size: 25px; font-family:Roboto">username: username</p>
-          <p style="color:whitesmoke; font-size: 25px; font-family:Roboto">email: email@gmail.com</p>
-        </div>
-      </div>
+      <h1 style=" color: whitesmoke; font-size: 80px; font-family: Roboto">My Profile</h1>
+      <!-- <h1 class="title_profile"> My Profile </h1> -->
+      <br>
+      <br>
+      <br>
+      <div class="Blue_Line"></div>
+      <div class="Green_Line"></div>
+      <!-- <h1 class="title_profile"> My Profile </h1> -->
+      <h2 style="margin-top: -10%;color: whitesmoke; font-size: 30px; font-family: Roboto">Hello!</h2>
+      <img class="anon" src="/static/images/anon_circle.png">
+      <br>
+      <a href="{{ url_for('login') }}">
+        <button class="logout_button" type="button" onclick="">Log Out</button>
+      </a>
+      <a href="{{ url_for('home') }}">
+        <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+      </a>
     </div>  
   </center> 
-
 </html>
