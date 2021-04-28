@@ -1,41 +1,8 @@
-.h1{
-  color: rgb(255, 255, 255);
- 
-}
-
-.blue-bar{
- color: #00bbff;
- width: 1000px;
- height: 48px;
-}
-
-
-.account-heading{
- color: rgb(255, 255, 255);
- font-size: 50px;
- 
-}
-
-.text-secondary{
- color: rgb(255, 255, 255);
- font-size: 40px; 
-}
-
-
-.anon{
-  height: 300px;
-  width: 300px;
-}
-
-.a{
-  color: rgb(0, 225, 255);
-  font-size: 40px;
-}
-
-.box{
-  color: #8c8c8c;
-  width: 170px;
-  height: 160px;
+/*~ Profile Page ~*/
+.title_profile{
+  color: whitesmoke;
+  font-size: 80px;
+  font-family: Roboto;
 }
 
 .Green_Line {
@@ -44,7 +11,7 @@
   background: rgba(140,255,138,1);
   opacity: 1;
   position: relative;
-  top: -40px;
+  top: -90px;
 }
 
 .Blue_Line {
@@ -53,8 +20,9 @@
   background: rgba(135,255,240,1);
   opacity: 1;
   position: relative;
-  top: -50px;
+  top: -100px;
 }
+
 
 .medium_box{
   top: 5px;
@@ -64,3 +32,60 @@
   opacity: 1;
   position: relative;
 }
+
+/* .title_sub{
+  color:rgb(255, 255, 255);
+  font-size: 20px;
+  font-family: Roboto;
+  position: relative;
+  top: 25px;
+} */
+
+ /* Profile Image Icon */
+ .anon{
+   height: 300px;
+   width: 300px;
+ }
+ 
+ .logout {
+  width: 220px;
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 250px;
+  left: 3px;
+  font-family: Roboto;
+  font-weight: Regular;
+  font-size: 18px;
+  opacity: 1;
+  text-align: left;
+  color: blue;
+ }
+ 
+ .p {
+  color:#ffff; 
+  font-size: 25px; 
+  font-family:Roboto;
+ }
+
+ /*~~Home Button~~*/
+.back_home{
+  position:absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 95px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+}
+
+.a {
+  position:absolute;
+  bottom: 15px;
+  left: 10px;
+  width: 95px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+}
+ 
