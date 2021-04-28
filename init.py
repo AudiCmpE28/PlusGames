@@ -76,7 +76,7 @@ def login():
          members= cur.fetchone()
          #if members[3]==mem_password #compare html hashed password against
             #
-         if (mem_password == __decryptpw(encryptedpw) and mem_username == username) 
+         if (mem_password == __decryptpw(password) and mem_username == username) 
             return render_template('profile.html')
          else:
             msg ='Incorrect username or password'
