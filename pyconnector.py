@@ -63,9 +63,9 @@ with open('steam_game.csv')as csv_file_game:
 
     #use loop to iterate through csvfile
     for row in csvfile:
-    #inserting each row into value
-    value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
-    all_value.append(value)
+    	#inserting each row into value
+    	value = (row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
+    	all_value.append(value)
 
     #query
     query = "INSERT INTO 'game'('game_id','platforms','g_company','game_n','genre','rating','release_date','price')
