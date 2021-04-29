@@ -199,10 +199,14 @@ def request_page():
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
    global Game_identification_number
+   game_i=[]
+
+   game_info=game_information(mysql.connection, Game_identification_number)
 
    
+   game_i.append(get_url_from_cvs(Game_identification_number))
 
-   return render_template('game_page.html', ID=Game_identification_number)
+   return render_template('game_page.html', game_page=game_info, game_image=game_i)
 
 
 

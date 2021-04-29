@@ -234,11 +234,13 @@ def get_url_from_cvs(game_id):
                 return row[1]  
 
 
-
 def game_ids_with_name(connection, games_name):
 	gamealpha = "SELECT game_id FROM Game WHERE Game.game_n = '{}';".format(games_name) 
 	return read_query(connection,gamealpha)
 
+def game_information(connection, game_ID):
+	gamealpha = "SELECT * FROM Game WHERE Game.game_id = {};".format(game_ID) 
+	return read_query(connection,gamealpha)
 
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
