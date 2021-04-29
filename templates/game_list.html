@@ -28,10 +28,10 @@
       <h2 class="Game-Gallery-Title"> Game Gallery </h2>
 
       <!-- Video Game Grid -->
-      {% for games in games_list %}
+      {% for games, url in games_list %}
       <div class="gallery-grid">
         <figure class="gallery-frame">
-          <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
+          <img class="gallery-img" src="{{ url }}" alt="Game Images" title="covers">
           <figcaption class="grid_name">{{games}}</figcaption>
         </figure>
       </div>
@@ -39,10 +39,7 @@
       {% endfor %}
 
 
-      {% for url in images_g %}
-      
-      <a href="{{ url }}" style="color:whitesmoke">{{ url }}<br></a>
-      {% endfor %}
+
 
       <div class="bottom_layout">
         <form method="post">

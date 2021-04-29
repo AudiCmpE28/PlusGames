@@ -219,7 +219,7 @@ def game_list(page=1):
    #We already have one, mysql @ line 48
    
    if type_sort_db == 0: #POPULAR   
-      VideoGames=sortbypopularity(mysql.connection, offset, per_page) # offset*10
+      VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
    elif type_sort_db == 1: # A to Z (ASCE)
       VideoGames=sortbyalphabetical(mysql.connection, offset, per_page)
    elif type_sort_db == 2: # Z to A (DESC)
@@ -262,7 +262,9 @@ def game_list(page=1):
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
-   return render_template('game_list.html', games_list = VideoGames, images_g = image_url, gameId=gameID, pagination=pagination)
+   return render_template('game_list.html', games_list = zip(VideoGames, image_url), pagination=pagination)
+
+   # return render_template('game_list.html', games_list = VideoGames, images_g = image_url, gameId=gameID, pagination=pagination)
 
 
 #***************************************************************************************
