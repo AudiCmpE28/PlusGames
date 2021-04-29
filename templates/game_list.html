@@ -28,10 +28,10 @@
       <h2 class="Game-Gallery-Title"> Game Gallery </h2>
 
       <!-- Video Game Grid -->
-      {% for games in games_list %}
+      {% for games, url in games_list %}
       <div class="gallery-grid">
         <figure class="gallery-frame">
-          <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
+          <img class="gallery-img" src="{{ url }}" alt="Game Images" title="covers">
           <figcaption class="grid_name">{{games}}</figcaption>
         </figure>
       </div>
@@ -39,17 +39,16 @@
       {% endfor %}
 
 
- 
-      
-      
-        <div class="bottom_layout">
-          <form method="post">
-            <input type="submit" name="submit_button" value="Back" class="left_button"></input>
-            <input type="submit" name="submit_button" value="Forward" class="right_button"></input>
-          </form>
 
-          {{ pagination.links }} {{ pagination.info }}
-        </div>
+
+      <div class="bottom_layout">
+        <form method="post">
+          <input type="submit" name="submit_button" value="Back" class="left_button"></input>
+          <input type="submit" name="submit_button" value="Forward" class="right_button"></input>
+        </form>
+
+        {{ pagination.links }} {{ pagination.info }}
+      </div>
     </div>
   
   </center>

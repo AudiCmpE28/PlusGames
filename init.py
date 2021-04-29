@@ -1,3 +1,4 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
 # $env:FLASK_APP = "init.py"    
 # $env:FLASK_ENV = "development"
 # python -m flask run    
@@ -20,7 +21,7 @@ import math
 import base64
 import yaml
 from flask import (Flask, g, redirect, render_template, request, session,
-                   url_for, Blueprint)
+                   url_for, Blueprint, escape)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
 # from flask_login import (LoginManager, logout_user, logout_user, 
@@ -208,8 +209,9 @@ def game_list(page=1):
    global offset
    global page_track
    global type_sort_db
-   per_page = 10
-   
+   per_page = 30
+
+
    # when front or back button pressed, activates POST
    # we use value and type thru here
    if request.method == 'POST':
@@ -227,7 +229,7 @@ def game_list(page=1):
    #We already have one, mysql @ line 48
    
    if type_sort_db == 0: #POPULAR   
-      VideoGames=sortbypopularity(mysql.connection, offset, per_page) # offset*10
+      VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
    elif type_sort_db == 1: # A to Z (ASCE)
       VideoGames=sortbyalphabetical(mysql.connection, offset, per_page)
    elif type_sort_db == 2: # Z to A (DESC)
@@ -244,19 +246,35 @@ def game_list(page=1):
    elif type_sort_db == 7: # ARCADE
       VideoGames=sortbyplatform(mysql.connection,platform)
 
+
    #### Fetching the data from query ####
-   
    VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
    
    # keep track of the pages t cap at min and max
    page_track = math.ceil(len(VideoGames)) 
+
+
+   image_url = []
+   gameID = []
+
+   for games_na in VideoGames:
+      games_num=game_ids_with_name(mysql.connection, games_na)
+      gameID.append(str(games_num))
+      
+   gameID=[x[2:-3] for x in gameID]
+
+   for search in gameID:
+      image_url.append(get_url_from_cvs(search))
+     
+   
+
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
-   return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
+   return render_template('game_list.html', games_list = zip(VideoGames, image_url), pagination=pagination)
 
-
+   # return render_template('game_list.html', games_list = VideoGames, images_g = image_url, gameId=gameID, pagination=pagination)
 
 
 #***************************************************************************************

@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
+
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
@@ -84,6 +86,12 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 #     mycursor = connection.cursor()
 #     mycursor.executemany(query,all_value)
 #     connection.commit()
+
+def geturlfromcsv(game_id):
+    file=csv.reader('static/csv/game_id_image.csv','r',encoding="utf8") 
+    for row in file:
+        if game_id==row[0]:
+            return row[1]
 
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
@@ -217,6 +225,20 @@ def sortbyplatform(connection,platform):
     chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
     return read_query(connection,chooseplatform)
 
+# /** get url to display**/
+def get_url_from_cvs(game_id):
+    with open('static/csv/game_id_image.csv', encoding="utf8") as csv_file:
+        csvfile=csv.reader(csv_file,delimiter=',') 
+        for row in csvfile:
+            if str(game_id)==row[0]:
+                return row[1]  
+
+
+
+def game_ids_with_name(connection, games_name):
+	gamealpha = "SELECT game_id FROM Game WHERE Game.game_n = '{}';".format(games_name) 
+	return read_query(connection,gamealpha)
+
 
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
@@ -275,12 +297,3 @@ def addbookmark(connection, mem_username, game_id):
 
 # with open('filtered.csv', 'w',encoding="utf8") as output:
 #     pd.merge(df1, df2, on='game_id').to_csv(output, sep=',', index=False)
-
-def geturlfromcsv(game_id):
-    with open('static/csv/game_id_image.csv',encoding="utf8")as csv_file:
-        csvfile=csv.reader(csv_file,delimiter=',') 
-        for row in csvfile:
-            if str(game_id)==row[0]:
-                # print(type(row[0]))
-                # print(type(row[1]))
-                return row[1]

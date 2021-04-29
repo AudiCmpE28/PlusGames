@@ -1,3 +1,5 @@
+-- SJSU CMPE 138 Spring 2021 TEAM1
+
 drop database if exists `+games`;
 create database `+games`;
 use `+games`;
@@ -20,7 +22,7 @@ CREATE TABLE Game(
   g_company		varchar(25) not null,
   game_n		varchar(50) not null,
   genre			varchar(30),
-  rating 		decimal(3,2),
+  rating 		decimal(4,2),
   release_Date	date,
   price			decimal(4,2),
   primary key (game_id,g_company), -- pull PK of owner entity to weak entity
