@@ -213,33 +213,33 @@ def game_list(page=1):
             offset=0
 
    #establish connection with MySQL
-   gamesL=mysql.connection.cursor() 
+   # gamesL=mysql.connection.cursor() 
+   #We already have one, mysql @ line 48
    
    if type_sort_db == 0: #POPULAR   
-      gamesL.execute(sortbypopularity(mysql.connection, offset, per_page)) # offset*10
+      VideoGames=sortbypopularity(mysql.connection, offset, per_page) # offset*10
    elif type_sort_db == 1: # A to Z (ASCE)
-      gamesL.execute(sortbyalphabetical(mysql.connection, offset, per_page))
+      VideoGames=sortbyalphabetical(mysql.connection, offset, per_page)
    elif type_sort_db == 2: # Z to A (DESC)
-      gamesL.execute(sordbyalphabeticaldesc(mysql.connection, offset, per_page))
+      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset, per_page)
 
    elif type_sort_db == 3: # CONSOLE   
-      gamesL.execute(sortbyplatform(mysql.connection,platform))
+      VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 4: # PC
-      gamesL.execute(sortbyplatform(mysql.connection,platform))
+      VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 5: # MOBILE
-      gamesL.execute(sortbyplatform(mysql.connection,platform))
+      VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 6: # HANDHELD
-      gamesL.execute(sortbyplatform(mysql.connection,platform))
+      VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 7: # ARCADE
-      gamesL.execute(sortbyplatform(mysql.connection,platform))
+      VideoGames=sortbyplatform(mysql.connection,platform)
 
    #### Fetching the data from query ####
-   VideoGames=gamesL.fetchall()
+   
    VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
-   gamesL.close()
    
    # keep track of the pages t cap at min and max
-   page_track = math.ceil(len(VideoGames)/10) 
+   page_track = math.ceil(len(VideoGames)) 
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 

@@ -182,28 +182,26 @@ def sortbygenre(connection,genre):
 
 
 def sortbypopularity2nd(connection, offset, per_page):
-    gamequery="SELECT genre FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
-    return gamequery
+    gamequery="SELECT game_n FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
+    return read_query(connection,gamequery)
 
 def sortbypopularity(connection, offset, per_page):
     gamequery="SELECT game_n FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
-    return gamequery
+    return read_query(connection,gamequery)
     
 
 def sortbyalphabetical(connection, offset, per_page):
 	gamealpha = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {};".format((offset*10), per_page) 
-	return gamealpha
+	return read_query(connection,gamealpha)
 	
 	
 def sordbyalphabeticaldesc(connection, offset, per_page):
 	gamealphadesc = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {};".format((offset*10), per_page)
-	return gamealphadesc
+	return read_query(connection,gamealphadesc)
 
 def sortbyplatform(connection,platform):
     chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
-    #or this
-    chooseplatform2 ="SELECT g.game_id,g.game_n,g.genre,g.rating,g.release_date,g.price FROM Game as g join Released_on as r WHERE g.game_id = r.game_id and r.platform_name='{}';".format(platform)
-    return returncolumns(connection,chooseplatform)
+    return read_query(connection,chooseplatform)
 
 
 def addcomment(connection, mem_username,game_id,text):
@@ -229,7 +227,7 @@ def addplatform(connection,platform):
     execute_query(connection, gamep)
 
 def addreleasedon(connection,game_id,platform):
-    gameidq = "insert IGNORE into released_on (game_id,platform_name) values ('{}','{}');".format(game_id,platform)
+    gameidq = "insert IGNORE into released_on (game_id,platform_name) values ({},'{}');".format(game_id,platform)
     execute_query(connection,gameidq)
 
 #csv file parser
@@ -257,3 +255,9 @@ def addbookmark(connection, mem_username, game_id):
         insertq="insert into bookmarked (mem_username, game_id) values ('{}', {});".format(mem_username, game_id)
         execute_query(connection, insertq)
 
+# import pandas as pd
+# df1 = pd.read_csv('static/csv/steam_game.csv',  delimiter=',')
+# df2 = pd.read_csv('static/csv/game_id_image.csv', delimiter=',')
+
+# with open('filtered.csv', 'w',encoding="utf8") as output:
+#     pd.merge(df1, df2, on='game_id').to_csv(output, sep=',', index=False)
