@@ -6,7 +6,7 @@ from IPython.display import display
 import logging
 import csv
 import MySQLdb
-
+import os
 logger = logging.getLogger('TLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
@@ -15,24 +15,38 @@ fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
-from cryptography.fernet import Fernet
+import hashlib
+import binascii
+def encryptpw(password):
+    salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+    pwdhash = hashlib.pbkdf2_hmac('sha512',password.encode('utf-8'),salt, 100000)
+    pwdhash = binascii.hexlify(pwdhash)
+    print("in encryptpw function encrypting ")
+    print(password)
+    print("as")
+    print(pwdhash)
+    return (salt + pwdhash).decode('ascii') #This is what you store in db
 
-def encryptpw(password:str):
-   f = Fernet("yMCknhRM5NJiN5flBsigJEavBdeVXal4UI08P7qfngc=")
-   password=password.encode("utf-8")
-   token = f.encrypt(password)
-   print(token)
-   return token
+def verify(encrypted,password):
+    password=password
+    salt = encrypted[:64]
+    encrypted = encrypted[64:]
+    print("in verify function encrypted pass got was ",end='')
+    print(encrypted)
+    print("in verify function encr "+password+" as: ",end='')
+    pwdhash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),salt.encode('ascii'),100000)
+    print(pwdhash)
+    pwdhash = binascii.hexlify(pwdhash).decode('ascii')
+    print('hexlified in verify is: '+pwdhash)
+    if pwdhash == encrypted:
+        print("IT IS CORRECT")
+        return 1
+    else:
+        print("NO IT AINT RETARD")
+        return 0
 
-def decryptpw(encrypted_password):
-   f = Fernet("yMCknhRM5NJiN5flBsigJEavBdeVXal4UI08P7qfngc=")
-   decrypted=f.decrypt(encrypted_password)
-   print(decrypted.decode("utf-8"))
-   return decrypted.decode("utf-8")
-
-kms="kms"
-en=encryptpw(kms)
-decryptpw(en)
+# a=encryptpw("QWE!@#123qwe")
+# print(a)
 
 #-----------------
 #Building blocks
@@ -261,3 +275,12 @@ def addbookmark(connection, mem_username, game_id):
 
 # with open('filtered.csv', 'w',encoding="utf8") as output:
 #     pd.merge(df1, df2, on='game_id').to_csv(output, sep=',', index=False)
+
+def geturlfromcsv(game_id):
+    with open('static/csv/game_id_image.csv',encoding="utf8")as csv_file:
+        csvfile=csv.reader(csv_file,delimiter=',') 
+        for row in csvfile:
+            if str(game_id)==row[0]:
+                # print(type(row[0]))
+                # print(type(row[1]))
+                return row[1]

@@ -49,12 +49,18 @@ primary key (unique_id),
 foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade
 );
-
+drop table if exists report_on;
+drop table if exists bookmarked;
+drop table if exists interact_with;
+drop table if exists review_on;
+drop table if exists comment_on;
+drop table if exists request_game;
+drop table if exists members;
 create table Members (
 unique_id	integer(16)not null,
-mem_username	varchar(16)not null,
+mem_username	varchar(25)not null,
 mem_email VARCHAR(50),
-mem_password	varchar(128) default null, -- insert hashed passwords by using a select statment and MD5('password')
+mem_password	varchar(200) default null, -- insert hashed passwords by using a select statment and MD5('password')
 primary key		(unique_id, mem_username),  -- temporary, might need to add email column for these tables
 foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade,
@@ -62,7 +68,7 @@ unique (mem_username)
 );
 
 CREATE TABLE request_game (
-mem_username	varchar(16) not null,
+mem_username	varchar(25) not null,
 game_id       	integer(10),
 req_text		varchar(50),
 foreign key (mem_username) references Members(mem_username) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -70,7 +76,7 @@ foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCA
 );
 
 CREATE TABLE comment_on (
-mem_username	varchar(16)not null,
+mem_username	varchar(25)not null,
 game_id			integer(10)not null,
 c_date	date,
 c_time 	time,
@@ -81,7 +87,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 );
 
 CREATE TABLE review_on (
-mem_username	varchar(16)not null,
+mem_username	varchar(25)not null,
 game_id		integer(10)not null,
 rv_date		date,
 rv_time 	timestamp,
@@ -92,7 +98,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 );
 
 CREATE TABLE report_on (
-mem_username	varchar(16)not null,
+mem_username	varchar(25)not null,
 game_id			integer(10)not null,
 rp_date	date,
 rp_time 	timestamp,
@@ -103,7 +109,7 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 );
 
 CREATE TABLE bookmarked (
-mem_username	varchar(16) not null,
+mem_username	varchar(25) not null,
 game_id			integer(10) not null,
 primary key (mem_username, game_id), 
 foreign key (mem_username) references Members(mem_username) on delete CASCADE,
@@ -112,9 +118,9 @@ foreign key (game_id) references Game(game_id) on delete CASCADE
 
 CREATE TABLE Administrator (
 unique_id	integer(16) not null,
-admin_username	varchar(16) not null,
+admin_username	varchar(25) not null,
 admin_email	varchar(50),
-admin_password	varchar(128) default null,
+admin_password	varchar(200) default null,
 primary key (unique_id, admin_username),
 foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade,
@@ -128,7 +134,7 @@ primary key (user_id)
 ); 
 
 CREATE TABLE interact_with (
-mem_username	varchar(16),
+mem_username	varchar(25),
 user_id       	integer(16),
 primary key (mem_username, user_id),
 foreign key (mem_username) references Members(mem_username) ON DELETE CASCADE,
@@ -136,7 +142,7 @@ foreign key (user_id) references Profile(user_id) ON DELETE CASCADE
 );
 
 CREATE TABLE manage (
-admin_username	varchar(16) not null,
+admin_username	varchar(25) not null,
 user_id       	integer(16) not null,
 primary key (admin_username, user_id),
 foreign key (admin_username) references Administrator(admin_username) ON DELETE CASCADE,
