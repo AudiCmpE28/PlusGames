@@ -222,7 +222,7 @@ def sordbyalphabeticaldesc(connection, offset, per_page):
 	return read_query(connection,gamealphadesc)
 
 def sortbyplatform(connection,platform):
-    chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
+    chooseplatform = "SELECT game_n FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
     return read_query(connection,chooseplatform)
 
 # /** get url to display**/
@@ -249,6 +249,9 @@ def addcomment(connection, mem_username,game_id,text):
 def addreview(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
+
+
+
 
 ######################## Company, Game, Platform, Released on ##########
 

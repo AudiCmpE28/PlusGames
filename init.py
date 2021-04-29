@@ -94,7 +94,7 @@ def home():
          # type_sort_db=3
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'PC':
-         # type_sort_db=4
+         type_sort_db=4
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'Mobile':
          # type_sort_db=5
@@ -251,7 +251,7 @@ def game_list(page=1):
    elif type_sort_db == 3: # CONSOLE   
       VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 4: # PC
-      VideoGames=sortbyplatform(mysql.connection,platform)
+      VideoGames=sortbyplatform(mysql.connection, 'windows')
    elif type_sort_db == 5: # MOBILE
       VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 6: # HANDHELD
