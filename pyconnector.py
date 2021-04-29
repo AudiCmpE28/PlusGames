@@ -211,7 +211,13 @@ def sortbyplatform(connection,platform):
     chooseplatform = "SELECT * FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
     return read_query(connection,chooseplatform)
 
-
+# /** get url to display**/
+def get_url_from_cvs(game_id):
+    with open('static/csv/game_id_image.csv', encoding="utf8") as csv_file:
+        csvfile=csv.reader(csv_file,delimiter=',') 
+        for row in csvfile:
+            if str(game_id)==row[0]:
+                return row[1]  
 
 
 

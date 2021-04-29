@@ -256,22 +256,13 @@ def game_list(page=1):
    for search in gameID:
       image_url.append(get_url_from_cvs(search))
      
+   
 
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
    return render_template('game_list.html', games_list = VideoGames, images_g = image_url, gameId=gameID, pagination=pagination)
-
-
-
-# /** get url to display**/
-def get_url_from_cvs(game_id):
-    with open('static/csv/game_id_image.csv', encoding="utf8") as csv_file:
-        csvfile=csv.reader(csv_file,delimiter=',') 
-        for row in csvfile:
-            if str(game_id)==row[0]:
-                return row[1]  
 
 
 #***************************************************************************************
