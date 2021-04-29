@@ -1,3 +1,4 @@
+-- SJSU CMPE 138 Spring 2021 TEAM1
 -- Write more insert , delete queries which would be useful. 
 -- test and report any errors in a comment
 

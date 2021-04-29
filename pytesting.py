@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
+
 import mysql.connector
 import os
 from mysql.connector import Error

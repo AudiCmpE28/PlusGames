@@ -1,3 +1,4 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
 # $env:FLASK_APP = "init.py"    
 # $env:FLASK_ENV = "development"
 # python -m flask run    

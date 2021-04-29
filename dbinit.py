@@ -1,3 +1,5 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
+
 from flask_mysql_connector import MySQL
 from pyconnector import *
 def dbreinit(logger,connection,bool): #pass in mysql = MySQL(app) from init.py
