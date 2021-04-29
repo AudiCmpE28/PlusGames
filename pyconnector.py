@@ -71,6 +71,12 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 #     mycursor.executemany(query,all_value)
 #     connection.commit()
 
+def geturlfromcsv(game_id):
+    file=csv.reader('static/csv/game_id_image.csv','r',encoding="utf8") 
+    for row in file:
+        if game_id==row[0]:
+            return row[1]
+
 
 # use triple quotes if using multiline strings (i.e queries w/linebreaks)
 #Pass in connection and string query, commits or rollbacks changes depending on errors

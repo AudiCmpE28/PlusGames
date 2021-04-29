@@ -234,8 +234,8 @@ def game_list(page=1):
    elif type_sort_db == 7: # ARCADE
       VideoGames=sortbyplatform(mysql.connection,platform)
 
+
    #### Fetching the data from query ####
-   
    VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
    
    # keep track of the pages t cap at min and max
