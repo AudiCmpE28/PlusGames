@@ -18,7 +18,7 @@ import random
 import string
 import sys
 import math
-
+import base64
 import yaml
 from flask import (Flask, g, redirect, render_template, request, session,
                    url_for, Blueprint, escape)
@@ -30,7 +30,8 @@ from mysql.connector import Error
 from dbinit import *
 from pyconnector import *
 from flask_paginate import Pagination, get_page_parameter, get_page_args
-from cryptography.fernet import Fernet
+import hashlib
+import binascii
 
 db=yaml.safe_load(open('db.yaml'))
 #Create a db.yaml file in the base directory and put the following 4 lines in it. Add it to .gitignore so you keep your own independent config files.
@@ -124,17 +125,25 @@ def home():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    if request.method == "POST": ##gets info from form
-      mem_username=request.form.get('username')
-      mem_password= request.form.get('password')
-      getuser="SELECT * FROM Members WHERE mem_username='{}'".format(mem_username)
-      try:
-         database_cred=getlogin(mysql.connection, getuser)
-         if mem_username != database_cred[1] or mem_password != decryptpw[3]:
-            msg = 'Incorrect username or password'
-
-         
-      except:
-         logger.info("Login failed by %s",mem_username)
+      print(request.form.get('username'))
+      if request.form.get('username'):
+         mem_username=request.form.get('username')
+         mem_password= request.form.get('password')
+         print("this is the mem_password from form: ",end='')
+         print(mem_password)
+         try:
+            print('searching db for '+mem_username)
+            data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
+            print(data)
+            unhexlifypw= binascii.unhexlify(data)
+            verify(unhexlifypw,mem_password)
+            print('TEST')
+            return render_template('home.html')
+         except:
+            logger.debug("Login failed by %s",mem_username)
+            return render_template('login.html')
+      else:
+         return render_template('login.html')
    else:
       return render_template('login.html')
 
@@ -164,16 +173,17 @@ def signup():
       print(mem_username)
       print(mem_email)
       print(mem_password)
-      user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
-      member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}', sha1('{}'));".format(unique_id,mem_username,mem_email,mem_password)
+      encryptedpw=encryptpw(mem_password)
       try:
-         addmembers(mysql.connection,unique_id,mem_username,mem_email,mem_password)
-         return render_template('signup.html')
+         print('Adding to database password: '+mem_password)
+         print('As :', end='')
+         print(encryptedpw)
+         addmembers(mysql.connection,unique_id,mem_username,mem_email,encryptedpw)
+         #authenticate/create session here?
+         return render_template('login.html')
       except:
          return -1
    return render_template('signup.html')
-
-
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ request page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
