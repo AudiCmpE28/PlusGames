@@ -20,7 +20,7 @@ import math
 
 import yaml
 from flask import (Flask, g, redirect, render_template, request, session,
-                   url_for, Blueprint)
+                   url_for, Blueprint, escape)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
 # from flask_login import (LoginManager, logout_user, logout_user, 
@@ -198,8 +198,9 @@ def game_list(page=1):
    global offset
    global page_track
    global type_sort_db
-   per_page = 10
-   
+   per_page = 30
+
+
    # when front or back button pressed, activates POST
    # we use value and type thru here
    if request.method == 'POST':
@@ -240,13 +241,36 @@ def game_list(page=1):
    
    # keep track of the pages t cap at min and max
    page_track = math.ceil(len(VideoGames)) 
+
+
+   image_url = []
+   gameID = []
+
+   for games_na in VideoGames:
+      games_num=game_ids_with_name(mysql.connection, games_na)
+      gameID.append(str(games_num))
+      
+   gameID=[x[2:-3] for x in gameID]
+
+   for search in gameID:
+      image_url.append(get_url_from_cvs(search))
+     
+
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
-   return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
+   return render_template('game_list.html', games_list = VideoGames, images_g = image_url, gameId=gameID, pagination=pagination)
 
 
+
+# /** get url to display**/
+def get_url_from_cvs(game_id):
+    with open('static/csv/game_id_image.csv', encoding="utf8") as csv_file:
+        csvfile=csv.reader(csv_file,delimiter=',') 
+        for row in csvfile:
+            if str(game_id)==row[0]:
+                return row[1]  
 
 
 #***************************************************************************************

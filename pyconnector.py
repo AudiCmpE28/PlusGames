@@ -210,6 +210,14 @@ def sortbyplatform(connection,platform):
     return read_query(connection,chooseplatform)
 
 
+
+
+
+def game_ids_with_name(connection, games_name):
+	gamealpha = "SELECT game_id FROM Game WHERE Game.game_n = '{}';".format(games_name) 
+	return read_query(connection,gamealpha)
+
+
 def addcomment(connection, mem_username,game_id,text):
     insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
