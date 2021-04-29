@@ -22,19 +22,44 @@
 
             <!-- Image -->
             <div class="game_image">
-
-
+                <img class="image_adjust" src="/static/images/GenshinImpact.png">
             </div>
 
 
             <!-- game information -->
-            <div class="information"></div>
+            <div class="information">
+                <div class="info_box">
+                    <div class="title_placements">Rating: </div>
+                    <!-- <div class="incoming_data">{{db}}</div> -->
+
+                    <div style="padding: 5px"></div>
+                    <div class="title_placements">Published Year: </div>
+
+                    <div style="padding: 5px"></div>
+                    <div class="title_placements">Company: </div>
+
+                    <div style="padding: 5px"></div>
+                    <div class="title_placements">Genre: </div>
+
+                    <div style="padding: 5px"></div>
+                    <div class="title_placements">Summary: </div>
+
+                    <div style="padding: 5px"></div>
+                    <div class="title_placements">Comments: </div>
+
+                </div>
+
+            </div>
+            
 
             <!-- comment box -->
-            <div class="comments"></div>
+            <div class="comments">
+                <textarea placeholder="Enter your Comment..." class="comment_box"  name="comment"></textarea>     
+                <button class="submit_button" type="button" onclick="">Submit</button>
+            </div>
 
 
-            
+
             <a href="{{ url_for('home') }}">
                 <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick="" />
             </a>
