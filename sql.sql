@@ -1,3 +1,5 @@
+-- SJSU CMPE 138 Spring 2021 TEAM1
+
 drop database if exists `+games`;
 create database `+games`;
 use `+games`;
