@@ -184,6 +184,7 @@
   border: none;
   background-repeat: no-repeat;
   cursor: pointer;
+  outline: 0;
 }
 
 

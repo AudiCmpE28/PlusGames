@@ -9,14 +9,11 @@
 </head>
 
 
-
 <!-- Body of Page -->
-
 <body style="background-color: #8c8c8c">
-  <!-- #222222 -->
 
 
-
+<!-- GameList -->
   <center>
     <div class="middle_box">
       <div class="blue_bar"></div>
@@ -28,17 +25,21 @@
       <h2 class="Game-Gallery-Title"> Game Gallery </h2>
 
       <!-- Video Game Grid -->
-      {% for games, url in games_list %}
+      {% for games, url, id in games_list %}
       <div class="gallery-grid">
-        <figure class="gallery-frame">
+
+        <form method="POST">
+          <input class="gallery-frame" type="submit" name="submit_button" id="submit_button" value="{{id}}">
           <img class="gallery-img" src="{{ url }}" alt="Game Images" title="covers">
-          <figcaption class="grid_name">{{games}}</figcaption>
-        </figure>
+          <a class="grid_name">{{games}}</a>
+          </input>
+        </form>
+
       </div>
+
+
       <div class="game_divider"></div>
       {% endfor %}
-
-
 
 
       <div class="bottom_layout">
@@ -53,10 +54,7 @@
 
   </center>
 
-
 </body>
-
-
 
 
 </html>

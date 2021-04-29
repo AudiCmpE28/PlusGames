@@ -189,8 +189,8 @@ def sortbygenre(connection,genre):
     return returncolumns(connection,gamegenre)
 
 
-def sortbypopularity2nd(connection, offset, per_page):
-    gamequery="SELECT game_n FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
+def sortbypopularity_rating(connection, offset, per_page):
+    gamequery="SELECT rating FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
     return read_query(connection,gamequery)
 
 def sortbypopularity(connection, offset, per_page):

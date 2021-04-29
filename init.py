@@ -62,6 +62,7 @@ resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 offset=0             # for pages
 page_track=1         # page counter configuration
 type_sort_db=0       # variable used in homepage to pick sort query
+Game_identification_number=0
 #-------------------------------------------------------------------------------
 
 
@@ -77,7 +78,7 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
-
+   global Game_identification_number
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db=0
@@ -187,7 +188,11 @@ def request_page():
 #**************************************************************************************
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
-   return render_template('game_page.html')
+   global Game_identification_number
+
+   
+
+   return render_template('game_page.html', ID=Game_identification_number)
 
 
 
@@ -199,6 +204,7 @@ def game_list(page=1):
    global offset
    global page_track
    global type_sort_db
+   global Game_identification_number
    per_page = 30
 
 
@@ -213,17 +219,20 @@ def game_list(page=1):
             offset-=1
          else:
             offset=0
+      else:
+         Game_identification_number=request.form.get('submit_button')
+         return redirect(url_for('game_page'))
+         
 
-   #establish connection with MySQL
-   # gamesL=mysql.connection.cursor() 
-   #We already have one, mysql @ line 48
-   
+      
+      # Game_identification_number=request.form.get('game_page')
+      
    if type_sort_db == 0: #POPULAR   
       VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
    elif type_sort_db == 1: # A to Z (ASCE)
-      VideoGames=sortbyalphabetical(mysql.connection, offset, per_page)
+      VideoGames=sortbyalphabetical(mysql.connection, offset*30, per_page)
    elif type_sort_db == 2: # Z to A (DESC)
-      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset, per_page)
+      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page)
 
    elif type_sort_db == 3: # CONSOLE   
       VideoGames=sortbyplatform(mysql.connection,platform)
@@ -256,15 +265,13 @@ def game_list(page=1):
    for search in gameID:
       image_url.append(get_url_from_cvs(search))
      
-   
-
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
-   return render_template('game_list.html', games_list = zip(VideoGames, image_url), pagination=pagination)
+   return render_template('game_list.html', games_list = zip(VideoGames, image_url, gameID), pagination=pagination)
 
-   # return render_template('game_list.html', games_list = VideoGames, images_g = image_url, gameId=gameID, pagination=pagination)
+   # return render_template('game_list.html', games_list = zip(VideoGames, image_url, extra_info), pagination=pagination)
 
 
 #***************************************************************************************
