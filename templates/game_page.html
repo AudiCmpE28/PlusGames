@@ -3,7 +3,7 @@
 
 <head>
     <title>Game Page</title>
-    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
+    <link rel="icon" href="/static/images/NES_icon.png" type="image/x-icon">
     <link href="/static/css/game_page.css" type="text/css" rel="stylesheet" />
 </head>
 
@@ -11,45 +11,35 @@
 <body style="background-color: #222222">
 
 
-
-<!-- Game Page Box -->
-<center>
-    <div class="medium_box">
-        <h1 class="title_game_page">Game Page</h1>
-        <div class="Blue_Line">
-        </div>
-        <div class="Green_Line">
-        </div>
-
-        <div class="images">
-            <div class="parent_image">
-            <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" width="200" height="300" class="image_position1"></div>
-        </div>
-
-        <!-- <div class="smoll_box">
-            <h2 class="title_sub">[Game Title Here]</h2>
-            <div class="boxPlacement">
-                
-                <label for="email" class="box_titles"><b>Test:</b></label><br>
-                <input type="email" id="email" class="box_decorations" placeholder="Enter Your Email" name="email" required/><br>
-
-                <div class="spacing"></div>
-
-                <label for="password" class="box_titles"><b>Password:</b></label><br>
-                <input type="password" minlength="8" title="At least 8 upper and lowercase alphanumeric characters and symbols" pattern="^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,}$" id="password"  class="box_decorations" placeholder="Enter Your Password" name="password" required/><br>
+    <!-- Game Page Box -->
+    <center>
+        <div class="medium_box">
+            <h1 class="title_game_page">Game Title</h1>
+            <div class="Blue_Line">
+            </div>
+            <div class="Green_Line">
             </div>
 
-            <a href="{{ url_for('signup') }}">
-                <button class="signup_redirect" type="button" onclick="">Not a member? Sign Up</button>
-            </a>
+            <!-- Image -->
+            <div class="game_image">
 
-            <button class="login_button" type="button" onclick="">Login</button>
-        </div> -->
-        <a href="{{ url_for('home') }}">
-            <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
-        </a>
-    </div>
-</center>
+
+            </div>
+
+
+            <!-- game information -->
+            <div class="information"></div>
+
+            <!-- comment box -->
+            <div class="comments"></div>
+
+
+            
+            <a href="{{ url_for('home') }}">
+                <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick="" />
+            </a>
+        </div>
+    </center>
 
 
 </html>

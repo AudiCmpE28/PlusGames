@@ -6,8 +6,8 @@
 }
 
 .Green_Line {
-  width: 680px;
-  height: 17px;
+  width: 1000px;
+  height: 14px;
   background: rgba(140,255,138,1);
   opacity: 1;
   position: relative;
@@ -15,8 +15,8 @@
 }
 
 .Blue_Line {
-  width: 680px;
-  height: 17px;
+  width: 1000px;
+  height: 14px;
   background: rgba(135,255,240,1);
   opacity: 1;
   position: relative;
@@ -34,22 +34,66 @@
 }
 
 .medium_box{
-  top: 5px;
-  width: 700px;
-  height: 741px;
+  top: 2px;
+  width: 1000px;
+  height: 900px;
   background: #333;
   opacity: 1;
   position: relative;
+
 }
 
-.smoll_box{
-  top: 20px;
-  width: 410px;
-  height: 500px;
+/* boexs for contents */
+.game_image{
+  top: 170px;
+  left: 45px;
+  width: 450px;
+  height: 450px;
   background: rgba(255,255,255,0.47999998927116394);
   opacity: 1;
-  position: relative;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
 }
+
+.information{
+  top: 170px;
+  right: 45px;
+  width: 400px;
+  height: 700px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+
+.comments{
+  bottom: 70px;
+  width: 450px;
+  height: 165px;
+  left: 45px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+
 
 .title_sub{
   color:whitesmoke;
@@ -140,7 +184,7 @@ input{
 .back_home{
   position:absolute;
   bottom: 15px;
-  left: 10px;
+  left: 215px;
   width: 95px;
   height: 40px;
   background-color: transparent;

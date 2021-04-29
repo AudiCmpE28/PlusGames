@@ -111,11 +111,13 @@
     <div class="dropdown">
       <button class="text" disabled>Platform</button>
       <div class="dropdown_content">
-        <a href="#">Console</a>
-        <a href="#">PC</a>
-        <a href="#">Mobile</a>
-        <a href="#">Handheld</a>
-        <a href="#">Arcade</a>
+        <form method="POST">
+          <a><input type="submit" name="sort" value="Console" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="PC" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Mobile" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Handheld" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Arcade" class="redirect_buttons"></input></a>
+      </form>
       </div>
     </div>
 

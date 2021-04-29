@@ -52,21 +52,23 @@ mysql = MySQL(app)
 # login_manager.login_view = 'auth.login'
 # login_manager.init_app(app)
 
-######################
+#------------------------------------------------------------------------------
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
 resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
-######################
-
-###################
-offset=0       # for pages
-page_track=1
-type_sort_db=0
-###################
+##########################################################################
+offset=0             # for pages
+page_track=1         # page counter configuration
+type_sort_db=0       # variable used in homepage to pick sort query
+#-------------------------------------------------------------------------------
 
 
-#### Homepage HTML ####
+#**************************************************************************************
+#***************************************************************************************
+#    <<<<<<<<<<<<<<<<<<<<< #### Homepage HTML #### >>>>>>>>>>>>>>>>>>>>>>>>
+#**************************************************************************************
+#**************************************************************************************
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
@@ -85,8 +87,22 @@ def home():
       elif request.form['sort'] == 'Z to A':
          type_sort_db=2
          return redirect(url_for('game_list'))
-      else:
-         pass
+      elif request.form['sort'] == 'Console':
+         # type_sort_db=3
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'PC':
+         # type_sort_db=4
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Mobile':
+         # type_sort_db=5
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Handheld':
+         # type_sort_db=6
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Arcade':
+         # type_sort_db=7
+         return redirect(url_for('game_list'))
+
    ################################
    dbreinit(logger,mysql.connection,resetflag)
    parse_steam_game_csv(mysql.connection, resetflagcsv)
@@ -99,9 +115,10 @@ def home():
    return render_template('home.html')
    
 
-#########################
-#### Login HTML ####
-#########################
+
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Login HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    if request.method == "POST": ##gets info from form
@@ -119,7 +136,10 @@ def login():
    else:
       return render_template('login.html')
 
-#### Logout ####
+
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Logout HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/logout', methods=['GET', 'POST'])
 # @login_required
 def logout():
@@ -128,9 +148,10 @@ def logout():
    return render_template('home.html')
 
 
-#########################
-#### sign up HTML ####
-#########################
+
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ sign up HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/signup', methods=['GET','POST'])
 def signup():
    if request.method=='POST':
@@ -151,25 +172,27 @@ def signup():
    return render_template('signup.html')
 
 
-###########################
-#### request page HTML ####
-###########################
+
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ request page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    return render_template('request_page.html')
 
-#########################
-#### Game page HTML ####
-#########################
+
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Game page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
    return render_template('game_page.html')
 
 
 
-#########################
-#### Game List HTML ####
-#########################
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Game List HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/game_list', methods=['GET', 'POST'])
 def game_list(page=1):
    global offset
@@ -177,6 +200,8 @@ def game_list(page=1):
    global type_sort_db
    per_page = 10
    
+   # when front or back button pressed, activates POST
+   # we use value and type thru here
    if request.method == 'POST':
       if request.form['submit_button'] == 'Forward':
          if(offset < (page_track-1)):
@@ -185,37 +210,48 @@ def game_list(page=1):
          if(offset > 0):
             offset-=1
          else:
-            offset=0   
-   elif request.method == 'GET':
-      offset = 0
-      
-   gamesL=mysql.connection.cursor()
+            offset=0
+
+   #establish connection with MySQL
+   gamesL=mysql.connection.cursor() 
    
    if type_sort_db == 0: #POPULAR   
-      gamesL.execute(sortbypopularity(mysql.connection, offset, per_page)) #offset*10
+      gamesL.execute(sortbypopularity(mysql.connection, offset, per_page)) # offset*10
    elif type_sort_db == 1: # A to Z (ASCE)
       gamesL.execute(sortbyalphabetical(mysql.connection, offset, per_page))
    elif type_sort_db == 2: # Z to A (DESC)
       gamesL.execute(sordbyalphabeticaldesc(mysql.connection, offset, per_page))
+
+   elif type_sort_db == 3: # CONSOLE   
+      gamesL.execute(sortbyplatform(mysql.connection,platform))
+   elif type_sort_db == 4: # PC
+      gamesL.execute(sortbyplatform(mysql.connection,platform))
+   elif type_sort_db == 5: # MOBILE
+      gamesL.execute(sortbyplatform(mysql.connection,platform))
+   elif type_sort_db == 6: # HANDHELD
+      gamesL.execute(sortbyplatform(mysql.connection,platform))
+   elif type_sort_db == 7: # ARCADE
+      gamesL.execute(sortbyplatform(mysql.connection,platform))
+
+   #### Fetching the data from query ####
    VideoGames=gamesL.fetchall()
    VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
    gamesL.close()
    
-
-   
+   # keep track of the pages t cap at min and max
    page_track = math.ceil(len(VideoGames)/10) 
+   #pagination assists in orgaizing pages and contents per page
+   pagination = Pagination(page=page, per_page=per_page, format_number=True, 
+                           total=len(VideoGames), record_name='Video Games') 
 
-   pagination = Pagination(page=page, 
-                           per_page=per_page, 
-                           format_number=True, 
-                           total=len(VideoGames), 
-                           record_name='Video Games')
    return render_template('game_list.html', games_list = VideoGames, pagination=pagination)
 
 
-#########################games_list = VideoGames, extras= extra_info,
-#### Profile HTML ####
-#########################
+
+
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Profile HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
 @app.route('/profile', methods=['GET', 'POST'])
 # @login_required
 def profile():
