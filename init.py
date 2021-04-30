@@ -79,7 +79,7 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
-   global Game_identification_number
+
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db=0
@@ -94,17 +94,9 @@ def home():
          # type_sort_db=3
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'PC':
-         type_sort_db=4
+         type_sort_db=0
          return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'Mobile':
-         # type_sort_db=5
-         return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'Handheld':
-         # type_sort_db=6
-         return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'Arcade':
-         # type_sort_db=7
-         return redirect(url_for('game_list'))
+
 
    ################################
    dbreinit(logger,mysql.connection,resetflag)
@@ -200,12 +192,8 @@ def request_page():
 def game_page():
    global Game_identification_number
    game_i=[]
-
-   game_info=game_information(mysql.connection, Game_identification_number)
-
-   
+   game_info=game_information(mysql.connection, Game_identification_number)   
    game_i.append(get_url_from_cvs(Game_identification_number))
-
    return render_template('game_page.html', game_page=game_info, game_image=game_i)
 
 
@@ -221,7 +209,6 @@ def game_list(page=1):
    global Game_identification_number
    per_page = 30
 
-
    # when front or back button pressed, activates POST
    # we use value and type thru here
    if request.method == 'POST':
@@ -236,10 +223,6 @@ def game_list(page=1):
       else:
          Game_identification_number=request.form.get('submit_button')
          return redirect(url_for('game_page'))
-         
-
-      
-      # Game_identification_number=request.form.get('game_page')
       
    if type_sort_db == 0: #POPULAR   
       VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
@@ -247,11 +230,10 @@ def game_list(page=1):
       VideoGames=sortbyalphabetical(mysql.connection, offset*30, per_page)
    elif type_sort_db == 2: # Z to A (DESC)
       VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page)
-
    elif type_sort_db == 3: # CONSOLE   
       VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 4: # PC
-      VideoGames=sortbyplatform(mysql.connection, 'windows')
+      VideoGames=sortbyplatform(mysql.connection,'windows')
    elif type_sort_db == 5: # MOBILE
       VideoGames=sortbyplatform(mysql.connection,platform)
    elif type_sort_db == 6: # HANDHELD
@@ -265,7 +247,6 @@ def game_list(page=1):
    
    # keep track of the pages t cap at min and max
    page_track = math.ceil(len(VideoGames)) 
-
 
    image_url = []
    gameID = []
@@ -284,8 +265,6 @@ def game_list(page=1):
                            total=len(VideoGames), record_name='Video Games') 
 
    return render_template('game_list.html', games_list = zip(VideoGames, image_url, gameID), pagination=pagination)
-
-   # return render_template('game_list.html', games_list = zip(VideoGames, image_url, extra_info), pagination=pagination)
 
 
 #***************************************************************************************
