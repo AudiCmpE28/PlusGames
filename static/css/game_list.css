@@ -37,6 +37,8 @@
   background-color: deepskyblue;
   width: 740px;
   height: 2px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 /*Game List Box*/
@@ -55,27 +57,31 @@
   font-family: Roboto;
   font-size: 24px;
   position: relative;
+  
 }
 
 /*~~Video Games Grid~~*/
 .gallery-grid {
+  position: relative;
   display: grid;
-  grid-template-rows: repeat(auto-fit, 200px); /*minmax(250px, 1fr) for flux*/
+  grid-template-rows: repeat(auto-fit, 130px); /*minmax(250px, 1fr) for flux*/
   grid-gap: 0.5rem;
-  justify-items: left;
   margin: 0;
   padding: 0;
+  justify-items: center;
 }
 
 /* The Picture Frame */
 .gallery-frame {
   padding: 0.5rem;
   font-size: 1.2rem;
-  text-align: left;
-  width: 900px;
-  height: 160px;
+  width: 700px;
+  height: 120px;
   color: #d9d9d9;
-
+  background-color: transparent;
+  border: none;
+  color: transparent;
+  outline: 0;
 }
 
 .gallery-frame:hover {
@@ -83,11 +89,23 @@
 }
 
 .grid_name{
-  position: relative;
-  left: 400px;
-  bottom: 120px;
+  position: absolute;
+  top: 15px;
+  left: 370px;
+  object-fit: cover;
   font-size: 35px;
-  word-wrap: break-word;
+  width: 500px;
+  overflow-wrap: break-word;
+}
+/* The Images */
+.gallery-img {
+  top: 15px;
+  height: 90px;
+  width: auto;
+  object-fit: cover;
+  transition: opacity 0.25s ease-in-out;
+  position: absolute;
+  left: 160px;
 }
 
 
@@ -101,13 +119,6 @@
 }
 
 
-/* The Images */
-.gallery-img {
-  height: 150px;
-  width: auto;
-  object-fit: cover;
-  transition: opacity 0.25s ease-in-out;
-}
 
 
 

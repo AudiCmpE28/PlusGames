@@ -13,41 +13,57 @@
     <!-- Game Page Box -->
     <center>
         <div class="medium_box">
-            <h1 class="title_game_page">Game Title</h1>
+            {% for info in game_page %} 
+            <h1 class="title_game_page">{{info[2]}}</h1>
+            {% endfor %}
             <div class="Blue_Line">
             </div>
             <div class="Green_Line">
             </div>
 
             <!-- Image -->
-            <div class="game_image">
-                <img class="image_adjust" src="/static/images/GenshinImpact.png">
+            <div class="game_image_setup">
+                {% for picture in game_image %}
+                <img class="image_adjust" src="{{ picture }}" alt="Game Images" title="covers">
+                <img class="image_back" src="/static/images/back_image.jpg" alt="symbol image" title="symbol image">
+                {% endfor %}
             </div>
-
+            
             <!-- game information -->
             <div class="information">
                 <div class="info_box">
+                    {% for info in game_page %}    
                     <div class="title_placements">Rating: </div>
-                    <!-- <div class="incoming_data">{{db}}</div> -->
+                    <div class="incoming_data">{{info[4]}}</div>
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Published Year: </div>
+                    <div class="incoming_data">{{info[5]}}</div>
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Company: </div>
+                    <div class="incoming_data">{{info[2]}}</div>
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Genre: </div>
+                    <div class="incoming_data">{{info[3]}}</div>
+
+                    <div style="padding: 5px"></div>
+                    <div class="title_placements">Price Estimate: </div>
+                    <div class="incoming_data">${{info[6]}} (US Currency)</div>
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Summary: </div>
 
+
+
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Comments: </div>
+                    {% endfor %}
                 </div>
             </div>
             
-
+            
             <!-- comment box -->
             <div class="comments">
                 <textarea placeholder="Enter your Comment..." class="comment_box"  name="comment"></textarea>     
