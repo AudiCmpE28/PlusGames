@@ -73,6 +73,10 @@ Game_identification_number=0
 #**************************************************************************************
 #**************************************************************************************
 @app.route('/')
+def homepage():
+   return redirect(url_for('home'))
+
+
 @app.route('/home', methods=['GET', 'POST'])
 def home():
    global resetflag
