@@ -58,7 +58,7 @@ mysql = MySQL(app)
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
-resetflagcsv=1       # Set to 1 if you want to reimport the csv to database
+resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
 page_track=1         # page counter configuration
@@ -79,7 +79,7 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
-   global Game_identification_number
+   
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db=0
