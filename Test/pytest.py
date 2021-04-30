@@ -1,3 +1,4 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd

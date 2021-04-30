@@ -1,3 +1,4 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
 ## Run on terminal
 
 pip install mysql-connector-python
