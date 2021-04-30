@@ -147,7 +147,7 @@ def addmembers(connection, unique_id, mem_username, mem_email,mem_password):
     if(unique_id==0):
         unique_id=random.randint(6,999999)
     if mem_email == "" or mem_username =="" or mem_password == "":
-        raise err
+        raise 'invalid'
     user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
     member_query= "insert into `Members` (`unique_id`, `mem_username`, `mem_email`, `mem_password`) values ({},'{}','{}','{}');".format(unique_id,mem_username,mem_email,mem_password)
     try: #This will fail the whole query and prevent a member being added to an already existing unique_id. Even though execute_query has a try/except, we need another try here to make sure we stop if the 1st exec fails
