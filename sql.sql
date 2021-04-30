@@ -51,13 +51,7 @@ primary key (unique_id),
 foreign key (unique_id) references Users(unique_id)
 on update cascade on delete cascade
 );
-drop table if exists report_on;
-drop table if exists bookmarked;
-drop table if exists interact_with;
-drop table if exists review_on;
-drop table if exists comment_on;
-drop table if exists request_game;
-drop table if exists members;
+
 create table Members (
 unique_id	integer(16)not null,
 mem_username	varchar(25)not null,

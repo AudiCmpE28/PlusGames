@@ -5,13 +5,13 @@
 import logging
 logger = logging.getLogger('TxLog')
 logger.setLevel(logging.DEBUG)
-logger.info('Logger config message')
+logger.debug('Logger config message')
 fhandler = logging.FileHandler(filename='logfile.log', mode='a')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
 logger.addHandler(fhandler)
-#logger.debug('Debugging to file')
+logger.debug('Debugging to file')
 
 import os
 import random
@@ -83,7 +83,11 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
+<<<<<<< HEAD
+   
+=======
 
+>>>>>>> d8e4d3defc5dab6d4e4fc422e6261d0b0e2ad828
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db=0
