@@ -79,11 +79,6 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
-<<<<<<< HEAD
-   
-=======
-
->>>>>>> d8e4d3defc5dab6d4e4fc422e6261d0b0e2ad828
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db=0
