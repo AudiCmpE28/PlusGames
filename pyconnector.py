@@ -9,46 +9,42 @@ import logging
 import csv
 import MySQLdb
 import os
-logger = logging.getLogger('TLog')
-logger.setLevel(logging.DEBUG)
-logger.debug('Logger config message')
+logger2 = logging.getLogger('TLog')
+logger2.setLevel(logging.DEBUG)
+logger2.debug('logger2 config message')
 fhandler = logging.FileHandler(filename='logfile2.log', mode='a')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
-logger.addHandler(fhandler)
+logger2.addHandler(fhandler)
 import hashlib
 import binascii
 def encryptpw(password):
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
     pwdhash = hashlib.pbkdf2_hmac('sha512',password.encode('utf-8'),salt, 100000)
     pwdhash = binascii.hexlify(pwdhash)
-    print("in encryptpw function encrypting ")
-    print(password)
-    print("as")
-    print(pwdhash)
+    # print("in encryptpw function encrypting ")
+    # print(password)
+    # print("as")
+    # print(pwdhash)
     return (salt + pwdhash).decode('ascii') #This is what you store in db
 
 def verify(encrypted,password):
     password=password
     salt = encrypted[:64]
     encrypted = encrypted[64:]
-    print("in verify function encrypted pass got was ",end='')
+    #print("in verify function encrypted pass got was ",end='')
     print(encrypted)
-    print("in verify function encr "+password+" as: ",end='')
+    #print("in verify function encr "+password+" as: ",end='')
     pwdhash = hashlib.pbkdf2_hmac('sha512', password.encode('utf-8'),salt.encode('ascii'),100000)
-    print(pwdhash)
+    #print(pwdhash)
     pwdhash = binascii.hexlify(pwdhash).decode('ascii')
-    print('hexlified in verify is: '+pwdhash)
+    #print('hexlified in verify is: '+pwdhash)
     if pwdhash == encrypted:
-        print("IT IS CORRECT")
         return 1
     else:
-        print("NO IT AINT RETARD")
         return 0
 
-# a=encryptpw("QWE!@#123qwe")
-# print(a)
 
 #-----------------
 #Building blocks
@@ -69,7 +65,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         print("MySQL Database connection successful")
     except Error as err:
         print(f"Error: '{err}'")
-        logger.debug('Db connection err')
+        logger2.debug('Db connection err')
     return connection
 
 # #csv file parser
@@ -108,14 +104,14 @@ def execute_query(connection, query):
         #print("Query successful")
         connection.commit()
         cursor.close()
-        logger.debug('Commit: '+query)
+        logger2.debug('Commit: '+query)
 
     except Error as err:
         print(f"Error: '{err}'")
         #Rollback changes due to errors
         connection.rollback()
         cursor.close()
-        logger.debug('Rollback: '+query)
+        logger2.debug('Rollback: '+query)
         raise err
 
 
@@ -127,12 +123,12 @@ def read_query(connection, query):
         cursor.execute(query)
         result = cursor.fetchall()
         cursor.close()
-        logger.debug('Fetching: '+query)
+        logger2.debug('Fetching: '+query)
         return result
     except Error as err:
         print(f"Error: '{err}'")
         cursor.close()
-        logger.debug('Badfetch: '+query)
+        logger2.debug('Badfetch: '+query)
 
 #for testing purposes, returns a string of size length 
 def randomstring(length):
@@ -166,6 +162,9 @@ def getlogin(connection, mem_username):
 def addadmins(connection, unique_id, admin_username, admin_email, admin_password): 
     user_query ="insert into `Users` (`unique_id`) values ({});".format(unique_id)
     adm_query="INSERT INTO administrator (unique_id, admin_username, admin_email, admin_password) VALUES({},'{}','{}','{}');".format(unique_id,admin_username,admin_email,admin_password)
+    if(unique_id >6):
+        logger2.info("Too many admins or UID taken")
+        exit
     try:
         execute_query(connection,user_query)
         execute_query(connection,adm_query)
@@ -257,10 +256,16 @@ def retrievereviews(connection,game_id):
 #removal queries
 
 def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
-    query="DELETE FROM `+games`.`review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)
+    query="DELETE FROM `review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)
     execute_query(connection,query)
 
+def removegame(connection,game_id):
+    query="DELETE from `games` WHERE game_id ={};".format(game_id)
+    execute_query(connection,game_id)
 
+def removeuser(connection,game_id):
+    query="DELETE from `users` WHERE game_id ={};".format(unique_id)
+    execute_query(connection,game_id)
 
 ######################## Company, Game, Platform, Released on ##########
 
@@ -283,7 +288,7 @@ def addreleasedon(connection,game_id,platform):
 #csv file parser
 def parse_steam_game_csv(connection,reset):
     if reset==0:
-        logger.info("CSV to db deferred")
+        logger2.info("CSV to db deferred")
         return 0
     with open('static/csv/steam_game.csv',encoding="utf8")as csv_file:
         csvfile = csv.reader(csv_file,delimiter =',')

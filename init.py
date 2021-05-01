@@ -3,10 +3,10 @@
 # $env:FLASK_ENV = "development"
 # python -m flask run    
 import logging
-logger = logging.getLogger('TxLog')
+logger = logging.getLogger('initLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
-fhandler = logging.FileHandler(filename='logfile.log', mode='a')
+fhandler = logging.FileHandler(filename='logfile.log', mode='a',encoding='utf-8')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
@@ -68,7 +68,7 @@ global resetflagcsv  #
 resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
-page_track=1         # page counter configuration
+page_track=0         # page counter configuration
 type_sort_db=0       # variable used in homepage to pick sort query
 Game_identification_number=0
 #-------------------------------------------------------------------------------
@@ -93,6 +93,7 @@ def homepage():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+   logger.info("Entered /home")
    global resetflag
    global resetflagcsv
    global offset
@@ -145,6 +146,30 @@ def home():
 #**************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+<<<<<<< HEAD
+   if request.method == "POST":
+      mem_username=request.form.get('username')
+      mem_password= request.form.get('password')
+      
+      cur= mysql.connection.cursor()
+      cur.execute("SELECT * FROM members WHERE username=%s AND password=%s")
+      # fetch all results and return
+      members= cur.fetchall()
+      
+      # if len(members) > 0:
+      #    if(bcyrpt.check_haspw(mem_password, members('password').encode('utf-8')) == members('password').encode('utf-8'):
+      #       session('username') = mem_username('username')
+      #       session('password') = user('password')
+      #       msg = 'you logged in'
+      #       return render_template('profile.html')
+      #    else:
+      #       msg = 'Invalid username or password'
+      #       return render_template('login.html')
+         # creating a session to be accessed in other routes
+         # session('username') = members('username')
+      cur.close()
+      return render_template('profile.html')
+=======
    error = None
    if request.method == "POST": 
       print(request.form.get('username'))
@@ -163,7 +188,7 @@ def login():
             unhexlifypw= binascii.unhexlify(truncated)
             print(truncated)
             verify(truncated,mem_password)
-            print('Success!')
+            logger.info("Login verification by %s",mem_username)
             return redirect(url_for('profile'))
 
          except:
@@ -214,6 +239,7 @@ def admin_login():
          # session['logged_in'] = True
          flash("You're logged in!")
          return render_template("profile.html")
+>>>>>>> ac08f0074f452e862876f43c3baf07bbf6f9c133
    else:
       return render_template("login.html", error= error)
 
@@ -338,11 +364,13 @@ def game_list(page=1):
    for games_na in VideoGames:
       games_num=game_ids_with_name(mysql.connection, games_na)
       gameID.append(str(games_num))
-      
+      print(games_na+':'+str(games_num))
+   print('...')
    gameID=[x[2:-3] for x in gameID]
-
+ 
    for search in gameID:
       image_url.append(get_url_from_cvs(search))
+      print(search)
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
