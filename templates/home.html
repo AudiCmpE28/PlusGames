@@ -19,48 +19,78 @@
     </div>
 
     <!-- Video Game Grid -->
+    
     <div class="gallery-grid">
+
+      <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="123455">
+        <input src="/static/images/ApexLegends.jpg" type="image" class="gallery-img">
         <figcaption>Apex Legends</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/rocketLeague.jpg" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="420420">
+        <input src="/static/images/rocketLeague.jpg" type="image" class="gallery-img">
         <figcaption>Rocket League</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/GenshinImpact.png" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="696969">
+        <input src="/static/images/GenshinImpact.png" type="image" class="gallery-img">
         <figcaption>Genshin Impact</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/mariopart8.png" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="980123">
+        <input src="/static/images/mariopart8.png" type="image" class="gallery-img">
         <figcaption>Mario Party 8</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/BlackDessert.jpg" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="024024">
+        <input src="/static/images/BlackDessert.jpg" type="image" class="gallery-img">
         <figcaption>Black Desert Online</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/overwatch.jpg" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="181997">
+        <input src="/static/images/overwatch.jpg" type="image" class="gallery-img">
         <figcaption>Overwatch</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/amogus.jpg" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="454548">
+        <input src="/static/images/amogus.jpg" type="image" class="gallery-img">
         <figcaption>Among Us</figcaption>
       </figure>
+    </form>
 
+    <form method="POST">
       <figure class="gallery-frame">
-        <img class="gallery-img" src="/static/images/fifa21.jpg" alt="symbol image" title="symbol image">
+        <input type="hidden" name="sort" value="351942">
+        <input src="/static/images/fifa21.jpg" type="image" class="gallery-img">
         <figcaption>FIFA 21</figcaption>
       </figure>
-    </div><!-- end:gallery-grid -->
-  </div>
+    </form>
+
+
+    </div>
+  
+<!-- end:gallery-grid -->
+
 
 
 
@@ -82,16 +112,20 @@
     <div class="dropdown">
       <button class="text" disabled>Genre</button>
       <div class="dropdown_content">
-        <a href="#">Action games</a>
-        <a href="#">Action-adventure games</a>
-        <a href="#">Adventure games</a>
-        <a href="#">Role-playing games</a>
-        <a href="#">Simulation games</a>
-        <a href="#">Strategy games</a>
-        <a href="#">Sports games</a>
-        <a href="#">Puzzle games</a>
-        <a href="#">Idle games</a>
-        <a href="#">Sandbox/ Open world</a>
+        <form method="POST">
+          <a><input type="submit" name="sort" value="Action" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Adventure" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Strategy" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="RPG" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Casual" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Indie" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Simulation" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Violent" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Racing" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Sports" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Education" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Massively Multiplayer" class="redirect_buttons"></input></a>
+        </form>
       </div>
     </div>
 

@@ -71,6 +71,7 @@
   max-height: 100%;
   display: block;
   z-index: 1;
+  top: 22%;
 }
 
 .image_back{
@@ -100,7 +101,8 @@
 .info_box{
   height: 699px;
   width: 399px; 
-  background: teal;
+  background: black;
+  opacity: 74%;
   font-size: 16px;
   font-family: Courier; 
   overflow: auto;
@@ -109,16 +111,17 @@
 }
 
 .title_placements{
-  color: #333;
+  color: white;
   font-family: fantasy;
   font-size: 30px;
   max-width: 398px; 
 }
 
 .incoming_data{
-  color: aliceblue;
+  color: rgba(140,255,138,1) ;
+  -webkit-text-stroke: 1px rgba(135,255,240,1);
   font-size: 30px;
-  font-family: Comic San MS;
+  font-family: roboto;
   left: 45px;
   position: relative;
   max-width: 398px;
