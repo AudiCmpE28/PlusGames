@@ -62,7 +62,7 @@ resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
 page_track=1         # page counter configuration
-type_sort_db=0       # variable used in homepage to pick sort query
+type_sort_db=''       # variable used in homepage to pick sort query
 Game_identification_number=0
 #-------------------------------------------------------------------------------
 
@@ -83,26 +83,22 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
-<<<<<<< HEAD
-   
-=======
 
->>>>>>> d8e4d3defc5dab6d4e4fc422e6261d0b0e2ad828
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
-         type_sort_db=0
+         type_sort_db='Popular'
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'A to Z':
-         type_sort_db=1
+         type_sort_db='A to Z''
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'Z to A':
-         type_sort_db=2
+         type_sort_db='Z to A'
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'Console':
          # type_sort_db=3
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'PC':
-         type_sort_db=0
+         type_sort_db='PC'
          return redirect(url_for('game_list'))
 
 
@@ -114,6 +110,7 @@ def home():
    resetflag=0
    page_track=1
    resetflagcsv=0
+   type_sort_db=''
 
    return render_template('home.html')
    
@@ -232,22 +229,16 @@ def game_list(page=1):
          Game_identification_number=request.form.get('submit_button')
          return redirect(url_for('game_page'))
       
-   if type_sort_db == 0: #POPULAR   
+   if type_sort_db == 'Popular': #POPULAR   
       VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
-   elif type_sort_db == 1: # A to Z (ASCE)
+   elif type_sort_db == 'A to Z': # A to Z (ASCE)
       VideoGames=sortbyalphabetical(mysql.connection, offset*30, per_page)
-   elif type_sort_db == 2: # Z to A (DESC)
+   elif type_sort_db == 'Z to A': # Z to A (DESC)
       VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page)
-   elif type_sort_db == 3: # CONSOLE   
+   elif type_sort_db == 'Console': # CONSOLE   
       VideoGames=sortbyplatform(mysql.connection,platform)
-   elif type_sort_db == 4: # PC
+   elif type_sort_db == 'PC': # PC
       VideoGames=sortbyplatform(mysql.connection,'windows')
-   elif type_sort_db == 5: # MOBILE
-      VideoGames=sortbyplatform(mysql.connection,platform)
-   elif type_sort_db == 6: # HANDHELD
-      VideoGames=sortbyplatform(mysql.connection,platform)
-   elif type_sort_db == 7: # ARCADE
-      VideoGames=sortbyplatform(mysql.connection,platform)
 
 
    #### Fetching the data from query ####
