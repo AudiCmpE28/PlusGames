@@ -5,7 +5,7 @@
 
 Year: 2021
 
-5 Members:
+6 Members:
   1. Simon Altamirano
   2. Danish Khan
   3. Christine Nguyen
