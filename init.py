@@ -3,10 +3,10 @@
 # $env:FLASK_ENV = "development"
 # python -m flask run    
 import logging
-logger = logging.getLogger('TxLog')
+logger = logging.getLogger('initLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
-fhandler = logging.FileHandler(filename='logfile.log', mode='a')
+fhandler = logging.FileHandler(filename='logfile.log', mode='a',encoding='utf-8')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
@@ -21,11 +21,13 @@ import math
 import base64
 import yaml
 from flask import (Flask, g, redirect, render_template, request, session,
-                   url_for, Blueprint, escape)
+                   url_for, Blueprint, escape, flash)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
-# from flask_login import (LoginManager, logout_user, logout_user, 
-#                          login_required, current_user)
+from flask_login import (LoginManager, logout_user, logout_user, 
+                         login_required, current_user)
+
+import functools 
 
 from dbinit import *
 from pyconnector import *
@@ -43,6 +45,7 @@ db=yaml.safe_load(open('db.yaml'))
 
 
 app = Flask(__name__)
+app.secret_key = "12345"
 app.config['MYSQL_USER'] = db['MYSQL_USER']
 app.config['MYSQL_HOST'] = db['MYSQL_HOST']
 app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
@@ -50,10 +53,14 @@ app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
 
 
-# login_manager =LoginManager()
-# login_manager.login_view = 'auth.login'
-# login_manager.init_app(app)
 
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
+
+# login = LoginManager()
+# login.login_view = 'login'
+# login.init_app(app)
 #------------------------------------------------------------------------------
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
@@ -61,11 +68,18 @@ global resetflagcsv  #
 resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
-page_track=1         # page counter configuration
+page_track=0         # page counter configuration
 type_sort_db=''       # variable used in homepage to pick sort query
 Game_identification_number=0
 #-------------------------------------------------------------------------------
 
+
+#*
+# Load user 
+# #
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 #**************************************************************************************
 #***************************************************************************************
@@ -79,11 +93,15 @@ def homepage():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+   logger.info("Entered /home")
    global resetflag
    global resetflagcsv
    global offset
    global type_sort_db
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac08f0074f452e862876f43c3baf07bbf6f9c133
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db='Popular'
@@ -114,46 +132,108 @@ def home():
 
    return render_template('home.html')
    
+# @app.route('/login')
+# def login_required():
+#    @functools.wraps()
+#    def wrap(*args, **kwargs):
+#       if 'logged_in' in session:
+#          return (*args, **kwargs)
+#       else:
+#          flash("You need to login first")
+#          return redirect(url_for('login'))
 
+#     return wrap  
+   # flash("You need to login first")
+   # return render_template('login.html')
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Login HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   if request.method == "POST": ##gets info from form
+   error = None
+   if request.method == "POST": 
       print(request.form.get('username'))
+   
       if request.form.get('username'):
          mem_username=request.form.get('username')
+         session['mem_username'] = mem_username
          mem_password= request.form.get('password')
          print("this is the mem_password from form: ",end='')
          print(mem_password)
          try:
             print('searching db for '+mem_username)
             data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
-            print(data)
-            unhexlifypw= binascii.unhexlify(data)
-            verify(unhexlifypw,mem_password)
-            print('TEST')
-            return render_template('home.html')
+            truncated=data[0][0]
+            print(truncated)
+            unhexlifypw= binascii.unhexlify(truncated)
+            print(truncated)
+            verify(truncated,mem_password)
+            logger.info("Login verification by %s",mem_username)
+            return redirect(url_for('profile'))
+
          except:
             logger.debug("Login failed by %s",mem_username)
-            return render_template('login.html')
+            return render_template("login.html")
+      #check for admin
+      # elif (request.form.get('username') != 'admin') or request.form.get('password') != 'admin':
+      #    error = 'Invalid Credentials'
       else:
-         return render_template('login.html')
+         # session['logged_in'] = True
+         flash("You're logged in!")
+         return render_template("profile.html")
    else:
-      return render_template('login.html')
+      return render_template("login.html", error= error)
 
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin Login HTML (NOT DONE) ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+   error = None
+   if request.method == "POST": 
+      print(request.form.get('username'))
+   
+      if request.form.get('username'):
+         mem_username=request.form.get('username')
+         # session["mem_username"] = username
+         mem_password= request.form.get('password')
+         print("this is the mem_password from form: ",end='')
+         print(mem_password)
+         try:
+            print('searching db for '+mem_username)
+            data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
+            truncated=data[0][0]
+            print(truncated)
+            unhexlifypw= binascii.unhexlify(truncated)
+            print(truncated)
+            verify(truncated,mem_password)
+            print('Success!')
+            return render_template('profile.html')
+         except:
+            logger.debug("Login failed by %s",mem_username)
+            return render_template("login.html")
+      #check for admin
+      # elif (request.form.get('username') != 'admin') or request.form.get('password') != 'admin':
+      #    error = 'Invalid Credentials'
+      else:
+         # session['logged_in'] = True
+         flash("You're logged in!")
+         return render_template("profile.html")
+   else:
+      return render_template("login.html", error= error)
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Logout HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
-@app.route('/logout', methods=['GET', 'POST'])
-# @login_required
+@app.route('/logout')
+@login_required
 def logout():
+   # session.pop("user", None)
+   # logout_user()
    session.clear()
-   #logout_user()
-   return render_template('home.html')
+   flash("You have been logged out!", "info")
+   return redirect(url_for('home'))
 
 
 
@@ -177,14 +257,19 @@ def signup():
          print(encryptedpw)
          addmembers(mysql.connection,unique_id,mem_username,mem_email,encryptedpw)
          #authenticate/create session here?
-         return render_template('login.html')
-      except:
-         return -1
+
+         flash("Thanks for registering!")
+         session['logged_in'] = True
+         
+         return render_template('home.html')
+      except Exception as e:
+         return (str(e))
    return render_template('signup.html')
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ request page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
+
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    return render_template('request_page.html')
@@ -253,11 +338,13 @@ def game_list(page=1):
    for games_na in VideoGames:
       games_num=game_ids_with_name(mysql.connection, games_na)
       gameID.append(str(games_num))
-      
+      print(games_na+':'+str(games_num))
+   print('...')
    gameID=[x[2:-3] for x in gameID]
-
+ 
    for search in gameID:
       image_url.append(get_url_from_cvs(search))
+      print(search)
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
@@ -272,8 +359,10 @@ def game_list(page=1):
 @app.route('/profile', methods=['GET', 'POST'])
 # @login_required
 def profile():
-   return render_template('profile.html')
-
+   if "mem_username" in session:
+      mem_username = session['mem_username']
+   return render_template('profile.html', mem_username=mem_username)
+      
 
 ## Nasic Stuff ##
 if __name__ == '__main__':
