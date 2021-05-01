@@ -21,9 +21,8 @@ pip install mysqlclient
 
 pip install flask-login
 
-pip install wheel
 
-pip install functools
+
 
 ## Create the database in sql.sql
 

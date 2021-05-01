@@ -126,17 +126,17 @@ def home():
 
    return render_template('home.html')
    
-@app.route('/login')
-def login_required(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash("You need to login first")
-            return redirect(url_for('login'))
+# @app.route('/login')
+# def login_required():
+#    @functools.wraps()
+#    def wrap(*args, **kwargs):
+#       if 'logged_in' in session:
+#          return (*args, **kwargs)
+#       else:
+#          flash("You need to login first")
+#          return redirect(url_for('login'))
 
-    return wrap  
+#     return wrap  
    # flash("You need to login first")
    # return render_template('login.html')
 
@@ -151,26 +151,21 @@ def login():
    
       if request.form.get('username'):
          mem_username=request.form.get('username')
+         session['mem_username'] = mem_username
          mem_password= request.form.get('password')
          print("this is the mem_password from form: ",end='')
          print(mem_password)
          try:
             print('searching db for '+mem_username)
             data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
-            print(data)
-            unhexlifypw= binascii.unhexlify(data)
-            verify(unhexlifypw,mem_password)
-            print('TEST')
-            # session['logged_in'] = True
-            # # flash("You're logged in!")
-            # return render_template("home.html")
             truncated=data[0][0]
             print(truncated)
             unhexlifypw= binascii.unhexlify(truncated)
             print(truncated)
             verify(truncated,mem_password)
             print('Success!')
-            return render_template('home.html')
+            return redirect(url_for('profile'))
+
          except:
             logger.debug("Login failed by %s",mem_username)
             return render_template("login.html")
@@ -180,10 +175,47 @@ def login():
       else:
          # session['logged_in'] = True
          flash("You're logged in!")
-         return render_template("home.html")
+         return render_template("profile.html")
    else:
       return render_template("login.html", error= error)
 
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin Login HTML (NOT DONE) ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
+@app.route('/admin_login', methods=['GET', 'POST'])
+def admin_login():
+   error = None
+   if request.method == "POST": 
+      print(request.form.get('username'))
+   
+      if request.form.get('username'):
+         mem_username=request.form.get('username')
+         # session["mem_username"] = username
+         mem_password= request.form.get('password')
+         print("this is the mem_password from form: ",end='')
+         print(mem_password)
+         try:
+            print('searching db for '+mem_username)
+            data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
+            truncated=data[0][0]
+            print(truncated)
+            unhexlifypw= binascii.unhexlify(truncated)
+            print(truncated)
+            verify(truncated,mem_password)
+            print('Success!')
+            return render_template('profile.html')
+         except:
+            logger.debug("Login failed by %s",mem_username)
+            return render_template("login.html")
+      #check for admin
+      # elif (request.form.get('username') != 'admin') or request.form.get('password') != 'admin':
+      #    error = 'Invalid Credentials'
+      else:
+         # session['logged_in'] = True
+         flash("You're logged in!")
+         return render_template("profile.html")
+   else:
+      return render_template("login.html", error= error)
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Logout HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -191,10 +223,10 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
-   logout_user()
-   # session.clear()
-   flash('You have been logged out!')
-   #logout_user()
+   # session.pop("user", None)
+   # logout_user()
+   session.clear()
+   flash("You have been logged out!", "info")
    return redirect(url_for('home'))
 
 
@@ -233,7 +265,6 @@ def signup():
 #**************************************************************************************
 
 @app.route('/request_page', methods=['GET', 'POST'])
-@login_required
 def request_page():
    return render_template('request_page.html')
 
@@ -324,10 +355,12 @@ def game_list(page=1):
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Profile HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
 @app.route('/profile', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def profile():
-   return render_template('profile.html')
-
+   if "mem_username" in session:
+      mem_username = session['mem_username']
+   return render_template('profile.html', mem_username=mem_username)
+      
 
 ## Nasic Stuff ##
 if __name__ == '__main__':
