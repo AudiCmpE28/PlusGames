@@ -129,10 +129,12 @@ def login():
          try:
             print('searching db for '+mem_username)
             data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
-            print(data)
-            unhexlifypw= binascii.unhexlify(data)
-            verify(unhexlifypw,mem_password)
-            print('TEST')
+            truncated=data[0][0]
+            print(truncated)
+            unhexlifypw= binascii.unhexlify(truncated)
+            print(truncated)
+            verify(truncated,mem_password)
+            print('Success!')
             return render_template('home.html')
          except:
             logger.debug("Login failed by %s",mem_username)
