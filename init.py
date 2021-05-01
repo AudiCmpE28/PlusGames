@@ -146,30 +146,6 @@ def home():
 #**************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-<<<<<<< HEAD
-   if request.method == "POST":
-      mem_username=request.form.get('username')
-      mem_password= request.form.get('password')
-      
-      cur= mysql.connection.cursor()
-      cur.execute("SELECT * FROM members WHERE username=%s AND password=%s")
-      # fetch all results and return
-      members= cur.fetchall()
-      
-      # if len(members) > 0:
-      #    if(bcyrpt.check_haspw(mem_password, members('password').encode('utf-8')) == members('password').encode('utf-8'):
-      #       session('username') = mem_username('username')
-      #       session('password') = user('password')
-      #       msg = 'you logged in'
-      #       return render_template('profile.html')
-      #    else:
-      #       msg = 'Invalid username or password'
-      #       return render_template('login.html')
-         # creating a session to be accessed in other routes
-         # session('username') = members('username')
-      cur.close()
-      return render_template('profile.html')
-=======
    error = None
    if request.method == "POST": 
       print(request.form.get('username'))
@@ -239,7 +215,6 @@ def admin_login():
          # session['logged_in'] = True
          flash("You're logged in!")
          return render_template("profile.html")
->>>>>>> ac08f0074f452e862876f43c3baf07bbf6f9c133
    else:
       return render_template("login.html", error= error)
 
