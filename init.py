@@ -164,6 +164,13 @@ def login():
             # session['logged_in'] = True
             # # flash("You're logged in!")
             # return render_template("home.html")
+            truncated=data[0][0]
+            print(truncated)
+            unhexlifypw= binascii.unhexlify(truncated)
+            print(truncated)
+            verify(truncated,mem_password)
+            print('Success!')
+            return render_template('home.html')
          except:
             logger.debug("Login failed by %s",mem_username)
             return render_template("login.html")

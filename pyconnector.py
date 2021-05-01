@@ -247,9 +247,18 @@ def addcomment(connection, mem_username,game_id,text):
     execute_query(connection, insertq)
 
 def addreview(connection, mem_username,game_id,text):
-    insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
+    insertq="insert into review_on (mem_username, game_id,rv_date,rv_time,review_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
 
+def retrievereviews(connection,game_id):
+    getreviews="SELECT * FROM review_on WHERE Game.game_id={};".format(game_id)
+    execute_query(connection,getreviews)
+
+#removal queries
+
+def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
+    query="DELETE FROM `+games`.`review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)
+    execute_query(connection,query)
 
 
 
