@@ -74,7 +74,7 @@ Game_identification_number=0
 #-------------------------------------------------------------------------------
 
 
-#*
+# #
 # Load user 
 # #
 @login_manager.user_loader
