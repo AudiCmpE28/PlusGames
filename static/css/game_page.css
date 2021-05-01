@@ -1,3 +1,5 @@
+/* SJSU CMPE 138 Spring 2021 TEAM1 */
+
 /*Game Page*/
 .title_game_page{
   color:whitesmoke;
@@ -6,8 +8,8 @@
 }
 
 .Green_Line {
-  width: 680px;
-  height: 17px;
+  width: 1000px;
+  height: 14px;
   background: rgba(140,255,138,1);
   opacity: 1;
   position: relative;
@@ -15,8 +17,8 @@
 }
 
 .Blue_Line {
-  width: 680px;
-  height: 17px;
+  width: 1000px;
+  height: 14px;
   background: rgba(135,255,240,1);
   opacity: 1;
   position: relative;
@@ -34,22 +36,153 @@
 }
 
 .medium_box{
-  top: 5px;
-  width: 700px;
-  height: 741px;
+  top: 2px;
+  width: 1000px;
+  height: 900px;
   background: #333;
   opacity: 1;
   position: relative;
+
 }
 
-.smoll_box{
-  top: 20px;
-  width: 410px;
-  height: 500px;
+
+
+
+/* boexs for contents */
+.game_image_setup{
+  top: 170px;
+  left: 45px;
+  width: 450px;
+  height: 450px;
   background: rgba(255,255,255,0.47999998927116394);
   opacity: 1;
-  position: relative;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
 }
+
+.image_adjust{
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  z-index: 1;
+}
+
+.image_back{
+  position:absolute;
+  max-width: 100%;
+  max-height: 100%;
+  right: 0px;
+  bottom: 0px;
+}
+
+.information{
+  top: 170px;
+  right: 45px;
+  width: 400px;
+  height: 700px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.info_box{
+  height: 699px;
+  width: 399px; 
+  background: teal;
+  font-size: 16px;
+  font-family: Courier; 
+  overflow: auto;
+  text-align: left;
+  border:1px solid
+}
+
+.title_placements{
+  color: #333;
+  font-family: fantasy;
+  font-size: 30px;
+  max-width: 398px; 
+}
+
+.incoming_data{
+  color: aliceblue;
+  font-size: 30px;
+  font-family: Comic San MS;
+  left: 45px;
+  position: relative;
+  max-width: 398px;
+}
+
+.summary_comments{
+  color: aliceblue;
+  font-size: 20px;
+  font-family: Comic San MS;
+  max-width: 398px;
+}
+
+
+.comments{
+  bottom: 70px;
+  width: 450px;
+  height: 165px;
+  left: 45px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  position: absolute;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.comment_box{
+  max-width: 440px; 
+  min-width: 440px;
+  max-height: 120px;
+  min-height: 120px;
+  word-wrap: break-word;
+}
+
+  /*~~Submit button~~*/
+  .submit_button{
+    position: relative;
+    font-family: Roboto;
+    font-weight: Regular;
+    font-size: 20px;
+    width: 80px;
+    height: 30px;
+    bottom: 1px;
+    text-align: center;
+    color: #23C6C6 ;
+    background-color: white;
+    border-style: solid;
+    border-width: thick;
+    border:lightcoral;
+}
+
+.submit_button:hover{
+    background-color: tomato;
+    color: #6B6B6B;
+    border: blue;
+}
+
+
+
+
+
 
 .title_sub{
   color:whitesmoke;
@@ -58,6 +191,10 @@
   position: relative;
   top: 25px;
 }
+
+
+
+
 
 /*~~Text Boxes~~*/
 .boxPlacement{
@@ -140,7 +277,7 @@ input{
 .back_home{
   position:absolute;
   bottom: 15px;
-  left: 10px;
+  left: 215px;
   width: 95px;
   height: 40px;
   background-color: transparent;

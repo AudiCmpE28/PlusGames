@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <title>+Games Profile Page</title>
-    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <title>+Games Profile Page</title>
+  <link rel="icon" href="/static/images/NES_icon.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 
 
 <!-- Body of Homepage -->
+
 <body style="background-color: #222222">
 
-<div class="images">
-  <div class="parent_image">
-  <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" class="image_position1"></div>
-  <div><img src="/static/images/rgb.gif" alt="HomePage Back" class="image_position2"></div>
-</div>
+  <div class="images">
+    <div class="parent_image">
+      <div><img src="/static/images/gamesLOGO.jpg" alt="HomePage Logo" class="image_position1"></div>
+      <div><img src="/static/images/rgb.gif" alt="HomePage Back" class="image_position2"></div>
+    </div>
 
-  <!-- Video Game Grid -->
-  <div class="gallery-grid">
-    <figure class="gallery-frame">
-      <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
-      <figcaption>Apex Legends</figcaption>
-    </figure>
+    <!-- Video Game Grid -->
+    <div class="gallery-grid">
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
+        <figcaption>Apex Legends</figcaption>
+      </figure>
 
-    <figure class="gallery-frame">
-      <img class="gallery-img" src="/static/images/rocketLeague.jpg" alt="symbol image" title="symbol image">
-      <figcaption>Rocket League</figcaption>
-    </figure>
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/rocketLeague.jpg" alt="symbol image" title="symbol image">
+        <figcaption>Rocket League</figcaption>
+      </figure>
 
-    <figure class="gallery-frame">
-      <img class="gallery-img" src="/static/images/GenshinImpact.png" alt="symbol image" title="symbol image">
-      <figcaption>Genshin Impact</figcaption>
-    </figure>
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/GenshinImpact.png" alt="symbol image" title="symbol image">
+        <figcaption>Genshin Impact</figcaption>
+      </figure>
 
-    <figure class="gallery-frame">
-      <img class="gallery-img" src="/static/images/mariopart8.png" alt="symbol image" title="symbol image">
-      <figcaption>Mario Party 8</figcaption>
-    </figure>
-      
+      <figure class="gallery-frame">
+        <img class="gallery-img" src="/static/images/mariopart8.png" alt="symbol image" title="symbol image">
+        <figcaption>Mario Party 8</figcaption>
+      </figure>
+
       <figure class="gallery-frame">
         <img class="gallery-img" src="/static/images/BlackDessert.jpg" alt="symbol image" title="symbol image">
         <figcaption>Black Desert Online</figcaption>
       </figure>
-  
+
       <figure class="gallery-frame">
         <img class="gallery-img" src="/static/images/overwatch.jpg" alt="symbol image" title="symbol image">
         <figcaption>Overwatch</figcaption>
@@ -51,36 +53,31 @@
       <figure class="gallery-frame">
         <img class="gallery-img" src="/static/images/amogus.jpg" alt="symbol image" title="symbol image">
         <figcaption>Among Us</figcaption>
-      </figure> 
-      
+      </figure>
+
       <figure class="gallery-frame">
         <img class="gallery-img" src="/static/images/fifa21.jpg" alt="symbol image" title="symbol image">
         <figcaption>FIFA 21</figcaption>
       </figure>
-  </div><!-- end:gallery-grid -->
-</div>  
-  
+    </div><!-- end:gallery-grid -->
+  </div>
 
 
 
-<!-- The sidebar -->
-<div class="sidebar" id="sidebar">
-  <img src="/static/images/logoCool.gif"/>
-  <div class="Blue_Line"></div>
-  <div class="Green_Line"></div>
 
-  <div style="padding-bottom: 120px;"></div>
-  
-  <!-- Buttons -->
-    <button class="text" >Popular</button>
+  <!-- The sidebar -->
+  <div class="sidebar" id="sidebar">
+    <img src="/static/images/logoCool.gif"/>
+    <div class="Blue_Line"></div>
+    <div class="Green_Line"></div>
 
-    <div class="dropdown">
-      <button class="text" disabled>Alphabetical</button>
-      <div class="dropdown_content">
-        <a href="#">A to Z</a>
-       <a href="#">Z to A</a>
-      </div>
-    </div>
+    <div style="padding-bottom: 120px;"></div>
+
+    <!-- Buttons -->
+    <form method="POST">
+      <input type="submit" name="sort" value="Popular" class="text"></input>
+    </form>
+    <!-- <button class="text">Popular</button> -->
 
     <div class="dropdown">
       <button class="text" disabled>Genre</button>
@@ -94,51 +91,57 @@
         <a href="#">Sports games</a>
         <a href="#">Puzzle games</a>
         <a href="#">Idle games</a>
-        <a href="#">Sandbox/Open world</a>
+        <a href="#">Sandbox/ Open world</a>
       </div>
     </div>
+
+
+    <div class="dropdown">
+      <button class="text" disabled>Alphabetical</button>
+      <div class="dropdown_content">
+        <form method="POST">
+          <a><input type="submit" name="sort" value="A to Z" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="Z to A" class="redirect_buttons"></input></a>
+        </form>
+      </div>
+    </div>
+
+
 
     <div class="dropdown">
       <button class="text" disabled>Platform</button>
       <div class="dropdown_content">
-        <a href="#">Console</a>
-        <a href="#">PC</a>
-        <a href="#">Mobile</a>
-        <a href="#">Handheld</a>
-        <a href="#">Arcade</a>
+        <form method="POST">
+          <a><input type="submit" name="sort" value="Console" class="redirect_buttons"></input></a>
+          <a><input type="submit" name="sort" value="PC" class="redirect_buttons"></input></a>
+      </form>
       </div>
     </div>
 
 
 
 
-  <!-- login/sign up -->
-  <div class="text_position">
-    <a href="{{ url_for('login') }}">
-      <button class="users" style="margin-top: 30%;" type="button" onclick="">SIGN IN</button>
-    </a>
-    <div style="padding-top: 30px;"></div>
-    <a href="{{ url_for('signup') }}">
-      <button class="users" type="button" onclick="">SIGN UP</button>
-    </a>
-    <div style="padding-top: 30px;"></div>
-    <a href="{{ url_for('request_page') }}">
-      <button class="users"  type="button" onclick="">REQUEST</button>
-    </a>
-    <a href="{{ url_for('game_list') }}">
-      <button class="users"  type="button" onclick="">TEST GAME LIST</button>
-    </a>
-    <a href="{{ url_for('profile') }}">
-      <button class="users"  type="button" onclick="">PROFILE</button>
-    </a>
-    <div style="padding-top: 30px;"></div>
-    <a href="{{ url_for('game_page') }}">
-      <button class="users"  type="button" onclick="">TEST GAME PAGE</button>
-    </a>
-    
+    <!-- login/sign up -->
+    <div class="text_position">
+      <a href="{{ url_for('login') }}">
+        <button class="users" style="margin-top: 30%;" type="button" onclick="">SIGN IN</button>
+      </a>
+      <div style="padding-top: 30px;"></div>
+      <a href="{{ url_for('signup') }}">
+        <button class="users" type="button" onclick="">SIGN UP</button>
+      </a>
+      <div style="padding-top: 30px;"></div>
+      <a href="{{ url_for('request_page') }}">
+        <button class="users" type="button" onclick="">REQUEST</button>
+      </a>
+      <div style="padding-top: 30px;"></div>
+      <a href="{{ url_for('profile') }}">
+        <button class="users" type="button" onclick="">PROFILE</button>
+      </a>
+
+    </div>
   </div>
-</div>
-  
+
 
 
 

@@ -9,8 +9,8 @@ from pyconnector import *
 from flask import Flask, request,render_template
 
 #put in the actual database credentials you have on your end. 
-#connection = create_db_connection("localhost","root","1234","+games")
 connection = create_db_connection("localhost","root","1234","+games")
+
 
 companyinsert = """
 INSERT Company VALUES
@@ -23,9 +23,7 @@ INSERT Company VALUES
 #Retrieving data and tabulating it in python
 #-----------------------------------------------------
 
-selectquery = """
-select * from company;
-"""
+selectquery = """select * from company;"""
 #reads and returns a list of companies
 qresult = read_query(connection, selectquery)
 for result in qresult:

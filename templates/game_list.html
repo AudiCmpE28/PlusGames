@@ -2,45 +2,58 @@
 <html lang="en">
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
-    <link href="/static/css/game_list.css" rel="stylesheet" />
-    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-    <title>+Games List</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link href="/static/css/game_list.css" rel="stylesheet" />
+  <link rel="icon" href="/static/images/NES_icon.png" type="image/x-icon">
+  <title>+Games List</title>
 </head>
 
 
-
 <!-- Body of Page -->
-
 <body style="background-color: #8c8c8c">
-  <!-- #222222 -->
 
 
-
+<!-- GameList -->
   <center>
     <div class="middle_box">
       <div class="blue_bar"></div>
 
       <a href="{{ url_for('home') }}">
-        <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
-    </a>
-    
-      <h2 class="Game-Gallery-Title"> Game Gallery </h2>
-      <!-- Video Game Grid -->
-  
-      <!-- <div class="gallery-grid"> -->
-  
-      <div class="gallery-grid">
-        <figure class="gallery-frame">
-          <img class="gallery-img" src="/static/images/ApexLegends.jpg" alt="symbol image" title="symbol image">
-          <figcaption class="grid_name">Apex Legends</figcaption>
-        </figure>
-      </div>
-      <hr>
-  
+        <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick="" />
+      </a>
 
+      <h2 class="Game-Gallery-Title"> Game Gallery </h2>
+
+      <!-- Video Game Grid -->
+      {% for games, url, id in games_list %}
+      <div class="gallery-grid">
+
+        <form method="POST">
+          <input class="gallery-frame" type="submit" name="submit_button" id="submit_button" value="{{id}}">
+          <img class="gallery-img" src="{{ url }}" alt="Game Images" title="covers">
+          <a class="grid_name">{{games}}</a>
+          </input>
+        </form>
+      </div>
+
+      <div class="game_divider"></div>
+      {% endfor %}
+
+
+      <div class="bottom_layout">
+        <form method="post">
+          <input type="submit" name="submit_button" value="Back" class="left_button"></input>
+          <input type="submit" name="submit_button" value="Forward" class="right_button"></input>
+        </form>
+
+        {{ pagination.links }} {{ pagination.info }}
+      </div>
     </div>
+  
   </center>
+
   
-  
-  </html>
+</body>
+
+
+</html>

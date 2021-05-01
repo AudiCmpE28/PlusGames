@@ -1,12 +1,40 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel = "icon" href = "/static/images/NES_icon.png" type = "image/x-icon">
-  </head>
 
-  <body>
-    <div for="game_n" > </div>
-    name="game_n"
+<head>
+  <link rel="icon" href="/static/images/NES_icon.png" type="image/x-icon">
+  <title>+Games Profile </title>
+  <link href="/static/css/profile.css" type="text/css" rel="stylesheet" />
 
- </body>
+</head>
+
+<body style="background-color: #222222">
+
+ <center> 
+    <div class ="medium_box">
+      <h1 style=" color: whitesmoke; font-size: 80px; font-family: Roboto">My Profile</h1>
+      <!-- <h1 class="title_profile"> My Profile </h1> -->
+      <br>
+      <br>
+      <br>
+      <div class="Blue_Line"></div>
+      <div class="Green_Line"></div>
+      <!-- <h1 class="title_profile"> My Profile </h1> -->
+      <h2 style="margin-top: -10%;color: whitesmoke; font-size: 30px; font-family: Roboto">Hello {{mem_username}}!</h2>
+      <!-- <label for="avatar" style="color: white; font-family: Roboto"> Upload profile image:   </label>  -->
+      
+      <img class="anon" src="/static/images/anon_circle.png">
+      <br>
+      <!-- <input type="file" id="avatar" name="avatar" accept="image/png, image.jpeg">  -->
+      
+      <br>
+      <a href="{{ url_for('login') }}">
+        <button class="logout_button" type="button" onclick="">Log Out</button>
+      </a>
+      
+      <a href="{{ url_for('home') }}">
+        <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>
+      </a>
+    </div>  
+  </center> 
 </html>
-

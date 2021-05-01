@@ -1,3 +1,4 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
 ## Run on terminal
 
 pip install mysql-connector-python
@@ -8,9 +9,18 @@ pip install IPython
 
 pip install flask-mysql-connector
 
-pip install flask-mysqldb
-
 pip install pyyaml
+
+pip install -U flask-paginate
+
+pip install flask_table
+
+pip install Flask-Images
+
+pip install mysqlclient
+
+pip install flask-login
+
 
 
 

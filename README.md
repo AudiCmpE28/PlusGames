@@ -1,15 +1,15 @@
+# SJSU CMPE 138 Spring 2021 TEAM1
 # 138_Project
 +Games Website
 
 Year: 2021
 
-6 Members:
+5 Members:
   1. Simon Altamirano
   2. Danish Khan
   3. Christine Nguyen
   4. Jasdip Sekhon
   5. Israel Aldave
-  6. Casey Tanod
   
  Description:
  +Games is a web application that displays the game's summary, information, and ratings for viewers to browse through. 
@@ -40,9 +40,15 @@ Year: 2021
   
    In case encounter problems regarding images, follow: https://mikeboers.github.io/Flask-Images/
   
-   ** Database Table ** 
+ **Databse Table Flask**
   
   (1) pip install flask_table
   
    In case encounter problems regarding images, follow: https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
- 
+   
+**Pages Flask**
+  pip install -U flask-paginate
+  https://pythonhosted.org/Flask-paginate/
+  
+**Git Ignore Issues Command**  
+git rm --cached <filename or source name>
