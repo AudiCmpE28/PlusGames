@@ -21,6 +21,10 @@ pip install mysqlclient
 
 pip install flask-login
 
+pip install wheel
+
+pip install functools
+
 ## Create the database in sql.sql
 
 ## You can import my Python-sql connector library in pyconnector.py
