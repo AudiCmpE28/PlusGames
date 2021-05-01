@@ -14,7 +14,10 @@
 
 <!-- Login Box -->
 <center>
-    <div class="medium_box">
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{error}} </p>
+    {% endif %}
+        <div class="medium_box">
         <h1 class="title_login">Login</h1>
         <div class="Blue_Line">
         </div>
