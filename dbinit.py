@@ -48,8 +48,13 @@ def dbreinit(logger,connection,bool): #pass in mysql = MySQL(app) from init.py
     execute_query(connection,profiletable)
     execute_query(connection,interactable)
     execute_query(connection,managetable)
-
- 
+    admins= {'dk','cn','sa','ia','js','ct'}
+    uid=1
+    for enumadmin in enumerate(admins,1):
+        pw='password'
+        addadmins(connection,uid,enumadmin[1],str(enumadmin[1])+'@sjsu.edu',pw)
+        uid=uid+1
 
     logger.debug("Database Reinitialized")
     return
+

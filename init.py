@@ -3,10 +3,10 @@
 # $env:FLASK_ENV = "development"
 # python -m flask run    
 import logging
-logger = logging.getLogger('TxLog')
+logger = logging.getLogger('initLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
-fhandler = logging.FileHandler(filename='logfile.log', mode='a')
+fhandler = logging.FileHandler(filename='logfile.log', mode='a',encoding='utf-8')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
@@ -61,7 +61,7 @@ global resetflagcsv  #
 resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
-page_track=1         # page counter configuration
+page_track=0         # page counter configuration
 type_sort_db=0       # variable used in homepage to pick sort query
 Game_identification_number=0
 #-------------------------------------------------------------------------------
@@ -79,6 +79,7 @@ def homepage():
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+   logger.info("Entered /home")
    global resetflag
    global resetflagcsv
    global offset
@@ -134,7 +135,7 @@ def login():
             unhexlifypw= binascii.unhexlify(truncated)
             print(truncated)
             verify(truncated,mem_password)
-            print('Success!')
+            logger.info("Login verification by %s",mem_username)
             return render_template('home.html')
          except:
             logger.debug("Login failed by %s",mem_username)
@@ -259,11 +260,13 @@ def game_list(page=1):
    for games_na in VideoGames:
       games_num=game_ids_with_name(mysql.connection, games_na)
       gameID.append(str(games_num))
-      
+      print(games_na+':'+str(games_num))
+   print('...')
    gameID=[x[2:-3] for x in gameID]
-
+ 
    for search in gameID:
       image_url.append(get_url_from_cvs(search))
+      print(search)
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
