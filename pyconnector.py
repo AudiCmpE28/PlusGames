@@ -316,3 +316,15 @@ def addbookmark(connection, mem_username, game_id):
 
 # with open('filtered.csv', 'w',encoding="utf8") as output:
 #     pd.merge(df1, df2, on='game_id').to_csv(output, sep=',', index=False)
+
+
+########################################################################
+# functions for password admin/member
+########################################################################
+def member_password_retrieve(connection, member_username):
+	mem_passw = "SELECT mem_password FROM Members WHERE mem_username='{}';".format(member_username)
+	return read_query(connection, mem_passw)
+
+def admin_password_retrieve(connection, admin_username):
+	admin_passw = "SELECT admin_password FROM Administrator WHERE admin_username='{}';".format(admin_username)
+	return read_query(connection, admin_passw)   

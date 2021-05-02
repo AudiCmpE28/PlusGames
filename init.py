@@ -63,7 +63,7 @@ login_manager.init_app(app)
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
-resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
+resetflagcsv=1       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
 page_track=0         # page counter configuration
@@ -74,9 +74,9 @@ semaphore=0
 #-------------------------------------------------------------------------------
 
 
-# #
-# Load user 
-# #
+# # # # # # #
+# Load user #
+# # # # # # #
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
@@ -206,17 +206,17 @@ def login():
 def profile():
    global admin_check
    global semaphore
+
    if "mem_username" in session:
       semaphore=1
+      mem_username = session['mem_username']
+      
       if admin_check:
-         # mem_username = session['mem_username']
          status=1
-         return render_template('profile.html', status=status)
+         return render_template('profile.html', mem_username=mem_username, status=status)
    
       else: 
-         mem_username = session['mem_username']
          status=0
-         #member since:... fror session
          return render_template('profile.html', mem_username=mem_username, status=status)
 
    else: 
