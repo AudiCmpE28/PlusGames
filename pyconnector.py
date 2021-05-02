@@ -23,10 +23,10 @@ def encryptpw(password):
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
     pwdhash = hashlib.pbkdf2_hmac('sha512',password.encode('utf-8'),salt, 100000)
     pwdhash = binascii.hexlify(pwdhash)
-    # print("in encryptpw function encrypting ")
-    # print(password)
-    # print("as")
-    # print(pwdhash)
+    print("in encryptpw function encrypting ")
+    print(password)
+    print("as")
+    print(pwdhash)
     return (salt + pwdhash).decode('ascii') #This is what you store in db
 
 def verify(encrypted,password):
@@ -220,8 +220,8 @@ def sordbyalphabeticaldesc(connection, offset, per_page):
 	gamealphadesc = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {};".format(offset, per_page)
 	return read_query(connection,gamealphadesc)
 
-def sortbyplatform(connection,platform):
-    chooseplatform = "SELECT game_n FROM Game join Released_on WHERE Game.game_id = Released_on.game_id AND platform_name= '{}';".format(platform)
+def sortbyplatform(connection, platform, offset, per_page):
+    chooseplatform = "SELECT game_n FROM Game, Released_on WHERE Game.game_id = Released_on.game_id AND platform_name= '{}' ORDER BY platform_name LIMIT {}, {};".format(platform, offset, per_page)
     return read_query(connection,chooseplatform)
 
 # /** get url to display**/
@@ -347,3 +347,15 @@ def addbookmark(connection, mem_username, game_id):
 
 # with open('filtered.csv', 'w',encoding="utf8") as output:
 #     pd.merge(df1, df2, on='game_id').to_csv(output, sep=',', index=False)
+
+
+########################################################################
+# functions for password admin/member
+########################################################################
+def member_password_retrieve(connection, member_username):
+	mem_passw = "SELECT mem_password FROM Members WHERE mem_username='{}';".format(member_username)
+	return read_query(connection, mem_passw)
+
+def admin_password_retrieve(connection, admin_username):
+	admin_passw = "SELECT admin_password FROM Administrator WHERE admin_username='{}';".format(admin_username)
+	return read_query(connection, admin_passw)   

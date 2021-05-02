@@ -78,6 +78,7 @@ for result in member_read:
     mem_db.append(result)
 
 
+
 columns = ["unique_id", "mem_username", "mem_email","mem_password"]
 #df = pd.DataFrame(mem_db, columns=columns)
 ##Display dataframe/table

@@ -157,21 +157,26 @@
 
     <!-- login/sign up -->
     <div class="text_position">
+      {% if loggedIn == 0 %}
       <a href="{{ url_for('login') }}">
         <button class="users" style="margin-top: 30%;" type="button" onclick="">SIGN IN</button>
       </a>
       <div style="padding-top: 30px;"></div>
       <a href="{{ url_for('signup') }}">
         <button class="users" type="button" onclick="">SIGN UP</button>
-      </a>
+      </a> 
+      
+      {% elif loggedIn == 1 %}
       <div style="padding-top: 30px;"></div>
       <a href="{{ url_for('request_page') }}">
         <button class="users" type="button" onclick="">REQUEST</button>
       </a>
+      
+     
       <div style="padding-top: 30px;"></div>
       <a href="{{ url_for('profile') }}">
         <button class="users" type="button" onclick="">PROFILE</button>
-      </a>
+      </a> {% endif %}
 
     </div>
   </div>
