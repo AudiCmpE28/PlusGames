@@ -71,6 +71,7 @@ type_sort_db=0       # variable used in homepage to pick sort query
 Game_identification_number=0
 admin_check=''
 semaphore=0
+admin=0
 #-------------------------------------------------------------------------------
 
 
@@ -82,11 +83,11 @@ def load_user(user_id):
     return User.get(user_id)
 
 
-#**************************************************************************************
-#***************************************************************************************
+#*************************************************************************************************
+#**************************************************************************************************
 #    <<<<<<<<<<<<<<<<<<<<< #### Homepage HTML #### >>>>>>>>>>>>>>>>>>>>>>>>
-#**************************************************************************************
-#**************************************************************************************
+#*************************************************************************************************
+#*************************************************************************************************
 # reroute to homepage to load homepage data
 @app.route('/')
 def homepage():
@@ -100,24 +101,64 @@ def home():
    global offset
    global type_sort_db
    global semaphore
+   global Game_identification_number
    # addadmins(mysql.connection, 69420, 'simonAlta', 'danish_query@sjsu.edu', 'simonAlta108!')
 
    if request.method == 'POST':
-      if request.form['sort'] == 'Popular':
-         type_sort_db=0
+      if request.form['sort'] == 'Popular':   ## Popular ##
+         type_sort_db='Popular'
          return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'A to Z':
-         type_sort_db=1
+      elif request.form['sort'] == 'A to Z':     ## Alphabetical ##
+         type_sort_db='A to Z'
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'Z to A':
-         type_sort_db=2
+         type_sort_db='Z to A'
          return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'Console':
-         # type_sort_db=3
+      elif request.form['sort'] == 'Console':   ## Platform ##
+         type_sort_db='Console'
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'PC':
-         type_sort_db=0
+         type_sort_db='PC'
          return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Action':    ## Genres ##
+         type_sort_db='Action'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Adventure':
+         type_sort_db='Adventure'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Strategy':
+         type_sort_db='Strategy'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'RPG':
+         type_sort_db='RPG'
+         return redirect(url_for('game_list'))         
+      elif request.form['sort'] == 'Casual':
+         type_sort_db='Casual'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Indie':
+         type_sort_db='Indie'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Simulation':
+         type_sort_db='Simulation'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Violent':
+         type_sort_db='Violent'
+         return redirect(url_for('game_list')) 
+      elif request.form['sort'] == 'Racing':
+         type_sort_db='Racing'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Sports':
+         type_sort_db='Sports'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Education':
+         type_sort_db='Education'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Massively Multiplayer':
+         type_sort_db='Massively Multiplayer'
+         return redirect(url_for('game_list')) 
+      else:
+         Game_identification_number=request.form.get('sort')
+         return redirect(url_for('game_page'))
 
    ################################
    dbreinit(logger,mysql.connection,resetflag)
@@ -127,13 +168,14 @@ def home():
    resetflag=0
    page_track=1
    resetflagcsv=0
-
+   type_sort_db='CLR'
+   
    return render_template('home.html', loggedIn=semaphore)
    
 
-#***************************************************************************************
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin || Member Login HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    error = None
@@ -198,14 +240,17 @@ def login():
    # flash("You need to login first")
    # return render_template('login.html')
 
-#***************************************************************************************
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Profile HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
    global admin_check
    global semaphore
+   global admin
    requestbox=0
+   adminMSG=''
+   gameID=''
 
    if request.method == "POST": 
       if request.form['request'] == 'Game_New':
@@ -214,16 +259,33 @@ def profile():
          requestbox=2
       elif request.form['request'] == 'Game_Remove':  
          requestbox=3    
+      elif request.form['request'] == 'Insert New Game':  
+         requestbox=1
+      elif request.form['request'] == 'EDIT GAME':  
+         requestbox=1
+      elif request.form['request'] == 'REMOVE GAME':  
+         requestbox=1
+      elif request.form['request'] == 'Retreive ID':
+         gameID=request.form.get('game_name_back')    
+         print(gameID)   
+         gameID=retrieve_game_ID(mysql.connection, gameID)
+         gameID=[i[0] for i in gameID]
+         print(gameID) 
 
    if "mem_username" in session:
-      semaphore=1
+      if semaphore == 0:
+         semaphore=1
+         if admin_check:
+            admin=1
+         else:
+            admin=0
+
       mem_username = session['mem_username']
       
-      if admin_check:
-
+      if admin == 1:
          status=1
-         return render_template('profile.html', mem_username=mem_username, status=status, selection=requestbox)
-   
+         return render_template('profile.html', mem_username=mem_username, status=status, selection=requestbox, gameID=gameID)
+
       else: 
          status=0
          return render_template('profile.html', mem_username=mem_username, status=status, selection=0)
@@ -233,9 +295,9 @@ def profile():
 
 
 
-#***************************************************************************************
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Logout HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/logout')
 def logout():
    global semaphore
@@ -248,9 +310,10 @@ def logout():
 
 
 
-#***************************************************************************************
+
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ sign up HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/signup', methods=['GET','POST'])
 def signup():
    if request.method=='POST':
@@ -279,9 +342,11 @@ def signup():
 
 
 
-#***************************************************************************************
+
+
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ request page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    if "mem_username" in session:
@@ -291,9 +356,12 @@ def request_page():
       return render_template('login.html')
 
 
-#***************************************************************************************
+
+
+
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Game page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
    global Game_identification_number
@@ -304,9 +372,10 @@ def game_page():
 
 
 
-#***************************************************************************************
+
+#**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Game List HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
+#*************************************************************************************************
 @app.route('/game_list', methods=['GET', 'POST'])
 def game_list(page=1):
    global offset
@@ -330,11 +399,11 @@ def game_list(page=1):
          Game_identification_number=request.form.get('submit_button')
          return redirect(url_for('game_page'))
       
-   if type_sort_db == 0: #POPULAR   
+   if type_sort_db == 'Popular': #POPULAR   
       VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
-   elif type_sort_db == 1: # A to Z (ASCE)
+   elif type_sort_db == 'A to Z': # A to Z (ASCE)
       VideoGames=sortbyalphabetical(mysql.connection, offset*30, per_page)
-   elif type_sort_db == 2: # Z to A (DESC)
+   elif type_sort_db == 'Z to A': # Z to A (DESC)
       VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page)
    elif type_sort_db == 'Console': # CONSOLE   
       VideoGames=sortbyplatform(mysql.connection,'console', offset*30, per_page) #placeholder
@@ -395,13 +464,13 @@ def game_list(page=1):
 
    for search in validID:
       image_url.append(get_url_from_csv(search))
-      print(search)
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
-   return render_template('game_list.html', games_list = zip(VideoGames, image_url, gameID), pagination=pagination)
+   return render_template('game_list.html', games_list = zip(VideoGames, image_url, gameID), 
+                           pagination=pagination, list_type=type_sort_db)
 
 
 

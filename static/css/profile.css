@@ -175,12 +175,28 @@
     position: relative;
     bottom: 220px;
     right: 190px;
+    background-color: whitesmoke;
+    color: teal;
+    width: 100px;
+    height: 20px;
+    box-shadow: 0 0 0 1px darkturquoise,
+    0 0 0 2px firebrick,
+    0 0 0 3px orange,
+    0 0 0 4px darkturquoise;
+    outline: dashed 6px darkturquoise;
   }
 
   .dependence{
     position: relative;
     bottom: 190px;
     right: 200px;
+  }
+
+  .game_msg{
+    position: relative;
+    color:aqua;
+    bottom: 190px;
+    right: 280px;
   }
 
   

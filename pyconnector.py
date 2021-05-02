@@ -265,16 +265,43 @@ def request_change_game(connection,mem_username,game_id,req_text):
         req_text=req_text.replace('--',r'/')
         execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
 
+###############
+#UPDATE FUNCTIONAS for ADMIN
+#########
+def retrieve_game_ID(connection, game_name):
+    query_ID="SELECT game_id FROM Game WHERE Game.game_n = '{}';".format(game_name)
+    return read_query(connection, query_ID)
+
+def updategame_name(connection,game_id, game_n):
+    q="UPDATE game set game_n=('{}') where game_id=({});".format(game_n,game_id)
+    execute_query(connection,q)
+
+def updategame_company(connection,game_id, g_company):
+    q="UPDATE game set g_company=('{}') where game_id=({});".format(g_company,game_id)
+    execute_query(connection,q)
+
+def updategame_genre(connection,game_id, genre):
+    q="UPDATE game set genre=('{}') where game_id=({});".format(genre,game_id)
+    execute_query(connection,q)
+    
+def updategame_rating(connection,game_id, rating):
+    q="UPDATE game set rating=({}) where game_id=({});".format(rating,game_id)
+    execute_query(connection,q)        
+
+def updategame_date(connection,game_id, release_Date):
+    q="UPDATE game set release_Date=('{}') where game_id=({});".format(release_Date,game_id)
+    execute_query(connection,q)
+    
+def updategame_price(connection,game_id, price):
+    q="UPDATE game set price=({}) where game_id=({});".format(price,game_id)
+    execute_query(connection,q)      
+
+def updategame_releasedon(connection,game_id,platform):
+    q="UPDATE released_on set platform=({}) where game_id=({});".format(platform,game_id)
+    execute_query(connection,q)  
 
 
 #removal queries/admin funcs
-
-def updaterequest_game(connection, game_id, g_company, game_n,genre,rating,release_Date,price,platform):
-    addcompany(connection, g_company)
-    q="UPDATE game g set g_company='{}',game_n='{}',genre='{}',rating={},release_Date='{}',price={} where g.game_id={} ;".format(g_company, game_n,genre,rating,release_Date,price,game_id)
-    execute_query(connection,q)
-    addplatform(connection,platform)
-
 
 def retrievememberrequests(connection):
     get="Select game_id, mem_username, req_text FROM request_game;"
