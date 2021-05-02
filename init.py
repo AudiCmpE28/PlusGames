@@ -69,6 +69,7 @@ offset=0             # for pages
 page_track=0         # page counter configuration
 type_sort_db='nothin'       # variable used in homepage to pick sort query
 Game_identification_number=0
+admin_check=''
 #-------------------------------------------------------------------------------
 
 
@@ -169,11 +170,13 @@ def home():
 
 
 #***************************************************************************************
-#    [[[[[[[[[[[[[[[[[[[[[[[[[ Login HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin || Member Login HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    error = None
+   global admin_check
+
    if request.method == "POST": 
       print(request.form.get('username'))
    
@@ -183,9 +186,18 @@ def login():
          mem_password= request.form.get('password')
          print("this is the mem_password from form: ",end='')
          print(mem_password)
+         admin_check='' #clears if needed
+         admin_check = request.form.get('admin_or_mem') #if check box clicked its true
+
+
          try:
             print('searching db for '+mem_username)
-            data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
+
+            if admin_check: #if slider was set to admin will enter first if
+               data = admin_password_retrieve(mysql.connection, mem_username):
+            else:
+               data = member_password_retrieve(mysql.connection, mem_username)
+
             truncated=data[0][0]
             print(truncated)
             unhexlifypw= binascii.unhexlify(truncated)
@@ -206,7 +218,18 @@ def login():
          return render_template("profile.html")
    else:
       return render_template("login.html", error= error)
-      
+
+
+
+
+def member_password_retrieve(connection, member_username):
+	mem_passw = "SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username)
+	return read_query(connection, mem_passw)
+
+def admin_password_retrieve(connection, admin_username):
+	admin_passw = "SELECT admin_password FROM Administrator WHERE mem_username='{}';".format(admin_username)
+	return read_query(connection, admin_passw)   
+
 
 # @app.route('/login')
 # def login_required():
@@ -223,44 +246,6 @@ def login():
    # return render_template('login.html')
 
 
-
-#***************************************************************************************
-#    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin Login HTML (NOT DONE) ]]]]]]]]]]]]]]]]]]]]]]]]]
-#**************************************************************************************
-@app.route('/admin_login', methods=['GET', 'POST'])
-def admin_login():
-   error = None
-   if request.method == "POST": 
-      print(request.form.get('username'))
-   
-      if request.form.get('username'):
-         mem_username=request.form.get('username')
-         # session["mem_username"] = username
-         mem_password= request.form.get('password')
-         print("this is the mem_password from form: ",end='')
-         print(mem_password)
-         try:
-            print('searching db for '+mem_username)
-            data= read_query(mysql.connection,"SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username))
-            truncated=data[0][0]
-            print(truncated)
-            unhexlifypw= binascii.unhexlify(truncated)
-            print(truncated)
-            verify(truncated,mem_password)
-            print('Success!')
-            return render_template('profile.html')
-         except:
-            logger.debug("Login failed by %s",mem_username)
-            return render_template("login.html")
-      #check for admin
-      # elif (request.form.get('username') != 'admin') or request.form.get('password') != 'admin':
-      #    error = 'Invalid Credentials'
-      else:
-         # session['logged_in'] = True
-         flash("You're logged in!")
-         return render_template("profile.html")
-   else:
-      return render_template("login.html", error= error)
 
 
 
