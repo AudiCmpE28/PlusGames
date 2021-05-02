@@ -66,7 +66,7 @@ unique (mem_username)
 CREATE TABLE request_game (
 mem_username	varchar(25) not null,
 game_id       	integer(10),
-req_text		varchar(50),
+req_text		varchar(250),
 foreign key (mem_username) references Members(mem_username) ON UPDATE CASCADE ON DELETE CASCADE,
 foreign key (game_id) references Game(game_id) ON UPDATE CASCADE ON DELETE CASCADE
 );

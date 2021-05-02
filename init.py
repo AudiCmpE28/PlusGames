@@ -324,7 +324,7 @@ def game_page():
    global Game_identification_number
    game_i=[]
    game_info=game_information(mysql.connection, Game_identification_number)   
-   game_i.append(get_url_from_cvs(Game_identification_number))
+   game_i.append(get_url_from_csv(Game_identification_number))
    return render_template('game_page.html', game_page=game_info, game_image=game_i)
 
 
@@ -425,7 +425,7 @@ def game_list(page=1):
 
 
    for search in validID:
-      image_url.append(get_url_from_cvs(search))
+      image_url.append(get_url_from_csv(search))
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
