@@ -12,7 +12,7 @@ import os
 logger2 = logging.getLogger('TLog')
 logger2.setLevel(logging.DEBUG)
 logger2.debug('logger2 config message')
-fhandler = logging.FileHandler(filename='logfile2.log', mode='a')
+fhandler = logging.FileHandler(filename='logfile2.log', mode='a', encoding='utf-8')
 fhandler.setLevel(logging.DEBUG)
 hformatter=logging.Formatter('%(asctime)s %(name)s: %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 fhandler.setFormatter(hformatter)
@@ -290,7 +290,7 @@ def parse_steam_game_csv(connection,reset):
     if reset==0:
         logger2.info("CSV to db deferred")
         return 0
-    with open('static/csv/steam_game.csv',encoding="utf8")as csv_file:
+    with open('static/csv/steam_game.csv',encoding="utf-8")as csv_file:
         csvfile = csv.reader(csv_file,delimiter =',')
         #store all the values in dynamic array
         #use loop to iterate through csvfile
