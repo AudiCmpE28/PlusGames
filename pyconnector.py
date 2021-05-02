@@ -225,7 +225,7 @@ def sortbyplatform(connection, platform, offset, per_page):
     return read_query(connection,chooseplatform)
 
 # /** get url to display**/
-def get_url_from_cvs(game_id):
+def get_url_from_csv(game_id):
     with open('static/csv/game_id_image.csv', encoding="utf8") as csv_file:
         csvfile=csv.reader(csv_file,delimiter=',') 
         for row in csvfile:
@@ -253,7 +253,36 @@ def retrievereviews(connection,game_id):
     getreviews="SELECT * FROM review_on WHERE Game.game_id={};".format(game_id)
     execute_query(connection,getreviews)
 
-#removal queries
+def request_change_game(connection,mem_username,game_id,req_text):
+    #if request is for existing game, else create a new game entry
+    if read_query("SELECT game_id FROM game where game.game_id = {}".format(game_id)):
+        req_text=req_text.replace('',r'\'')
+        req_text=req_text.replace('--',r'/')
+        execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
+    else:
+        q="insert into game (game_id) values ({});".format(game_id)
+        req_text=req_text.replace('',r'\'')
+        req_text=req_text.replace('--',r'/')
+        execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
+
+
+
+#removal queries/admin funcs
+
+def updaterequest_game(connection, game_id, g_company, game_n,genre,rating,release_Date,price,platform):
+    addcompany(connection, g_company)
+    q="UPDATE game g set g_company='{}',game_n='{}',genre='{}',rating={},release_Date='{}',price={} where g.game_id={} ;".format(g_company, game_n,genre,rating,release_Date,price,game_id)
+    execute_query(connection,q)
+    addplatform(connection,platform)
+
+
+def retrievememberrequests(connection):
+    get="Select game_id, mem_username, req_text FROM request_game;"
+    read_query(connection, get)
+
+def removerequest(connection, game_id):
+    rem="Delete from reqest_game r where r.game_id={}".format(game_id)
+    execute_query(connection,rem)
 
 def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
     query="DELETE FROM `review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)
@@ -266,6 +295,8 @@ def removegame(connection,game_id):
 def removeuser(connection,game_id):
     query="DELETE from `users` WHERE game_id ={};".format(unique_id)
     execute_query(connection,game_id)
+
+
 
 ######################## Company, Game, Platform, Released on ##########
 
