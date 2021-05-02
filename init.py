@@ -70,6 +70,7 @@ page_track=0         # page counter configuration
 type_sort_db=0       # variable used in homepage to pick sort query
 Game_identification_number=0
 admin_check=''
+semaphore=0
 #-------------------------------------------------------------------------------
 
 
@@ -97,6 +98,10 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
+   global semaphore
+   # addadmins(mysql.connection, 69420, 'simonAlta', 'danish_query@sjsu.edu', 'simonAlta108!')
+   
+
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
          type_sort_db=0
@@ -124,7 +129,7 @@ def home():
    page_track=1
    resetflagcsv=0
 
-   return render_template('home.html')
+   return render_template('home.html', loggedIn=semaphore)
    
 
 #***************************************************************************************
@@ -134,6 +139,7 @@ def home():
 def login():
    error = None
    global admin_check
+   global semaphore
 
    if request.method == "POST": 
       print(request.form.get('username'))
@@ -143,15 +149,16 @@ def login():
          mem_password= request.form.get('password')
          print("this is the mem_password from form: ",end='')
          print(mem_password)
-         admin_check='' #clears if needed
-         admin_check = request.form.get('admin_or_mem') #if check box clicked its true
+         if semaphore == 0:
+            admin_check='' #clears if needed
+            admin_check = request.form.get('admin_or_mem') #if check box clicked its true
 
 
          try:
             print('searching db for '+mem_username)
 
             if admin_check: #if slider was set to admin will enter first if
-               data = admin_password_retrieve(mysql.connection, mem_username):
+               data = admin_password_retrieve(mysql.connection, mem_username)
             else:
                data = member_password_retrieve(mysql.connection, mem_username)
 
@@ -181,11 +188,11 @@ def login():
 
 
 def member_password_retrieve(connection, member_username):
-	mem_passw = "SELECT mem_password FROM Members WHERE mem_username='{}';".format(mem_username)
+	mem_passw = "SELECT mem_password FROM Members WHERE mem_username='{}';".format(member_username)
 	return read_query(connection, mem_passw)
 
 def admin_password_retrieve(connection, admin_username):
-	admin_passw = "SELECT admin_password FROM Administrator WHERE mem_username='{}';".format(admin_username)
+	admin_passw = "SELECT admin_password FROM Administrator WHERE admin_username='{}';".format(admin_username)
 	return read_query(connection, admin_passw)   
 
 
@@ -203,7 +210,28 @@ def admin_password_retrieve(connection, admin_username):
    # flash("You need to login first")
    # return render_template('login.html')
 
+#***************************************************************************************
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Profile HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#**************************************************************************************
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+   global admin_check
+   global semaphore
+   if "mem_username" in session:
+      semaphore=1
+      if admin_check:
+         # mem_username = session['mem_username']
+         status=1
+         return render_template('profile.html', status=status)
+   
+      else: 
+         mem_username = session['mem_username']
+         status=0
+         #member since:... fror session
+         return render_template('profile.html', mem_username=mem_username, status=status)
 
+   else: 
+      return render_template('login.html')  #no account or logged in
 
 
 
@@ -212,8 +240,10 @@ def admin_password_retrieve(connection, admin_username):
 #**************************************************************************************
 @app.route('/logout')
 def logout():
+   global semaphore
    # session.pop("user", None)
    # logout_user()
+   semaphore=0
    session.clear()
    flash("You have been logged out!", "info")
    return redirect(url_for('home'))
@@ -347,12 +377,12 @@ def game_list(page=1):
 
    image_url = []
    gameID = []
+   validID = []
 
    for games_na in VideoGames:
       games_num=game_ids_with_name(mysql.connection, games_na)
       gameID.append(str(games_num))
-      print(games_na+':'+str(games_num))
-   print('...')
+      
    gameID=[x[2:-3] for x in gameID]
  
    # cleans number ids from punctuation
@@ -378,15 +408,8 @@ def game_list(page=1):
 
 
 #***************************************************************************************
-#    [[[[[[[[[[[[[[[[[[[[[[[[[ Profile HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
+#    [[[[[[[[[[[[[[[[[[[[[[[[[ Python HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
-@app.route('/profile', methods=['GET', 'POST'])
-def profile():
-   if "mem_username" in session:
-      mem_username = session['mem_username']
-      return render_template('profile.html', mem_username=mem_username)
-   else: 
-      return render_template('login.html')   
 
 ## Basic Stuff ##
 if __name__ == '__main__':

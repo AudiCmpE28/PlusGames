@@ -23,10 +23,15 @@
       <h2 style="margin-top: -10%;color: whitesmoke; font-size: 30px; font-family: Roboto">Hello {{mem_username}}!</h2>
       <!-- <label for="avatar" style="color: white; font-family: Roboto"> Upload profile image:   </label>  -->
       
+      {% if status == 0 %}
       <img class="anon" src="/static/images/anon_circle.png">
+      {% elif status == 1 %}
+      <img class="anon" src="/static/images/ApexLegends.jpg">
+      {% endif %}
+
       <br>
       <!-- <input type="file" id="avatar" name="avatar" accept="image/png, image.jpeg">  -->
-      
+     
       <br>
       <a href="{{ url_for('logout') }}">
         <button class="logout_button" type="button" onclick="">Log Out</button>

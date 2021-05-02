@@ -51,7 +51,8 @@ def dbreinit(logger,connection,bool): #pass in mysql = MySQL(app) from init.py
     admins= {'dk','cn','sa','ia','js','ct'}
     uid=1
     for enumadmin in enumerate(admins,1):
-        pw='password'
+        ## encryptpw('Password12!')
+        pw='6dd5128dd843213c65ea42cd6a727a0a5caabb66987a2842b6b3e3c0ee0440e3cf1df67487a3cd57a2c6e46163c2650946074b981d82faa753ef76a0dad990a8ef0b6a15069a16c3c77c16305ee38f7ee8c3c617f19c8e6ab00c8749f702fd34'
         addadmins(connection,uid,enumadmin[1],str(enumadmin[1])+'@sjsu.edu',pw)
         uid=uid+1
 

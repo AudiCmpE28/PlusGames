@@ -23,10 +23,10 @@ def encryptpw(password):
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
     pwdhash = hashlib.pbkdf2_hmac('sha512',password.encode('utf-8'),salt, 100000)
     pwdhash = binascii.hexlify(pwdhash)
-    # print("in encryptpw function encrypting ")
-    # print(password)
-    # print("as")
-    # print(pwdhash)
+    print("in encryptpw function encrypting ")
+    print(password)
+    print("as")
+    print(pwdhash)
     return (salt + pwdhash).decode('ascii') #This is what you store in db
 
 def verify(encrypted,password):
