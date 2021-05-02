@@ -71,6 +71,7 @@
     width: 200px;
     object-fit: cover;
     transition: opacity 0.25s ease-in-out;
+    outline: 0;
   }
   
 

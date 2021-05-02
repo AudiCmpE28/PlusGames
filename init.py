@@ -69,12 +69,12 @@ resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
 page_track=0         # page counter configuration
-type_sort_db=0       # variable used in homepage to pick sort query
+type_sort_db='nothin'       # variable used in homepage to pick sort query
 Game_identification_number=0
 #-------------------------------------------------------------------------------
 
 
-#*
+# #
 # Load user 
 # #
 @login_manager.user_loader
@@ -98,24 +98,63 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
+   global Game_identification_number
+
    if request.method == 'POST':
-      if request.form['sort'] == 'Popular':
-         type_sort_db=0
+      if request.form['sort'] == 'Popular':   ## Popular ##
+         type_sort_db='Popular'
          return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'A to Z':
-         type_sort_db=1
+      elif request.form['sort'] == 'A to Z':     ## Alphabetical ##
+         type_sort_db='A to Z'
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'Z to A':
-         type_sort_db=2
+         type_sort_db='Z to A'
          return redirect(url_for('game_list'))
-      elif request.form['sort'] == 'Console':
-         # type_sort_db=3
+      elif request.form['sort'] == 'Console':   ## Platform ##
+         type_sort_db='Console'
          return redirect(url_for('game_list'))
       elif request.form['sort'] == 'PC':
-         type_sort_db=0
+         type_sort_db='PC'
          return redirect(url_for('game_list'))
-
-
+      elif request.form['sort'] == 'Action':    ## Genres ##
+         type_sort_db='Action'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Adventure':
+         type_sort_db='Adventure'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Strategy':
+         type_sort_db='Strategy'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'RPG':
+         type_sort_db='RPG'
+         return redirect(url_for('game_list'))         
+      elif request.form['sort'] == 'Casual':
+         type_sort_db='Casual'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Indie':
+         type_sort_db='Indie'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Simulation':
+         type_sort_db='Simulation'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Violent':
+         type_sort_db='Violent'
+         return redirect(url_for('game_list')) 
+      elif request.form['sort'] == 'Racing':
+         type_sort_db='Racing'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Sports':
+         type_sort_db='Sports'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Education':
+         type_sort_db='Education'
+         return redirect(url_for('game_list'))
+      elif request.form['sort'] == 'Massively Multiplayer':
+         type_sort_db='Massively Multiplayer'
+         return redirect(url_for('game_list')) 
+      else:
+         Game_identification_number=request.form.get('sort')
+         return redirect(url_for('game_page'))
    ################################
    dbreinit(logger,mysql.connection,resetflag)
    parse_steam_game_csv(mysql.connection, resetflagcsv)
@@ -124,6 +163,7 @@ def home():
    resetflag=0
    page_track=1
    resetflagcsv=0
+   type_sort_db='CLR'
 
    return render_template('home.html')
    
@@ -180,6 +220,8 @@ def login():
    else:
       return render_template("login.html", error= error)
 
+
+
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin Login HTML (NOT DONE) ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
@@ -217,6 +259,8 @@ def admin_login():
          return render_template("profile.html")
    else:
       return render_template("login.html", error= error)
+
+
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Logout HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -260,6 +304,8 @@ def signup():
       except Exception as e:
          return (str(e))
    return render_template('signup.html')
+
+
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ request page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -309,22 +355,45 @@ def game_list(page=1):
          Game_identification_number=request.form.get('submit_button')
          return redirect(url_for('game_page'))
       
-   if type_sort_db == 0: #POPULAR   
+#######################    DATABASE QUERIES   ########################################
+   if type_sort_db == 'Popular': #POPULAR   
       VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
-   elif type_sort_db == 1: # A to Z (ASCE)
+   elif type_sort_db == 'A to Z': # A to Z (ASCE)
       VideoGames=sortbyalphabetical(mysql.connection, offset*30, per_page)
-   elif type_sort_db == 2: # Z to A (DESC)
+   elif type_sort_db == 'Z to A': # Z to A (DESC)
       VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page)
-   elif type_sort_db == 3: # CONSOLE   
-      VideoGames=sortbyplatform(mysql.connection,platform)
-   elif type_sort_db == 4: # PC
-      VideoGames=sortbyplatform(mysql.connection,'windows')
-   elif type_sort_db == 5: # MOBILE
-      VideoGames=sortbyplatform(mysql.connection,platform)
-   elif type_sort_db == 6: # HANDHELD
-      VideoGames=sortbyplatform(mysql.connection,platform)
-   elif type_sort_db == 7: # ARCADE
-      VideoGames=sortbyplatform(mysql.connection,platform)
+   elif type_sort_db == 'Console': # CONSOLE   
+      # VideoGames=sortbyplatform(mysql.connection,'console')
+      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page) #placeholder
+   elif type_sort_db == 'PC': # PC
+      # VideoGames=sortbyplatform(mysql.connection,'windows')
+      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page) #placeholder
+
+   elif type_sort_db == 'Action': # GENRES
+      VideoGames=sortbygenre(mysql.connection, 'Action', offset*30, per_page)
+   elif type_sort_db == 'Adventure': 
+      VideoGames=sortbygenre(mysql.connection, 'Adventure', offset*30, per_page)
+   elif type_sort_db == 'Strategy': 
+      VideoGames=sortbygenre(mysql.connection, 'Strategy', offset*30, per_page)
+   elif type_sort_db == 'RPG':
+      VideoGames=sortbygenre(mysql.connection, 'RPG', offset*30, per_page)
+   elif type_sort_db == 'Casual': 
+      VideoGames=sortbygenre(mysql.connection, 'Casual', offset*30, per_page)
+   elif type_sort_db == 'Indie': 
+      VideoGames=sortbygenre(mysql.connection, 'Indie', offset*30, per_page)
+   elif type_sort_db == 'Simulation': 
+      VideoGames=sortbygenre(mysql.connection, 'Simulation', offset*30, per_page)
+   elif type_sort_db == 'Violent':
+      VideoGames=sortbygenre(mysql.connection, 'Violent', offset*30, per_page)
+   elif type_sort_db == 'Racing': 
+      VideoGames=sortbygenre(mysql.connection, 'Racing', offset*30, per_page)
+   elif type_sort_db == 'Sports': 
+      VideoGames=sortbygenre(mysql.connection, 'Sports', offset*30, per_page)
+   elif type_sort_db == 'Education': 
+      VideoGames=sortbygenre(mysql.connection, 'Education', offset*30, per_page)
+   elif type_sort_db == 'Massively Multiplayer':
+      VideoGames=sortbygenre(mysql.connection, 'Massively Multiplayer', offset*30, per_page)
+#################################################################################################
 
 
    #### Fetching the data from query ####
@@ -335,23 +404,35 @@ def game_list(page=1):
 
    image_url = []
    gameID = []
+   validID = []
 
    for games_na in VideoGames:
       games_num=game_ids_with_name(mysql.connection, games_na)
       gameID.append(str(games_num))
-      print(games_na+':'+str(games_num))
-   print('...')
+      
+   # first stop to shave off punctuation from ids
    gameID=[x[2:-3] for x in gameID]
  
-   for search in gameID:
+   # cleans number ids from punctuation
+   for num in gameID:
+      num=num.replace(',', '')
+      num=num.replace(')', '')
+      num=num.replace('(', '')
+      num=num.split(' ')
+      for clean in num:
+         if clean != '':
+            validID.append(str(clean))
+
+
+   for search in validID:
       image_url.append(get_url_from_cvs(search))
-      print(search)
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
                            total=len(VideoGames), record_name='Video Games') 
 
-   return render_template('game_list.html', games_list = zip(VideoGames, image_url, gameID), pagination=pagination)
+   return render_template('game_list.html', games_list = zip(VideoGames, image_url, validID), 
+                           list_type=type_sort_db, pagination=pagination)
 
 
 #***************************************************************************************

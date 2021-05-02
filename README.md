@@ -1,15 +1,17 @@
 # SJSU CMPE 138 Spring 2021 TEAM1
 # 138_Project
+
 +Games Website
 
 Year: 2021
 
-5 Members:
+6 Members:
   1. Simon Altamirano
   2. Danish Khan
   3. Christine Nguyen
-  4. Jasdip Sekhon
-  5. Israel Aldave
+  4. Israel Aldave
+  5. Jasdip Sekhon
+  6. Casey Tanod
   
  Description:
  +Games is a web application that displays the game's summary, information, and ratings for viewers to browse through. 

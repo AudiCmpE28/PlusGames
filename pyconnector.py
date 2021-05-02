@@ -197,31 +197,31 @@ def displaytable(columns,twoDarray): #columns = ["unique_id", "mem_username", "m
 
 
 
-def sortbygenre(connection,genre):
-    gamegenre = "SELECT * FROM Game ORDER BY '{}';".format(genre)
-    return returncolumns(connection,gamegenre)
+def sortbygenre(connection, genre, offset, per_page):
+    gamegenre = "SELECT game_n FROM Game WHERE Game.genre = '{}' ORDER BY genre LIMIT {}, {};".format(genre, offset, per_page)
+    return read_query(connection,gamegenre)
 
 
 def sortbypopularity_rating(connection, offset, per_page):
-    gamequery="SELECT rating FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
+    gamequery="SELECT rating FROM Game ORDER BY rating DESC LIMIT {}, {};".format(offset, per_page) 
     return read_query(connection,gamequery)
 
 def sortbypopularity(connection, offset, per_page):
-    gamequery="SELECT game_n FROM Game ORDER BY rating DESC LIMIT {}, {};".format((offset*10), per_page) 
+    gamequery="SELECT game_n FROM Game ORDER BY rating DESC LIMIT {}, {};".format(offset, per_page) 
     return read_query(connection,gamequery)
     
 
 def sortbyalphabetical(connection, offset, per_page):
-	gamealpha = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {};".format((offset*10), per_page) 
+	gamealpha = "SELECT game_n FROM Game ORDER BY game_n ASC LIMIT {}, {};".format(offset, per_page) 
 	return read_query(connection,gamealpha)
 	
 	
 def sordbyalphabeticaldesc(connection, offset, per_page):
-	gamealphadesc = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {};".format((offset*10), per_page)
+	gamealphadesc = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {};".format(offset, per_page)
 	return read_query(connection,gamealphadesc)
 
 def sortbyplatform(connection,platform):
-    chooseplatform = "SELECT game_n FROM Game join Released_on WHERE Game.game_id = Released_on.game_id and platform_name= '{}';".format(platform)
+    chooseplatform = "SELECT game_n FROM Game join Released_on WHERE Game.game_id = Released_on.game_id AND platform_name= '{}';".format(platform)
     return read_query(connection,chooseplatform)
 
 # /** get url to display**/

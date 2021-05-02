@@ -22,7 +22,7 @@
         <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick="" />
       </a>
 
-      <h2 class="Game-Gallery-Title"> Game Gallery </h2>
+      <h2 class="Game-Gallery-Title">( ͡° ͜ʖ ͡°) <br> >> {{list_type}} << </h2>
 
       <!-- Video Game Grid -->
       {% for games, url, id in games_list %}
@@ -30,7 +30,7 @@
 
         <form method="POST">
           <input class="gallery-frame" type="submit" name="submit_button" id="submit_button" value="{{id}}">
-          <img class="gallery-img" src="{{ url }}" alt="Game Images" title="covers">
+          <img class="gallery-img" src="{{ url }}">
           <a class="grid_name">{{games}}</a>
           </input>
         </form>
