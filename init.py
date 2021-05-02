@@ -153,7 +153,6 @@ def login():
             admin_check='' #clears if needed
             admin_check = request.form.get('admin_or_mem') #if check box clicked its true
 
-
          try:
             print('searching db for '+mem_username)
 
@@ -184,16 +183,6 @@ def login():
    else:
       return render_template("login.html", error= error)
 
-
-
-
-def member_password_retrieve(connection, member_username):
-	mem_passw = "SELECT mem_password FROM Members WHERE mem_username='{}';".format(member_username)
-	return read_query(connection, mem_passw)
-
-def admin_password_retrieve(connection, admin_username):
-	admin_passw = "SELECT admin_password FROM Administrator WHERE admin_username='{}';".format(admin_username)
-	return read_query(connection, admin_passw)   
 
 
 # @app.route('/login')
@@ -410,6 +399,8 @@ def game_list(page=1):
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Python HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
+
+
 
 ## Basic Stuff ##
 if __name__ == '__main__':
