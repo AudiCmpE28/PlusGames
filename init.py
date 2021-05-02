@@ -20,8 +20,7 @@ import sys
 import math
 import base64
 import yaml
-from flask import (Flask, g, redirect, render_template, request, session,
-                   url_for, Blueprint, escape, flash)
+from flask import (Flask, g, redirect, render_template, request, session, url_for, Blueprint, escape, flash)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
 from flask_login import (LoginManager, logout_user, logout_user, 
@@ -51,7 +50,6 @@ app.config['MYSQL_HOST'] = db['MYSQL_HOST']
 app.config['MYSQL_PASSWORD'] =db['MYSQL_PASSWORD']
 app.config['MYSQL_DATABASE'] =db['MYSQL_DATABASE']
 mysql = MySQL(app)
-
 
 
 login_manager = LoginManager()
@@ -86,10 +84,10 @@ def load_user(user_id):
 #    <<<<<<<<<<<<<<<<<<<<< #### Homepage HTML #### >>>>>>>>>>>>>>>>>>>>>>>>
 #**************************************************************************************
 #**************************************************************************************
+# reroute to homepage to load homepage data
 @app.route('/')
 def homepage():
    return redirect(url_for('home'))
-
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
@@ -166,20 +164,9 @@ def home():
    type_sort_db='CLR'
 
    return render_template('home.html')
-   
-# @app.route('/login')
-# def login_required():
-#    @functools.wraps()
-#    def wrap(*args, **kwargs):
-#       if 'logged_in' in session:
-#          return (*args, **kwargs)
-#       else:
-#          flash("You need to login first")
-#          return redirect(url_for('login'))
 
-#     return wrap  
-   # flash("You need to login first")
-   # return render_template('login.html')
+
+
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Login HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -219,6 +206,21 @@ def login():
          return render_template("profile.html")
    else:
       return render_template("login.html", error= error)
+      
+
+# @app.route('/login')
+# def login_required():
+#    @functools.wraps()
+#    def wrap(*args, **kwargs):
+#       if 'logged_in' in session:
+#          return (*args, **kwargs)
+#       else:
+#          flash("You need to login first")
+#          return redirect(url_for('login'))
+
+#     return wrap  
+   # flash("You need to login first")
+   # return render_template('login.html')
 
 
 
@@ -363,11 +365,9 @@ def game_list(page=1):
    elif type_sort_db == 'Z to A': # Z to A (DESC)
       VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page)
    elif type_sort_db == 'Console': # CONSOLE   
-      # VideoGames=sortbyplatform(mysql.connection,'console')
-      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page) #placeholder
+      VideoGames=sortbyplatform(mysql.connection,'console', offset*30, per_page) #placeholder
    elif type_sort_db == 'PC': # PC
-      # VideoGames=sortbyplatform(mysql.connection,'windows')
-      VideoGames=sordbyalphabeticaldesc(mysql.connection, offset*30, per_page) #placeholder
+      VideoGames=sortbyplatform(mysql.connection,'windows', offset*30, per_page) #placeholder
 
    elif type_sort_db == 'Action': # GENRES
       VideoGames=sortbygenre(mysql.connection, 'Action', offset*30, per_page)
@@ -394,7 +394,6 @@ def game_list(page=1):
    elif type_sort_db == 'Massively Multiplayer':
       VideoGames=sortbygenre(mysql.connection, 'Massively Multiplayer', offset*30, per_page)
 #################################################################################################
-
 
    #### Fetching the data from query ####
    VideoGames=[i[0] for i in VideoGames] #removes () and , from each name
@@ -423,7 +422,6 @@ def game_list(page=1):
          if clean != '':
             validID.append(str(clean))
 
-
    for search in validID:
       image_url.append(get_url_from_cvs(search))
      
@@ -433,6 +431,7 @@ def game_list(page=1):
 
    return render_template('game_list.html', games_list = zip(VideoGames, image_url, validID), 
                            list_type=type_sort_db, pagination=pagination)
+
 
 
 #***************************************************************************************

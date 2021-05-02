@@ -220,8 +220,8 @@ def sordbyalphabeticaldesc(connection, offset, per_page):
 	gamealphadesc = "SELECT game_n FROM Game ORDER BY game_n DESC LIMIT {}, {};".format(offset, per_page)
 	return read_query(connection,gamealphadesc)
 
-def sortbyplatform(connection,platform):
-    chooseplatform = "SELECT game_n FROM Game join Released_on WHERE Game.game_id = Released_on.game_id AND platform_name= '{}';".format(platform)
+def sortbyplatform(connection, platform, offset, per_page):
+    chooseplatform = "SELECT game_n FROM Game, Released_on WHERE Game.game_id = Released_on.game_id AND platform_name= '{}' ORDER BY platform_name LIMIT {}, {};".format(platform, offset, per_page)
     return read_query(connection,chooseplatform)
 
 # /** get url to display**/
