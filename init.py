@@ -354,7 +354,7 @@ def game_list(page=1):
 #**************************************************************************************
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
-   if "mem_username" in session:
+   if "mem_username" in session: #include admin_username when done
       mem_username = session['mem_username']
       return render_template('profile.html', mem_username=mem_username)
    else: 
