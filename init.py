@@ -63,7 +63,7 @@ login_manager.init_app(app)
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
-resetflagcsv=1       # Set to 1 if you want to reimport the csv to database
+resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
 page_track=0         # page counter configuration
@@ -385,7 +385,7 @@ def game_list(page=1):
             validID.append(str(clean))
 
    for search in validID:
-      image_url.append(get_url_from_cvs(search))
+      image_url.append(get_url_from_csv(search))
       print(search)
      
    #pagination assists in orgaizing pages and contents per page
