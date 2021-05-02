@@ -167,6 +167,8 @@ def login():
    else:
       return render_template("login.html", error= error)
 
+
+
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Admin Login HTML (NOT DONE) ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
@@ -204,6 +206,8 @@ def admin_login():
          return render_template("profile.html")
    else:
       return render_template("login.html", error= error)
+
+
 
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Logout HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -247,10 +251,11 @@ def signup():
          return (str(e))
    return render_template('signup.html')
 
+
+
 #***************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ request page HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
 #**************************************************************************************
-
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    if "mem_username" in session:
@@ -355,6 +360,6 @@ def profile():
    else: 
       return render_template('login.html')   
 
-## Nasic Stuff ##
+## Basic Stuff ##
 if __name__ == '__main__':
    app.run(debug=True)
