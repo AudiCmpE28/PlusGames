@@ -63,7 +63,7 @@ login_manager.init_app(app)
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
-resetflagcsv=1       # Set to 1 if you want to reimport the csv to database
+resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 offset=0             # for pages
 page_track=0         # page counter configuration
@@ -74,12 +74,13 @@ semaphore=0
 #-------------------------------------------------------------------------------
 
 
-# # # # # # #
-# Load user #
-# # # # # # #
+# # # # # # # # # #
+# Load user Home #
+# # # # # # # # #
 @login_manager.user_loader
 def load_user(user_id):
     return User.get(user_id)
+
 
 #**************************************************************************************
 #***************************************************************************************
@@ -100,7 +101,6 @@ def home():
    global type_sort_db
    global semaphore
    # addadmins(mysql.connection, 69420, 'simonAlta', 'danish_query@sjsu.edu', 'simonAlta108!')
-   
 
    if request.method == 'POST':
       if request.form['sort'] == 'Popular':
@@ -118,7 +118,6 @@ def home():
       elif request.form['sort'] == 'PC':
          type_sort_db=0
          return redirect(url_for('game_list'))
-
 
    ################################
    dbreinit(logger,mysql.connection,resetflag)
@@ -206,18 +205,28 @@ def login():
 def profile():
    global admin_check
    global semaphore
+   requestbox=0
+
+   if request.method == "POST": 
+      if request.form['request'] == 'Game_New':
+         requestbox=1
+      elif request.form['request'] == 'Game_Edit':
+         requestbox=2
+      elif request.form['request'] == 'Game_Remove':  
+         requestbox=3    
 
    if "mem_username" in session:
       semaphore=1
       mem_username = session['mem_username']
       
       if admin_check:
+
          status=1
-         return render_template('profile.html', mem_username=mem_username, status=status)
+         return render_template('profile.html', mem_username=mem_username, status=status, selection=requestbox)
    
       else: 
          status=0
-         return render_template('profile.html', mem_username=mem_username, status=status)
+         return render_template('profile.html', mem_username=mem_username, status=status, selection=0)
 
    else: 
       return render_template('login.html')  #no account or logged in

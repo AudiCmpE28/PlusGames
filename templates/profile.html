@@ -24,10 +24,82 @@
       <!-- <label for="avatar" style="color: white; font-family: Roboto"> Upload profile image:   </label>  -->
       
       {% if status == 0 %}
-      <img class="anon" src="/static/images/anon_circle.png">
+        <img class="anon" src="/static/images/anon_circle.png">
+        <input class="pic" type="file" name="image">
+
       {% elif status == 1 %}
-      <img class="anon" src="/static/images/admin.png">
+        <img class="anonAdmin" src="/static/images/icon1.png">
+        <input class="picAdmin" type="file" name="image">
+
+        <form method="POST">
+        <div class="boxPlacement">
+          <label for="request_select" class="box_title"><b>Choose type of Request:</b></label><br>
+          <select name="request" id="request_select" class="box_decorations">
+              <option value="" disabled selected>~~Admin Options~~</option>
+              <option value="Game_New">Insert New Game</option>
+              <option value="Game_Edit">Edit Game</option>
+              <option value="Game_Remove">Remove Game</option>
+          </select>
+        </div>
+        
+        <input type="submit" name="request" value="Refresh" class="refresh_butt">
+      </form>
+      
+        {% if selection == 1 %}
+        <div class="dependence">
+          <div class="vertical_line"></div>
+          <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
+          <input class="text_box" type="text" placeholder="Game Name" name="game_name" required/><br>
+
+          <div for="Game Company" class="box_titles"><b>COMPANY</b></div>
+          <input class="text_box" type="text" placeholder="Game Company Name" name="company" required/><br>
+
+          <div for="Game Genre" class="box_titles"><b>GENRE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Genre" name="genre" required/><br>
+
+          <div for="RATE" class="box_titles"><b>RATING</b></div>
+          <input class="text_box" type="text" placeholder="Game's Rating" name="rating" required/><br>
+
+          <div for="Release Date" class="box_titles"><b>RELEASE DATE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Date" name="date" required/><br>
+
+          <div for="Price" class="box_titles"><b>PRICE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Price" name="price" required/><br>
+
+          <div for="Platform" class="box_titles"><b>PLATFORM</b></div>
+          <input class="text_box" type="text" placeholder="Platform Distribution" name="platform" required/><br>
+
+          <input type="submit" class="submit_info" value="Insert New Game">
+        </div>
+        
+        {% elif selection == 2 %}
+        <div class="dependence">
+
+        </div>
+
+
+        {% elif selection == 3 %}
+        <div class="dependence">
+          <div for="Game ID" class="box_titles"><b>GAME ID</b></div>
+          <input class="text_box" type="text" placeholder="Game ID" name="game_id" required/><br>
+          <input type="submit" class="submit_info" value="Retreive ID">
+
+          <div style="padding-top: 30px; padding-bottom: 30px;"></div>
+
+          <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
+          <input class="text_box" type="text" placeholder="Game Name" name="game_name_back" required/><br>
+          <input type="submit" class="submit_info" value="REMOVE GAME">
+        </div>
+
+        {% endif %}
+        
+        
+        
+ 
       {% endif %}
+
+
+
 
       <br>
       <!-- <input type="file" id="avatar" name="avatar" accept="image/png, image.jpeg">  -->
