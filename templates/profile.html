@@ -27,27 +27,33 @@
         <img class="anon" src="/static/images/anon_circle.png">
         <input class="pic" type="file" name="image">
 
+
+
       {% elif status == 1 %}
         <img class="anonAdmin" src="/static/images/icon1.png">
         <input class="picAdmin" type="file" name="image">
 
         <form method="POST">
         <div class="boxPlacement">
+
           <label for="request_select" class="box_title"><b>Choose type of Request:</b></label><br>
           <select name="request" id="request_select" class="box_decorations">
-              <option value="" >~~Admin Options~~</option>
-              <option value="Game_New">Insert New Game</option>
-              <option value="Game_Edit">Edit Game</option>
-              <option value="Game_Remove">Remove Game</option>
+              <option value="" >{{ss}}</option>
+              <option value="New Game">New Game</option>
+              <option value="Edit Game">Edit Game</option>
+              <option value="Remove Game">Remove Game</option>
           </select>
+
         </div>
+
+
         
         <input type="submit" name="request" value="Refresh" class="refresh_butt">
       </form>
       
+
         {% if selection == 1 %}
         <div class="dependence">
-          <div class="vertical_line"></div>
           <form method="POST">
           <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
           <input class="text_box" type="text" placeholder="Game Name" name="game_name" required/><br>
@@ -70,23 +76,27 @@
           <div for="Platform" class="box_titles"><b>PLATFORM</b></div>
           <input class="text_box" type="text" placeholder="Platform Distribution" name="platform" required/><br>
 
-          <input type="submit" class="submit_info" name="request" value="Insert New Game">
+          <input type="submit" class="submit_info" name="request" value="INSERT">
         </form>
         </div>
         
 
 
+
+
         {% elif selection == 2 %}
         <div class="dependence">
           <form method="POST">
-          <div for="Game Name" class="box_titles"><b>Retrieve ID</b></div>
-          <input class="text_box" type="text" placeholder="Game Name" name="game_name_back"/>
-          <input type="submit" class="submit_info" name="request" value="Retreive ID">
+            <div for="Game Name" class="box_titles"><b>Retrieve ID</b></div>
+            <input class="text_box" type="text" placeholder="Game Name" name="game_name_back"/>
+            <input type="submit" class="submit_info" name="request" value="Retreive ID">
           <br><br><br></form>
 
+          <div class="game_msg" style="top:-30px; left:0px">ID: {{gameID[0]}}</div>
+          
           <form method="POST">
           <div for="Game ID" class="box_titles"><b>GAME ID</b></div>
-          <input class="text_box" type="text" placeholder="Game ID" name="game_id" required/>
+          <input class="text_box" type="text" placeholder="Game ID" name="game_id_edit" required/>
           <br>
 
           <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
@@ -108,9 +118,9 @@
           <input class="text_box" type="text" placeholder="Game's Price" name="price"/><br>
 
           <div for="Platform" class="box_titles"><b>PLATFORM</b></div>
-          <input class="text_box" type="text" placeholder="Platform Distribution" name="platform"/><br>
+          <input class="text_box" type="text" placeholder="Platform Distribution" name="platform2"/><br>
 
-          <input type="submit" class="submit_info" name="request" value="EDIT GAME">
+          <input type="submit" class="submit_info" name="request" value="EDIT">
         </form>
         </div>
 
@@ -122,7 +132,6 @@
           <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
           <input class="text_box" type="text" placeholder="Game Name" name="game_name_back"/>
           
-          <br>
           <input type="submit" class="submit_info" name="request" value="Retreive ID">
           </form>
 
@@ -130,19 +139,22 @@
 
           <form method="POST">
           <div for="Game ID" class="box_titles"><b>GAME ID</b></div>
-          <input class="text_box" type="text" placeholder="Game ID" name="game_id" required/><br>
+          <input class="text_box" type="number" placeholder="Game ID" name="game_id_3"/>
+          <br>
           <input type="submit" class="submit_info" name="request" value="REMOVE GAME">
+        </form>
+        
         </div>
-      </form>
+        <div style="padding-top: 30px; padding-bottom: 30px;"></div>
+        <div class="game_msg">ID: {{gameID[0]}}</div>
         {% endif %}
         
-        <div class="game_msg">{{gameID[0]}}</div>
         
  
       {% endif %}
 
 
-
+      
 
       <br>
       <!-- <input type="file" id="avatar" name="avatar" accept="image/png, image.jpeg">  -->
