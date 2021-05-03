@@ -344,10 +344,11 @@ def addreleasedon(connection,game_id,platform):
     execute_query(connection,gameidq)
 
 #csv file parser
-def parse_steam_game_csv(connection,reset):
+def parse_steam_game_csv(logger,connection,reset):
     if reset==0:
-        logger2.info("CSV to db deferred")
+        logger.debug("CSV to db deferred")
         return 0
+    logger.debug('Importing CSV to db...')
     with open('static/csv/steam_game.csv',encoding="utf-8")as csv_file:
         csvfile = csv.reader(csv_file,delimiter =',')
         #store all the values in dynamic array
@@ -358,6 +359,7 @@ def parse_steam_game_csv(connection,reset):
             addplatform(connection,row[1])
             addgame(connection, row[0],row[2],row[3],row[4], row[5],row[6],row[7])
             addreleasedon(connection,row[0],row[1])
+    logger.debug('...Importing Complete')
 ########################################################################
 
 def getgamecomments(connection, game_id):
