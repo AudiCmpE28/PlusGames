@@ -3,7 +3,7 @@
 # $env:FLASK_ENV = "development"
 # python -m flask run    
 import logging
-logger = logging.getLogger('initLog')
+logger = logging.getLogger('AppLog')
 logger.setLevel(logging.DEBUG)
 logger.debug('Logger config message')
 fhandler = logging.FileHandler(filename='logfile.log', mode='a',encoding='utf-8')
@@ -83,7 +83,8 @@ selectName=''
 # # # # # # # # #
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+   logger.debug('At user_loader')
+   return User.get(user_id)
 
 
 #*************************************************************************************************
@@ -167,7 +168,7 @@ def home():
 
    ################################
    dbreinit(logger,mysql.connection,resetflag)
-   parse_steam_game_csv(mysql.connection, resetflagcsv)
+   parse_steam_game_csv(logger,mysql.connection, resetflagcsv)
    ################################
    offset=0
    resetflag=0
@@ -185,6 +186,7 @@ def home():
 #*************************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+   logger.debug('Entered /login')
    error = None
    global admin_check
    global semaphore
@@ -197,26 +199,25 @@ def login():
       if request.form.get('username'):
          mem_username=request.form.get('username')
          mem_password= request.form.get('password')
-         print("this is the mem_password from form: ",end='')
-         print(mem_password)
+         # print("this is the mem_password from form: ",end='')
+         # print(mem_password)
          if semaphore == 0:
             admin_check='' #clears if needed
             admin_check = request.form.get('admin_or_mem') #if check box clicked its true
 
          try:
-            print('searching db for '+mem_username)
-
+            # print('searching db for '+mem_username)
             if admin_check: #if slider was set to admin will enter first if
                data = admin_password_retrieve(mysql.connection, mem_username)
             else:
                data = member_password_retrieve(mysql.connection, mem_username)
 
             truncated=data[0][0]
-            print(truncated)
+            # print(truncated)
             unhexlifypw= binascii.unhexlify(truncated)
-            print(truncated)
+            # print(truncated)
             verify(truncated,mem_password)
-            logger.info("Login verification by %s",mem_username)
+            logger.debug("Login verification by %s",mem_username)
             session['mem_username'] = mem_username
             return redirect(url_for('profile'))
 
@@ -254,6 +255,7 @@ def login():
 #*************************************************************************************************
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
+   logger.debug('Entered /profile')
    global admin_check
    global semaphore
    global admin
@@ -371,6 +373,7 @@ def profile():
 #*************************************************************************************************
 @app.route('/logout')
 def logout():
+   logger.debug('Logging out...')
    global semaphore
    # session.pop("user", None)
    # logout_user()
@@ -387,6 +390,7 @@ def logout():
 #*************************************************************************************************
 @app.route('/signup', methods=['GET','POST'])
 def signup():
+   logger.debug('Entered /signup')
    if request.method=='POST':
       mem_username=request.form.get('username')
       mem_email= request.form.get('email')
@@ -405,7 +409,7 @@ def signup():
 
          flash("Thanks for registering!")
          session['logged_in'] = True
-         
+         logger.debug('%s signed up',mem_username)
          return render_template('home.html')
             #       truncated=data[0][0]
             # print(truncated)
@@ -430,6 +434,7 @@ def signup():
 #*************************************************************************************************
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
+   logger.debug('Entered /request_page')
    if "mem_username" in session:
       mem_username = session['mem_username']
       return render_template('request_page.html', mem_username=mem_username)
@@ -445,10 +450,12 @@ def request_page():
 #*************************************************************************************************
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
+   logger.debug('Entered /game_page')
    global Game_identification_number
    game_i=[]
    game_info=game_information(mysql.connection, Game_identification_number)   
    game_i.append(get_url_from_csv(Game_identification_number))
+   logger.debug('Fetched game info and image')
    return render_template('game_page.html', game_page=game_info, game_image=game_i)
 
 
@@ -471,15 +478,18 @@ def game_list(page=1):
       if request.form['submit_button'] == 'Forward':
          if(offset < (page_track-1)):
             offset+=1
+            logger.debug('Next page')
       elif request.form['submit_button'] == 'Back':
          if(offset > 0):
             offset-=1
+            logger.debug('Prev page')
          else:
             offset=0
       else:
          Game_identification_number=request.form.get('submit_button')
          return redirect(url_for('game_page'))
-      
+         
+   logger.debug('Sorting by: %s',type_sort_db)
    if type_sort_db == 'Popular': #POPULAR   
       VideoGames=sortbypopularity(mysql.connection, offset*30, per_page) # offset*10
    elif type_sort_db == 'A to Z': # A to Z (ASCE)

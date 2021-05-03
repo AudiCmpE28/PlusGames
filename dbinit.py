@@ -4,7 +4,7 @@ from flask_mysql_connector import MySQL
 from pyconnector import *
 def dbreinit(logger,connection,bool): #pass in mysql = MySQL(app) from init.py
     if bool==0:
-        logger.info("Database reinitialization deferred")
+        logger.debug("Database reinitialization deferred")
         return 0
     
     ddrop="drop database if exists `+games`;"
