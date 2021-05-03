@@ -86,7 +86,7 @@
 .information{
   top: 170px;
   right: 45px;
-  width: 400px;
+  width: 420px;
   height: 700px;
   background: rgba(255,255,255,0.47999998927116394);
   opacity: 1;
@@ -101,7 +101,7 @@
 
 .info_box{
   height: 699px;
-  width: 399px; 
+  width: 419px; 
   background: black;
   opacity: 74%;
   font-size: 16px;
@@ -184,10 +184,6 @@
 }
 
 
-
-
-
-
 .title_sub{
   color:whitesmoke;
   font-size: 20px;
@@ -195,9 +191,6 @@
   position: relative;
   top: 25px;
 }
-
-
-
 
 
 /*~~Text Boxes~~*/
@@ -288,4 +281,35 @@ input{
   border: none;
 }
 
+.comment_section{
+  position: relative;
+  background: teal;
+  border-color: tomato;
+  max-width: 419px; 
+  margin-bottom: 5px;
+}
 
+.username{
+  position: relative;
+  text-align: center;
+  color: azure;
+  font-size: 25px;
+  vertical-align: text-top;
+  padding: 0px;
+}
+
+.date{
+  position: relative;
+  text-align: right;
+  color: tomato;
+}
+
+.time{
+  position: relative;
+  text-align: left;
+  top: 0px;
+}
+
+.comment_text{
+  position: relative;
+}

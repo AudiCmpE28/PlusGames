@@ -299,9 +299,6 @@ def profile():
          date=request.form.get('date')
          price=request.form.get('price')
          platform=request.form.get('platform')
-         print(game_ID)
-         print(game_n)
-         print(platform)
 
          addcompany(mysql.connection, company)
          addgame(mysql.connection,game_ID,company,game_n,genres,rate,date,price)
@@ -339,13 +336,12 @@ def profile():
 
       elif request.form['request'] == 'REMOVE USER':
          userID=request.form.get('game_id_user')
-         removeuser(mysql.connection, userID)
+         removeuser(mysql.connection, int(userID))
       
       elif request.form['request'] == 'REMOVE GAME':
          gameID=request.form.get('game_id_3') 
          removegame(mysql.connection, gameID)
          
-
    if "mem_username" in session:
       if semaphore == 0:
          semaphore=1
@@ -409,16 +405,8 @@ def signup():
 
          flash("Thanks for registering!")
          session['logged_in'] = True
-         logger.debug('%s signed up',mem_username)
-         return render_template('home.html')
-            #       truncated=data[0][0]
-            # print(truncated)
-            # unhexlifypw= binascii.unhexlify(truncated)
-            # print(truncated)
-            # verify(truncated,mem_password)
-            # logger.info("Login verification by %s",mem_username)
-            # session['mem_username'] = mem_username
-            # return redirect(url_for('profile'))
+         session['mem_username'] = mem_username
+         return redirect(url_for('profile'))
       
       
       except Exception as e:
@@ -450,13 +438,27 @@ def request_page():
 #*************************************************************************************************
 @app.route('/game_page', methods=['GET', 'POST'])
 def game_page():
-   logger.debug('Entered /game_page')
+   global semaphore
    global Game_identification_number
+   game_comments=[]
+   comment=''
+
+   if request.method == 'POST':
+      if request.form['comments'] == 'Postit':
+         comment=request.form['comment']
+
+   if semaphore:  #if user is signed in
+      mem_username = session['mem_username']
+      if comment:
+         addcomment(mysql.connection, mem_username,int(Game_identification_number),comment)
+
+   game_comments.append(getgamecomments(mysql.connection, Game_identification_number))
+
+
    game_i=[]
    game_info=game_information(mysql.connection, Game_identification_number)   
    game_i.append(get_url_from_csv(Game_identification_number))
-   logger.debug('Fetched game info and image')
-   return render_template('game_page.html', game_page=game_info, game_image=game_i)
+   return render_template('game_page.html', game_page=game_info, game_image=game_i, comment=game_comments, status=semaphore)
 
 
 
@@ -554,13 +556,12 @@ def game_list(page=1):
             validID.append(str(clean))
 
    for search in validID:
-      temp=get_url_from_csv(search)
-      if temp:
-         image_url.append(temp)
-      else:
-         image_url.append('/static/images/game_page/fifa.png') 
-         
-      # image_url.append(get_url_from_csv(search))
+      image_url.append(get_url_from_csv(search))
+      # temp=get_url_from_csv(search)
+      # if temp:
+      #    image_url.append(temp)
+      # else:
+      #    image_url.append('/static/images/game_page/default.png') 
 
      
    #pagination assists in orgaizing pages and contents per page

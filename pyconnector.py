@@ -235,6 +235,7 @@ def get_url_from_csv(game_id):
         for row in csvfile:
             if str(game_id)==row[0]:
                 return row[1] 
+        return '/static/images/game_page/default.jpg'
 
 
 def game_ids_with_name(connection, games_name):
@@ -246,7 +247,7 @@ def game_information(connection, game_ID):
 	return read_query(connection,gamealpha)
 
 def addcomment(connection, mem_username,game_id,text):
-    insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
+    insertq="INSERT IGNORE into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
 
 def addreview(connection, mem_username,game_id,text):
@@ -357,8 +358,9 @@ def parse_steam_game_csv(logger,connection,reset):
 ########################################################################
 
 def getgamecomments(connection, game_id):
-    game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
-    return returncolumns(connection,game_comments)
+    # game_comments = "SELECT mem_username, c_date, c_time, comment_text FROM comment_on JOIN Game ON comment_on.game_id = Game.game_id WHERE game_id={} ORDER BY c_time DESC".format(game_id)
+    game_comments = "SELECT mem_username, c_date, c_time, comment_text FROM comment_on WHERE comment_on.game_id={} ORDER BY c_time DESC".format(game_id)
+    return read_query(connection,game_comments)
 
 def addbookmark(connection, mem_username, game_id):
         insertq="insert into bookmarked (mem_username, game_id) values ('{}', {});".format(mem_username, game_id)
