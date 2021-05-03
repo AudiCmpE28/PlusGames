@@ -42,6 +42,7 @@
               <option value="New Game">New Game</option>
               <option value="Edit Game">Edit Game</option>
               <option value="Remove Game">Remove Game</option>
+              <option value="Remove Members">Remove Member</option>
           </select>
 
         </div>
@@ -147,6 +148,16 @@
         </div>
         <div style="padding-top: 30px; padding-bottom: 30px;"></div>
         <div class="game_msg">ID: {{gameID[0]}}</div>
+
+        {% elif selection == 4 %}
+        <div class="dependence">
+          <form method="POST">
+          <div for="Game Name" class="box_titles"><b>Member ID</b></div>
+          <input class="text_box" type="text" placeholder="Game Name" name="game_id_user"/>
+          
+          <input type="submit" class="submit_info" name="request" value="REMOVE USER">
+          </form>
+
         {% endif %}
         
         

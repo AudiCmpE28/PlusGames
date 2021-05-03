@@ -280,7 +280,9 @@ def profile():
          requestbox=2
       elif request.form['request'] == 'Remove Game': 
          selectName='Selection -> Edit Game' 
-         requestbox=3    
+         requestbox=3
+      elif request.form['request'] == 'Remove Members':
+         requestbox=4       
       elif request.form['request'] == 'Retreive ID':
          gameID=request.form.get('game_name_back')  
          gameID=retrieve_game_ID(mysql.connection, gameID)
@@ -333,6 +335,10 @@ def profile():
          else:
             gameID='Invalid ID'   
 
+      elif request.form['request'] == 'REMOVE USER':
+         userID=request.form.get('game_id_user')
+         removeuser(mysql.connection, userID)
+      
       elif request.form['request'] == 'REMOVE GAME':
          gameID=request.form.get('game_id_3') 
          removegame(mysql.connection, gameID)
@@ -401,6 +407,16 @@ def signup():
          session['logged_in'] = True
          
          return render_template('home.html')
+            #       truncated=data[0][0]
+            # print(truncated)
+            # unhexlifypw= binascii.unhexlify(truncated)
+            # print(truncated)
+            # verify(truncated,mem_password)
+            # logger.info("Login verification by %s",mem_username)
+            # session['mem_username'] = mem_username
+            # return redirect(url_for('profile'))
+      
+      
       except Exception as e:
          return (str(e))
    return render_template('signup.html')
