@@ -25,8 +25,9 @@
            
             
             <div class="boxPlacement">
+                <form method="POST">
                 <label for="request_select"><b>Choose type of Request:</b></label><br>
-                <select name="request" id="request_select" class="box_decorations">
+                <select name="submit" id="request_select" class="box_decorations">
                     <option value="">~~Please choose an option~~</option>
                     <option value="Game_New">Request Game </option>
                     <option value="Game_Edit">Request Modification</option>
@@ -34,10 +35,20 @@
 
                 <label for="comment" class="boxPlacement_ct"><b>Comment Box:</b></label><br>
                 <textarea placeholder="Enter your Comment..." class="box_decorations_ct"  name="comment"></textarea>    
+            
+                <div for="Game ID" class=""><b>Game ID</b></div>
+                <input class="" type="number" placeholder="Game ID Number" name="game_id"/><br>
+
+                
+                    <div for="Game Name" class="box_titles"><b>Retrieve ID</b></div>
+                    <input class="" type="text" placeholder="Game Name" name="game_name_back"/>
+                    <input type="submit" class="" name="submit" value="Retreive ID">
+                
             </div>
 
-            <button class="submit_button" type="button" onclick="">Submit</button>
-                
+            <input type="submit" name="submit" value="Submit Form" class="submit_button">
+        </form>
+
         </div>
         <a href="{{ url_for('home') }}">
             <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>

@@ -298,7 +298,7 @@ def retrieve_game_ID(connection, game_name):
 
 #removal queries/admin funcs
 
-def retrievememberrequests(connection):
+def retrieve_member_requests(connection):
     get="Select game_id, mem_username, req_text FROM request_game;"
     read_query(connection, get)
 
@@ -314,8 +314,8 @@ def removegame(connection,game_id):
     query="DELETE FROM Game WHERE game_id ={};".format(game_id)
     execute_query(connection,query)
 
-def removeuser(connection,game_id):
-    query="DELETE from `users` WHERE game_id ={};".format(unique_id)
+def removeuser(connection,unique_id):
+    query="DELETE from `users` WHERE unique_id ={};".format(unique_id)
     execute_query(connection,query)
 
 
@@ -421,3 +421,16 @@ def updategame_releasedon(connection,game_id,platform):
     addreleasedon(connection,game_id,platform)
     q="UPDATE IGNORE released_on SET platform_name=('{}') WHERE game_id=({});".format(platform,game_id)
     execute_query(connection,q) 
+
+
+
+########################################################################
+# functions for Member Profile
+########################################################################
+def update_username(connection,ID, username):
+    q="UPDATE members set mem_username=('{}') where unique_id=({});".format(username,ID)
+    execute_query(connection,q)
+    
+def retrieve_member_ID(connection, member_name):
+    query_ID="SELECT unique_id FROM members WHERE mem_username=('{}');".format(member_name)
+    return read_query(connection, query_ID)

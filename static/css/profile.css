@@ -45,6 +45,14 @@
  .anon{
    height: 200px;
    width: 200px;
+   position: relative;
+   border-style: solid;
+   border-width: thick;
+   border-radius: 50%;
+   border-top-color: rgba(135,255,240,1);
+   border-bottom-color: rgba(140,255,138,1);
+   border-left-color: rgba(135,255,240,1);
+   border-right-color: rgba(140,255,138,1);
  }
 
 .pic{
@@ -55,7 +63,7 @@
  .anonAdmin{
   height: 200px;
   width: 200px;
-  left: 360px;
+  left: 250px;
   position: relative;
   border-style: solid;
   border-width: thick;
@@ -93,7 +101,13 @@
   bottom: 40px;
   border-style: solid;
   border-width: thick;
-  border:lightcoral;
+  border-color:rgba(140,255,138,1);
+ }
+ .logout_button:hover{
+  border-style: solid;
+  border-width: thick;
+  border-color:rgba(135,255,240,1);
+  color: rgba(140,255,138,1);
  }
  
  .upload_profile{
@@ -159,13 +173,6 @@
     outline: 0;
   }
   
-  /* .selection{
-    color: chartreuse;
-    margin-right: 20px;
-    width: 400px;
-    height: 40px;
-    outline: 0;
-  } */
 
   .box_decorations{
     border-style: solid;
@@ -254,11 +261,60 @@
   color:tomato;
 }
 
-​.vertical_line{
+
+/* normal user member satuff */
+.updateUsername{
   position: relative;
-  background: blueviolet;
-  height: 100px;
-  width: 10px;
-  opacity: 1;
-  z-index: 1;
+  margin-top: 30px;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+.updateUsername:hover{
+  box-shadow: 0 0 0 1px rgba(135,255,240,1),
+  0 0 0 3px rgba(140,255,138,1),
+  0 0 0 5px rgba(135,255,240,1),
+  0 0 0 6px rgba(140,255,138,1);
+}
+
+
+
+.deleteAcc{
+  margin-top: 30px;
+  width: 180px;
+  margin-top: 10px;
+  position: relative;
+  border-style: solid;
+  border-width: thick;
+  color: #333;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+.deleteAcc:hover{
+  box-shadow: 0 0 0 1px darkturquoise,
+  0 0 0 3px firebrick,
+  0 0 0 5px orange,
+  0 0 0 6px darkturquoise;
+  color:tomato;
+  background-color: teal;
+}
+.WarnUser{
+  margin-top: 80px;
+  position: relative;
+  font-size: 30px;
+  color: black;
+  -webkit-text-stroke: 2px yellowgreen; /* width and color */
+  font-family: Comic Sans MS;
+}
+
+
+.username{
+  position: relative;
+  margin-top: 50px;
+  font
 }

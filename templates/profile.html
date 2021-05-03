@@ -19,19 +19,42 @@
       <br>
       <div class="Blue_Line"></div>
       <div class="Green_Line"></div>
-      <!-- <h1 class="title_profile"> My Profile </h1> -->
+     
       <h2 style="margin-top: -10%;color: whitesmoke; font-size: 30px; font-family: Roboto">Hello {{mem_username}}!</h2>
-      <!-- <label for="avatar" style="color: white; font-family: Roboto"> Upload profile image:   </label>  -->
       
+
       {% if status == 0 %}
         <img class="anon" src="/static/images/anon_circle.png">
-        <input class="pic" type="file" name="image">
+        
+        <div style="top:80px;"></div>
+        <form method="POST">
+
+        {% if updates == 0 %}
+        <input type="submit" name="request" value="Update Username" class="updateUsername">
+        
+        {% elif updates == 1 %}
+        <div class="username">
+          <div for="User Name" class="box_titles"><b>Update Username</b></div>
+          <input class="text_box" type="text" placeholder="Enter New Username" name="newUsr" required/>
+          <br>
+          <input type="submit" class="submit_info" name="request" value="Update">
+        </div>
+        {% endif %}
+        <br>
+        {% if warning %}
+        <div class="WarnUser"> WARNING: YOU SURE YOU WANT TO DELETE?</div>
+        {% elif warning == 0 %}
+        <div style="padding-top: 80px;"></div>
+        {% endif %}
+        <input type="submit" name="request" value="Remove Account" class="deleteAcc">
+      </form>
+
+
 
 
 
       {% elif status == 1 %}
         <img class="anonAdmin" src="/static/images/icon1.png">
-        <input class="picAdmin" type="file" name="image">
 
         <form method="POST">
         <div class="boxPlacement">
@@ -47,8 +70,6 @@
 
         </div>
 
-
-        
         <input type="submit" name="request" value="Refresh" class="refresh_butt">
       </form>
       
@@ -152,12 +173,13 @@
         {% elif selection == 4 %}
         <div class="dependence">
           <form method="POST">
+            <br><br>
           <div for="ID Member" class="box_titles"><b>Member ID</b></div>
           <input class="number" type="text" placeholder="Member ID " name="game_id_user"/>
-          
+          <br>
           <input type="submit" class="submit_info" name="request" value="REMOVE USER">
           </form>
-
+        </div>
         {% endif %}
         
         

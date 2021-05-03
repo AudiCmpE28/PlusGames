@@ -66,15 +66,19 @@ resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
 resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
-offset=0             # for pages
-page_track=0         # page counter configuration
-type_sort_db=0       # variable used in homepage to pick sort query
+### DO NOT TOUCH THESE          
+offset=0                      
+page_track=0         
+type_sort_db=0       
 Game_identification_number=0
 admin_check=''
+### DO NOT TOUCH THESE
 semaphore=0
 admin=0
 requestbox=0
+deleteWarn=0
 selectName=''
+### DO NOT TOUCH THESE
 #-------------------------------------------------------------------------------
 
 
@@ -104,10 +108,10 @@ def home():
    global resetflagcsv
    global offset
    global type_sort_db
-   global semaphore
    global Game_identification_number
    global requestbox
    global selectName
+   global deleteWarn
    # addadmins(mysql.connection, 69420, 'simonAlta', 'danish_query@sjsu.edu', 'simonAlta108!')
 
    if request.method == 'POST':
@@ -176,6 +180,7 @@ def home():
    resetflagcsv=0
    type_sort_db='CLR'
    requestbox=0
+   deleteWarn=0
    selectName='Admin Select Menu'
    
    return render_template('home.html', loggedIn=semaphore)
@@ -261,6 +266,7 @@ def profile():
    global admin
    global requestbox
    global selectName
+   global deleteWarn
    adminMSG=''
    gameID=''
    game_vertify=''
@@ -272,6 +278,8 @@ def profile():
    date=''
    price=''
    platform=''
+   updateButton=0
+   mem_username = session['mem_username']
 
    if request.method == "POST": 
       if request.form['request'] == 'New Game':
@@ -284,6 +292,7 @@ def profile():
          selectName='Selection -> Edit Game' 
          requestbox=3
       elif request.form['request'] == 'Remove Members':
+         selectName='Selection -> Member Removal'
          requestbox=4       
       elif request.form['request'] == 'Retreive ID':
          gameID=request.form.get('game_name_back')  
@@ -341,6 +350,27 @@ def profile():
       elif request.form['request'] == 'REMOVE GAME':
          gameID=request.form.get('game_id_3') 
          removegame(mysql.connection, gameID)
+
+
+      elif request.form['request'] == 'Remove Account':
+         deleteWarn=deleteWarn+1
+         if deleteWarn == 2:
+            userID=retrieve_member_ID(mysql.connection, mem_username)
+            userID=[i[0] for i in userID] 
+            removeuser(mysql.connection, userID[0])
+            return redirect(url_for('logout'))
+      
+      elif request.form['request'] == 'Update Username':
+         updateButton=1
+
+      elif request.form['request'] == 'Update':
+         username=request.form.get('newUsr')
+         userID=retrieve_member_ID(mysql.connection, mem_username) 
+         userID=[i[0] for i in userID]
+         update_username(mysql.connection, userID[0], username)
+         mem_username=username
+         session['mem_username'] = mem_username
+
          
    if "mem_username" in session:
       if semaphore == 0:
@@ -349,8 +379,6 @@ def profile():
             admin=1
          else:
             admin=0
-
-      mem_username = session['mem_username']
       
       if admin == 1:
          status=1
@@ -358,7 +386,7 @@ def profile():
                                  selection=requestbox, gameID=gameID, ss=selectName)
       else: 
          status=0
-         return render_template('profile.html', mem_username=mem_username, status=status, selection=0)
+         return render_template('profile.html', mem_username=mem_username, status=status, warning=deleteWarn, updates=updateButton)
    else: 
       return render_template('login.html')  #no account or logged in
 
@@ -386,20 +414,15 @@ def logout():
 #*************************************************************************************************
 @app.route('/signup', methods=['GET','POST'])
 def signup():
+   global semaphore
    logger.debug('Entered /signup')
    if request.method=='POST':
       mem_username=request.form.get('username')
       mem_email= request.form.get('email')
       mem_password= request.form.get('password')
       unique_id=random.randint(1,100000)
-      print(mem_username)
-      print(mem_email)
-      print(mem_password)
       encryptedpw=encryptpw(mem_password)
       try:
-         print('Adding to database password: '+mem_password)
-         print('As :', end='')
-         print(encryptedpw)
          addmembers(mysql.connection,unique_id,mem_username,mem_email,encryptedpw)
          #authenticate/create session here?
 
@@ -422,10 +445,33 @@ def signup():
 #*************************************************************************************************
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
-   logger.debug('Entered /request_page')
+   gameID=''
+
+   if request.method == 'POST':
+      if request.form['request'] == 'Retreive ID':
+         gameID=request.form.get('game_name_back')  
+         gameID=retrieve_game_ID(mysql.connection, gameID)
+         gameID=[i[0] for i in gameID]
+      
+      elif request.form['submit'] == 'Submit Form':
+         request_form=request.form['comment']
+         GameID=request.form['game_id']
+
+         if request.form['submit'] == 'Game_New':
+            GameID=random.randint(1,100000)
+            request_change_game(connection,mem_username, GameID, req_text)
+            redirect(url_for('home'))
+         
+         else:
+            game_vertify=does_game_ID_exist(mysql.connection, GameID)
+            if game_vertify != GameID:
+               request_change_game(connection,mem_username, GameID, req_text)
+               redirect(url_for('home'))
+
+
    if "mem_username" in session:
       mem_username = session['mem_username']
-      return render_template('request_page.html', mem_username=mem_username)
+      return render_template('request_page.html', mem_username=mem_username, gameid=gameID)
    else:
       return render_template('login.html')
 
@@ -440,6 +486,7 @@ def request_page():
 def game_page():
    global semaphore
    global Game_identification_number
+   global admin
    game_comments=[]
    comment=''
 
@@ -449,8 +496,9 @@ def game_page():
 
    if semaphore:  #if user is signed in
       mem_username = session['mem_username']
-      if comment:
-         addcomment(mysql.connection, mem_username,int(Game_identification_number),comment)
+      if admin == 0:
+         if comment:
+            addcomment(mysql.connection, mem_username,int(Game_identification_number),comment)
 
    game_comments.append(getgamecomments(mysql.connection, Game_identification_number))
 
@@ -557,11 +605,6 @@ def game_list(page=1):
 
    for search in validID:
       image_url.append(get_url_from_csv(search))
-      # temp=get_url_from_csv(search)
-      # if temp:
-      #    image_url.append(temp)
-      # else:
-      #    image_url.append('/static/images/game_page/default.png') 
 
      
    #pagination assists in orgaizing pages and contents per page
