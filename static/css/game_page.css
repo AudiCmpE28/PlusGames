@@ -3,8 +3,9 @@
 /*Game Page*/
 .title_game_page{
   color:whitesmoke;
-  font-size: 80px;
+  font-size: 70px;
   font-family: Roboto;
+  position: relative;
 }
 
 .Green_Line {
@@ -36,7 +37,7 @@
 }
 
 .medium_box{
-  top: 2px;
+  top: auto;
   width: 1000px;
   height: 900px;
   background: #333;

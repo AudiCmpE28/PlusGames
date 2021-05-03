@@ -19,6 +19,7 @@ fhandler.setFormatter(hformatter)
 logger2.addHandler(fhandler)
 import hashlib
 import binascii
+
 def encryptpw(password):
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
     pwdhash = hashlib.pbkdf2_hmac('sha512',password.encode('utf-8'),salt, 100000)
@@ -130,10 +131,13 @@ def read_query(connection, query):
         cursor.close()
         logger2.debug('Badfetch: '+query)
 
+
 #for testing purposes, returns a string of size length 
 def randomstring(length):
     l = string.ascii_lowercase
     return ''.join(random.choice(l)for i in range(length))
+
+
 
 
 
@@ -230,7 +234,7 @@ def get_url_from_csv(game_id):
         csvfile=csv.reader(csv_file,delimiter=',') 
         for row in csvfile:
             if str(game_id)==row[0]:
-                return row[1]  
+                return row[1] 
 
 
 def game_ids_with_name(connection, games_name):
@@ -265,40 +269,30 @@ def request_change_game(connection,mem_username,game_id,req_text):
         req_text=req_text.replace('--',r'/')
         execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
 
+
+
+
 ###############
 #UPDATE FUNCTIONAS for ADMIN
 #########
+def does_game_ID_exist(connection, gameID):
+    query_ID="SELECT game_id FROM Game WHERE Game.game_id = {};".format(gameID)
+    return read_query(connection, query_ID)
+    
+def gameID_generator(connection):
+    game_vertify=0
+    game_ID=0
+    while game_ID == game_vertify:
+        game_ID=random.randint(0,999999)
+        game_vertify=does_game_ID_exist(connection, game_ID)
+    return game_ID
+
 def retrieve_game_ID(connection, game_name):
     query_ID="SELECT game_id FROM Game WHERE Game.game_n = '{}';".format(game_name)
     return read_query(connection, query_ID)
 
-def updategame_name(connection,game_id, game_n):
-    q="UPDATE game set game_n=('{}') where game_id=({});".format(game_n,game_id)
-    execute_query(connection,q)
 
-def updategame_company(connection,game_id, g_company):
-    q="UPDATE game set g_company=('{}') where game_id=({});".format(g_company,game_id)
-    execute_query(connection,q)
-
-def updategame_genre(connection,game_id, genre):
-    q="UPDATE game set genre=('{}') where game_id=({});".format(genre,game_id)
-    execute_query(connection,q)
-    
-def updategame_rating(connection,game_id, rating):
-    q="UPDATE game set rating=({}) where game_id=({});".format(rating,game_id)
-    execute_query(connection,q)        
-
-def updategame_date(connection,game_id, release_Date):
-    q="UPDATE game set release_Date=('{}') where game_id=({});".format(release_Date,game_id)
-    execute_query(connection,q)
-    
-def updategame_price(connection,game_id, price):
-    q="UPDATE game set price=({}) where game_id=({});".format(price,game_id)
-    execute_query(connection,q)      
-
-def updategame_releasedon(connection,game_id,platform):
-    q="UPDATE released_on set platform=({}) where game_id=({});".format(platform,game_id)
-    execute_query(connection,q)  
+ 
 
 
 #removal queries/admin funcs
@@ -316,12 +310,12 @@ def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
     execute_query(connection,query)
 
 def removegame(connection,game_id):
-    query="DELETE from `games` WHERE game_id ={};".format(game_id)
-    execute_query(connection,game_id)
+    query="DELETE FROM Game WHERE game_id ={};".format(game_id)
+    execute_query(connection,query)
 
 def removeuser(connection,game_id):
     query="DELETE from `users` WHERE game_id ={};".format(unique_id)
-    execute_query(connection,game_id)
+    execute_query(connection,query)
 
 
 
@@ -386,3 +380,40 @@ def member_password_retrieve(connection, member_username):
 def admin_password_retrieve(connection, admin_username):
 	admin_passw = "SELECT admin_password FROM Administrator WHERE admin_username='{}';".format(admin_username)
 	return read_query(connection, admin_passw)   
+
+
+
+########################################################################
+# functions for UPDATE
+########################################################################
+def updategame_name(connection,game_id, game_n):
+    q="UPDATE game set game_n=('{}') where game_id=({});".format(game_n,game_id)
+    execute_query(connection,q)
+
+def updategame_company(connection,game_id, g_company):
+    addcompany(connection,g_company)
+    q="UPDATE game set g_company=('{}') where game_id=({});".format(g_company,game_id)
+    execute_query(connection,q)
+
+
+def updategame_genre(connection,game_id, genre):
+    q="UPDATE game set genre=('{}') where game_id=({});".format(genre,game_id)
+    execute_query(connection,q)
+    
+def updategame_rating(connection,game_id, rating):
+    q="UPDATE game set rating=({}) where game_id=({});".format(rating,game_id)
+    execute_query(connection,q)        
+
+def updategame_date(connection,game_id, release_Date):
+    q="UPDATE game set release_Date=('{}') where game_id=({});".format(release_Date,game_id)
+    execute_query(connection,q)
+    
+def updategame_price(connection,game_id, price):
+    q="UPDATE game set price=({}) where game_id=({});".format(price,game_id)
+    execute_query(connection,q)      
+
+def updategame_releasedon(connection,game_id,platform):
+    addplatform(connection, platform)
+    addreleasedon(connection,game_id,platform)
+    q="UPDATE IGNORE released_on SET platform_name=('{}') WHERE game_id=({});".format(platform,game_id)
+    execute_query(connection,q) 
