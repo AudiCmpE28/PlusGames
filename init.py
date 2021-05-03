@@ -20,6 +20,7 @@ import sys
 import math
 import base64
 import yaml
+import random
 from flask import (Flask, g, redirect, render_template, request, session, url_for, Blueprint, escape, flash)
 from flask_mysql_connector import MySQL
 from mysql.connector import Error
@@ -72,6 +73,8 @@ Game_identification_number=0
 admin_check=''
 semaphore=0
 admin=0
+requestbox=0
+selectName=''
 #-------------------------------------------------------------------------------
 
 
@@ -102,6 +105,8 @@ def home():
    global type_sort_db
    global semaphore
    global Game_identification_number
+   global requestbox
+   global selectName
    # addadmins(mysql.connection, 69420, 'simonAlta', 'danish_query@sjsu.edu', 'simonAlta108!')
 
    if request.method == 'POST':
@@ -169,6 +174,8 @@ def home():
    page_track=1
    resetflagcsv=0
    type_sort_db='CLR'
+   requestbox=0
+   selectName='Admin Select Menu'
    
    return render_template('home.html', loggedIn=semaphore)
    
@@ -181,6 +188,8 @@ def login():
    error = None
    global admin_check
    global semaphore
+   global selectName
+   selectName='Admin Select Menu'
 
    if request.method == "POST": 
       print(request.form.get('username'))
@@ -248,29 +257,86 @@ def profile():
    global admin_check
    global semaphore
    global admin
-   requestbox=0
+   global requestbox
+   global selectName
    adminMSG=''
    gameID=''
+   game_vertify=''
+   game_ID=''
+   company=''
+   game_n=''
+   genres=''
+   rate=''
+   date=''
+   price=''
+   platform=''
 
    if request.method == "POST": 
-      if request.form['request'] == 'Game_New':
-         requestbox=1
-      elif request.form['request'] == 'Game_Edit':
+      if request.form['request'] == 'New Game':
+         selectName='Selection -> New Game'
+         requestbox=1           
+      elif request.form['request'] == 'Edit Game':
+         selectName='Selection -> Edit Game'
          requestbox=2
-      elif request.form['request'] == 'Game_Remove':  
+      elif request.form['request'] == 'Remove Game': 
+         selectName='Selection -> Edit Game' 
          requestbox=3    
-      elif request.form['request'] == 'Insert New Game':  
-         requestbox=1
-      elif request.form['request'] == 'EDIT GAME':  
-         requestbox=1
-      elif request.form['request'] == 'REMOVE GAME':  
-         requestbox=1
       elif request.form['request'] == 'Retreive ID':
-         gameID=request.form.get('game_name_back')    
-         print(gameID)   
+         gameID=request.form.get('game_name_back')  
          gameID=retrieve_game_ID(mysql.connection, gameID)
          gameID=[i[0] for i in gameID]
-         print(gameID) 
+
+      elif request.form['request'] == 'INSERT':  
+         game_ID=gameID_generator(mysql.connection)
+         company=request.form.get('company')
+         game_n=request.form.get('game_name')
+         genres=request.form.get('genre')
+         rate=request.form.get('rating')
+         date=request.form.get('date')
+         price=request.form.get('price')
+         platform=request.form.get('platform')
+         print(game_ID)
+         print(game_n)
+         print(platform)
+
+         addcompany(mysql.connection, company)
+         addgame(mysql.connection,game_ID,company,game_n,genres,rate,date,price)
+         addreleasedon(mysql.connection,game_ID,platform)
+         addreleasedon(mysql.connection,game_ID,platform)
+      
+      elif request.form['request'] == 'EDIT':  
+         gameID=request.form.get('game_id_edit') 
+         game_vertify=does_game_ID_exist(mysql.connection, gameID)
+         if game_vertify != gameID:
+            game_n=request.form.get('game_name')
+            company=request.form.get('company')
+            genres=request.form.get('genre')
+            rate=request.form.get('rating')
+            date=request.form.get('date')
+            price=request.form.get('price')
+            platform=request.form.get('platform2')
+
+            if game_n != '':
+               updategame_name(mysql.connection,gameID, str(game_n))
+            if company != '':
+               updategame_company(mysql.connection,gameID, str(company))
+            if genres != '':
+               updategame_genre(mysql.connection,gameID, str(genres))
+            if rate != '':
+               updategame_rating(mysql.connection,gameID, rate)
+            if date != '':
+               updategame_date(mysql.connection,gameID, str(date))
+            if price != '':   
+               updategame_price(mysql.connection,gameID, price)
+            if platform != '':
+               updategame_releasedon(mysql.connection,gameID, str(platform))
+         else:
+            gameID='Invalid ID'   
+
+      elif request.form['request'] == 'REMOVE GAME':
+         gameID=request.form.get('game_id_3') 
+         removegame(mysql.connection, gameID)
+         
 
    if "mem_username" in session:
       if semaphore == 0:
@@ -284,12 +350,11 @@ def profile():
       
       if admin == 1:
          status=1
-         return render_template('profile.html', mem_username=mem_username, status=status, selection=requestbox, gameID=gameID)
-
+         return render_template('profile.html', mem_username=mem_username, status=status, 
+                                 selection=requestbox, gameID=gameID, ss=selectName)
       else: 
          status=0
          return render_template('profile.html', mem_username=mem_username, status=status, selection=0)
-
    else: 
       return render_template('login.html')  #no account or logged in
 
@@ -463,7 +528,14 @@ def game_list(page=1):
             validID.append(str(clean))
 
    for search in validID:
-      image_url.append(get_url_from_csv(search))
+      temp=get_url_from_csv(search)
+      if temp:
+         image_url.append(temp)
+      else:
+         image_url.append('/static/images/game_page/fifa.png') 
+         
+      # image_url.append(get_url_from_csv(search))
+
      
    #pagination assists in orgaizing pages and contents per page
    pagination = Pagination(page=page, per_page=per_page, format_number=True, 
