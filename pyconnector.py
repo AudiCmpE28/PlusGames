@@ -259,16 +259,13 @@ def retrievereviews(connection,game_id):
     execute_query(connection,getreviews)
 
 def request_change_game(connection,mem_username,game_id,req_text):
-    game_vertify=does_game_ID_exist(mysql.connection, game_id)
-    if game_id != game_vertify:    
-        addcompany(connection, 'TBA')
-        addgame(connection,game_id, 'TBA', 'TBA', 'TBA', 0, '0000-00-00', 0)
-        addplatform(connection, 'TBA')
-        addreleasedon(connection, game_id, 'TBA')
+    addcompany(connection, 'TBA')
+    addgame(connection,game_id, 'TBA', 'TBA', 'TBA', 0, '0000-00-00', 0)
+    addplatform(connection, 'TBA')
+    addreleasedon(connection, game_id, 'TBA')
 
-        qq="Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text)
-        execute_query(connection, qq)
- 
+    qq="Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text)
+    execute_query(connection, qq)
 
 
 
@@ -284,7 +281,7 @@ def gameID_generator(connection):
     game_vertify=0
     game_ID=0
     while game_ID == game_vertify:
-        game_ID=random.randint(0,999999)
+        game_ID=random.randint(10,999999)
         game_vertify=does_game_ID_exist(connection, game_ID)
     return game_ID
 

@@ -64,7 +64,7 @@ login_manager.init_app(app)
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
-resetflagcsv=0      # Set to 1 if you want to reimport the csv to database
+resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 ### DO NOT TOUCH THESE          
 offset=0                      
@@ -450,13 +450,14 @@ def request_page():
 
          if gameID == 0:
             gameID=gameID_generator(mysql.connection)
-            print(gameID)
             request_change_game(mysql.connection, mem_username, gameID, request_comm)
             redirect(url_for('home'))
          else:
-            print(gameID)
             game_vertify=does_game_ID_exist(mysql.connection, gameID)
-            if game_vertify != gameID:
+            game_vertify=[x[0] for x in game_vertify]
+            game_vertify=game_vertify[0]
+
+            if game_vertify == gameID:
                request_change_game(mysql.connection, mem_username, gameID, request_comm)
                redirect(url_for('home'))
 
