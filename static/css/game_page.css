@@ -3,8 +3,9 @@
 /*Game Page*/
 .title_game_page{
   color:whitesmoke;
-  font-size: 80px;
+  font-size: 70px;
   font-family: Roboto;
+  position: relative;
 }
 
 .Green_Line {
@@ -36,7 +37,7 @@
 }
 
 .medium_box{
-  top: 2px;
+  top: auto;
   width: 1000px;
   height: 900px;
   background: #333;
@@ -85,7 +86,7 @@
 .information{
   top: 170px;
   right: 45px;
-  width: 400px;
+  width: 420px;
   height: 700px;
   background: rgba(255,255,255,0.47999998927116394);
   opacity: 1;
@@ -100,7 +101,7 @@
 
 .info_box{
   height: 699px;
-  width: 399px; 
+  width: 419px; 
   background: black;
   opacity: 74%;
   font-size: 16px;
@@ -183,10 +184,6 @@
 }
 
 
-
-
-
-
 .title_sub{
   color:whitesmoke;
   font-size: 20px;
@@ -194,9 +191,6 @@
   position: relative;
   top: 25px;
 }
-
-
-
 
 
 /*~~Text Boxes~~*/
@@ -287,4 +281,41 @@ input{
   border: none;
 }
 
+.comment_section{
+  position: relative;
+  background: teal;
+  border-color: tomato;
+  max-width: 419px; 
+  margin-bottom: 8px;
+  height: auto;
+}
 
+.username{
+  position: relative;
+  text-align: center;
+  color: azure;
+  font-size: 25px;
+  vertical-align: text-top;
+  padding: 0px;
+  background-color: salmon;
+}
+
+.date{
+  position: relative;
+  text-align: right;
+  color: tomato;
+}
+
+.time{
+  position: absolute;
+  text-align: left;
+  top: 0px;
+}
+
+.comment_text{
+  position: relative;
+  font-size: 25px;
+  margin-top: 10px;
+  font-family: Comic San MS;
+  color: greenyellow;
+}

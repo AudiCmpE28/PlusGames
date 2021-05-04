@@ -19,6 +19,7 @@ fhandler.setFormatter(hformatter)
 logger2.addHandler(fhandler)
 import hashlib
 import binascii
+
 def encryptpw(password):
     salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
     pwdhash = hashlib.pbkdf2_hmac('sha512',password.encode('utf-8'),salt, 100000)
@@ -130,10 +131,13 @@ def read_query(connection, query):
         cursor.close()
         logger2.debug('Badfetch: '+query)
 
+
 #for testing purposes, returns a string of size length 
 def randomstring(length):
     l = string.ascii_lowercase
     return ''.join(random.choice(l)for i in range(length))
+
+
 
 
 
@@ -230,7 +234,8 @@ def get_url_from_csv(game_id):
         csvfile=csv.reader(csv_file,delimiter=',') 
         for row in csvfile:
             if str(game_id)==row[0]:
-                return row[1]  
+                return row[1] 
+        return '/static/images/game_page/default.jpg'
 
 
 def game_ids_with_name(connection, games_name):
@@ -242,7 +247,7 @@ def game_information(connection, game_ID):
 	return read_query(connection,gamealpha)
 
 def addcomment(connection, mem_username,game_id,text):
-    insertq="insert into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
+    insertq="INSERT IGNORE into comment_on (mem_username, game_id,c_date,c_time,comment_text) values ('{}', {},NOW(),NOW(), '{}');".format(mem_username,game_id,text)
     execute_query(connection, insertq)
 
 def addreview(connection, mem_username,game_id,text):
@@ -253,53 +258,19 @@ def retrievereviews(connection,game_id):
     getreviews="SELECT * FROM review_on WHERE Game.game_id={};".format(game_id)
     execute_query(connection,getreviews)
 
+
+
+
 def request_change_game(connection,mem_username,game_id,req_text):
-    #if request is for existing game, else create a new game entry
-    if read_query("SELECT game_id FROM game where game.game_id = {}".format(game_id)):
-        req_text=req_text.replace('',r'\'')
-        req_text=req_text.replace('--',r'/')
-        execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
-    else:
-        q="insert into game (game_id) values ({});".format(game_id)
-        req_text=req_text.replace('',r'\'')
-        req_text=req_text.replace('--',r'/')
-        execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
-
-
-
-#removal queries/admin funcs
-
-def updaterequest_game(connection, game_id, g_company, game_n,genre,rating,release_Date,price,platform):
-    addcompany(connection, g_company)
-    q="UPDATE game g set g_company='{}',game_n='{}',genre='{}',rating={},release_Date='{}',price={} where g.game_id={} ;".format(g_company, game_n,genre,rating,release_Date,price,game_id)
-    execute_query(connection,q)
-    addplatform(connection,platform)
-
-
-def retrievememberrequests(connection):
-    get="Select game_id, mem_username, req_text FROM request_game;"
-    read_query(connection, get)
-
-def removerequest(connection, game_id):
-    rem="Delete from reqest_game r where r.game_id={}".format(game_id)
-    execute_query(connection,rem)
-
-def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
-    query="DELETE FROM `review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)
-    execute_query(connection,query)
-
-def removegame(connection,game_id):
-    query="DELETE from `games` WHERE game_id ={};".format(game_id)
-    execute_query(connection,game_id)
-
-def removeuser(connection,game_id):
-    query="DELETE from `users` WHERE game_id ={};".format(unique_id)
-    execute_query(connection,game_id)
-
+    addcompany(connection, 'TBA')
+    addgame(connection,game_id, 'TBA', 'TBA', 'TBA', 0, '0000-00-00', 0)
+    addplatform(connection, 'TBA')
+    addreleasedon(connection, game_id, 'TBA')
+    qq="Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text)
+    execute_query(connection, qq)
 
 
 ######################## Company, Game, Platform, Released on ##########
-
 def addcompany(connection, company):
     companyq="Insert IGNORE company values ('{}')".format(company)
     execute_query(connection,companyq)
@@ -316,11 +287,68 @@ def addreleasedon(connection,game_id,platform):
     gameidq = "insert IGNORE into released_on (game_id,platform_name) values ({},'{}');".format(game_id,platform)
     execute_query(connection,gameidq)
 
+
+
+
+
+
+
+###############
+#UPDATE FUNCTIONAS for ADMIN
+#########
+def does_game_ID_exist(connection, gameID):
+    query_ID="SELECT game_id FROM Game WHERE Game.game_id = {};".format(gameID)
+    return read_query(connection, query_ID)
+    
+def gameID_generator(connection):
+    game_vertify=0
+    game_ID=0
+    while game_ID == game_vertify:
+        game_ID=random.randint(10,999999)
+        game_vertify=does_game_ID_exist(connection, game_ID)
+    return game_ID
+
+def retrieve_game_ID(connection, game_name):
+    query_ID="SELECT game_id FROM Game WHERE Game.game_n = '{}';".format(game_name)
+    return read_query(connection, query_ID)
+
+
+ 
+
+
+#removal queries/admin funcs
+def retrieve_member_requests(connection):
+    get="SELECT * FROM request_game;"
+    return read_query(connection, get)
+
+
+def removerequest(connection, game_id):
+    rem="DELETE FROM request_game WHERE game_id={};".format(game_id)
+    execute_query(connection,rem)
+
+
+
+def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
+    query="DELETE FROM `review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)
+    execute_query(connection,query)
+
+def removegame(connection,game_id):
+    query="DELETE FROM Game WHERE game_id ={};".format(game_id)
+    execute_query(connection,query)
+
+def removeuser(connection,unique_id):
+    query="DELETE from `users` WHERE unique_id ={};".format(unique_id)
+    execute_query(connection,query)
+
+
+
+
 #csv file parser
-def parse_steam_game_csv(connection,reset):
+def parse_steam_game_csv(logger,connection,reset):
     if reset==0:
-        logger2.info("CSV to db deferred")
+        logger.debug("CSV to db deferred")
         return 0
+    logger.debug('Importing CSV to db...')
     with open('static/csv/steam_game.csv',encoding="utf-8")as csv_file:
         csvfile = csv.reader(csv_file,delimiter =',')
         #store all the values in dynamic array
@@ -331,11 +359,13 @@ def parse_steam_game_csv(connection,reset):
             addplatform(connection,row[1])
             addgame(connection, row[0],row[2],row[3],row[4], row[5],row[6],row[7])
             addreleasedon(connection,row[0],row[1])
+    logger.debug('...Importing Complete')
 ########################################################################
 
 def getgamecomments(connection, game_id):
-    game_comments = "select mem_username, c_date, c_time, comment_text from comment_on join Game on comment_on.game_id = Game.game_id where game_id={} order by c_time desc".format(game_id)
-    return returncolumns(connection,game_comments)
+    # game_comments = "SELECT mem_username, c_date, c_time, comment_text FROM comment_on JOIN Game ON comment_on.game_id = Game.game_id WHERE game_id={} ORDER BY c_time DESC".format(game_id)
+    game_comments = "SELECT mem_username, c_date, c_time, comment_text FROM comment_on WHERE comment_on.game_id={} ORDER BY c_time DESC".format(game_id)
+    return read_query(connection,game_comments)
 
 def addbookmark(connection, mem_username, game_id):
         insertq="insert into bookmarked (mem_username, game_id) values ('{}', {});".format(mem_username, game_id)
@@ -359,3 +389,53 @@ def member_password_retrieve(connection, member_username):
 def admin_password_retrieve(connection, admin_username):
 	admin_passw = "SELECT admin_password FROM Administrator WHERE admin_username='{}';".format(admin_username)
 	return read_query(connection, admin_passw)   
+
+
+
+########################################################################
+# functions for UPDATE
+########################################################################
+def updategame_name(connection,game_id, game_n):
+    q="UPDATE game set game_n=('{}') where game_id=({});".format(game_n,game_id)
+    execute_query(connection,q)
+
+def updategame_company(connection,game_id, g_company):
+    addcompany(connection,g_company)
+    q="UPDATE game set g_company=('{}') where game_id=({});".format(g_company,game_id)
+    execute_query(connection,q)
+
+
+def updategame_genre(connection,game_id, genre):
+    q="UPDATE game set genre=('{}') where game_id=({});".format(genre,game_id)
+    execute_query(connection,q)
+    
+def updategame_rating(connection,game_id, rating):
+    q="UPDATE game set rating=({}) where game_id=({});".format(rating,game_id)
+    execute_query(connection,q)        
+
+def updategame_date(connection,game_id, release_Date):
+    q="UPDATE game set release_Date=('{}') where game_id=({});".format(release_Date,game_id)
+    execute_query(connection,q)
+    
+def updategame_price(connection,game_id, price):
+    q="UPDATE game set price=({}) where game_id=({});".format(price,game_id)
+    execute_query(connection,q)      
+
+def updategame_releasedon(connection,game_id,platform):
+    addplatform(connection, platform)
+    addreleasedon(connection,game_id,platform)
+    q="UPDATE IGNORE released_on SET platform_name=('{}') WHERE game_id=({});".format(platform,game_id)
+    execute_query(connection,q) 
+
+
+
+########################################################################
+# functions for Member Profile
+########################################################################
+def update_username(connection,ID, username):
+    q="UPDATE members set mem_username=('{}') where unique_id=({});".format(username,ID)
+    execute_query(connection,q)
+    
+def retrieve_member_ID(connection, member_name):
+    query_ID="SELECT unique_id FROM members WHERE mem_username=('{}');".format(member_name)
+    return read_query(connection, query_ID)

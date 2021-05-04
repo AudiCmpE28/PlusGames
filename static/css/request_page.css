@@ -27,7 +27,7 @@
   .medium_box{
     top: 5px;
     width: 680px;
-    height: 750px;
+    height: 820px;
     background: #333;
     opacity: 1;
     position: relative;
@@ -36,7 +36,7 @@
   .smoll_box{
     top: 15px;
     width: 510px;
-    height: 490px;
+    height: 550px;
     background: rgba(255,255,255,0.47999998927116394);
     opacity: 1;
     position: relative;
@@ -97,14 +97,61 @@
     border-right-color: rgba(140,255,138,1);
     max-width: 400px; 
     min-width: 400px;
-    max-height: 260px;
-    min-height: 260px;
+    max-height: 180px;
+    min-height: 180px;
     border-style: solid;
     border-width: thick;
     word-wrap: break-word;
   }
   
+.gameidnum{
+  position: relative;
+  margin-top: 10px;
+  color:rebeccapurple;
+  font-size: 20px;
+  font-family: Roboto;
+}
 
+.gameid{
+  position: relative;
+  margin-top: 10px;
+  color:whitesmoke;
+  font-size: 20px;
+  font-family: Roboto;
+}
+
+.gameidBOX{
+  position: relative;
+  border-style: solid;
+  border-width: thick;
+  width: 400px;
+  height: 20px;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.gameName{
+  position: relative;
+  margin-top: 30px;
+  color: teal;
+  font-size: 20px;
+  font-family: Roboto;
+}
+
+.gameNameButton{
+  position: relative;
+  margin-left: 20px;
+  border-color: #23C6C6;
+}
+
+.gameNameBOX{
+  position: relative;
+  border-style: solid;
+  border-width: thick;
+  border-color: #23C6C6;
+}
 
   /*~~Submit button~~*/
 .submit_button{
@@ -114,9 +161,8 @@
     font-size: 15px;
     width: 90px;
     height: 40px;
-    top: 40px;
     text-align: center;
-
+    margin-top: 20px;
     color: #23C6C6 ;
     background-color: white;
     border-style: solid;

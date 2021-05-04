@@ -1,3 +1,4 @@
+<!-- SJSU CMPE 138 Spring 2021 TEAM1 -->
 <!DOCTYPE html>
 <html>
 
@@ -23,21 +24,28 @@
 
         <div class="smoll_box">
            
-            
             <div class="boxPlacement">
-                <label for="request_select"><b>Choose type of Request:</b></label><br>
-                <select name="request" id="request_select" class="box_decorations">
-                    <option value="">~~Please choose an option~~</option>
-                    <option value="Game_New">Request Game </option>
-                    <option value="Game_Edit">Request Modification</option>
-                </select><br><br>
 
-                <label for="comment" class="boxPlacement_ct"><b>Comment Box:</b></label><br>
-                <textarea placeholder="Enter your Comment..." class="box_decorations_ct"  name="comment"></textarea>    
+                <form method="POST">
+                    <label for="req txt" class="boxPlacement_ct"><b>Comment Box:</b></label><br>
+                    <textarea placeholder="Enter your Request Here... Detailed Description" class="box_decorations_ct" name="req_txt" required></textarea>
+            
+                    <div for="Game ID" class="gameid"><b>Enter Game ID:</b></div>
+                    <input class="gameidBOX" type="number" placeholder="If game needs 'EDIT' Enter ID   ---  Enter 0 for game not in Library" name="game_id" required /><br>
+            
+                    <input type="submit" name="submit" value="Submit Form" class="submit_button">
+                </form>
+            
+                <form method="POST">
+                    <div for="Game Name" class="gameName"><b>Retrieve ID</b></div>
+                    <input class="gameNameBOX" type="text" placeholder="Game Name" name="game_name_back"/>
+                    <input type="submit" class="gameNameButton" name="submit" value="Retrieve ID">
+                    <div class="gameidnum"><b>{{gameid}}</b></div>
+                </form>
+            
             </div>
+        
 
-            <button class="submit_button" type="button" onclick="">Submit</button>
-                
         </div>
         <a href="{{ url_for('home') }}">
             <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick=""/>

@@ -7,63 +7,105 @@
 }
 
 .Green_Line {
-  width: 680px;
+  width: 860px;
   height: 17px;
   background: rgba(140,255,138,1);
-  opacity: 1;
-  position: relative;
-  top: -90px;
-}
-
-.Blue_Line {
-  width: 680px;
-  height: 17px;
-  background: rgba(135,255,240,1);
   opacity: 1;
   position: relative;
   top: -100px;
 }
 
+.Blue_Line {
+  width: 860px;
+  height: 17px;
+  background: rgba(135,255,240,1);
+  opacity: 1;
+  position: relative;
+  top: -110px;
+}
+
 
 .medium_box{
-  top: 5px;
-  width: 680px;
-  height: 721px;
+  width: 860px;
+  height: 900px;
   background: #333;
   opacity: 1;
   position: relative;
 }
 
-/* .title_sub{
-  color:rgb(255, 255, 255);
-  font-size: 20px;
-  font-family: Roboto;
-  position: relative;
-  top: 25px;
-} */
 
  /* Profile Image Icon */
  .anon{
-   height: 300px;
-   width: 300px;
+   height: 200px;
+   width: 200px;
+   position: relative;
+   border-style: solid;
+   border-width: thick;
+   border-radius: 50%;
+   border-top-color: rgba(135,255,240,1);
+   border-bottom-color: rgba(140,255,138,1);
+   border-left-color: rgba(135,255,240,1);
+   border-right-color: rgba(140,255,138,1);
  }
+
+.pic{
+  position: relative;
+}
+
+
+ .anonAdmin{
+  height: 200px;
+  width: 200px;
+  left: 250px;
+  position: relative;
+  border-style: solid;
+  border-width: thick;
+  border-radius: 50%;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.picAdmin{
+  position: relative;
+  left: 210px;
+  top: 32px;
+  border-style: solid;
+  border-width: thick;
+  width: 87px;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
  
  .logout_button {
-  color: #23C6C6 ;
+  color: aqua;
   background-color: white;
   position: absolute;
   font-family: Roboto;
   font-weight: Regular;
-  font-size: 15px;
-  width: 90px;
+  font-size: 25px;
+  width: 120px;
   height: 40px;
-  right: 40px;
-  bottom: 40px;
+  bottom: 20px;
   border-style: solid;
   border-width: thick;
-  border:lightcoral;
+  border-color:red;
  }
  
+ 
+ .logout_button:hover{
+  color: red;
+  border-style: solid;
+  border-width: thick;
+  border-color:rgba(135,255,240,1);
+  color: rgba(140,255,138,1);
+ }
+ 
+
  .upload_profile{
   color: #23C6C6 ;
   background-color: white;
@@ -77,7 +119,6 @@
   bottom: 40px;
   border-style: solid;
   border-width: thick;
-  
  }
 
  .label{
@@ -113,3 +154,237 @@
   border: none;
 }
  
+  /*Selection Box*/
+  .box_title{
+    color:seashell;
+    font-size: 20px;
+  }
+
+  .boxPlacement{
+    position: relative;
+    bottom: 230px;
+    right: 190px;
+    text-align: center;
+    border-radius: 5px;
+    outline: 0;
+  }
+  
+
+  .box_decorations{
+    border-style: solid;
+    border-width: thick;
+    border-top-color: rgba(135,255,240,1);
+    border-bottom-color: rgba(140,255,138,1);
+    border-left-color: rgba(135,255,240,1);
+    border-right-color: rgba(140,255,138,1);
+    width: 400px;
+    height: 40px;
+    outline: 0;
+  }
+
+  .refresh_butt{
+    position: relative;
+    bottom: 220px;
+    right: 190px;
+    background-color: whitesmoke;
+    color: teal;
+    width: 100px;
+    height: 20px;
+    box-shadow: 0 0 0 1px darkturquoise,
+    0 0 0 2px firebrick,
+    0 0 0 3px orange,
+    0 0 0 4px darkturquoise;
+    outline: dashed 6px darkturquoise;
+  }
+
+  .dependence{
+    position: relative;
+    bottom: 190px;
+    right: 200px;
+  }
+
+  .game_msg{
+    position: relative;
+    color:white;
+    font-size: 30px;
+    bottom: 383px;
+    right: 50px;
+  }
+
+  
+/* fill in options */
+.box_titles{
+  color:aqua;
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+  margin-right: 25px;
+  margin-bottom: 10px;
+}
+
+.text_box{
+  position: relative;
+  outline: 0;
+  height: 20px;
+  border-style: solid;
+  border-width: thin;
+  border-top-color: red;
+  border-bottom-color: red;
+  border-left-color: red;
+  border-right-color: red;
+}
+
+.submit_info{
+  position: relative;
+  margin-top: 30px;
+  color:teal;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+  outline: 0;
+  width: 140px;
+  height: 35px;
+}
+
+.submit_info:hover{
+  box-shadow: 0 0 0 1px darkturquoise,
+  0 0 0 3px firebrick,
+  0 0 0 5px orange,
+  0 0 0 6px darkturquoise;
+  color:tomato;
+}
+
+
+/* normal user member satuff */
+.updateUsername{
+  position: relative;
+  margin-top: 30px;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+.updateUsername:hover{
+  box-shadow: 0 0 0 1px rgba(135,255,240,1),
+  0 0 0 3px rgba(140,255,138,1),
+  0 0 0 5px rgba(135,255,240,1),
+  0 0 0 6px rgba(140,255,138,1);
+}
+
+
+
+.deleteAcc{
+  margin-top: 30px;
+  width: 180px;
+  margin-top: 10px;
+  position: relative;
+  border-style: solid;
+  border-width: thick;
+  color: #333;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+.deleteAcc:hover{
+  box-shadow: 0 0 0 1px darkturquoise,
+  0 0 0 3px firebrick,
+  0 0 0 5px orange,
+  0 0 0 6px darkturquoise;
+  color:tomato;
+  background-color: teal;
+}
+.WarnUser{
+  margin-top: 80px;
+  position: relative;
+  font-size: 30px;
+  color: black;
+  -webkit-text-stroke: 2px yellowgreen; /* width and color */
+  font-family: Comic Sans MS;
+}
+
+
+.username{
+  position: relative;
+  margin-top: 50px;
+}
+
+.game_req_box {
+  position: absolute;
+  right: 15px;
+  width: 350px;
+  height: 360px;
+  bottom: 80px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.game_req_inside{
+  width: 350px;
+  height: 360px;
+  background: black;
+  opacity: 74%;
+  font-size: 16px;
+  font-family: Courier; 
+  overflow: auto;
+  text-align: left;
+  border:1px solid
+}
+
+.messages{
+  position: relative;
+  background-color: turquoise;
+  width: 334px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+
+.messages1{
+  position: relative;
+  background-color: ghostwhite;
+  font-family: fantasy;
+  font-size: 18px;
+
+}
+.messages2{
+  position: relative;
+  background-color: goldenrod;
+  color: purple;
+  text-align: right;
+  font-family: fantasy;
+  font-size: 20px;
+}
+.messages3{
+  position: relative;
+  font-family: fantasy;
+  font-size: 25px;
+  text-align: left;
+}
+
+.submit_button{
+  margin: 3px;
+  position: relative;
+  left: 40%;
+  color: green;
+  border-style: solid;
+  border-width: thick;
+  border-color: brown;
+}
+
+.submit_button:hover{
+  border-color: darkblue;
+  color: red;
+}
+

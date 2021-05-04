@@ -1,3 +1,4 @@
+<!-- SJSU CMPE 138 Spring 2021 TEAM1 -->
 <!DOCTYPE html>
 <html>
 
@@ -19,15 +20,195 @@
       <br>
       <div class="Blue_Line"></div>
       <div class="Green_Line"></div>
-      <!-- <h1 class="title_profile"> My Profile </h1> -->
+     
       <h2 style="margin-top: -10%;color: whitesmoke; font-size: 30px; font-family: Roboto">Hello {{mem_username}}!</h2>
-      <!-- <label for="avatar" style="color: white; font-family: Roboto"> Upload profile image:   </label>  -->
       
+
       {% if status == 0 %}
-      <img class="anon" src="/static/images/anon_circle.png">
+        <img class="anon" src="/static/images/anon_circle.png">
+        
+        <div style="top:80px;"></div>
+        
+
+        <form method="POST">
+        {% if updates == 0 %}
+        <input type="submit" name="request" value="Update Username" class="updateUsername">
+        
+        {% elif updates == 1 %}
+        <div class="username">
+          <div for="User Name" class="box_titles"><b>Update Username</b></div>
+          <input class="text_box" type="text" placeholder="Enter New Username" name="newUsr" required/>
+          <br>
+          <input type="submit" class="submit_info" name="request" value="Update">
+        </div>
+      </form>
+        {% endif %}
+        <br>
+        <form method="POST">
+        {% if warning %}
+        <div class="WarnUser"> WARNING: YOU SURE YOU WANT TO DELETE?</div>
+        {% elif warning == 0 %}
+        <div style="padding-top: 80px;"></div>
+        {% endif %}
+        <input type="submit" name="request" value="Remove Account" class="deleteAcc">
+      </form>
+
+
+
+
+
       {% elif status == 1 %}
-      <img class="anon" src="/static/images/admin.png">
+        <img class="anonAdmin" src="/static/images/icon1.png">
+
+        <div class="game_req_box">
+          <div class="game_req_inside">
+          {% for display in messages %}
+            {% for box in display %}
+            <div class="messages">
+            <div class="messages1">Member: <b>{{box[0]}}</b></div>
+            <div class="messages2">Game ID: {{box[1]}}</div>
+            <div class="messages3"><b>Description:</b><br> {{box[2]}}</div>
+            <form method="POST">
+            <button class="submit_button" type="submit" name="request" value="{{box[1]}}">Checked</button>
+          </form>
+          </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+        </div>
+
+
+        <form method="POST">
+        <div class="boxPlacement">
+          <label for="request_select" class="box_title"><b>Choose type of Request:</b></label><br>
+          <select name="request" id="request_select" class="box_decorations">
+              <option value="" >{{ss}}</option>
+              <option value="New Game">New Game</option>
+              <option value="Edit Game">Edit Game</option>
+              <option value="Remove Game">Remove Game</option>
+              <option value="Remove Members">Remove Member</option>
+          </select>
+
+        </div>
+
+        <input type="submit" name="request" value="Refresh" class="refresh_butt">
+      </form>
+      
+
+        {% if selection == 1 %}
+        <div class="dependence">
+          <form method="POST">
+          <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
+          <input class="text_box" type="text" placeholder="Game Name" name="game_name" required/><br>
+
+          <div for="Game Company" class="box_titles"><b>COMPANY</b></div>
+          <input class="text_box" type="text" placeholder="Game Company Name" name="company" required/><br>
+
+          <div for="Game Genre" class="box_titles"><b>GENRE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Genre" name="genre" required/><br>
+
+          <div for="RATE" class="box_titles"><b>RATING</b></div>
+          <input class="text_box" type="text" placeholder="Game's Rating" name="rating" required/><br>
+
+          <div for="Release Date" class="box_titles"><b>RELEASE DATE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Date" name="date" required/><br>
+
+          <div for="Price" class="box_titles"><b>PRICE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Price" name="price" required/><br>
+
+          <div for="Platform" class="box_titles"><b>PLATFORM</b></div>
+          <input class="text_box" type="text" placeholder="Platform Distribution" name="platform" required/><br>
+
+          <input type="submit" class="submit_info" name="request" value="INSERT">
+        </form>
+        </div>
+        
+
+
+
+
+        {% elif selection == 2 %}
+        <div class="dependence">
+          <form method="POST">
+            <div for="Game Name" class="box_titles"><b>Retrieve ID</b></div>
+            <input class="text_box" type="text" placeholder="Game Name" name="game_name_back"/>
+            <input type="submit" class="submit_info" name="request" value="Retreive ID">
+          <br><br><br></form>
+
+          <div class="game_msg" style="top:-30px; left:0px">ID: {{gameID[0]}}</div>
+          
+          <form method="POST">
+          <div for="Game ID" class="box_titles"><b>GAME ID</b></div>
+          <input class="text_box" type="text" placeholder="Game ID" name="game_id_edit" required/>
+          <br>
+
+          <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
+          <input class="text_box" type="text" placeholder="Game Name" name="game_name"/><br>
+
+          <div for="Game Company" class="box_titles"><b>COMPANY</b></div>
+          <input class="text_box" type="text" placeholder="Game Company Name" name="company"/><br>
+
+          <div for="Game Genre" class="box_titles"><b>GENRE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Genre" name="genre"/><br>
+
+          <div for="RATE" class="box_titles"><b>RATING</b></div>
+          <input class="text_box" type="text" placeholder="Game's Rating" name="rating"/><br>
+
+          <div for="Release Date" class="box_titles"><b>RELEASE DATE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Date" name="date"/><br>
+
+          <div for="Price" class="box_titles"><b>PRICE</b></div>
+          <input class="text_box" type="text" placeholder="Game's Price" name="price"/><br>
+
+          <div for="Platform" class="box_titles"><b>PLATFORM</b></div>
+          <input class="text_box" type="text" placeholder="Platform Distribution" name="platform2"/><br>
+
+          <input type="submit" class="submit_info" name="request" value="EDIT">
+        </form>
+        </div>
+
+
+
+        {% elif selection == 3 %}
+        <div class="dependence">
+          <form method="POST">
+          <div for="Game Name" class="box_titles"><b>GAME NAME</b></div>
+          <input class="text_box" type="text" placeholder="Game Name" name="game_name_back"/>
+          
+          <input type="submit" class="submit_info" name="request" value="Retreive ID">
+          </form>
+
+          <div style="padding-top: 30px; padding-bottom: 30px;"></div>
+
+          <form method="POST">
+          <div for="Game ID" class="box_titles"><b>GAME ID</b></div>
+          <input class="text_box" type="number" placeholder="Game ID" name="game_id_3"/>
+          <br>
+          <input type="submit" class="submit_info" name="request" value="REMOVE GAME">
+        </form>
+        
+        </div>
+        <div style="padding-top: 30px; padding-bottom: 30px;"></div>
+        <div class="game_msg">ID: {{gameID[0]}}</div>
+
+        {% elif selection == 4 %}
+        <div class="dependence">
+          <form method="POST">
+            <br><br>
+          <div for="ID Member" class="box_titles"><b>Member ID</b></div>
+          <input class="number" type="text" placeholder="Member ID " name="game_id_user"/>
+          <br>
+          <input type="submit" class="submit_info" name="request" value="REMOVE USER">
+          </form>
+        </div>
+        {% endif %}
+        
+        
+ 
       {% endif %}
+
+
+      
 
       <br>
       <!-- <input type="file" id="avatar" name="avatar" accept="image/png, image.jpeg">  -->

@@ -1,3 +1,4 @@
+<!-- SJSU CMPE 138 Spring 2021 TEAM1 -->
 <!DOCTYPE html>
 <html>
 
@@ -15,7 +16,7 @@
         <div class="medium_box">
             {% for info in game_page %} 
             <h1 class="title_game_page">{{info[2]}}</h1>
-            <br>
+        
             {% endfor %}
             <div class="Blue_Line">
             </div>
@@ -43,7 +44,7 @@
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Company: </div>
-                    <div class="incoming_data">{{info[2]}}</div>
+                    <div class="incoming_data">{{info[1]}}</div>
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Genre: </div>
@@ -53,24 +54,32 @@
                     <div class="title_placements">Price Estimate: </div>
                     <div class="incoming_data">${{info[6]}} (US Currency)</div>
 
-                    <div style="padding: 5px"></div>
-                    <div class="title_placements">Summary: </div>
-
-
 
                     <div style="padding: 5px"></div>
                     <div class="title_placements">Comments: </div>
+                    {% for x in comment %}
+                    {% for y in x %}
+                    <div class="comment_section">
+                    <div class="username"> {{y[0]}} </div>    
+                    <div class="date"> {{y[1]}} </div>
+                    <div class="time"> {{y[2]}} </div>
+                    <div class="comment_text">{{y[3]}} </div>
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
                     {% endfor %}
                 </div>
             </div>
             
-            
             <!-- comment box -->
+            <form method="POST">
             <div class="comments">
-                <textarea placeholder="Enter your Comment..." class="comment_box"  name="comment"></textarea>     
-                <button class="submit_button" type="button" onclick="">Submit</button>
+                <textarea placeholder="Enter your Comment..." class="comment_box"  name="comment"></textarea>    
+                {% if status %} 
+                <input type="submit" class="submit_button" name="comments" value="Postit">
+                {% endif %}
             </div>
-
+        </form>
             
             <a href="{{ url_for('home') }}">
                 <input src="/static/images/logoCool.gif" class="back_home" type="image" onclick="" />
