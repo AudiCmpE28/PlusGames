@@ -258,14 +258,37 @@ def retrievereviews(connection,game_id):
     getreviews="SELECT * FROM review_on WHERE Game.game_id={};".format(game_id)
     execute_query(connection,getreviews)
 
+
+
+
 def request_change_game(connection,mem_username,game_id,req_text):
     addcompany(connection, 'TBA')
     addgame(connection,game_id, 'TBA', 'TBA', 'TBA', 0, '0000-00-00', 0)
     addplatform(connection, 'TBA')
     addreleasedon(connection, game_id, 'TBA')
-
     qq="Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text)
     execute_query(connection, qq)
+
+
+######################## Company, Game, Platform, Released on ##########
+def addcompany(connection, company):
+    companyq="Insert IGNORE company values ('{}')".format(company)
+    execute_query(connection,companyq)
+
+def addgame(connection,game_id,g_company,game_n,genre,rating,release_Date,price):
+    gameq = "INSERT IGNORE INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},'{}',{});".format(game_id,g_company,game_n,genre,rating,release_Date,price)
+    execute_query(connection, gameq)
+
+def addplatform(connection,platform):
+    gamep= "Insert IGNORE into platform (platform_name) values('{}');".format(platform)
+    execute_query(connection, gamep)
+
+def addreleasedon(connection,game_id,platform):
+    gameidq = "insert IGNORE into released_on (game_id,platform_name) values ({},'{}');".format(game_id,platform)
+    execute_query(connection,gameidq)
+
+
+
 
 
 
@@ -319,23 +342,6 @@ def removeuser(connection,unique_id):
 
 
 
-######################## Company, Game, Platform, Released on ##########
-
-def addcompany(connection, company):
-    companyq="Insert IGNORE company values ('{}')".format(company)
-    execute_query(connection,companyq)
-
-def addgame(connection,game_id,g_company,game_n,genre,rating,release_Date,price):
-    gameq = "INSERT IGNORE INTO Game (game_id,g_company,game_n,genre,rating,release_Date,price) values ({},'{}','{}','{}',{},'{}',{});".format(game_id,g_company,game_n,genre,rating,release_Date,price)
-    execute_query(connection, gameq)
-
-def addplatform(connection,platform):
-    gamep= "Insert IGNORE into platform (platform_name) values('{}');".format(platform)
-    execute_query(connection, gamep)
-
-def addreleasedon(connection,game_id,platform):
-    gameidq = "insert IGNORE into released_on (game_id,platform_name) values ({},'{}');".format(game_id,platform)
-    execute_query(connection,gameidq)
 
 #csv file parser
 def parse_steam_game_csv(logger,connection,reset):

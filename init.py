@@ -447,19 +447,22 @@ def request_page():
       elif request.form['submit'] == 'Submit Form':
          request_comm=request.form["req_txt"]
          gameID=int(request.form['game_id'])
+         gameID=gameID_generator(mysql.connection)
+         request_change_game(mysql.connection, mem_username, gameID, request_comm)
+         redirect(url_for('home'))
+         # if gameID == 0:
+         #    gameID=gameID_generator(mysql.connection)
+         #    request_change_game(mysql.connection, mem_username, gameID, request_comm)
+         #    redirect(url_for('home'))
+         # else:
+         #    game_vertify=does_game_ID_exist(mysql.connection, gameID)
+         #    game_vertify=[x[0] for x in game_vertify]
+         #    game_vertify=game_vertify[0]
 
-         if gameID == 0:
-            gameID=gameID_generator(mysql.connection)
-            request_change_game(mysql.connection, mem_username, gameID, request_comm)
-            redirect(url_for('home'))
-         else:
-            game_vertify=does_game_ID_exist(mysql.connection, gameID)
-            game_vertify=[x[0] for x in game_vertify]
-            game_vertify=game_vertify[0]
-
-            if game_vertify == gameID:
-               request_change_game(mysql.connection, mem_username, gameID, request_comm)
-               redirect(url_for('home'))
+         #    if game_vertify == gameID:
+         #       gameID=gameID_generator(mysql.connection)
+         #       does_game_ID_exist(mysql.connection, mem_username, gameID, request_comm)
+         #       redirect(url_for('home'))
 
 
    if "mem_username" in session:
