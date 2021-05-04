@@ -64,7 +64,7 @@ login_manager.init_app(app)
 global resetflag     #
 resetflag=0          # Set to 1 if you want to reset the db
 global resetflagcsv  # 
-resetflagcsv=0       # Set to 1 if you want to reimport the csv to database
+resetflagcsv=0      # Set to 1 if you want to reimport the csv to database
 ##########################################################################
 ### DO NOT TOUCH THESE          
 offset=0                      
@@ -78,6 +78,7 @@ admin=0
 requestbox=0
 deleteWarn=0
 selectName=''
+usernameGlobal=''
 ### DO NOT TOUCH THESE
 #-------------------------------------------------------------------------------
 
@@ -191,7 +192,6 @@ def home():
 #*************************************************************************************************
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-   logger.debug('Entered /login')
    error = None
    global admin_check
    global semaphore
@@ -199,41 +199,30 @@ def login():
    selectName='Admin Select Menu'
 
    if request.method == "POST": 
-      print(request.form.get('username'))
    
       if request.form.get('username'):
          mem_username=request.form.get('username')
          mem_password= request.form.get('password')
-         # print("this is the mem_password from form: ",end='')
-         # print(mem_password)
          if semaphore == 0:
             admin_check='' #clears if needed
             admin_check = request.form.get('admin_or_mem') #if check box clicked its true
 
          try:
-            # print('searching db for '+mem_username)
             if admin_check: #if slider was set to admin will enter first if
                data = admin_password_retrieve(mysql.connection, mem_username)
             else:
                data = member_password_retrieve(mysql.connection, mem_username)
 
             truncated=data[0][0]
-            # print(truncated)
             unhexlifypw= binascii.unhexlify(truncated)
-            # print(truncated)
             verify(truncated,mem_password)
-            logger.debug("Login verification by %s",mem_username)
             session['mem_username'] = mem_username
             return redirect(url_for('profile'))
 
          except:
             logger.debug("Login failed by %s",mem_username)
             return render_template("login.html")
-      #check for admin
-      # elif (request.form.get('username') != 'admin') or request.form.get('password') != 'admin':
-      #    error = 'Invalid Credentials'
       else:
-         # session['logged_in'] = True
          flash("You're logged in!")
          return render_template("profile.html")
    else:
@@ -241,19 +230,8 @@ def login():
 
 
 
-# @app.route('/login')
-# def login_required():
-#    @functools.wraps()
-#    def wrap(*args, **kwargs):
-#       if 'logged_in' in session:
-#          return (*args, **kwargs)
-#       else:
-#          flash("You need to login first")
-#          return redirect(url_for('login'))
 
-#     return wrap  
-   # flash("You need to login first")
-   # return render_template('login.html')
+
 
 #**************************************************************************************************
 #    [[[[[[[[[[[[[[[[[[[[[[[[[ Profile HTML ]]]]]]]]]]]]]]]]]]]]]]]]]
@@ -280,6 +258,8 @@ def profile():
    platform=''
    updateButton=0
    mem_username = session['mem_username']
+   requests_games=[]
+
 
    if request.method == "POST": 
       if request.form['request'] == 'New Game':
@@ -371,6 +351,10 @@ def profile():
          mem_username=username
          session['mem_username'] = mem_username
 
+      else:
+         game_id=request.form.get('request')
+         removerequest(mysql.connection, game_id)
+
          
    if "mem_username" in session:
       if semaphore == 0:
@@ -381,9 +365,10 @@ def profile():
             admin=0
       
       if admin == 1:
-         status=1
+         status=1   
+         requests_games.append(retrieve_member_requests(mysql.connection))
          return render_template('profile.html', mem_username=mem_username, status=status, 
-                                 selection=requestbox, gameID=gameID, ss=selectName)
+                                 selection=requestbox, gameID=gameID, ss=selectName, messages=requests_games)
       else: 
          status=0
          return render_template('profile.html', mem_username=mem_username, status=status, warning=deleteWarn, updates=updateButton)
@@ -446,26 +431,33 @@ def signup():
 @app.route('/request_page', methods=['GET', 'POST'])
 def request_page():
    gameID=''
+   mem_username = session['mem_username']
 
    if request.method == 'POST':
-      if request.form['request'] == 'Retreive ID':
-         gameID=request.form.get('game_name_back')  
+      if request.form['submit'] == 'Retrieve ID':
+         gameID=request.form['game_name_back']
          gameID=retrieve_game_ID(mysql.connection, gameID)
          gameID=[i[0] for i in gameID]
-      
-      elif request.form['submit'] == 'Submit Form':
-         request_form=request.form['comment']
-         GameID=request.form['game_id']
-
-         if request.form['submit'] == 'Game_New':
-            GameID=random.randint(1,100000)
-            request_change_game(connection,mem_username, GameID, req_text)
-            redirect(url_for('home'))
-         
+         if gameID:
+            gameID=gameID[0]
          else:
-            game_vertify=does_game_ID_exist(mysql.connection, GameID)
-            if game_vertify != GameID:
-               request_change_game(connection,mem_username, GameID, req_text)
+            gameID='INVALID GAME NAME'
+         
+
+      elif request.form['submit'] == 'Submit Form':
+         request_comm=request.form["req_txt"]
+         gameID=int(request.form['game_id'])
+
+         if gameID == 0:
+            gameID=gameID_generator(mysql.connection)
+            print(gameID)
+            request_change_game(mysql.connection, mem_username, gameID, request_comm)
+            redirect(url_for('home'))
+         else:
+            print(gameID)
+            game_vertify=does_game_ID_exist(mysql.connection, gameID)
+            if game_vertify != gameID:
+               request_change_game(mysql.connection, mem_username, gameID, request_comm)
                redirect(url_for('home'))
 
 

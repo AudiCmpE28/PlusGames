@@ -259,16 +259,16 @@ def retrievereviews(connection,game_id):
     execute_query(connection,getreviews)
 
 def request_change_game(connection,mem_username,game_id,req_text):
-    #if request is for existing game, else create a new game entry
-    if read_query("SELECT game_id FROM game where game.game_id = {}".format(game_id)):
-        req_text=req_text.replace('',r'\'')
-        req_text=req_text.replace('--',r'/')
-        execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
-    else:
-        q="insert into game (game_id) values ({});".format(game_id)
-        req_text=req_text.replace('',r'\'')
-        req_text=req_text.replace('--',r'/')
-        execute_query("Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text))
+    game_vertify=does_game_ID_exist(mysql.connection, game_id)
+    if game_id != game_vertify:    
+        addcompany(connection, 'TBA')
+        addgame(connection,game_id, 'TBA', 'TBA', 'TBA', 0, '0000-00-00', 0)
+        addplatform(connection, 'TBA')
+        addreleasedon(connection, game_id, 'TBA')
+
+        qq="Insert into request_game (mem_username, game_id, req_text) values ('{}',{},'{}');".format(mem_username,game_id,req_text)
+        execute_query(connection, qq)
+ 
 
 
 
@@ -297,14 +297,16 @@ def retrieve_game_ID(connection, game_name):
 
 
 #removal queries/admin funcs
-
 def retrieve_member_requests(connection):
-    get="Select game_id, mem_username, req_text FROM request_game;"
-    read_query(connection, get)
+    get="SELECT * FROM request_game;"
+    return read_query(connection, get)
+
 
 def removerequest(connection, game_id):
-    rem="Delete from reqest_game r where r.game_id={}".format(game_id)
+    rem="DELETE FROM request_game WHERE game_id={};".format(game_id)
     execute_query(connection,rem)
+
+
 
 def removecomment(connection,mem_username,game_id,rv_date,rv_time,review_text):
     query="DELETE FROM `review_on` WHERE mem_username='{}' AND game_id={} AND rv_date='{}', rv_time='{}', review_text='{}';".format(mem_username,game_id,rv_date,rv_time,review_text)

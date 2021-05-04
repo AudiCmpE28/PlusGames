@@ -27,19 +27,12 @@
 
 .medium_box{
   width: 860px;
-  height: 800px;
+  height: 900px;
   background: #333;
   opacity: 1;
   position: relative;
 }
 
-/* .title_sub{
-  color:rgb(255, 255, 255);
-  font-size: 20px;
-  font-family: Roboto;
-  position: relative;
-  top: 25px;
-} */
 
  /* Profile Image Icon */
  .anon{
@@ -89,28 +82,30 @@
 
  
  .logout_button {
-  color: #23C6C6 ;
+  color: aqua;
   background-color: white;
   position: absolute;
   font-family: Roboto;
   font-weight: Regular;
-  font-size: 15px;
-  width: 90px;
+  font-size: 25px;
+  width: 120px;
   height: 40px;
-  right: 40px;
-  bottom: 40px;
+  bottom: 20px;
   border-style: solid;
   border-width: thick;
-  border-color:rgba(140,255,138,1);
+  border-color:red;
  }
  
+ 
  .logout_button:hover{
+  color: red;
   border-style: solid;
   border-width: thick;
   border-color:rgba(135,255,240,1);
   color: rgba(140,255,138,1);
  }
  
+
  .upload_profile{
   color: #23C6C6 ;
   background-color: white;
@@ -317,5 +312,79 @@
 .username{
   position: relative;
   margin-top: 50px;
-  font
 }
+
+.game_req_box {
+  position: absolute;
+  right: 15px;
+  width: 350px;
+  height: 360px;
+  bottom: 80px;
+  background: rgba(255,255,255,0.47999998927116394);
+  opacity: 1;
+  border-style: solid;
+  border-width: thick;
+  border-top-color: rgba(135,255,240,1);
+  border-bottom-color: rgba(140,255,138,1);
+  border-left-color: rgba(135,255,240,1);
+  border-right-color: rgba(140,255,138,1);
+}
+
+.game_req_inside{
+  width: 350px;
+  height: 360px;
+  background: black;
+  opacity: 74%;
+  font-size: 16px;
+  font-family: Courier; 
+  overflow: auto;
+  text-align: left;
+  border:1px solid
+}
+
+.messages{
+  position: relative;
+  background-color: turquoise;
+  width: 334px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+
+.messages1{
+  position: relative;
+  background-color: ghostwhite;
+  font-family: fantasy;
+  font-size: 18px;
+
+}
+.messages2{
+  position: relative;
+  background-color: goldenrod;
+  color: purple;
+  text-align: right;
+  font-family: fantasy;
+  font-size: 20px;
+}
+.messages3{
+  position: relative;
+  font-family: fantasy;
+  font-size: 25px;
+  text-align: left;
+}
+
+.submit_button{
+  margin: 3px;
+  position: relative;
+  left: 40%;
+  color: green;
+  border-style: solid;
+  border-width: thick;
+  border-color: brown;
+}
+
+.submit_button:hover{
+  border-color: darkblue;
+  color: red;
+}
+

@@ -27,8 +27,9 @@
         <img class="anon" src="/static/images/anon_circle.png">
         
         <div style="top:80px;"></div>
-        <form method="POST">
+        
 
+        <form method="POST">
         {% if updates == 0 %}
         <input type="submit" name="request" value="Update Username" class="updateUsername">
         
@@ -39,8 +40,10 @@
           <br>
           <input type="submit" class="submit_info" name="request" value="Update">
         </div>
+      </form>
         {% endif %}
         <br>
+        <form method="POST">
         {% if warning %}
         <div class="WarnUser"> WARNING: YOU SURE YOU WANT TO DELETE?</div>
         {% elif warning == 0 %}
@@ -56,9 +59,26 @@
       {% elif status == 1 %}
         <img class="anonAdmin" src="/static/images/icon1.png">
 
+        <div class="game_req_box">
+          <div class="game_req_inside">
+          {% for display in messages %}
+            {% for box in display %}
+            <div class="messages">
+            <div class="messages1">Member: <b>{{box[0]}}</b></div>
+            <div class="messages2">Game ID: {{box[1]}}</div>
+            <div class="messages3"><b>Description:</b><br> {{box[2]}}</div>
+            <form method="POST">
+            <button class="submit_button" type="submit" name="request" value="{{box[1]}}">Checked</button>
+          </form>
+          </div>
+            {% endfor %}
+          {% endfor %}
+        </div>
+        </div>
+
+
         <form method="POST">
         <div class="boxPlacement">
-
           <label for="request_select" class="box_title"><b>Choose type of Request:</b></label><br>
           <select name="request" id="request_select" class="box_decorations">
               <option value="" >{{ss}}</option>

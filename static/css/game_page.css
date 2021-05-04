@@ -286,7 +286,8 @@ input{
   background: teal;
   border-color: tomato;
   max-width: 419px; 
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  height: auto;
 }
 
 .username{
@@ -296,6 +297,7 @@ input{
   font-size: 25px;
   vertical-align: text-top;
   padding: 0px;
+  background-color: salmon;
 }
 
 .date{
@@ -305,11 +307,15 @@ input{
 }
 
 .time{
-  position: relative;
+  position: absolute;
   text-align: left;
   top: 0px;
 }
 
 .comment_text{
   position: relative;
+  font-size: 25px;
+  margin-top: 10px;
+  font-family: Comic San MS;
+  color: greenyellow;
 }
