@@ -17,7 +17,7 @@ Year: 2021
  +Games is a web application that displays the game's summary, information, and ratings for viewers to browse through. 
  
  ----------------------------------------------------------------------------------------------------------------------------
- ## ** UPDATE: Running the Page as of 04_24_21 ***
+ ## ** UPDATE: Running the Page as of 05_03_2021 ***
  
  **NOTE:** Webpage display may have issues with Google Chrome, so if that occurs, please use a different browser
  
@@ -28,29 +28,23 @@ Year: 2021
   
 **Run the init.py file :** https://flask.palletsprojects.com/en/1.1.x/quickstart/
 
-## ** Commands to run on WINDOWS:**
+ ----------------------------------------------------------------------------------------------------------------------------
+  **Please Have everything in README2_SQL installed**
+  
+  Install the commands in README2_SQL after the above steps to run the program. After 
+  installation, follow the instructions below. 
+
+
+ ----------------------------------------------------------------------------------------------------------------------------
+## ** Commands to run in the (IDE) TERMINAL:**
   
   (1) $env:FLASK_APP = "init.py"
   
   (2) python -m flask run
   
-  ----> What you should see in the terminal:  "* Running on http://127.0.0.1:5000/"
-  
-  **Images Flask**
-  
-  (1) pip install Flask-Images
-  
-   In case encounter problems regarding images, follow: https://mikeboers.github.io/Flask-Images/
-  
- **Databse Table Flask**
-  
-  (1) pip install flask_table
-  
-   In case encounter problems regarding images, follow: https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
-   
-**Pages Flask**
-  pip install -U flask-paginate
-  https://pythonhosted.org/Flask-paginate/
-  
+  --> What you should see in the terminal and click on:  "* Running on http://127.0.0.1:5000/"
+
+ ----------------------------------------------------------------------------------------------------------------------------
+**IGNORE unless needed**  
 **Git Ignore Issues Command**  
 git rm --cached <filename or source name>
